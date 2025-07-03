@@ -1,0 +1,3818 @@
+/*
+    NWC Powered Point of Sale Device
+*/
+
+#define LGFX_USE_V1         // set to use new version of library
+#include <LovyanGFX.hpp> // main library
+
+#include <lvgl.h>
+#include <WiFi.h>
+#include <vector>
+#include <Preferences.h>
+#include "lv_conf.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "freertos/queue.h"
+#include <WebSocketsClient.h>
+#include <ArduinoJson.h>
+#include "nostr.h"
+#include "Bitcoin.h"
+#include <WiFiUdp.h>
+#include <NTPClient.h>
+#include <qrcode.h>
+#include <WebServer.h>
+#include <DNSServer.h>
+#include <HTTPClient.h>
+
+// Portrait
+#define TFT_WIDTH   320
+#define TFT_HEIGHT  480
+
+class LGFX : public lgfx::LGFX_Device
+{
+  lgfx::Panel_ST7796  _panel_instance;  // ST7796UI
+  lgfx::Bus_Parallel8 _bus_instance;    // MCU8080 8B
+  lgfx::Light_PWM     _light_instance;
+  lgfx::Touch_FT5x06  _touch_instance;
+
+public:
+  LGFX(void)
+  {
+    {
+      auto cfg = _bus_instance.config();
+      cfg.freq_write = 40000000;    
+      cfg.pin_wr = 47;             
+      cfg.pin_rd = -1;             
+      cfg.pin_rs = 0;              
+
+      // LCD data interface, 8bit MCU (8080)
+      cfg.pin_d0 = 9;              
+      cfg.pin_d1 = 46;             
+      cfg.pin_d2 = 3;              
+      cfg.pin_d3 = 8;              
+      cfg.pin_d4 = 18;             
+      cfg.pin_d5 = 17;             
+      cfg.pin_d6 = 16;             
+      cfg.pin_d7 = 15;             
+
+      _bus_instance.config(cfg);   
+      _panel_instance.setBus(&_bus_instance);      
+    }
+
+    { 
+      auto cfg = _panel_instance.config();    
+
+      cfg.pin_cs           =    -1;  
+      cfg.pin_rst          =    4;  
+      cfg.pin_busy         =    -1; 
+
+      cfg.panel_width      =   TFT_WIDTH;
+      cfg.panel_height     =   TFT_HEIGHT;
+      cfg.offset_x         =     0;
+      cfg.offset_y         =     0;
+      cfg.offset_rotation  =     0;
+      cfg.dummy_read_pixel =     8;
+      cfg.dummy_read_bits  =     1;
+      cfg.readable         =  false;
+      cfg.invert           = true;
+      cfg.rgb_order        = false;
+      cfg.dlen_16bit       = false;
+      cfg.bus_shared       = false;
+
+      _panel_instance.config(cfg);
+    }
+
+    {
+      auto cfg = _light_instance.config();    
+
+      cfg.pin_bl = 45;              
+      cfg.invert = false;           
+      cfg.freq   = 44100;           
+      cfg.pwm_channel = 7;          
+
+      _light_instance.config(cfg);
+      _panel_instance.setLight(&_light_instance);  
+    }
+
+    { 
+      auto cfg = _touch_instance.config();
+
+      cfg.x_min      = 0;
+      cfg.x_max      = 319;
+      cfg.y_min      = 0;  
+      cfg.y_max      = 479;
+      cfg.pin_int    = 7;  
+      cfg.bus_shared = true; 
+      cfg.offset_rotation = 0;
+
+      cfg.i2c_port = 1;//I2C_NUM_1;
+      cfg.i2c_addr = 0x38;
+      cfg.pin_sda  = 6;   
+      cfg.pin_scl  = 5;   
+      cfg.freq = 400000;  
+
+      _touch_instance.config(cfg);
+      _panel_instance.setTouch(&_touch_instance);  
+    }
+
+    setPanel(&_panel_instance); 
+  }
+};
+
+static LGFX lcd;            // declare display variable
+
+// Variables for touch x,y
+static int32_t x,y;
+
+
+static const String SOFTWARE_VERSION = "v0.0.1";
+
+static void handleNwcNip04NotificationEvent(uint8_t *data);
+static void handleNwcNip44NotificationEvent(uint8_t *data);
+static void display_invoice_text_fallback(const String& invoice);
+static void display_qr_code(const String& invoice);
+static void display_qr_code_alternative(const String& invoice);
+static void test_canvas_drawing();
+static bool allocate_qr_buffer(size_t size);
+static void free_qr_buffer();
+static void load_shop_settings_from_preferences(void);
+static void ap_password_kb_event_handler(lv_event_t *e);
+static void ap_password_save_event_handler(lv_event_t *e);
+static void ap_password_cancel_event_handler(lv_event_t *e);
+
+static void reset_websocket_fragment_state(void);
+
+static void fetch_bitcoin_prices(void);
+static int calculate_sats_from_amount(float amount, String currency);
+static void update_prices_from_json(String json_response);
+static void attempt_reconnection_if_needed(void);
+static void update_relay_status_display(bool connected);
+
+// WebSocket ping management variables
+static unsigned long last_ws_ping = 0;
+static const unsigned long WS_PING_INTERVAL = 5 * 1000; // Websocket ping interval in milliseconds
+
+// WebSocket fragmented message handling variables
+static bool ws_fragment_in_progress = false;
+static String ws_fragmented_message = "";
+static size_t ws_fragment_total_size = 0;
+static size_t ws_fragment_received_size = 0;
+static bool ws_fragment_is_binary = false;
+static unsigned long ws_fragment_start_time = 0;
+static const unsigned long WS_FRAGMENT_TIMEOUT = 30000; // 30 seconds timeout for fragments
+static const size_t WS_MAX_FRAGMENT_SIZE = 1024 * 1024; // 1MB maximum fragment size
+
+// WiFi connection timeout management
+static unsigned long wifi_connect_start_time = 0;
+static const unsigned long WIFI_CONNECT_TIMEOUT = 10000; // 10 seconds
+static bool wifi_connection_attempted = false;
+
+// WiFi Access Point mode variables
+static bool ap_mode_active = false;
+static WebServer ap_server(80);
+static DNSServer dns_server;
+static const char* ap_ssid = "NWC-PoS-Portal";
+static String ap_password = "GoodMorning21"; // Changed from const char* to String for configurability
+static const char* ap_ip = "192.168.4.1";
+
+static lv_timer_t *wifi_scan_timer = NULL;
+
+// WiFi Access Point mode functions
+static void launch_ap_mode_event_handler(lv_event_t *e);
+static void start_ap_mode(void);
+static void stop_ap_mode(void);
+static void handle_ap_root(void);
+static void handle_ap_config(void);
+static void load_nwc_url_from_preferences(void);
+static void save_nwc_url_to_preferences(const String& url);
+static void update_settings_screen_for_ap_mode(void);
+static void exit_ap_mode_event_handler(lv_event_t *e);
+static void stop_wifi_scanning(void);
+
+static void send_invoice_lookup_request_cb(lv_timer_t *timer);
+static void invoice_notification_watchdog_cb(lv_timer_t *timer);
+
+// NWC
+WebSocketsClient webSocket;
+// LNbits NWC provider testing
+String nwcPairingUrl = "nostr+walletconnect://dbb2f09400c14e80a2d7926e634221ddf0d5f5144aada66a996bfd2e88ca7cde?relay=wss://relay.nostriot.com&secret=e2b73178e2119612cad6457530bee54ed10067b249ab3dbfbbf5a3c770da3708";
+String relayUrl;
+String relayPath = "/";
+String walletPubKey;
+String nsecHexStr;
+String npubHexStr;
+
+// NTP for time synchronization
+WiFiUDP ntpUDP;
+NTPClient timeClient(ntpUDP, "pool.ntp.org", 0, 60000);
+unsigned long unixTimestamp = 0;
+unsigned long bootTimestamp = 0;
+
+// Add these definitions after the includes and before the global variables
+
+// WiFi command types
+typedef enum {
+    WIFI_SCAN,
+    WIFI_CONNECT,
+    WIFI_DISCONNECT,
+    WIFI_STOP_SCAN  // Add this new command type
+} wifi_command_type_t;
+
+// WiFi command structure
+typedef struct {
+    wifi_command_type_t type;
+    char ssid[33];
+    char password[65];
+} wifi_command_t;
+
+// WiFi scan result structure
+typedef struct {
+    int network_count;
+    char ssids[9][33];  // Store up to 9 SSIDs
+    int rssi[9];
+    bool encrypted[9];
+} wifi_scan_result_t;
+
+// Queue for WiFi scan results
+QueueHandle_t wifiScanResultQueue = NULL;
+
+/*** Setup screen resolution for LVGL ***/
+static const uint16_t screenWidth = 320;  // Portrait mode
+static const uint16_t screenHeight = 480;
+static lv_disp_draw_buf_t draw_buf;
+static lv_color_t buf[screenWidth * 10];
+
+// Global variables for keypad
+static lv_obj_t *display_label;
+static String entered_number = "";
+
+// Global state for WiFi connection
+Preferences preferences;
+static char current_ssid[33];
+static char current_password[65];
+static lv_obj_t *wifi_status_label;
+static lv_timer_t *wifi_status_timer = NULL;
+static lv_obj_t *main_wifi_status_label = NULL;
+static lv_obj_t *relay_status_label = NULL;
+static bool nwc_initialized = false;
+
+// Global variables for invoice overlay
+static lv_obj_t *invoice_overlay = NULL;
+static lv_obj_t *invoice_spinner = NULL;
+static lv_obj_t *invoice_label = NULL;
+static lv_obj_t *lookup_spinner = NULL; 
+static lv_timer_t *invoice_timer = NULL;
+static bool invoice_processing = false;
+static int invoice_counter = 0;
+
+// Global variables for settings
+static String selected_currency = "sats";
+static String shop_name = "LNbits Shop";
+static lv_obj_t *shop_name_keyboard = NULL;
+static lv_obj_t *shop_name_textarea = NULL;
+
+// Global variables for AP password settings
+static lv_obj_t *ap_password_keyboard = NULL;
+static lv_obj_t *ap_password_textarea = NULL;
+
+// Global variables for settings screen buttons (to hide/show when keyboards are active)
+static lv_obj_t *settings_pin_btn = NULL;
+static lv_obj_t *settings_save_btn = NULL;
+
+// Bitcoin price data
+static long btc_prices[8] = {0}; // USD, EUR, GBP, CAD, CHF, AUD, JPY (in order from API)
+static bool prices_loaded = false;
+static unsigned long last_price_update = 0;
+static const unsigned long PRICE_UPDATE_INTERVAL = 300000; // 5 minutes
+
+// PIN code management variables
+static String current_pin = "1234"; // Default PIN
+static lv_obj_t *pin_management_screen = NULL;
+static lv_obj_t *pin_verification_screen = NULL;
+static lv_obj_t *pin_current_textarea = NULL;
+static lv_obj_t *pin_new_textarea = NULL;
+static lv_obj_t *pin_verify_textarea = NULL;
+static lv_obj_t *pin_verification_textarea = NULL;
+static lv_obj_t *pin_keyboard = NULL;
+static lv_obj_t *pin_verification_keyboard = NULL;
+static lv_obj_t *pin_verification_status = NULL;
+
+// PIN code management functions
+static void save_pin_to_preferences(const String& pin);
+static void show_pin_management_screen(void);
+static void load_pin_from_preferences(void);
+static void hide_pin_management_screen(void);
+static void pin_current_kb_event_handler(lv_event_t *e);
+static void pin_new_kb_event_handler(lv_event_t *e);
+static void pin_verify_kb_event_handler(lv_event_t *e);
+static void pin_save_event_handler(lv_event_t *e);
+static void pin_cancel_event_handler(lv_event_t *e);
+static void show_pin_verification_screen(void);
+static void pin_verification_kb_event_handler(lv_event_t *e);
+static void pin_verification_cancel_event_handler(lv_event_t *e);
+static bool verify_pin_code(const String& entered_pin);
+
+// Global variable for LVGL QR code
+static lv_obj_t *qr_code_obj = NULL;
+static lv_obj_t *payment_checkmark = NULL;
+
+static lv_timer_t *invoice_notification_watchdog_timer = NULL;
+static lv_timer_t *invoice_lookup_timer = NULL;
+static lv_obj_t *lookup_status_label = NULL;
+static String current_invoice_str = "";
+
+// Screen state management
+typedef enum {
+  SCREEN_KEYPAD,
+  SCREEN_SETTINGS,
+  SCREEN_WIFI,
+  SCREEN_WIFI_PASSWORD,
+  SCREEN_SETTINGS_SUB,
+  SCREEN_INFO
+} screen_state_t;
+
+// Add this global variable to store SSIDs safely
+static std::vector<String> wifi_ssids;
+
+// Task handles
+TaskHandle_t wifiTaskHandle = NULL;
+TaskHandle_t uiTaskHandle = NULL;
+
+// Queue for communication between tasks
+QueueHandle_t wifiCommandQueue = NULL;
+
+// Add these definitions
+typedef enum {
+    INVOICE_START,
+    INVOICE_STOP
+} invoice_command_type_t;
+
+typedef struct {
+    invoice_command_type_t type;
+    int duration_seconds;
+} invoice_command_t;
+
+// Add these global variables
+TaskHandle_t invoiceTaskHandle = NULL;
+QueueHandle_t invoiceCommandQueue = NULL;
+QueueHandle_t invoiceStatusQueue = NULL;
+
+// Add this function declaration to the function declarations section
+static bool process_wifi_scan_results(void);
+
+// Add these helper functions for managing multiple WiFi networks
+static void save_wifi_network(const char* ssid, const char* password) {
+    preferences.begin("wifi-creds", false);
+    
+    // Get current count
+    int count = preferences.getInt("count", 0);
+    
+    // Create indexed keys
+    String ssid_key = "ssid_" + String(count);
+    String pass_key = "pass_" + String(count);
+    
+    // Save the network
+    preferences.putString(ssid_key.c_str(), ssid);
+    preferences.putString(pass_key.c_str(), password);
+    
+    // Update count
+    preferences.putInt("count", count + 1);
+    
+    preferences.end();
+    Serial.printf("Saved WiFi network %d: %s\n", count, ssid);
+}
+
+static void load_all_wifi_networks() {
+    preferences.begin("wifi-creds", true);
+    
+    int count = preferences.getInt("count", 0);
+    Serial.printf("Found %d saved WiFi networks\n", count);
+    
+    for (int i = 0; i < count; i++) {
+        String ssid_key = "ssid_" + String(i);
+        String pass_key = "pass_" + String(i);
+        
+        String ssid = preferences.getString(ssid_key.c_str(), "");
+        String password = preferences.getString(pass_key.c_str(), "");
+        
+        if (ssid.length() > 0) {
+            Serial.printf("Network %d: %s\n", i, ssid.c_str());
+            // You could store these in a global vector for quick access
+        }
+    }
+    
+    preferences.end();
+}
+
+static bool find_saved_wifi_network(const char* ssid, char* password, size_t password_size) {
+    preferences.begin("wifi-creds", true);
+    
+    int count = preferences.getInt("count", 0);
+    
+    for (int i = 0; i < count; i++) {
+        String ssid_key = "ssid_" + String(i);
+        String pass_key = "pass_" + String(i);
+        
+        String saved_ssid = preferences.getString(ssid_key.c_str(), "");
+        
+        if (saved_ssid == ssid) {
+            String saved_password = preferences.getString(pass_key.c_str(), "");
+            strncpy(password, saved_password.c_str(), password_size - 1);
+            password[password_size - 1] = '\0';
+            preferences.end();
+            Serial.printf("Found saved password for: %s\n", ssid);
+            return true;
+        }
+    }
+    
+    preferences.end();
+    return false;
+}
+
+static void remove_wifi_network(const char* ssid) {
+    preferences.begin("wifi-creds", false);
+    
+    int count = preferences.getInt("count", 0);
+    
+    for (int i = 0; i < count; i++) {
+        String ssid_key = "ssid_" + String(i);
+        String saved_ssid = preferences.getString(ssid_key.c_str(), "");
+        
+        if (saved_ssid == ssid) {
+            // Remove this entry by shifting remaining entries
+            for (int j = i; j < count - 1; j++) {
+                String current_ssid_key = "ssid_" + String(j);
+                String current_pass_key = "pass_" + String(j);
+                String next_ssid_key = "ssid_" + String(j + 1);
+                String next_pass_key = "pass_" + String(j + 1);
+                
+                String next_ssid = preferences.getString(next_ssid_key.c_str(), "");
+                String next_password = preferences.getString(next_pass_key.c_str(), "");
+                
+                preferences.putString(current_ssid_key.c_str(), next_ssid);
+                preferences.putString(current_pass_key.c_str(), next_password);
+            }
+            
+            // Update count
+            preferences.putInt("count", count - 1);
+            Serial.printf("Removed WiFi network: %s\n", ssid);
+            break;
+        }
+    }
+    
+    preferences.end();
+}
+
+// WiFi task function
+void wifiTask(void *parameter) {
+    Serial.println("WiFi task started");
+    while (true) {
+        // Wait for WiFi commands from UI task
+        wifi_command_t command;
+        if (xQueueReceive(wifiCommandQueue, &command, portMAX_DELAY)) {
+            Serial.print("WiFi task received command: ");
+            Serial.println(command.type);
+            
+            switch (command.type) {
+                case WIFI_SCAN: {
+                    Serial.println("Starting WiFi scan...");
+                    // Perform WiFi scan
+                    int n = WiFi.scanNetworks();
+                    Serial.print("Scan completed, found ");
+                    Serial.print(n);
+                    Serial.println(" networks");
+                    
+                    // Create scan result
+                    wifi_scan_result_t result;
+                    result.network_count = (n > 9) ? 9 : n;
+                    
+                    for (int i = 0; i < result.network_count; i++) {
+                        strncpy(result.ssids[i], WiFi.SSID(i).c_str(), 32);
+                        result.ssids[i][32] = '\0';
+                        result.rssi[i] = WiFi.RSSI(i);
+                        result.encrypted[i] = (WiFi.encryptionType(i) != WIFI_AUTH_OPEN);
+                    }
+                    
+                    // Send results back to UI task
+                    if (wifiScanResultQueue != NULL) {
+                        if (xQueueSend(wifiScanResultQueue, &result, 0) == pdTRUE) {
+                            Serial.println("Scan results sent to queue successfully");
+                        } else {
+                            Serial.println("Failed to send scan results to queue");
+                        }
+                    } else {
+                        Serial.println("wifiScanResultQueue is NULL");
+                    }
+                    break;
+                }
+                case WIFI_CONNECT:
+                    Serial.println("Connecting to WiFi...");
+                    WiFi.begin(command.ssid, command.password);
+                    break;
+                case WIFI_DISCONNECT:
+                    Serial.println("Disconnecting from WiFi...");
+                    WiFi.disconnect(true);
+                    break;
+                case WIFI_STOP_SCAN:
+                    Serial.println("Stopping WiFi scan...");
+                    // WiFi.scanDelete() would be called here if needed
+                    break;
+            }
+        }
+        vTaskDelay(pdMS_TO_TICKS(100));
+    }
+}
+
+// Invoice task function
+void invoiceTask(void *parameter) {
+    while (true) {
+        invoice_command_t command;
+        if (xQueueReceive(invoiceCommandQueue, &command, portMAX_DELAY)) {
+            switch (command.type) {
+                case INVOICE_START: {
+                    int counter = 0;
+                    while (counter < command.duration_seconds) {
+                        Serial.println("getting...");
+                        counter++;
+                        vTaskDelay(pdMS_TO_TICKS(1000));
+                        
+                        // Check if we should stop
+                        invoice_command_t stop_check;
+                        if (xQueueReceive(invoiceCommandQueue, &stop_check, 0)) {
+                            if (stop_check.type == INVOICE_STOP) {
+                                break;
+                            }
+                        }
+                    }
+                    
+                    // Send completion status
+                    if (invoiceStatusQueue != NULL) {
+                        int status = 1; // Completed
+                        xQueueSend(invoiceStatusQueue, &status, 0);
+                    }
+                    break;
+                }
+                case INVOICE_STOP:
+                    // Just break out of the loop
+                    break;
+            }
+        }
+        vTaskDelay(pdMS_TO_TICKS(100));
+    }
+}
+
+/*** Function declaration ***/
+void display_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p);
+void touchpad_read(lv_indev_drv_t *indev_driver, lv_indev_data_t *data);
+void load_screen(screen_state_t screen);
+void create_keypad_screen(void);
+void create_settings_screen(void);
+void create_wifi_screen(void);
+void create_wifi_password_screen(const char * ssid);
+void create_settings_sub_screen(void);
+void create_info_screen(void);
+static void keypad_event_handler(lv_event_t *e);
+static void navigation_event_handler(lv_event_t *e);
+static void wifi_scan_event_handler(lv_event_t *e);
+static void wifi_connect_event_handler(lv_event_t *e);
+static void wifi_password_kb_event_handler(lv_event_t *e);
+static void wifi_password_back_event_handler(lv_event_t *e);
+static void settings_save_event_handler(lv_event_t *e);
+static void settings_back_event_handler(lv_event_t *e);
+static void currency_dropdown_event_handler(lv_event_t *e);
+static void shop_name_kb_event_handler(lv_event_t *e);
+static void wifi_status_checker_cb(lv_timer_t *timer);
+static void wifi_main_status_updater_cb(lv_timer_t *timer);
+static void initial_wifi_scan_cb(lv_timer_t *timer);
+static void create_invoice_overlay(void);
+static void close_invoice_overlay(void);
+static void invoice_timer_cb(lv_timer_t *timer);
+static void invoice_close_btn_event_handler(lv_event_t *e);
+static void cleanup_global_pointers(void);
+void setup_nwc_data(String nwcPairingUrl);
+void connect_to_relay();
+void websocket_event(WStype_t type, uint8_t * payload, size_t length);
+void handle_websocket_message(void *arg, uint8_t *data, size_t len);
+void get_randomw_64_byte_hex(char *output);
+static void handle_nwc_response_event(uint8_t *data);
+void show_message(String title, String message);
+
+// Add these global variables for QR code using PSRAM
+static lv_obj_t *qr_canvas = NULL;
+static lv_color_t *canvas_buf = NULL; // Buffer for canvas
+static uint8_t* qr_code_buffer = NULL;
+static size_t qr_buffer_size = 0;
+static size_t canvas_buffer_size = 0;
+
+// Function to allocate QR code buffer in PSRAM
+static bool allocate_qr_buffer(size_t size) {
+    if (qr_code_buffer != NULL) {
+        free(qr_code_buffer);
+        qr_code_buffer = NULL;
+    }
+    
+    qr_code_buffer = (uint8_t*)ps_malloc(size);
+    if (qr_code_buffer == NULL) {
+        Serial.printf("Failed to allocate %d bytes in PSRAM for QR code\n", size);
+        return false;
+    }
+    
+    qr_buffer_size = size;
+    Serial.printf("Allocated %d bytes in PSRAM for QR code\n", size);
+    return true;
+}
+
+// Function to free QR code buffer
+static void free_qr_buffer() {
+    if (qr_code_buffer != NULL) {
+        free(qr_code_buffer);
+        qr_code_buffer = NULL;
+        qr_buffer_size = 0;
+    }
+}
+
+// Function to allocate canvas buffer in PSRAM
+static bool allocate_canvas_buffer(size_t size) {
+    if (canvas_buf != NULL) {
+        free(canvas_buf);
+        canvas_buf = NULL;
+    }
+    
+    canvas_buf = (lv_color_t*)ps_malloc(size * sizeof(lv_color_t));
+    if (canvas_buf == NULL) {
+        Serial.printf("Failed to allocate %d bytes in PSRAM for canvas buffer\n", size * sizeof(lv_color_t));
+        return false;
+    }
+    
+    canvas_buffer_size = size;
+    Serial.printf("Allocated %d bytes in PSRAM for canvas buffer\n", size * sizeof(lv_color_t));
+    return true;
+}
+
+// Function to free canvas buffer
+static void free_canvas_buffer() {
+    if (canvas_buf != NULL) {
+        free(canvas_buf);
+        canvas_buf = NULL;
+        canvas_buffer_size = 0;
+    }
+}
+
+// Simple test function to verify canvas drawing
+static void test_canvas_drawing() {
+    if (qr_canvas == NULL || !lv_obj_is_valid(qr_canvas)) {
+        Serial.println("QR canvas not available for test");
+        return;
+    }
+    
+    Serial.println("Testing canvas drawing with simple pattern");
+    
+    // Allocate canvas buffer
+    if (!allocate_canvas_buffer(200 * 200)) {
+        Serial.println("Failed to allocate canvas buffer for test");
+        return;
+    }
+    
+    // Set canvas buffer
+    lv_canvas_set_buffer(qr_canvas, canvas_buf, 200, 200, LV_IMG_CF_TRUE_COLOR);
+    
+    // Clear canvas with white background
+    lv_canvas_fill_bg(qr_canvas, lv_color_white(), LV_OPA_COVER);
+    
+    // Create draw descriptor for test rectangles
+    lv_draw_rect_dsc_t rect_dsc;
+    lv_draw_rect_dsc_init(&rect_dsc);
+    rect_dsc.bg_color = lv_color_black();
+    rect_dsc.bg_opa = LV_OPA_COVER;
+    rect_dsc.border_width = 0;
+    rect_dsc.radius = 0;
+    
+    // Draw a simple test pattern (checkerboard)
+    for (int y = 0; y < 10; y++) {
+        for (int x = 0; x < 10; x++) {
+            if ((x + y) % 2 == 0) {
+                lv_canvas_draw_rect(qr_canvas, x * 20, y * 20, 20, 20, &rect_dsc);
+            }
+        }
+    }
+    
+    // Force canvas to be visible
+    lv_obj_move_foreground(qr_canvas);
+    lv_obj_clear_flag(qr_canvas, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_invalidate(qr_canvas);
+    
+    Serial.println("Test pattern drawn - you should see a black and white checkerboard");
+    
+    // Free canvas buffer
+    free_canvas_buffer();
+}
+
+// Alternative QR code display using individual rectangles (more reliable)
+static void display_qr_code_alternative(const String& invoice) {
+    if (qr_canvas == NULL || !lv_obj_is_valid(qr_canvas)) {
+        Serial.println("QR canvas not available for alternative method");
+        return;
+    }
+    
+    Serial.println("Using alternative QR code display method");
+    
+    // Determine appropriate QR code version based on invoice length
+    int version = 1;
+    if (invoice.length() > 25) version = 2;
+    if (invoice.length() > 47) version = 3;
+    if (invoice.length() > 77) version = 4;
+    if (invoice.length() > 114) version = 5;
+    if (invoice.length() > 154) version = 6;
+    if (invoice.length() > 195) version = 7;
+    if (invoice.length() > 224) version = 8;
+    if (invoice.length() > 279) version = 9;
+    if (invoice.length() > 335) version = 10;
+    
+    // Cap at version 10 to prevent excessive memory usage
+    if (version > 10) version = 10;
+    
+    Serial.printf("Using QR code version %d\n", version);
+    
+    // Calculate required buffer size
+    size_t buffer_size = qrcode_getBufferSize(version);
+    Serial.printf("Required buffer size: %d bytes\n", buffer_size);
+    
+    // Allocate buffer in PSRAM
+    if (!allocate_qr_buffer(buffer_size)) {
+        Serial.println("Failed to allocate QR buffer, showing text instead");
+        display_invoice_text_fallback(invoice);
+        return;
+    }
+    
+    // Generate QR code
+    QRCode qrcode;
+    int result = qrcode_initText(&qrcode, qr_code_buffer, version, 0, invoice.c_str());
+    
+    if (result != 0) {
+        Serial.printf("Failed to generate QR code version %d, trying smaller version\n", version);
+        // Try with a smaller version
+        if (version > 1) {
+            version--;
+            buffer_size = qrcode_getBufferSize(version);
+            if (allocate_qr_buffer(buffer_size)) {
+                result = qrcode_initText(&qrcode, qr_code_buffer, version, 0, invoice.c_str());
+            }
+        }
+        
+        if (result != 0) {
+            Serial.println("Failed to generate QR code, showing text instead");
+            free_qr_buffer();
+            display_invoice_text_fallback(invoice);
+            return;
+        }
+    }
+    
+    // Calculate scaling for display
+    int qr_size = qrcode.size;
+    int max_display_size = 180; // Leave some margin
+    int scale = max_display_size / qr_size;
+    if (scale < 1) scale = 1;
+    if (scale > 8) scale = 8; // Cap scale to prevent excessive drawing
+    
+    int offset_x = (200 - (qr_size * scale)) / 2;
+    int offset_y = (200 - (qr_size * scale)) / 2;
+    
+    Serial.printf("QR size: %d, scale: %d, offset: (%d, %d)\n", qr_size, scale, offset_x, offset_y);
+    
+    // Allocate and set canvas buffer
+    if (!allocate_canvas_buffer(200 * 200)) {
+        Serial.println("Failed to allocate canvas buffer, showing text instead");
+        free_qr_buffer();
+        display_invoice_text_fallback(invoice);
+        return;
+    }
+    
+    lv_canvas_set_buffer(qr_canvas, canvas_buf, 200, 200, LV_IMG_CF_TRUE_COLOR);
+    
+    // Clear canvas with white background
+    lv_canvas_fill_bg(qr_canvas, lv_color_white(), LV_OPA_COVER);
+    Serial.println("Canvas cleared with white background");
+    
+    // Create draw descriptor for QR modules
+    lv_draw_rect_dsc_t rect_dsc;
+    lv_draw_rect_dsc_init(&rect_dsc);
+    rect_dsc.bg_color = lv_color_black();
+    rect_dsc.bg_opa = LV_OPA_COVER;
+    rect_dsc.border_width = 0;
+    rect_dsc.radius = 0;
+    
+    // Draw QR code using individual rectangles
+    int drawn_modules = 0;
+    for (int y = 0; y < qr_size; y++) {
+        for (int x = 0; x < qr_size; x++) {
+            if (qrcode_getModule(&qrcode, x, y)) {
+                int draw_x = offset_x + x * scale;
+                int draw_y = offset_y + y * scale;
+                lv_canvas_draw_rect(qr_canvas, draw_x, draw_y, scale, scale, &rect_dsc);
+                drawn_modules++;
+            }
+        }
+    }
+    
+    Serial.printf("Drew %d QR modules using alternative method\n", drawn_modules);
+    
+    // Force canvas to be on top and visible
+    lv_obj_move_foreground(qr_canvas);
+    lv_obj_clear_flag(qr_canvas, LV_OBJ_FLAG_HIDDEN);
+    
+    // Invalidate the canvas to force a redraw
+    lv_obj_invalidate(qr_canvas);
+    
+    // Add a small delay to ensure drawing is complete
+    delay(10);
+    
+    Serial.println("QR canvas flag cleared (should be visible now)");
+    
+    if (invoice_spinner != NULL && lv_obj_is_valid(invoice_spinner)) {
+        lv_obj_add_flag(invoice_spinner, LV_OBJ_FLAG_HIDDEN);
+        Serial.println("Spinner hidden");
+    }
+    
+    // Free the buffer
+    free_qr_buffer();
+    free_canvas_buffer();
+    
+    Serial.println("QR code displayed successfully using alternative method");
+}
+
+// Improved QR code display function using PSRAM
+static void display_qr_code(const String& invoice) {
+    if (qr_canvas == NULL || !lv_obj_is_valid(qr_canvas)) {
+        Serial.println("QR canvas not available");
+        return;
+    }
+    
+    Serial.println("Generating QR code for invoice length: " + String(invoice.length()));
+    
+    // Determine appropriate QR code version based on invoice length
+    int version = 1;
+    if (invoice.length() > 25) version = 2;
+    if (invoice.length() > 47) version = 3;
+    if (invoice.length() > 77) version = 4;
+    if (invoice.length() > 114) version = 5;
+    if (invoice.length() > 154) version = 6;
+    if (invoice.length() > 195) version = 7;
+    if (invoice.length() > 224) version = 8;
+    if (invoice.length() > 279) version = 9;
+    if (invoice.length() > 335) version = 10;
+    
+    // Cap at version 10 to prevent excessive memory usage
+    if (version > 10) version = 10;
+    
+    Serial.printf("Using QR code version %d\n", version);
+    
+    // Calculate required buffer size
+    size_t buffer_size = qrcode_getBufferSize(version);
+    Serial.printf("Required buffer size: %d bytes\n", buffer_size);
+    
+    // Allocate buffer in PSRAM
+    if (!allocate_qr_buffer(buffer_size)) {
+        Serial.println("Failed to allocate QR buffer, showing text instead");
+        display_invoice_text_fallback(invoice);
+        return;
+    }
+    
+    // Generate QR code
+    QRCode qrcode;
+    int result = qrcode_initText(&qrcode, qr_code_buffer, version, 0, invoice.c_str());
+    
+    if (result != 0) {
+        Serial.printf("Failed to generate QR code version %d, trying smaller version\n", version);
+        // Try with a smaller version
+        if (version > 1) {
+            version--;
+            buffer_size = qrcode_getBufferSize(version);
+            if (allocate_qr_buffer(buffer_size)) {
+                result = qrcode_initText(&qrcode, qr_code_buffer, version, 0, invoice.c_str());
+            }
+        }
+        
+        if (result != 0) {
+            Serial.println("Failed to generate QR code, showing text instead");
+            free_qr_buffer();
+            display_invoice_text_fallback(invoice);
+            return;
+        }
+    }
+    
+    // Calculate scaling for display
+    int qr_size = qrcode.size;
+    int max_display_size = 260; // Leave some margin
+    int scale = max_display_size / qr_size;
+    if (scale < 1) scale = 1;
+    if (scale > 8) scale = 8; // Cap scale to prevent excessive drawing
+    
+    int offset = (200 - (qr_size * scale)) / 2;
+    
+    Serial.printf("QR size: %d, scale: %d, offset: %d\n", qr_size, scale, offset);
+    
+    // Allocate and set canvas buffer
+    if (!allocate_canvas_buffer(260 * 260)) {
+        Serial.println("Failed to allocate canvas buffer, showing text instead");
+        free_qr_buffer();
+        display_invoice_text_fallback(invoice);
+        return;
+    }
+    
+    lv_canvas_set_buffer(qr_canvas, canvas_buf, 260, 260, LV_IMG_CF_TRUE_COLOR);
+    
+    // Clear canvas with white background
+    lv_canvas_fill_bg(qr_canvas, lv_color_white(), LV_OPA_COVER);
+    Serial.println("Canvas cleared with white background");
+    
+    // Create draw descriptor for QR modules
+    lv_draw_rect_dsc_t rect_dsc;
+    lv_draw_rect_dsc_init(&rect_dsc);
+    rect_dsc.bg_color = lv_color_black();
+    rect_dsc.bg_opa = LV_OPA_COVER;
+    rect_dsc.border_width = 0;
+    rect_dsc.radius = 0;
+    
+    // Draw QR code using rectangles (more efficient)
+    int drawn_modules = 0;
+    for (int y = 0; y < qr_size; y++) {
+        for (int x = 0; x < qr_size; x++) {
+            if (qrcode_getModule(&qrcode, x, y)) {
+                lv_canvas_draw_rect(qr_canvas, offset + x * scale, offset + y * scale, scale, scale, &rect_dsc);
+                drawn_modules++;
+            }
+        }
+    }
+    
+    Serial.printf("Drew %d QR modules using rectangles\n", drawn_modules);
+    
+    // Force canvas to be on top and visible
+    lv_obj_move_foreground(qr_canvas);
+    lv_obj_clear_flag(qr_canvas, LV_OBJ_FLAG_HIDDEN);
+    
+    // Invalidate the canvas to force a redraw
+    lv_obj_invalidate(qr_canvas);
+    
+    // Add a small delay to ensure drawing is complete
+    delay(10);
+    
+    Serial.println("QR canvas flag cleared (should be visible now)");
+    
+    if (invoice_spinner != NULL && lv_obj_is_valid(invoice_spinner)) {
+        lv_obj_add_flag(invoice_spinner, LV_OBJ_FLAG_HIDDEN);
+        Serial.println("Spinner hidden");
+    }
+    
+    // Free the buffer
+    free_qr_buffer();
+    
+    Serial.println("QR code displayed successfully");
+}
+
+// Fallback function to display invoice as text
+static void display_invoice_text_fallback(const String& invoice) {
+    if (invoice_label == NULL || !lv_obj_is_valid(invoice_label)) {
+        return;
+    }
+    
+    String displayText = "Invoice received!\nLength: " + String(invoice.length()) + " chars\n";
+    displayText += "Use wallet app to pay";
+    
+    lv_label_set_text(invoice_label, displayText.c_str());
+    lv_label_set_long_mode(invoice_label, LV_LABEL_LONG_WRAP);
+    lv_obj_set_width(invoice_label, 260);
+    
+    // Hide spinner
+    if (invoice_spinner != NULL && lv_obj_is_valid(invoice_spinner)) {
+        lv_obj_add_flag(invoice_spinner, LV_OBJ_FLAG_HIDDEN);
+    }
+    
+    // Hide QR canvas
+    if (qr_canvas != NULL && lv_obj_is_valid(qr_canvas)) {
+        lv_obj_add_flag(qr_canvas, LV_OBJ_FLAG_HIDDEN);
+    }
+}
+
+void set_display_rotation(int rotation) {
+  lcd.setRotation(rotation);
+}
+
+void setup(void)
+{
+  Serial.begin(115200); /* prepare for possible serial debug */
+
+  lcd.init(); // Initialize LovyanGFX
+  lv_init();  // Initialize lvgl
+
+  set_display_rotation(0);
+
+  load_nwc_url_from_preferences();
+  load_shop_settings_from_preferences();
+  load_pin_from_preferences();
+
+  WiFi.mode(WIFI_STA);
+
+  // Only try to connect to saved WiFi if not in AP mode
+  if (!ap_mode_active) {
+    preferences.begin("wifi-creds", true);
+    String saved_ssid = preferences.getString("ssid", "");
+    String saved_pass = preferences.getString("password", "");
+    preferences.end();
+
+    if (saved_ssid.length() > 0) {
+      Serial.println("Found saved WiFi credentials.");
+      Serial.print("Connecting to ");
+      Serial.println(saved_ssid);
+      WiFi.begin(saved_ssid.c_str(), saved_pass.c_str());
+      wifi_connect_start_time = millis();
+      wifi_connection_attempted = true;
+    }
+  }
+
+  // Initialize NTP client
+  timeClient.begin();
+  timeClient.setTimeOffset(0); // Adjust for your timezone if needed
+
+  // Initialize Nostr memory space
+  nostr::initMemorySpace(2048, 2048);
+
+  /* LVGL : Setting up buffer to use for display */
+  lv_disp_draw_buf_init(&draw_buf, buf, NULL, screenWidth * 10);
+
+  /*** LVGL : Setup & Initialize the display device driver ***/
+  static lv_disp_drv_t disp_drv;
+  lv_disp_drv_init(&disp_drv);
+  disp_drv.hor_res = screenWidth;
+  disp_drv.ver_res = screenHeight;
+  disp_drv.flush_cb = display_flush;
+  disp_drv.draw_buf = &draw_buf;
+  lv_disp_drv_register(&disp_drv);
+
+  /*** LVGL : Setup & Initialize the input device driver ***/
+  static lv_indev_drv_t indev_drv;
+  lv_indev_drv_init(&indev_drv);
+  indev_drv.type = LV_INDEV_TYPE_POINTER;
+  indev_drv.read_cb = touchpad_read;
+  lv_indev_drv_register(&indev_drv);
+
+  load_screen(SCREEN_KEYPAD);
+
+  lv_timer_create(wifi_main_status_updater_cb, 1000, NULL);
+
+  // Create queues for WiFi communication
+  wifiCommandQueue = xQueueCreate(10, sizeof(wifi_command_t));
+  wifiScanResultQueue = xQueueCreate(5, sizeof(wifi_scan_result_t));
+  
+  // Create WiFi task on Core 0
+  xTaskCreatePinnedToCore(
+      wifiTask,           // Task function
+      "WiFiTask",         // Task name
+      4096,               // Stack size
+      NULL,               // Task parameters
+      1,                  // Task priority
+      &wifiTaskHandle,    // Task handle
+      0                   // Core 0
+  );
+
+  // Create queues for invoice processing
+  invoiceCommandQueue = xQueueCreate(5, sizeof(invoice_command_t));
+  invoiceStatusQueue = xQueueCreate(5, sizeof(int));
+  
+  // Create invoice task on Core 0
+  xTaskCreatePinnedToCore(
+      invoiceTask,        // Task function
+      "InvoiceTask",      // Task name
+      4096,               // Stack size
+      NULL,               // Task parameters
+      1,                  // Task priority
+      &invoiceTaskHandle, // Task handle
+      0                   // Core 0
+  );
+}
+
+unsigned long last_ws_log_time = 0;
+
+void loop()
+{
+    lv_timer_handler(); /* let the GUI do its work */
+    
+    // Check WiFi connection status and timeout
+    bool wifi_connected = (WiFi.status() == WL_CONNECTED);
+    
+    // If we attempted to connect but haven't succeeded within timeout, stop trying
+    if (wifi_connection_attempted && !wifi_connected) {
+        unsigned long current_time = millis();
+        if (current_time - wifi_connect_start_time > WIFI_CONNECT_TIMEOUT) {
+            Serial.println("WiFi connection timeout - stopping connection attempts");
+            WiFi.disconnect(true);
+            wifi_connection_attempted = false;
+        }
+    }
+    
+    // Only process WebSocket and networking when WiFi is connected and not in AP mode
+    if (!ap_mode_active && wifi_connected) {
+        // Only run WebSocket loop when invoice overlay is visible
+        if (invoice_processing && invoice_overlay != NULL && lv_obj_is_valid(invoice_overlay)) {
+
+            if (ws_fragment_in_progress && (millis() - ws_fragment_start_time > WS_FRAGMENT_TIMEOUT)) {
+                Serial.printf("[WSc] Fragment timeout in main loop, resetting state\n");
+                reset_websocket_fragment_state();
+            }
+            webSocket.loop();
+        } else {
+            // If WebSocket is initialized but not connected, try to establish connection
+            if (nwc_initialized && !webSocket.isConnected()) {
+                webSocket.loop(); // This will attempt to establish the connection
+                
+                if (millis() - last_ws_log_time > 1000) {
+                    Serial.println("Attempting WebSocket connection...");
+                    last_ws_log_time = millis();
+                }
+            } else if (webSocket.isConnected()) {
+                // Send periodic ping to keep connection alive
+                unsigned long current_time = millis();
+                if (current_time - last_ws_ping >= WS_PING_INTERVAL) {
+                    webSocket.sendPing();
+                    webSocket.loop();
+                    Serial.println("WebSocket ping and loop sent");
+                    last_ws_ping = current_time;
+                }
+            }
+        }
+        
+        // Update NTP time only when WiFi is connected
+        timeClient.update();
+        unixTimestamp = timeClient.getEpochTime();
+        bootTimestamp = unixTimestamp;
+    }
+  
+    // Handle AP mode if active
+    if (ap_mode_active) {
+        dns_server.processNextRequest();
+        ap_server.handleClient();
+    }
+
+    if (unixTimestamp - bootTimestamp > 30) {
+        Serial.printf("Uptime: %d seconds\n", unixTimestamp - bootTimestamp);
+    }
+}
+
+/*** Display callback to flush the buffer to screen ***/
+void display_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p)
+{
+  uint32_t w = (area->x2 - area->x1 + 1);
+  uint32_t h = (area->y2 - area->y1 + 1);
+
+  lcd.startWrite();
+  lcd.setAddrWindow(area->x1, area->y1, w, h);
+  lcd.pushPixels((uint16_t *)&color_p->full, w * h, true);
+  lcd.endWrite();
+
+  lv_disp_flush_ready(disp);
+}
+
+/*** Touchpad callback to read the touchpad ***/
+void touchpad_read(lv_indev_drv_t *indev_driver, lv_indev_data_t *data)
+{
+  uint16_t touchX, touchY;
+  bool touched = lcd.getTouch(&touchX, &touchY);
+
+  if (!touched)
+  {
+    data->state = LV_INDEV_STATE_REL;
+  }
+  else
+  {
+    data->state = LV_INDEV_STATE_PR;
+
+    /*Set the coordinates*/
+    data->point.x = touchX;
+    data->point.y = touchY;
+
+    // Serial.printf("Touch (x,y): (%03d,%03d)\n",touchX,touchY );
+  }
+}
+
+/* Keypad button event handler */
+static void keypad_event_handler(lv_event_t *e)
+{
+  lv_event_code_t code = lv_event_get_code(e);
+  lv_obj_t *btn = lv_event_get_target(e);
+  
+  if (code == LV_EVENT_CLICKED)
+  {
+    /*Get the first child of the button which is the label and get its text*/
+    lv_obj_t *label = lv_obj_get_child(btn, 0);
+    const char *button_text = lv_label_get_text(label);
+    
+    if (strcmp(button_text, LV_SYMBOL_BACKSPACE) == 0) {
+        // Backspace button
+        if (entered_number.length() > 0) {
+            entered_number.remove(entered_number.length() - 1);
+        }
+        Serial.println("Button pressed: Backspace");
+    }
+    else if (strcmp(button_text, "Clear") == 0) {
+      // Clear button
+      entered_number = "";
+      Serial.println("Button pressed: Clear");
+    }
+    else if (strcmp(button_text, "Go") == 0) {
+      // Go button
+      Serial.print("Button pressed: Go - Number entered: ");
+      Serial.println(entered_number);
+      create_invoice_overlay();
+    }
+    else if (strcmp(button_text, ".") == 0) {
+      // Decimal button
+      if (entered_number.indexOf('.') == -1) { // Only add decimal if not already present
+        entered_number += ".";
+      }
+      Serial.println("Button pressed: Decimal");
+    }
+    else {
+      // Number button (0-9)
+      int dot_index = entered_number.indexOf('.');
+      if (dot_index == -1 || (entered_number.length() - dot_index - 1) < 2) {
+        entered_number += button_text;
+        Serial.print("Button pressed: ");
+        Serial.println(button_text);
+      }
+    }
+    
+    // Update display
+    if (entered_number.isEmpty()) {
+        lv_label_set_text(display_label, ("0 " + selected_currency).c_str());
+    } else {
+        String display_text = entered_number + " " + selected_currency.c_str();
+        lv_label_set_text(display_label, display_text.c_str());
+    }
+  }
+}
+
+void load_screen(screen_state_t screen) {
+    // Clean up global pointers before creating new screen
+    cleanup_global_pointers();
+    
+    lv_obj_clean(lv_scr_act()); // Deletes all children of the screen
+
+    switch (screen) {
+        case SCREEN_KEYPAD:
+            create_keypad_screen();
+            break;
+        case SCREEN_SETTINGS:
+            create_settings_screen();
+            break;
+        case SCREEN_WIFI:
+            create_wifi_screen();
+            break;
+        case SCREEN_WIFI_PASSWORD:
+            // This case will be handled manually
+            break;
+        case SCREEN_SETTINGS_SUB:
+            create_settings_sub_screen();
+            break;
+        case SCREEN_INFO:  // Add this case
+            create_info_screen();
+            break;
+    }
+}
+
+static void navigation_event_handler(lv_event_t * e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    if (code == LV_EVENT_CLICKED) {
+        // Stop any active timers first
+        if(wifi_status_timer != NULL) {
+            lv_timer_del(wifi_status_timer);
+            wifi_status_timer = NULL;
+        }
+        
+        // Close invoice overlay if active
+        if (invoice_processing) {
+            close_invoice_overlay();
+        }
+        
+        // Get the screen to load
+        screen_state_t * screen_to_load = (screen_state_t*)lv_event_get_user_data(e);
+        if (screen_to_load != NULL) {
+            // Check if we're exiting the WiFi screen
+            if (*screen_to_load != SCREEN_WIFI && *screen_to_load != SCREEN_WIFI_PASSWORD) {
+                Serial.println("Exiting WiFi screen, stopping WiFi scanning...");
+                stop_wifi_scanning();
+            }
+            
+            // Check if we're returning to the keypad screen
+            if (*screen_to_load == SCREEN_KEYPAD) {
+                Serial.println("Returning to keypad screen, checking connections...");
+                // Attempt reconnection if needed
+                attempt_reconnection_if_needed();
+            }
+            
+            load_screen(*screen_to_load);
+        }
+    }
+}
+
+static void nwc_button_event_handler(lv_event_t * e) {
+    lv_event_code_t code = lv_event_get_code(e);
+    if (code == LV_EVENT_CLICKED) {
+        Serial.println("NWC connection button clicked");
+    }
+}
+
+static lv_obj_t *wifi_list;
+
+static void wifi_scan_event_handler(lv_event_t * e) {
+    if(e != NULL) {
+        lv_event_code_t code = lv_event_get_code(e);
+        if (code != LV_EVENT_CLICKED) return;
+    }
+    
+    Serial.println("Scanning for WiFi networks...");
+    lv_obj_clean(wifi_list);
+    
+    // Show scanning message
+    lv_list_add_text(wifi_list, "Scanning for networks...");
+    
+    // Send scan command to WiFi task
+    if (wifiCommandQueue != NULL) {
+        wifi_command_t command;
+        command.type = WIFI_SCAN;
+        if (xQueueSend(wifiCommandQueue, &command, 0) == pdTRUE) {
+            Serial.println("Scan command sent to WiFi task successfully");
+        } else {
+            Serial.println("Failed to send scan command to WiFi task");
+        }
+    } else {
+        Serial.println("wifiCommandQueue is NULL");
+    }
+    
+    // Create a repeating timer to check for results every 500ms
+    wifi_scan_timer = lv_timer_create([](lv_timer_t *timer) {
+        if (process_wifi_scan_results()) {
+            // Results found, stop the timer
+            lv_timer_del(timer);
+            wifi_scan_timer = NULL;
+        }
+    }, 500, NULL);
+}
+
+static bool process_wifi_scan_results(void) {
+    Serial.println("process_wifi_scan_results called");
+    
+    if (wifiScanResultQueue == NULL) {
+        Serial.println("wifiScanResultQueue is NULL");
+        return false;
+    }
+    
+    wifi_scan_result_t result;
+    if (xQueueReceive(wifiScanResultQueue, &result, 0)) {
+        Serial.print("Found ");
+        Serial.print(result.network_count);
+        Serial.println(" networks.");
+        
+        lv_obj_clean(wifi_list);
+        
+        if (result.network_count == 0) {
+            lv_list_add_text(wifi_list, "No networks found");
+        } else {
+            // Clear the global SSID storage
+            wifi_ssids.clear();
+            wifi_ssids.reserve(result.network_count);
+            
+            for (int i = 0; i < result.network_count; i++) {
+                String ssid = String(result.ssids[i]);
+                wifi_ssids.push_back(ssid);
+                
+                String rssi = String(result.rssi[i]);
+                String security = result.encrypted[i] ? "Lck" : " ";
+                String item_text = ssid + " (" + rssi + " dBm) " + security;
+                
+                Serial.print("Adding network: ");
+                Serial.println(item_text);
+                
+                lv_obj_t * list_btn = lv_list_add_btn(wifi_list, NULL, item_text.c_str());
+                lv_obj_add_event_cb(list_btn, wifi_connect_event_handler, LV_EVENT_CLICKED, (void*)(uintptr_t)i);
+                
+                // Add small delay every few items to keep UI responsive
+                if (i % 3 == 0) {
+                    delay(1);
+                }
+            }
+        }
+        return true; // Results were found and processed
+    } else {
+        Serial.println("No scan results received from queue");
+        return false; // No results yet
+    }
+}
+
+static void wifi_connect_event_handler(lv_event_t * e) {
+    lv_event_code_t code = lv_event_get_code(e);
+    if (code == LV_EVENT_CLICKED) {
+        // Get the index from user_data
+        uintptr_t index = (uintptr_t)lv_event_get_user_data(e);
+        
+        // Validate index
+        if (index < wifi_ssids.size()) {
+            const char * ssid = wifi_ssids[index].c_str();
+            Serial.print("Selected WiFi network: ");
+            Serial.println(ssid);
+            create_wifi_password_screen(ssid);
+        } else {
+            Serial.println("Invalid WiFi network index");
+        }
+    }
+}
+
+static void initial_wifi_scan_cb(lv_timer_t *timer) {
+    // Send scan command to WiFi task
+    if (wifiCommandQueue != NULL) {
+        wifi_command_t command;
+        command.type = WIFI_SCAN;
+        xQueueSend(wifiCommandQueue, &command, 0);
+    }
+    
+    // Create a repeating timer to check for results every 500ms
+    wifi_scan_timer = lv_timer_create([](lv_timer_t *timer) {
+        if (process_wifi_scan_results()) {
+            // Results found, stop the timer
+            lv_timer_del(timer);
+            wifi_scan_timer = NULL;
+        }
+    }, 500, NULL);
+}
+
+static void wifi_password_kb_event_handler(lv_event_t * e) {
+    lv_event_code_t code = lv_event_get_code(e);
+    lv_obj_t * kb = lv_event_get_target(e);
+    
+    if (code == LV_EVENT_READY) {
+        lv_obj_t * ta = lv_keyboard_get_textarea(kb);
+        const char * password = lv_textarea_get_text(ta);
+        strncpy(current_password, password, sizeof(current_password) - 1);
+        current_password[sizeof(current_password) - 1] = '\0';
+        
+        Serial.print("Attempting to connect to ");
+        Serial.print(current_ssid);
+        Serial.print(" with password: ");
+        Serial.println(password);
+
+        lv_obj_add_flag(kb, LV_OBJ_FLAG_HIDDEN);
+        lv_obj_add_flag(ta, LV_OBJ_FLAG_HIDDEN);
+
+        lv_obj_clear_flag(wifi_status_label, LV_OBJ_FLAG_HIDDEN);
+        lv_label_set_text(wifi_status_label, "Connecting...");
+        lv_obj_align(wifi_status_label, LV_ALIGN_CENTER, 0, 0);
+        
+        // Use user_data to store the attempt counter
+        lv_obj_set_user_data(wifi_status_label, (void*)0);
+
+        // Send connect command to WiFi task instead of calling WiFi.begin directly
+        if (wifiCommandQueue != NULL) {
+            wifi_command_t command;
+            command.type = WIFI_CONNECT;
+            strncpy(command.ssid, current_ssid, sizeof(command.ssid) - 1);
+            command.ssid[sizeof(command.ssid) - 1] = '\0';
+            strncpy(command.password, current_password, sizeof(command.password) - 1);
+            command.password[sizeof(command.password) - 1] = '\0';
+            xQueueSend(wifiCommandQueue, &command, 0);
+        }
+
+        wifi_status_timer = lv_timer_create(wifi_status_checker_cb, 500, wifi_status_label);
+    } else if (code == LV_EVENT_CANCEL) {
+        set_display_rotation(0);
+        load_screen(SCREEN_WIFI);
+    }
+}
+
+static void wifi_password_back_event_handler(lv_event_t * e) {
+    set_display_rotation(0);
+    load_screen(SCREEN_WIFI);
+}
+
+static void wifi_status_checker_cb(lv_timer_t *timer) {
+    lv_obj_t * status_label = (lv_obj_t *)timer->user_data;
+    int attempts = (int)lv_obj_get_user_data(status_label);
+    attempts++;
+
+    if (WiFi.status() == WL_CONNECTED) {
+        lv_label_set_text_fmt(status_label, "Connected!\nIP: %s", WiFi.localIP().toString().c_str());
+        
+        preferences.begin("wifi-creds", false);
+        preferences.putString("ssid", current_ssid);
+        preferences.putString("password", current_password);
+        preferences.end();
+        Serial.println("WiFi credentials saved.");
+
+        lv_timer_del(timer);
+        wifi_status_timer = NULL;
+        return;
+    }
+
+    if (attempts > 30) { // 15-second timeout
+        lv_label_set_text(status_label, "Connection Failed!");
+        WiFi.disconnect(true);
+        lv_timer_del(timer);
+        wifi_status_timer = NULL;
+        return;
+    }
+
+    // Still trying, update counter and wait
+    lv_obj_set_user_data(status_label, (void*)attempts);
+    
+    // Add this line to yield control back to UI thread
+    delay(1);
+}
+
+static void wifi_main_status_updater_cb(lv_timer_t *timer) {
+    // Don't try to connect to WiFi or relay when in AP mode
+    if (ap_mode_active) {
+        if (main_wifi_status_label != NULL && lv_obj_is_valid(main_wifi_status_label)) {
+            lv_label_set_text(main_wifi_status_label, "AP Mode Active");
+            lv_obj_set_style_text_color(main_wifi_status_label, lv_color_hex(0x4CAF50), 0);
+        }
+        if (relay_status_label != NULL && lv_obj_is_valid(relay_status_label)) {
+            lv_label_set_text(relay_status_label, "Relay: Disabled (AP Mode)");
+            lv_obj_set_style_text_color(relay_status_label, lv_color_hex(0x9E9E9E), 0);
+        }
+        return;
+    }
+
+    if (main_wifi_status_label != NULL && lv_obj_is_valid(main_wifi_status_label)) {
+        if (WiFi.status() == WL_CONNECTED) {
+            String status_text = String(LV_SYMBOL_WIFI) + " " + WiFi.SSID();
+            lv_label_set_text(main_wifi_status_label, status_text.c_str());
+            lv_obj_set_style_text_color(main_wifi_status_label, lv_color_hex(0x00FF00), 0);
+            
+            if (!nwc_initialized) {
+                Serial.println("WiFi connected, initializing NWC...");
+                setup_nwc_data(nwcPairingUrl);
+                connect_to_relay();
+            }
+
+            // Fetch Bitcoin prices when WiFi connects
+            if (
+                (!prices_loaded || (millis() - last_price_update > PRICE_UPDATE_INTERVAL))
+                &&
+                selected_currency != "sats"
+                ) {
+                fetch_bitcoin_prices();
+            }
+        } else {
+            // Check if we've timed out
+            unsigned long current_time = millis();
+            if (wifi_connection_attempted && (current_time - wifi_connect_start_time > WIFI_CONNECT_TIMEOUT)) {
+                lv_label_set_text(main_wifi_status_label, LV_SYMBOL_WIFI " Timeout");
+                lv_obj_set_style_text_color(main_wifi_status_label, lv_color_hex(0xFF5722), 0);
+            } else {
+                lv_label_set_text(main_wifi_status_label, LV_SYMBOL_WIFI " Not Connected");
+                lv_obj_set_style_text_color(main_wifi_status_label, lv_color_hex(0x9E9E9E), 0);
+            }
+            
+            if (nwc_initialized) {
+                webSocket.disconnect();
+                nwc_initialized = false;
+                update_relay_status_display(false);
+            }
+        }
+    }
+    
+    // Add this line to yield control back to UI thread
+    delay(1);
+}
+
+void create_wifi_password_screen(const char * ssid) {
+    lv_obj_clean(lv_scr_act());
+    strncpy(current_ssid, ssid, sizeof(current_ssid) - 1);
+    current_ssid[sizeof(current_ssid) - 1] = '\0';
+
+    // Back Button - moved to top left with same style as shop settings
+    lv_obj_t * back_btn = lv_btn_create(lv_scr_act());
+    lv_obj_set_size(back_btn, 80, 40);
+    lv_obj_align(back_btn, LV_ALIGN_TOP_LEFT, 10, 10);
+    
+    lv_obj_t * back_label = lv_label_create(back_btn);
+    lv_label_set_text(back_label, LV_SYMBOL_LEFT " Back");
+    lv_obj_center(back_label);
+    
+    static screen_state_t wifi_screen_state = SCREEN_WIFI;
+    lv_obj_add_event_cb(back_btn, navigation_event_handler, LV_EVENT_CLICKED, &wifi_screen_state);
+
+    // Style for Back button (transparent with white border)
+    lv_obj_set_style_bg_color(back_btn, lv_color_hex(0x000000), LV_PART_MAIN);
+    lv_obj_set_style_bg_opa(back_btn, LV_OPA_0, LV_PART_MAIN); // Transparent background
+    lv_obj_set_style_border_color(back_btn, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+    lv_obj_set_style_border_width(back_btn, 2, LV_PART_MAIN);
+    lv_obj_set_style_text_color(back_btn, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+    lv_obj_set_style_radius(back_btn, 5, LV_PART_MAIN);
+    
+    // Pressed state - dark grey background
+    lv_obj_set_style_bg_color(back_btn, lv_color_hex(0x424242), LV_STATE_PRESSED);
+    lv_obj_set_style_bg_opa(back_btn, LV_OPA_COVER, LV_STATE_PRESSED);
+    lv_obj_set_style_text_color(back_btn, lv_color_hex(0xFFFFFF), LV_STATE_PRESSED);
+
+    // Title
+    lv_obj_t * title = lv_label_create(lv_scr_act());
+    lv_label_set_text_fmt(title, "Password for %s", ssid);
+    lv_obj_align(title, LV_ALIGN_TOP_MID, 0, 60);
+
+    // Connecting text above password textbox
+    lv_obj_t * connecting_label = lv_label_create(lv_scr_act());
+    lv_label_set_text_fmt(connecting_label, "Connecting to %s", ssid);
+    lv_obj_align(connecting_label, LV_ALIGN_TOP_MID, 0, 120);
+
+    lv_obj_t * ta = lv_textarea_create(lv_scr_act());
+    lv_obj_set_width(ta, screenWidth - 40);
+    lv_textarea_set_one_line(ta, true);
+    lv_obj_align(ta, LV_ALIGN_TOP_MID, 0, 160);
+
+    lv_obj_t * kb = lv_keyboard_create(lv_scr_act());
+    lv_keyboard_set_textarea(kb, ta);
+    lv_obj_add_event_cb(kb, wifi_password_kb_event_handler, LV_EVENT_ALL, NULL);
+    
+    // Style for keyboard buttons on press
+    lv_obj_set_style_bg_color(kb, lv_color_hex(0x9370DB), LV_PART_ITEMS | LV_STATE_PRESSED);
+    lv_obj_set_style_text_color(kb, lv_color_hex(0xFFFFFF), LV_PART_ITEMS | LV_STATE_PRESSED);
+
+    wifi_status_label = lv_label_create(lv_scr_act());
+    lv_obj_add_flag(wifi_status_label, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_align(wifi_status_label, LV_ALIGN_CENTER, 0, -50);
+    lv_label_set_long_mode(wifi_status_label, LV_LABEL_LONG_WRAP);
+    lv_obj_set_width(wifi_status_label, screenWidth - 40);
+}
+
+void create_wifi_screen(void) {
+    // Back button - moved to top left with same style as shop settings
+    lv_obj_t * back_btn = lv_btn_create(lv_scr_act());
+    lv_obj_set_size(back_btn, 80, 40);
+    lv_obj_align(back_btn, LV_ALIGN_TOP_LEFT, 10, 10);
+    
+    lv_obj_t * back_label = lv_label_create(back_btn);
+    lv_label_set_text(back_label, LV_SYMBOL_LEFT " Back");
+    lv_obj_center(back_label);
+    
+    static screen_state_t settings_screen_state = SCREEN_SETTINGS;
+    lv_obj_add_event_cb(back_btn, navigation_event_handler, LV_EVENT_CLICKED, &settings_screen_state);
+
+    // Style for Back button (transparent with white border)
+    lv_obj_set_style_bg_color(back_btn, lv_color_hex(0x000000), LV_PART_MAIN);
+    lv_obj_set_style_bg_opa(back_btn, LV_OPA_0, LV_PART_MAIN); // Transparent background
+    lv_obj_set_style_border_color(back_btn, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+    lv_obj_set_style_border_width(back_btn, 2, LV_PART_MAIN);
+    lv_obj_set_style_text_color(back_btn, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+    lv_obj_set_style_radius(back_btn, 5, LV_PART_MAIN);
+    
+    // Pressed state - dark grey background
+    lv_obj_set_style_bg_color(back_btn, lv_color_hex(0x424242), LV_STATE_PRESSED);
+    lv_obj_set_style_bg_opa(back_btn, LV_OPA_COVER, LV_STATE_PRESSED);
+    lv_obj_set_style_text_color(back_btn, lv_color_hex(0xFFFFFF), LV_STATE_PRESSED);
+
+    // Title - moved down to avoid overlap with back button
+    lv_obj_t * title = lv_label_create(lv_scr_act());
+    lv_label_set_text(title, "WiFi Networks");
+    lv_obj_align(title, LV_ALIGN_TOP_MID, 0, 70); // Moved down from 10 to 70
+
+    // WiFi List - moved down to avoid overlap with back button
+    wifi_list = lv_list_create(lv_scr_act());
+    lv_obj_set_size(wifi_list, screenWidth - 20, 300);
+    lv_obj_align(wifi_list, LV_ALIGN_TOP_MID, 0, 100); // Moved down from 40 to 100
+
+    // Show initial scanning message
+    lv_list_add_text(wifi_list, "Scanning for networks...");
+
+    // Create a timer to perform the initial scan after UI has rendered
+    lv_timer_t *scan_timer = lv_timer_create(initial_wifi_scan_cb, 100, NULL);
+    lv_timer_set_repeat_count(scan_timer, 1);
+
+    // Scan button - moved to bottom right
+    lv_obj_t * scan_btn = lv_btn_create(lv_scr_act());
+    lv_obj_set_size(scan_btn, 100, 50);
+    lv_obj_align(scan_btn, LV_ALIGN_BOTTOM_RIGHT, -10, -10);
+    lv_obj_t * scan_label = lv_label_create(scan_btn);
+    lv_label_set_text(scan_label, "Scan");
+    lv_obj_center(scan_label);
+    lv_obj_add_event_cb(scan_btn, wifi_scan_event_handler, LV_EVENT_CLICKED, NULL);
+}
+
+void create_settings_screen(void) {
+    // Info button (at the top)
+    lv_obj_t * info_btn = lv_btn_create(lv_scr_act());
+    lv_obj_set_size(info_btn, screenWidth - 40, 50);
+    lv_obj_align(info_btn, LV_ALIGN_CENTER, 0, -120); // Top
+
+    lv_obj_t * info_label = lv_label_create(info_btn);
+    lv_label_set_text(info_label, "Device Information");
+    lv_obj_center(info_label);
+
+    static screen_state_t info_screen_state = SCREEN_INFO;
+    lv_obj_add_event_cb(info_btn, navigation_event_handler, LV_EVENT_CLICKED, &info_screen_state);
+
+    // Style for Info button (Orange)
+    lv_obj_set_style_bg_color(info_btn, lv_color_hex(0xFF9800), LV_PART_MAIN);
+    lv_obj_set_style_text_color(info_btn, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+    lv_obj_set_style_bg_color(info_btn, lv_color_hex(0xF57C00), LV_STATE_PRESSED);
+    lv_obj_set_style_text_color(info_btn, lv_color_hex(0xFFFFFF), LV_STATE_PRESSED);
+
+    // WiFi Settings button
+    lv_obj_t * wifi_btn = lv_btn_create(lv_scr_act());
+    lv_obj_set_size(wifi_btn, screenWidth - 40, 50);
+    lv_obj_align(wifi_btn, LV_ALIGN_CENTER, 0, -60);
+
+    lv_obj_t * wifi_label = lv_label_create(wifi_btn);
+    lv_label_set_text(wifi_label, "WiFi Settings");
+    lv_obj_center(wifi_label);
+
+    static screen_state_t wifi_screen_state = SCREEN_WIFI;
+    lv_obj_add_event_cb(wifi_btn, navigation_event_handler, LV_EVENT_CLICKED, &wifi_screen_state);
+
+    // Style for WiFi button
+    lv_obj_set_style_bg_color(wifi_btn, lv_color_hex(0x8A2BE2), LV_PART_MAIN);
+    lv_obj_set_style_text_color(wifi_btn, lv_color_hex(0x000000), LV_PART_MAIN);
+    lv_obj_set_style_bg_color(wifi_btn, lv_color_hex(0x9370DB), LV_STATE_PRESSED);
+    lv_obj_set_style_text_color(wifi_btn, lv_color_hex(0xFFFFFF), LV_STATE_PRESSED);
+
+    // Shop Settings button
+    lv_obj_t * shop_btn = lv_btn_create(lv_scr_act());
+    lv_obj_set_size(shop_btn, screenWidth - 40, 50);
+    lv_obj_align(shop_btn, LV_ALIGN_CENTER, 0, 0);
+
+    lv_obj_t * shop_label = lv_label_create(shop_btn);
+    lv_label_set_text(shop_label, "Device Settings");
+    lv_obj_center(shop_label);
+
+    static screen_state_t settings_sub_screen_state = SCREEN_SETTINGS_SUB;
+    lv_obj_add_event_cb(shop_btn, navigation_event_handler, LV_EVENT_CLICKED, &settings_sub_screen_state);
+
+    // Style for Shop Settings button
+    lv_obj_set_style_bg_color(shop_btn, lv_color_hex(0x2196F3), LV_PART_MAIN);
+    lv_obj_set_style_text_color(shop_btn, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+    lv_obj_set_style_bg_color(shop_btn, lv_color_hex(0x1976D2), LV_STATE_PRESSED);
+    lv_obj_set_style_text_color(shop_btn, lv_color_hex(0xFFFFFF), LV_STATE_PRESSED);
+
+    // Show different content based on AP mode status
+    if (!ap_mode_active) {
+        // Launch Access Point button
+        lv_obj_t * ap_btn = lv_btn_create(lv_scr_act());
+        lv_obj_set_size(ap_btn, screenWidth - 40, 50);
+        lv_obj_align(ap_btn, LV_ALIGN_CENTER, 0, 60);
+        
+        lv_obj_t * ap_label = lv_label_create(ap_btn);
+        lv_label_set_text(ap_label, "Change NWC Pairing Code (AP mode)");
+        lv_obj_center(ap_label);
+
+        lv_obj_add_event_cb(ap_btn, launch_ap_mode_event_handler, LV_EVENT_CLICKED, NULL);
+
+        // Style for AP button
+        lv_obj_set_style_bg_color(ap_btn, lv_color_hex(0x4CAF50), LV_PART_MAIN);
+        lv_obj_set_style_text_color(ap_btn, lv_color_hex(0x000000), LV_PART_MAIN);
+        lv_obj_set_style_bg_color(ap_btn, lv_color_hex(0x45A049), LV_STATE_PRESSED);
+        lv_obj_set_style_text_color(ap_btn, lv_color_hex(0xFFFFFF), LV_STATE_PRESSED);
+    } else {
+        // Show AP info and Exit AP button when AP mode is active
+        lv_obj_t *ap_info_label = lv_label_create(lv_scr_act());
+        String ap_info = "AP Mode Active\nSSID: " + String(ap_ssid) +
+                         "\nPassword: " + ap_password +
+                         "\nIP: " + String(ap_ip);
+        lv_label_set_text(ap_info_label, ap_info.c_str());
+        lv_obj_align(ap_info_label, LV_ALIGN_CENTER, 0, 70);
+        lv_obj_set_style_text_font(ap_info_label, &lv_font_montserrat_14, LV_PART_MAIN);
+
+        lv_obj_t *exit_ap_btn = lv_btn_create(lv_scr_act());
+        lv_obj_set_size(exit_ap_btn, screenWidth - 40, 50);
+        lv_obj_align(exit_ap_btn, LV_ALIGN_CENTER, 0, 140);
+
+        lv_obj_t *exit_ap_label = lv_label_create(exit_ap_btn);
+        lv_label_set_text(exit_ap_label, "Exit AP Mode");
+        lv_obj_center(exit_ap_label);
+
+        lv_obj_add_event_cb(exit_ap_btn, exit_ap_mode_event_handler, LV_EVENT_CLICKED, NULL);
+
+        // Style for exit AP button (red)
+        lv_obj_set_style_bg_color(exit_ap_btn, lv_color_hex(0xFF5722), LV_PART_MAIN);
+        lv_obj_set_style_text_color(exit_ap_btn, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+        lv_obj_set_style_bg_color(exit_ap_btn, lv_color_hex(0xD84315), LV_STATE_PRESSED);
+        lv_obj_set_style_text_color(exit_ap_btn, lv_color_hex(0xFFFFFF), LV_STATE_PRESSED);
+    }
+
+    lv_obj_t * back_btn = lv_btn_create(lv_scr_act());
+    lv_obj_set_size(back_btn, 80, 40);
+    lv_obj_align(back_btn, LV_ALIGN_TOP_LEFT, 10, 10);
+    
+    lv_obj_t * back_label = lv_label_create(back_btn);
+    lv_label_set_text(back_label, LV_SYMBOL_LEFT " Back");
+    lv_obj_center(back_label);
+
+    static screen_state_t keypad_screen_state = SCREEN_KEYPAD;
+    lv_obj_add_event_cb(back_btn, navigation_event_handler, LV_EVENT_CLICKED, &keypad_screen_state);
+
+    // Style for Back button (transparent with white border)
+    lv_obj_set_style_bg_color(back_btn, lv_color_hex(0x000000), LV_PART_MAIN);
+    lv_obj_set_style_bg_opa(back_btn, LV_OPA_0, LV_PART_MAIN); // Transparent background
+    lv_obj_set_style_border_color(back_btn, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+    lv_obj_set_style_border_width(back_btn, 2, LV_PART_MAIN);
+    lv_obj_set_style_text_color(back_btn, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+    lv_obj_set_style_radius(back_btn, 5, LV_PART_MAIN);
+    
+    // Pressed state - dark grey background
+    lv_obj_set_style_bg_color(back_btn, lv_color_hex(0x424242), LV_STATE_PRESSED);
+    lv_obj_set_style_bg_opa(back_btn, LV_OPA_COVER, LV_STATE_PRESSED);
+    lv_obj_set_style_text_color(back_btn, lv_color_hex(0xFFFFFF), LV_STATE_PRESSED);
+}
+
+void create_keypad_screen(void)
+{
+  // Status Bar
+  main_wifi_status_label = lv_label_create(lv_scr_act());
+  lv_obj_align(main_wifi_status_label, LV_ALIGN_TOP_LEFT, 10, 5);
+  wifi_main_status_updater_cb(NULL); // Update status immediately
+
+  // Relay Status
+  relay_status_label = lv_label_create(lv_scr_act());  // Assign to global pointer
+  lv_obj_align(relay_status_label, LV_ALIGN_TOP_RIGHT, -10, 5);
+  lv_label_set_text(relay_status_label, "Relay: Disconnected");
+  lv_obj_set_style_text_color(relay_status_label, lv_color_hex(0x9E9E9E), 0);
+
+  // Update the relay status display with current connection state
+  bool websocket_connected = webSocket.isConnected();
+  update_relay_status_display(websocket_connected);
+
+  // Create display area at the top
+  lv_obj_t *display_panel = lv_obj_create(lv_scr_act());
+  lv_obj_set_size(display_panel, screenWidth - 20, 80);
+  lv_obj_set_pos(display_panel, 10, 30);
+  lv_obj_set_style_bg_color(display_panel, lv_color_hex(0x000000), LV_PART_MAIN);
+  lv_obj_set_style_border_width(display_panel, 2, LV_PART_MAIN);
+  lv_obj_set_style_border_color(display_panel, lv_color_hex(0x666666), LV_PART_MAIN);
+  
+  display_label = lv_label_create(display_panel);
+  
+  lv_label_set_text(display_label, ("0 " + selected_currency).c_str());
+  lv_obj_set_style_text_color(display_label, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+  lv_obj_set_style_text_font(display_label, &lv_font_montserrat_24, LV_PART_MAIN);
+  lv_obj_align(display_label, LV_ALIGN_CENTER, 0, 0);
+
+  // Keypad layout parameters
+  const int num_button_spacing = 5;
+  const int num_button_width = (screenWidth - (4 * num_button_spacing)) / 3;
+  const int num_button_height = 65;
+  const int start_y = 120;
+  
+  // Create number buttons 1-9
+  const char* numbers[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
+  int row = 0, col = 0;
+  
+  for (int i = 0; i < 9; i++) {
+    lv_obj_t *btn = lv_btn_create(lv_scr_act());
+    lv_obj_set_size(btn, num_button_width, num_button_height);
+    lv_obj_set_pos(btn, num_button_spacing + col * (num_button_width + num_button_spacing), 
+                   start_y + row * (num_button_height + num_button_spacing));
+    
+    lv_obj_add_event_cb(btn, keypad_event_handler, LV_EVENT_ALL, NULL);
+    
+    lv_obj_t *label = lv_label_create(btn);
+    lv_label_set_text(label, numbers[i]);
+    lv_obj_set_style_text_font(label, &lv_font_montserrat_24, LV_PART_MAIN);
+    lv_obj_center(label);
+
+    // Style for number buttons
+    lv_obj_set_style_bg_color(btn, lv_color_hex(0x8A2BE2), LV_PART_MAIN);
+    lv_obj_set_style_text_color(btn, lv_color_hex(0x000000), LV_PART_MAIN);
+    lv_obj_set_style_bg_color(btn, lv_color_hex(0x9370DB), LV_STATE_PRESSED);
+    lv_obj_set_style_text_color(btn, lv_color_hex(0xFFFFFF), LV_STATE_PRESSED);
+    
+    col++;
+    if (col >= 3) {
+      col = 0;
+      row++;
+    }
+  }
+  
+  // Bottom row: Decimal, 0, Go
+  int bottom_row_y = start_y + 3 * (num_button_height + num_button_spacing);
+  
+  // Decimal button (.)
+  lv_obj_t *decimal_btn = lv_btn_create(lv_scr_act());
+  lv_obj_set_size(decimal_btn, num_button_width, num_button_height);
+  lv_obj_set_pos(decimal_btn, num_button_spacing, bottom_row_y);
+  lv_obj_add_event_cb(decimal_btn, keypad_event_handler, LV_EVENT_ALL, NULL);
+  
+  lv_obj_t *decimal_label = lv_label_create(decimal_btn);
+  lv_label_set_text(decimal_label, ".");
+  lv_obj_set_style_text_font(decimal_label, &lv_font_montserrat_24, LV_PART_MAIN);
+  lv_obj_center(decimal_label);
+  
+  // Style for decimal button
+  lv_obj_set_style_bg_color(decimal_btn, lv_color_hex(0x8A2BE2), LV_PART_MAIN);
+  lv_obj_set_style_text_color(decimal_btn, lv_color_hex(0x000000), LV_PART_MAIN);
+  lv_obj_set_style_bg_color(decimal_btn, lv_color_hex(0x9370DB), LV_STATE_PRESSED);
+  lv_obj_set_style_text_color(decimal_btn, lv_color_hex(0xFFFFFF), LV_STATE_PRESSED);
+
+  // Zero button (0)
+  lv_obj_t *zero_btn = lv_btn_create(lv_scr_act());
+  lv_obj_set_size(zero_btn, num_button_width, num_button_height);
+  lv_obj_set_pos(zero_btn, num_button_spacing + (num_button_width + num_button_spacing), bottom_row_y);
+  lv_obj_add_event_cb(zero_btn, keypad_event_handler, LV_EVENT_ALL, NULL);
+  
+  lv_obj_t *zero_label = lv_label_create(zero_btn);
+  lv_label_set_text(zero_label, "0");
+  lv_obj_set_style_text_font(zero_label, &lv_font_montserrat_24, LV_PART_MAIN);
+  lv_obj_center(zero_label);
+  
+  // Style for zero button
+  lv_obj_set_style_bg_color(zero_btn, lv_color_hex(0x8A2BE2), LV_PART_MAIN);
+  lv_obj_set_style_text_color(zero_btn, lv_color_hex(0x000000), LV_PART_MAIN);
+  lv_obj_set_style_bg_color(zero_btn, lv_color_hex(0x9370DB), LV_STATE_PRESSED);
+  lv_obj_set_style_text_color(zero_btn, lv_color_hex(0xFFFFFF), LV_STATE_PRESSED);
+
+  // Backspace button
+  lv_obj_t *backspace_btn = lv_btn_create(lv_scr_act());
+  lv_obj_set_size(backspace_btn, num_button_width, num_button_height);
+  lv_obj_set_pos(backspace_btn, num_button_spacing + 2 * (num_button_width + num_button_spacing), bottom_row_y);
+  lv_obj_add_event_cb(backspace_btn, keypad_event_handler, LV_EVENT_ALL, NULL);
+  
+  lv_obj_t *backspace_label = lv_label_create(backspace_btn);
+  lv_label_set_text(backspace_label, LV_SYMBOL_BACKSPACE);
+  lv_obj_center(backspace_label);
+
+  // Style for backspace button (Yellow)
+  lv_obj_set_style_bg_color(backspace_btn, lv_color_hex(0xFFC107), LV_PART_MAIN);
+  lv_obj_set_style_text_color(backspace_btn, lv_color_hex(0x000000), LV_PART_MAIN);
+  lv_obj_set_style_bg_color(backspace_btn, lv_color_hex(0xFFA000), LV_STATE_PRESSED);
+  lv_obj_set_style_text_color(backspace_btn, lv_color_hex(0xFFFFFF), LV_STATE_PRESSED);
+
+  // Last row: Settings, Clear, and Go
+  int last_row_y = bottom_row_y + num_button_height + num_button_spacing;
+
+  // Settings button
+  lv_obj_t *settings_btn = lv_btn_create(lv_scr_act());
+  lv_obj_set_size(settings_btn, num_button_width, num_button_height);
+  lv_obj_set_pos(settings_btn, num_button_spacing, last_row_y);
+  static screen_state_t settings_screen_state = SCREEN_SETTINGS;
+  lv_obj_add_event_cb(settings_btn, navigation_event_handler, LV_EVENT_CLICKED, &settings_screen_state);
+
+  lv_obj_t * settings_label = lv_label_create(settings_btn);
+  lv_label_set_text(settings_label, LV_SYMBOL_SETTINGS);
+  lv_obj_center(settings_label);
+  
+  // Style for settings button (Grey)
+  lv_obj_set_style_bg_color(settings_btn, lv_color_hex(0x9E9E9E), LV_PART_MAIN);
+  lv_obj_set_style_text_color(settings_btn, lv_color_hex(0x000000), LV_PART_MAIN);
+  lv_obj_set_style_bg_color(settings_btn, lv_color_hex(0x616161), LV_STATE_PRESSED);
+  lv_obj_set_style_text_color(settings_btn, lv_color_hex(0xFFFFFF), LV_STATE_PRESSED);
+
+  // Clear button
+  lv_obj_t *clear_btn = lv_btn_create(lv_scr_act());
+  lv_obj_set_size(clear_btn, num_button_width, num_button_height);
+  lv_obj_set_pos(clear_btn, num_button_spacing + (num_button_width + num_button_spacing), last_row_y);
+  lv_obj_add_event_cb(clear_btn, keypad_event_handler, LV_EVENT_ALL, NULL);
+  lv_obj_set_style_bg_color(clear_btn, lv_color_hex(0xFF0000), LV_PART_MAIN);
+  
+  lv_obj_t *clear_label = lv_label_create(clear_btn);
+  lv_label_set_text(clear_label, "Clear");
+  lv_obj_set_style_text_font(clear_label, &lv_font_montserrat_14, LV_PART_MAIN);
+  lv_obj_set_style_text_color(clear_label, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+  lv_obj_center(clear_label);
+
+  // Go button - Green
+  lv_obj_t *go_btn = lv_btn_create(lv_scr_act());
+  lv_obj_set_size(go_btn, num_button_width, num_button_height);
+  lv_obj_set_pos(go_btn, num_button_spacing + 2 * (num_button_width + num_button_spacing), last_row_y);
+  lv_obj_add_event_cb(go_btn, keypad_event_handler, LV_EVENT_ALL, NULL);
+  lv_obj_set_style_bg_color(go_btn, lv_color_hex(0x00FF00), LV_PART_MAIN);
+  
+  lv_obj_t *go_label = lv_label_create(go_btn);
+  lv_label_set_text(go_label, "Go");
+  lv_obj_set_style_text_font(go_label, &lv_font_montserrat_14, LV_PART_MAIN);
+  lv_obj_set_style_text_color(go_label, lv_color_hex(0x000000), LV_PART_MAIN);
+  lv_obj_center(go_label);
+}
+
+static void create_invoice_overlay(void) {
+    // Don't create invoices when in AP mode
+    if (ap_mode_active) {
+        show_message("AP Mode Active", "Cannot create invoices while in AP mode. Exit AP mode first.");
+        return;
+    }
+    
+    // Create overlay container
+    invoice_overlay = lv_obj_create(lv_scr_act());
+    lv_obj_set_size(invoice_overlay, screenWidth, screenHeight);
+    lv_obj_set_pos(invoice_overlay, 0, 0);
+    lv_obj_set_style_bg_color(invoice_overlay, lv_color_hex(0x000000), LV_PART_MAIN);
+    lv_obj_set_style_bg_opa(invoice_overlay, LV_OPA_80, LV_PART_MAIN);
+    lv_obj_set_style_border_width(invoice_overlay, 0, LV_PART_MAIN);
+    lv_obj_set_style_radius(invoice_overlay, 0, LV_PART_MAIN);
+    
+    // Create content container
+    lv_obj_t *content = lv_obj_create(invoice_overlay);
+    lv_obj_set_size(content, 280, 400); // Increased height for QR code
+    lv_obj_align(content, LV_ALIGN_CENTER, 0, 0);
+    lv_obj_set_style_bg_color(content, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+    lv_obj_set_style_border_width(content, 2, LV_PART_MAIN);
+    lv_obj_set_style_border_color(content, lv_color_hex(0x8A2BE2), LV_PART_MAIN);
+    lv_obj_set_style_radius(content, 10, LV_PART_MAIN);
+    
+    // Create spinner and center it
+    invoice_spinner = lv_spinner_create(content, 1000, 60);
+    lv_obj_set_size(invoice_spinner, 60, 60);
+    lv_obj_center(invoice_spinner);
+    
+    // Create label (initially hidden)
+    invoice_label = lv_label_create(content);
+    lv_label_set_text(invoice_label, "");
+    lv_obj_set_style_text_font(invoice_label, &lv_font_montserrat_28, LV_PART_MAIN);
+    lv_obj_set_style_text_color(invoice_label, lv_color_hex(0x000000), LV_PART_MAIN);
+    lv_obj_set_width(invoice_label, 280);
+    lv_obj_align(invoice_label, LV_ALIGN_TOP_MID, 0, 15);
+    lv_obj_set_style_text_align(invoice_label, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN);
+    lv_obj_add_flag(invoice_label, LV_OBJ_FLAG_HIDDEN);
+    
+    // Create LVGL QR code object
+    qr_code_obj = lv_qrcode_create(content, 240, lv_color_black(), lv_color_white());
+    lv_obj_align(qr_code_obj, LV_ALIGN_CENTER, 0, 0);
+    lv_obj_add_flag(qr_code_obj, LV_OBJ_FLAG_HIDDEN);
+    
+    // Create lookup status label (initially hidden)
+    lookup_status_label = lv_label_create(content);
+    lv_label_set_text(lookup_status_label, "");
+    lv_obj_set_style_text_font(lookup_status_label, &lv_font_montserrat_14, LV_PART_MAIN);
+    lv_obj_set_style_text_color(lookup_status_label, lv_color_hex(0x000000), LV_PART_MAIN);
+    lv_obj_set_width(lookup_status_label, 260);
+    lv_label_set_long_mode(lookup_status_label, LV_LABEL_LONG_WRAP);
+    lv_obj_set_style_text_align(lookup_status_label, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN);
+    lv_obj_align(lookup_status_label, LV_ALIGN_TOP_MID, 0, 40);
+    lv_obj_add_flag(lookup_status_label, LV_OBJ_FLAG_HIDDEN);
+    
+    // Create payment success checkmark (initially hidden)
+    payment_checkmark = lv_label_create(content);
+    lv_label_set_text(payment_checkmark, LV_SYMBOL_OK);
+    lv_obj_set_style_text_font(payment_checkmark, &lv_font_montserrat_48, LV_PART_MAIN);
+    lv_obj_set_style_text_color(payment_checkmark, lv_color_hex(0x00FF00), LV_PART_MAIN);
+    lv_obj_align(payment_checkmark, LV_ALIGN_CENTER, 0, 0);
+    lv_obj_add_flag(payment_checkmark, LV_OBJ_FLAG_HIDDEN);
+    
+    // Create close button
+    lv_obj_t *close_btn = lv_btn_create(content);
+    lv_obj_set_size(close_btn, 100, 40);
+    lv_obj_align(close_btn, LV_ALIGN_BOTTOM_MID, 0, -10);
+    lv_obj_set_style_bg_color(close_btn, lv_color_hex(0xFF0000), LV_PART_MAIN);
+    lv_obj_set_style_text_color(close_btn, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+    
+    lv_obj_t *close_label = lv_label_create(close_btn);
+    lv_label_set_text(close_label, "Close");
+    lv_obj_center(close_label);
+    
+    lv_obj_add_event_cb(close_btn, invoice_close_btn_event_handler, LV_EVENT_CLICKED, NULL);
+    
+    // Start processing
+    invoice_processing = true;
+    invoice_counter = 0;
+    
+    // Send make_invoice request via Nostr
+    if (webSocket.isConnected()) {
+        // Calculate sats based on entered amount and selected currency
+        float amount = entered_number.toFloat();
+        int amount_sats;
+        if (selected_currency == "sats") {
+            amount_sats = amount;
+        } else {
+            amount_sats = calculate_sats_from_amount(amount, selected_currency);
+        }
+        
+        // Create the make_invoice request
+        DynamicJsonDocument doc(512);
+        doc["method"] = "make_invoice";
+        JsonObject params = doc.createNestedObject("params");
+        params["amount"] = amount_sats * 1000; // Convert to msats
+        params["description"] = "Payment to " + shop_name;
+        
+        String requestJson;
+        serializeJson(doc, requestJson);
+        
+        Serial.println("Sending make_invoice request: " + requestJson);
+        Serial.println("Amount: " + String(amount) + " " + selected_currency + " = " + String(amount_sats) + " sats");
+        
+        // Encrypt and send the request
+        String encryptedDm = nostr::getEncryptedDm(nsecHexStr.c_str(), npubHexStr.c_str(), walletPubKey.c_str(), 23194, unixTimestamp, requestJson, "nip04");
+        webSocket.sendTXT(encryptedDm);
+        
+        doc.clear();
+    } else {
+        lv_label_set_text(invoice_label, "Not connected to relay");
+    }
+    
+    Serial.println("Invoice overlay created");
+}
+
+static void close_invoice_overlay(void) {
+    if (invoice_overlay != NULL && lv_obj_is_valid(invoice_overlay)) {
+        lv_obj_del(invoice_overlay);
+        invoice_overlay = NULL;
+    }
+
+    if (invoice_lookup_timer != NULL) {
+            lv_timer_del(invoice_lookup_timer);
+            invoice_lookup_timer = NULL;
+    }
+    
+    invoice_processing = false;
+    invoice_counter = 0;
+    
+    Serial.println("Invoice overlay closed");
+}
+
+static void invoice_close_btn_event_handler(lv_event_t *e) {
+    lv_event_code_t code = lv_event_get_code(e);
+    if (code == LV_EVENT_CLICKED) {
+        Serial.println("Close button pressed - closing invoice overlay");
+        close_invoice_overlay();
+    }
+}
+
+static void cleanup_global_pointers(void) {
+    // Clear global pointers that might become invalid
+    display_label = NULL;
+    wifi_list = NULL;
+    wifi_status_label = NULL;
+    main_wifi_status_label = NULL;
+    relay_status_label = NULL;
+    qr_code_obj = NULL;
+    shop_name_keyboard = NULL;
+    shop_name_textarea = NULL;
+    ap_password_keyboard = NULL;
+    ap_password_textarea = NULL;
+    
+    // Clear invoice overlay pointers
+    invoice_overlay = NULL;
+    invoice_spinner = NULL;
+    invoice_label = NULL;
+    lookup_status_label = NULL;
+    lookup_spinner = NULL;  // Add this line
+    payment_checkmark = NULL;
+    
+    // Clear WiFi SSIDs
+    wifi_ssids.clear();
+    
+    // Stop any active timers
+    if (wifi_status_timer != NULL) {
+        lv_timer_del(wifi_status_timer);
+        wifi_status_timer = NULL;
+    }
+    if (invoice_timer != NULL) {
+        lv_timer_del(invoice_timer);
+        invoice_timer = NULL;
+    }
+    if (invoice_notification_watchdog_timer != NULL) {
+        lv_timer_del(invoice_notification_watchdog_timer);
+        invoice_notification_watchdog_timer = NULL;
+    }
+    if (invoice_lookup_timer != NULL) {
+        lv_timer_del(invoice_lookup_timer);
+        invoice_lookup_timer = NULL;
+    }
+    
+    // Reset processing flags
+    invoice_processing = false;
+    invoice_counter = 0;
+    current_invoice_str = "";
+}
+
+void get_randomw_64_byte_hex(char *output)
+{
+  for (int i = 0; i < 64; i++)
+  {
+    output[i] = "0123456789abcdef"[esp_random() % 16];
+  }
+  output[64] = '\0';
+}
+
+void show_message(String title, String message)
+{
+  Serial.println(title + ": " + message);
+  // For now, just log to serial. Could be expanded to show on screen if needed.
+}
+
+/**
+ * @brief Connect to the Nostr relay
+ */
+void connect_to_relay() {
+    webSocket.beginSSL(relayUrl.c_str(), 443, relayPath.c_str());
+    webSocket.onEvent(websocket_event);
+    webSocket.setReconnectInterval(5000);
+    nwc_initialized = true;
+}
+
+void setup_nwc_data(String nwcPairingUrl) {
+    relayUrl = nwcPairingUrl.substring(nwcPairingUrl.indexOf("relay=") + 6, nwcPairingUrl.indexOf("&secret="));
+    relayUrl.replace("wss://", "");
+
+    // Extract only the hostname from the relay URL and set relayPath to the path
+    int pathIndex = relayUrl.indexOf('/');
+    if (pathIndex != -1) {
+        relayPath = relayUrl.substring(pathIndex);
+        relayUrl = relayUrl.substring(0, pathIndex);
+    }
+
+    nsecHexStr = nwcPairingUrl.substring(nwcPairingUrl.indexOf("secret=") + 7);
+    walletPubKey = nwcPairingUrl.substring(nwcPairingUrl.indexOf("nostr+walletconnect://") + 22);
+    walletPubKey = walletPubKey.substring(0, walletPubKey.indexOf("?"));
+    Serial.println("Wallet PubKey: " + walletPubKey);
+    Serial.println("Relay URL: " + relayUrl);
+    Serial.println("Relay Path: " + relayPath);
+    Serial.println("nsecHexStr: " + nsecHexStr);
+
+    int byteSize = 32;
+    byte privateKeyBytes[byteSize];
+    fromHex(nsecHexStr.c_str(), privateKeyBytes, byteSize);
+
+    PrivateKey privateKey(privateKeyBytes);
+    PublicKey pub = privateKey.publicKey();
+    
+    // Extract only the X coordinate (32 bytes) for Nostr
+    byte pubKeyBytes[33];
+    pub.serialize(pubKeyBytes, sizeof(pubKeyBytes));
+    
+    // Convert the X coordinate (bytes 1-32) to hex string
+    char npubHex[65];
+    for(int i = 1; i < 33; i++) {
+        sprintf(npubHex + (i-1)*2, "%02x", pubKeyBytes[i]);
+    }
+    npubHex[64] = '\0';
+    npubHexStr = String(npubHex);
+    
+    Serial.println("NPub Hex: " + npubHexStr);
+}
+
+static void handle_nwc_response_event(uint8_t *data)
+{
+  Serial.println("NWC Response Event");
+  Serial.println(String((char *)data));
+
+  DynamicJsonDocument doc(1024);
+  deserializeJson(doc, (char *)data);
+  String eventContent = doc[2];
+  Serial.println("Event Content: " + eventContent);
+  doc.clear();
+
+  // Parse the event content - it's a JSON string that needs to be parsed again
+  DynamicJsonDocument eventContentDoc(2048); // Increased size for larger events
+  DeserializationError error = deserializeJson(eventContentDoc, eventContent);
+  
+  if (error) {
+    Serial.print("JSON parsing failed: ");
+    Serial.println(error.c_str());
+    return;
+  }
+  
+  String cipherText = eventContentDoc["content"];
+  String thirdPartyPubKey = eventContentDoc["pubkey"];
+  Serial.println("Third Party PubKey: " + thirdPartyPubKey);
+  Serial.println("Cipher Text: " + cipherText);
+
+  if (cipherText.length() == 0 || thirdPartyPubKey.length() == 0) {
+    Serial.println("Failed to extract cipherText or pubkey from event");
+    return;
+  }
+
+  String decryptedResponse = nostr::decryptNip04Ciphertext(cipherText, nsecHexStr.c_str(), thirdPartyPubKey);
+  Serial.println("Decrypted Response: " + decryptedResponse);
+  
+  // Parse the decrypted response
+  DynamicJsonDocument decryptedResponseDoc(1024);
+  deserializeJson(decryptedResponseDoc, decryptedResponse);
+  String resultType = decryptedResponseDoc["result_type"];
+  Serial.println("Result Type: " + resultType);
+  
+  if(resultType == "make_invoice") {
+    JsonObject result = decryptedResponseDoc["result"];
+    current_invoice_str = result["invoice"].as<String>(); // Correctly assign to global
+    String description = result["description"];
+    int amount = result["amount"];
+    
+    Serial.println("Invoice: " + current_invoice_str);
+    Serial.println("Description: " + description);
+    Serial.println("Amount: " + String(amount) + " sats");
+    
+    // Delete spinner
+    if (invoice_spinner != NULL && lv_obj_is_valid(invoice_spinner)) {
+        lv_obj_del(invoice_spinner);
+        invoice_spinner = NULL;
+    }
+    
+    // Update the overlay to show the invoice details and make it visible
+    if (invoice_label != NULL && lv_obj_is_valid(invoice_label)) {
+      String displayText =String(amount / 1000) + " sats";
+      lv_label_set_text(invoice_label, displayText.c_str());
+      lv_obj_clear_flag(invoice_label, LV_OBJ_FLAG_HIDDEN);
+    }
+    
+    // Display QR code for the invoice
+    if (qr_code_obj != NULL && lv_obj_is_valid(qr_code_obj)) {
+        lv_qrcode_update(qr_code_obj, current_invoice_str.c_str(), current_invoice_str.length());
+        lv_obj_clear_flag(qr_code_obj, LV_OBJ_FLAG_HIDDEN);
+    }
+    
+    // Start watchdog timer to check for notifications
+    invoice_notification_watchdog_timer = lv_timer_create(invoice_notification_watchdog_cb, 5000, NULL);
+    lv_timer_set_repeat_count(invoice_notification_watchdog_timer, 1);
+    
+  } else if (resultType == "lookup_invoice") {
+    Serial.println("Received lookup_invoice response:");
+    String resultJson;
+    serializeJson(decryptedResponseDoc["result"], resultJson);
+    Serial.println(resultJson);
+
+    Serial.println("Settled at value is: " + decryptedResponseDoc["result"]["settled_at"].as<String>());
+    
+    // check if settled at is a timestamp
+    if (decryptedResponseDoc["result"].containsKey("settled_at") && decryptedResponseDoc["result"]["settled_at"] >= 1231006505) {
+        Serial.println("Invoice is settled (paid).");
+        
+        if (invoice_lookup_timer != NULL) {
+            lv_timer_del(invoice_lookup_timer);
+            invoice_lookup_timer = NULL;
+        }
+
+        // Hide QR code and show checkmark
+        if (qr_code_obj != NULL && lv_obj_is_valid(qr_code_obj)) {
+            lv_obj_add_flag(qr_code_obj, LV_OBJ_FLAG_HIDDEN);
+        }
+        
+        if (payment_checkmark != NULL && lv_obj_is_valid(payment_checkmark)) {
+            lv_obj_clear_flag(payment_checkmark, LV_OBJ_FLAG_HIDDEN);
+        }
+
+        if (lookup_status_label != NULL && lv_obj_is_valid(lookup_status_label)) {
+            lv_label_set_text(lookup_status_label, "Payment received!");
+            lv_obj_clear_flag(lookup_status_label, LV_OBJ_FLAG_HIDDEN);
+        }
+    } else {
+        Serial.println("Invoice is not settled yet.");
+    }
+  } else if(resultType == "pay_invoice") {
+    show_message("Payment Successful", "Invoice paid successfully.");
+  } else {
+    show_message("Payment Failed", "result_type: " + resultType);
+  }
+  
+  eventContentDoc.clear();
+  decryptedResponseDoc.clear();
+}
+
+void handleNwcNip04NotificationEvent(uint8_t *data)
+{
+    Serial.println("Received NIP-04 push notification. Stopping lookup timers.");
+    if (invoice_notification_watchdog_timer != NULL) {
+        lv_timer_del(invoice_notification_watchdog_timer);
+        invoice_notification_watchdog_timer = NULL;
+    }
+    if (invoice_lookup_timer != NULL) {
+        lv_timer_del(invoice_lookup_timer);
+        invoice_lookup_timer = NULL;
+    }
+
+    if (qr_code_obj != NULL && lv_obj_is_valid(qr_code_obj)) {
+        lv_obj_add_flag(qr_code_obj, LV_OBJ_FLAG_HIDDEN);
+    }
+    if (payment_checkmark != NULL && lv_obj_is_valid(payment_checkmark)) {
+        lv_obj_clear_flag(payment_checkmark, LV_OBJ_FLAG_HIDDEN);
+    }
+        
+    if (lookup_status_label != NULL && lv_obj_is_valid(lookup_status_label)) {
+        lv_label_set_text(lookup_status_label, "Payment received!");
+        lv_obj_clear_flag(lookup_status_label, LV_OBJ_FLAG_HIDDEN);
+    }
+
+    String serialisedJson = String((char *)data);
+    String decryptedMessage = nostr::nip04Decrypt(nsecHexStr.c_str(), serialisedJson);
+    Serial.println("NIP-04 Decrypted Notification: " + decryptedMessage);
+}
+
+void handleNwcNip44NotificationEvent(uint8_t *data)
+{
+    Serial.println("Received NIP-44 push notification. Stopping lookup timers.");
+    if (invoice_notification_watchdog_timer != NULL) {
+        lv_timer_del(invoice_notification_watchdog_timer);
+        invoice_notification_watchdog_timer = NULL;
+    }
+    if (invoice_lookup_timer != NULL) {
+        lv_timer_del(invoice_lookup_timer);
+        invoice_lookup_timer = NULL;
+    }
+
+    if (qr_code_obj != NULL && lv_obj_is_valid(qr_code_obj)) {
+        lv_obj_add_flag(qr_code_obj, LV_OBJ_FLAG_HIDDEN);
+    }
+    if (payment_checkmark != NULL && lv_obj_is_valid(payment_checkmark)) {
+        lv_obj_clear_flag(payment_checkmark, LV_OBJ_FLAG_HIDDEN);
+    }
+    if (lookup_status_label != NULL && lv_obj_is_valid(lookup_status_label)) {
+        lv_label_set_text(lookup_status_label, "Payment received!");
+        lv_obj_clear_flag(lookup_status_label, LV_OBJ_FLAG_HIDDEN);
+    }
+
+    String serialisedJson = String((char *)data);
+    String decryptedMessage = nostr::nip44Decrypt(nsecHexStr.c_str(), serialisedJson);
+    Serial.println("NIP-44 Decrypted Notification: " + decryptedMessage);
+}
+
+void handle_websocket_message(void *arg, uint8_t *data, size_t len)
+{
+  // Don't process WebSocket messages when in AP mode
+  if (ap_mode_active) {
+    return;
+  }
+  
+  Serial.println("Handling WebSocket Message");
+  Serial.println(String((char *)data));
+  if (strstr((char *)data, "EVENT") && strstr((char *)data, "23195"))
+  {
+    handle_nwc_response_event(data);
+  }
+  if (strstr((char *)data, "EVENT") && strstr((char *)data, "23196"))
+  {
+    handleNwcNip04NotificationEvent(data);
+  }
+  // 23197 is a nip44 notification event
+  if (strstr((char *)data, "EVENT") && strstr((char *)data, "23197"))
+  {
+    handleNwcNip44NotificationEvent(data);
+  }
+
+
+  
+}
+
+void websocket_event(WStype_t type, uint8_t * payload, size_t length) {
+	switch(type) {
+		case WStype_DISCONNECTED:
+			Serial.printf("[WSc] Disconnected!\n");
+            update_relay_status_display(false);
+            reset_websocket_fragment_state(); // Reset fragment state on disconnect
+			break;
+		case WStype_CONNECTED:
+			{
+				Serial.printf("[WSc] Connected to url: %s\n", payload);
+                update_relay_status_display(true);
+
+				// subscribe to events
+                char subscriptionId[65];
+                get_randomw_64_byte_hex(subscriptionId);
+				String req = "[\"REQ\", \"" + String(subscriptionId) + "\",{\"kinds\":[23195,23196,23197],\"#p\":[\"" + npubHexStr + "\"],\"limit\":0}]";
+                Serial.println("Sending REQ: " + req);
+				webSocket.sendTXT(req);
+			}
+			break;
+		case WStype_TEXT:
+			Serial.printf("[WSc] get text: %s\n", payload);
+            handle_websocket_message(NULL, payload, length);
+			break;
+		case WStype_BIN:
+			Serial.printf("[WSc] get binary length: %u\n", length);
+			//hexdump(payload, length);
+			break;
+        case WStype_ERROR:
+        case WStype_FRAGMENT_TEXT_START:
+            Serial.printf("[WSc] Fragment text start, length: %u\n", length);
+            ws_fragment_in_progress = true;
+            ws_fragment_is_binary = false;
+            ws_fragmented_message = String((char*)payload, length);
+            ws_fragment_received_size = length;
+            ws_fragment_start_time = millis();
+            Serial.printf("[WSc] Fragment state: in_progress=%d, received=%u, is_binary=%d\n", 
+                         ws_fragment_in_progress, ws_fragment_received_size, ws_fragment_is_binary);
+            break;
+        case WStype_FRAGMENT_BIN_START:
+            Serial.printf("[WSc] Fragment binary start, length: %u\n", length);
+            ws_fragment_in_progress = true;
+            ws_fragment_is_binary = true;
+            ws_fragmented_message = "";
+            ws_fragment_received_size = length;
+            ws_fragment_start_time = millis();
+            // For binary fragments, we'll accumulate the raw data
+            // Note: This is a simplified approach - in a production system you might want to use a proper buffer
+            break;
+        case WStype_FRAGMENT:
+            Serial.printf("[WSc] Fragment continuation, length: %u\n", length);
+            if (ws_fragment_in_progress) {
+                // Check for timeout
+                if (millis() - ws_fragment_start_time > WS_FRAGMENT_TIMEOUT) {
+                    Serial.printf("[WSc] Fragment timeout, resetting state\n");
+                    reset_websocket_fragment_state();
+                    break;
+                }
+                
+                // Check for size limit
+                if (ws_fragment_received_size + length > WS_MAX_FRAGMENT_SIZE) {
+                    Serial.printf("[WSc] Fragment too large, resetting state\n");
+                    reset_websocket_fragment_state();
+                    break;
+                }
+                
+                if (!ws_fragment_is_binary) {
+                    ws_fragmented_message += String((char*)payload, length);
+                }
+                ws_fragment_received_size += length;
+            }
+            break;
+        case WStype_FRAGMENT_FIN:
+            Serial.printf("[WSc] Fragment final, length: %u\n", length);
+            if (ws_fragment_in_progress) {
+                // Check for timeout
+                if (millis() - ws_fragment_start_time > WS_FRAGMENT_TIMEOUT) {
+                    Serial.printf("[WSc] Fragment timeout in final, resetting state\n");
+                    reset_websocket_fragment_state();
+                    break;
+                }
+                
+                // Check for size limit
+                if (ws_fragment_received_size + length > WS_MAX_FRAGMENT_SIZE) {
+                    Serial.printf("[WSc] Fragment too large in final, resetting state\n");
+                    reset_websocket_fragment_state();
+                    break;
+                }
+                
+                if (!ws_fragment_is_binary) {
+                    ws_fragmented_message += String((char*)payload, length);
+                    Serial.printf("[WSc] Complete fragmented text message: %s\n", ws_fragmented_message.c_str());
+                    handle_websocket_message(NULL, (uint8_t*)ws_fragmented_message.c_str(), ws_fragmented_message.length());
+                } else {
+                    Serial.printf("[WSc] Complete fragmented binary message received\n");
+                    // Handle binary fragmented message if needed
+                }
+                // Reset fragment state
+                reset_websocket_fragment_state();
+            }
+            break;
+	}
+}
+
+static void send_invoice_lookup_request_cb(lv_timer_t *timer) {
+    // Don't send invoice lookup requests when in AP mode
+    if (ap_mode_active) {
+        Serial.println("Invoice lookup skipped (AP mode active)");
+        return;
+    }
+    
+    // Don't send lookup requests if invoice overlay is not active
+    if (!invoice_processing || invoice_overlay == NULL || !lv_obj_is_valid(invoice_overlay)) {
+        Serial.println("Invoice lookup skipped - overlay not active");
+        // Stop the timer since the overlay is closed
+        if (invoice_lookup_timer != NULL) {
+            lv_timer_del(invoice_lookup_timer);
+            invoice_lookup_timer = NULL;
+        }
+        return;
+    }
+    
+    // Don't send lookup requests if there's no current invoice
+    if (current_invoice_str.isEmpty()) {
+        Serial.println("Invoice lookup skipped - no current invoice");
+        // Stop the timer since there's no invoice to check
+        if (invoice_lookup_timer != NULL) {
+            lv_timer_del(invoice_lookup_timer);
+            invoice_lookup_timer = NULL;
+        }
+        return;
+    }
+    
+    Serial.println("send_invoice_lookup_request_cb called");
+    if (!webSocket.isConnected()) {
+        if (lookup_status_label != NULL && lv_obj_is_valid(lookup_status_label)) {
+            lv_label_set_text(lookup_status_label, "Lookup failed: No connection");
+        }
+        return;
+    }
+
+    // Remove the duplicate check for current_invoice_str.isEmpty() since we already checked above
+    
+    if (lookup_status_label != NULL && lv_obj_is_valid(lookup_status_label)) {
+        lv_label_set_text(lookup_status_label, "Checking payment");
+        lv_obj_clear_flag(lookup_status_label, LV_OBJ_FLAG_HIDDEN);
+    }
+
+    // Show the lookup spinner
+    if (lookup_spinner != NULL && lv_obj_is_valid(lookup_spinner)) {
+        lv_obj_clear_flag(lookup_spinner, LV_OBJ_FLAG_HIDDEN);
+    }
+
+    DynamicJsonDocument doc(512);
+    doc["method"] = "lookup_invoice";
+    JsonObject params = doc.createNestedObject("params");
+    params["invoice"] = current_invoice_str;
+    
+    String requestJson;
+    serializeJson(doc, requestJson);
+    
+    Serial.println("Sending lookup_invoice request: " + requestJson);
+    
+    String encryptedDm = nostr::getEncryptedDm(nsecHexStr.c_str(), npubHexStr.c_str(), walletPubKey.c_str(), 23194, unixTimestamp, requestJson, "nip04");
+    webSocket.sendTXT(encryptedDm);
+    
+    doc.clear();
+}
+
+static void invoice_notification_watchdog_cb(lv_timer_t *timer) {
+    Serial.println("Notification watchdog fired. Starting polling lookup.");
+    
+    lv_timer_del(invoice_notification_watchdog_timer);
+    invoice_notification_watchdog_timer = NULL;
+
+    invoice_lookup_timer = lv_timer_create(send_invoice_lookup_request_cb, 3000, NULL);
+}
+
+static void launch_ap_mode_event_handler(lv_event_t *e) {
+    lv_event_code_t code = lv_event_get_code(e);
+    if (code == LV_EVENT_CLICKED) {
+        show_pin_verification_screen();
+    }
+}
+
+static void start_ap_mode(void) {
+    if (ap_mode_active) {
+        Serial.println("AP mode already active");
+        return;
+    }
+    
+    Serial.println("Starting Access Point mode...");
+    
+    // Disconnect from current WiFi and relay
+    if (nwc_initialized) {
+        webSocket.disconnect();
+        webSocket.setReconnectInterval(0); // Disable reconnection
+        nwc_initialized = false;
+        Serial.println("Disconnected from relay and disabled reconnection");
+    }
+    
+    WiFi.disconnect(true);
+    delay(1000);
+    
+    // Configure AP before starting it
+    WiFi.mode(WIFI_AP);
+    
+    // Configure AP IP first
+    IPAddress local_IP;
+    local_IP.fromString(ap_ip);
+    IPAddress gateway(192, 168, 4, 1);
+    IPAddress subnet(255, 255, 255, 0);
+    
+    // Start Access Point with custom configuration
+    bool ap_started = WiFi.softAP(ap_ssid, ap_password.c_str());
+    if (!ap_started) {
+        Serial.println("Failed to start AP");
+        return;
+    }
+    
+    // Configure AP IP
+    WiFi.softAPConfig(local_IP, gateway, subnet);
+    
+    // Start DNS server for captive portal
+    dns_server.start(53, "*", local_IP);
+    
+    // Setup web server routes
+    ap_server.on("/", HTTP_GET, handle_ap_root);
+    ap_server.on("/config", HTTP_POST, handle_ap_config);
+    ap_server.on("/current-url", HTTP_GET, []() {
+        ap_server.send(200, "text/plain", nwcPairingUrl);
+    });
+    ap_server.onNotFound([]() {
+        ap_server.sendHeader("Location", "http://" + String(ap_ip), true);
+        ap_server.send(302, "text/plain", "");
+    });
+    
+    ap_server.begin();
+    ap_mode_active = true;
+    
+    Serial.println("Access Point started successfully");
+    Serial.println("SSID: " + String(ap_ssid));
+    Serial.println("Password: " + String(ap_password));
+    Serial.println("IP: " + String(ap_ip));
+    
+    // Update the settings screen to show AP status
+    update_settings_screen_for_ap_mode();
+    
+    // Show AP info on screen
+    show_message("AP Mode Active", "SSID: " + String(ap_ssid) + "\nPassword: " + String(ap_password) + "\nIP: " + String(ap_ip));
+}
+
+static void stop_ap_mode(void) {
+    if (!ap_mode_active) {
+        return;
+    }
+    
+    ap_server.close();
+    dns_server.stop();
+    WiFi.softAPdisconnect(true);
+    WiFi.mode(WIFI_STA);
+    ap_mode_active = false;
+    
+    Serial.println("Access Point stopped");
+    
+    // Re-enable WebSocket reconnection
+    webSocket.setReconnectInterval(5000);
+    
+    // Try to reconnect to saved WiFi credentials
+    preferences.begin("wifi-creds", true);
+    String saved_ssid = preferences.getString("ssid", "");
+    String saved_pass = preferences.getString("password", "");
+    preferences.end();
+
+    if (saved_ssid.length() > 0) {
+        Serial.println("Attempting to reconnect to saved WiFi: " + saved_ssid);
+        WiFi.begin(saved_ssid.c_str(), saved_pass.c_str());
+    }
+    
+    // The NWC connection will be automatically restarted by the wifi_main_status_updater_cb
+    // when WiFi connects, using the updated URL if one was configured during AP mode
+}
+
+static void handle_ap_root(void) {
+    String html = R"(
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NWC POS Configuration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { max-width: 500px; margin: 0 auto; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="text"] { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+        button { background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #45a049; }
+        .info { background-color: #e7f3ff; padding: 10px; border-radius: 4px; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>NWC POS Configuration</h1>
+        
+        <div class="info">
+            <strong>Current NWC URL:</strong><br>
+            <span id="current-url">Loading...</span>
+        </div>
+        
+        <form action="/config" method="post">
+            <div class="form-group">
+                <label for="nwc_url">NWC Pairing URL:</label>
+                <input type="text" id="nwc_url" name="nwc_url" placeholder="nostr+walletconnect://..." required>
+            </div>
+            <button type="submit">Save Configuration</button>
+        </form>
+    </div>
+    
+    <script>
+        // Load current URL on page load
+        window.onload = function() {
+            fetch('/current-url')
+                .then(response => response.text())
+                .then(url => {
+                    document.getElementById('current-url').textContent = url || 'Not configured';
+                    document.getElementById('nwc_url').value = url || '';
+                });
+        };
+    </script>
+</body>
+</html>
+    )";
+    
+    ap_server.send(200, "text/html", html);
+}
+
+static void handle_ap_config(void) {
+    if (ap_server.hasArg("nwc_url")) {
+        String nwc_url = ap_server.arg("nwc_url");
+        save_nwc_url_to_preferences(nwc_url);
+        
+        // Update the global variable
+        nwcPairingUrl = nwc_url;
+        Serial.println("NWC URL set to: " + nwcPairingUrl);
+        
+        // Only restart NWC connection if not in AP mode
+        if (nwc_initialized && !ap_mode_active) {
+            Serial.println("Restarting NWC connection with new URL");
+            webSocket.disconnect();
+            nwc_initialized = false;
+            
+            // Wait a moment for disconnect to complete
+            delay(1000);
+            
+            // Reinitialize with new URL
+            setup_nwc_data(nwcPairingUrl);
+            connect_to_relay();
+            
+        } else {
+            Serial.println("NWC URL updated but connection restart deferred (AP mode active)");
+        }
+        
+        String html = R"(
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Configuration Saved</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; text-align: center; }
+        .success { color: #4CAF50; font-size: 18px; margin: 20px 0; }
+        .back-btn { background-color: #2196F3; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; display: inline-block; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="success">✓ Configuration saved successfully!</div>
+    <p>The NWC pairing URL has been updated.)";
+        
+        if (ap_mode_active) {
+            html += "<br><em>Connection will be restarted when exiting AP mode.</em>";
+        } else {
+            html += "<br>The NWC connection has been restarted.";
+        }
+        
+        html += R"(
+    </p>
+    <a href="/" class="back-btn">Back to Configuration</a>
+</body>
+</html>
+        )";
+        
+        ap_server.send(200, "text/html", html);
+        
+        Serial.println("NWC URL updated: " + nwc_url);
+    } else {
+        ap_server.send(400, "text/plain", "Missing NWC URL parameter");
+    }
+}
+
+static void load_nwc_url_from_preferences(void) {
+    preferences.begin("nwc-config", true);
+    String saved_url = preferences.getString("nwc_url", "");
+    preferences.end();
+    
+    if (saved_url.length() > 0) {
+        nwcPairingUrl = saved_url;
+        Serial.println("Loaded NWC URL from preferences: " + nwcPairingUrl);
+    } else {
+        Serial.println("No saved NWC URL found, using default");
+    }
+}
+
+static void save_nwc_url_to_preferences(const String& url) {
+    preferences.begin("nwc-config", false);
+    preferences.putString("nwc_url", url);
+    preferences.end();
+    Serial.println("Saved NWC URL to preferences: " + url);
+}
+
+static void exit_ap_mode_event_handler(lv_event_t *e) {
+    lv_event_code_t code = lv_event_get_code(e);
+    if (code == LV_EVENT_CLICKED) {
+        Serial.println("Exiting Access Point mode");
+        stop_ap_mode();
+        
+        // Return to settings screen
+        load_screen(SCREEN_SETTINGS);
+    }
+}
+
+static void update_settings_screen_for_ap_mode(void) {
+    // This function will be called to refresh the settings screen when AP mode is active
+    // For now, we'll just reload the screen
+    load_screen(SCREEN_SETTINGS);
+}
+
+// Add this function declaration at the top with other declarations
+static void restart_nwc_connection(void);
+
+// Add this function implementation
+static void restart_nwc_connection(void) {
+    // Don't restart NWC connection when in AP mode
+    if (ap_mode_active) {
+        Serial.println("NWC connection restart skipped (AP mode active)");
+        return;
+    }
+    
+    if (nwc_initialized) {
+        Serial.println("Restarting NWC connection");
+        webSocket.disconnect();
+        nwc_initialized = false;
+        
+        // Wait a moment for disconnect to complete
+        delay(1000);
+        
+        // Reinitialize with current URL
+        setup_nwc_data(nwcPairingUrl);
+        connect_to_relay();
+        
+        Serial.println("NWC connection restarted");
+    }
+}
+
+static void load_shop_settings_from_preferences(void) {
+    preferences.begin("shop-config", true);
+    selected_currency = preferences.getString("currency", "sats");
+    shop_name = preferences.getString("shop_name", "LNbits Shop");
+    ap_password = preferences.getString("ap_password", "GoodMorning21");
+    preferences.end();
+    Serial.println("Loaded shop settings - Currency: " + selected_currency + ", Shop: " + shop_name + ", AP Password: " + ap_password);
+}
+
+static void save_shop_settings_to_preferences(void) {
+    preferences.begin("shop-config", false);
+    preferences.putString("currency", selected_currency);
+    preferences.putString("shop_name", shop_name);
+    if (ap_password_textarea != NULL) {
+        ap_password = String(lv_textarea_get_text(ap_password_textarea));
+    }
+    preferences.putString("ap_password", ap_password);
+    preferences.end();
+    Serial.println("Saved shop settings - Currency: " + selected_currency + ", Shop: " + shop_name + ", AP Password: " + ap_password);
+}
+
+void create_settings_sub_screen(void) {
+    // Back Button - moved to top left with transparent styling
+    lv_obj_t * back_btn = lv_btn_create(lv_scr_act());
+    lv_obj_set_size(back_btn, 80, 40);
+    lv_obj_align(back_btn, LV_ALIGN_TOP_LEFT, 10, 10);
+    
+    lv_obj_t * back_label = lv_label_create(back_btn);
+    lv_label_set_text(back_label, LV_SYMBOL_LEFT " Back");
+    lv_obj_center(back_label);
+    
+    lv_obj_add_event_cb(back_btn, settings_back_event_handler, LV_EVENT_CLICKED, NULL);
+
+    // Style for Back button (transparent with white border)
+    lv_obj_set_style_bg_color(back_btn, lv_color_hex(0x000000), LV_PART_MAIN);
+    lv_obj_set_style_bg_opa(back_btn, LV_OPA_0, LV_PART_MAIN); // Transparent background
+    lv_obj_set_style_border_color(back_btn, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+    lv_obj_set_style_border_width(back_btn, 2, LV_PART_MAIN);
+    lv_obj_set_style_text_color(back_btn, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+    lv_obj_set_style_radius(back_btn, 5, LV_PART_MAIN);
+    
+    // Pressed state - dark grey background
+    lv_obj_set_style_bg_color(back_btn, lv_color_hex(0x424242), LV_STATE_PRESSED);
+    lv_obj_set_style_bg_opa(back_btn, LV_OPA_COVER, LV_STATE_PRESSED);
+    lv_obj_set_style_text_color(back_btn, lv_color_hex(0xFFFFFF), LV_STATE_PRESSED);
+
+    // Currency Label
+    lv_obj_t * currency_label = lv_label_create(lv_scr_act());
+    lv_label_set_text(currency_label, "Currency:");
+    lv_obj_align(currency_label, LV_ALIGN_TOP_LEFT, 20, 70);
+    lv_obj_set_style_text_font(currency_label, &lv_font_montserrat_14, LV_PART_MAIN);
+
+    // Currency Dropdown
+    lv_obj_t * currency_dropdown = lv_dropdown_create(lv_scr_act());
+    lv_dropdown_set_options(currency_dropdown, "sats\nUSD\nGBP\nEUR\nCHF");
+    
+    if (selected_currency == "sats") lv_dropdown_set_selected(currency_dropdown, 0);
+    else if (selected_currency == "USD") lv_dropdown_set_selected(currency_dropdown, 1);
+    else if (selected_currency == "GBP") lv_dropdown_set_selected(currency_dropdown, 2);
+    else if (selected_currency == "EUR") lv_dropdown_set_selected(currency_dropdown, 3);
+    else if (selected_currency == "CHF") lv_dropdown_set_selected(currency_dropdown, 4);
+
+    lv_obj_set_size(currency_dropdown, 100, 40);
+    lv_obj_align(currency_dropdown, LV_ALIGN_TOP_LEFT, 20, 95);    
+    lv_obj_add_event_cb(currency_dropdown, currency_dropdown_event_handler, LV_EVENT_VALUE_CHANGED, NULL);
+
+    // Shop Name Label
+    lv_obj_t * shop_name_label = lv_label_create(lv_scr_act());
+    lv_label_set_text(shop_name_label, "Shop Name:");
+    lv_obj_align(shop_name_label, LV_ALIGN_TOP_LEFT, 20, 150);
+    lv_obj_set_style_text_font(shop_name_label, &lv_font_montserrat_14, LV_PART_MAIN);
+
+    // Shop Name Text Area
+    shop_name_textarea = lv_textarea_create(lv_scr_act());  // Use global variable
+    lv_textarea_set_text(shop_name_textarea, shop_name.c_str());
+    lv_textarea_set_one_line(shop_name_textarea, true);
+    lv_obj_set_size(shop_name_textarea, screenWidth - 40, 40);
+    lv_obj_align(shop_name_textarea, LV_ALIGN_TOP_LEFT, 20, 175);
+    lv_obj_set_style_text_font(shop_name_textarea, &lv_font_montserrat_12, LV_PART_MAIN);
+
+    // AP Password Label
+    lv_obj_t * ap_password_label = lv_label_create(lv_scr_act());
+    lv_label_set_text(ap_password_label, "AP Portal Password:");
+    lv_obj_align(ap_password_label, LV_ALIGN_TOP_LEFT, 20, 230);
+    lv_obj_set_style_text_font(ap_password_label, &lv_font_montserrat_14, LV_PART_MAIN);
+
+    // AP Password Text Area (clear text)
+    ap_password_textarea = lv_textarea_create(lv_scr_act());
+    lv_textarea_set_text(ap_password_textarea, ap_password.c_str());
+    lv_textarea_set_one_line(ap_password_textarea, true);
+    lv_textarea_set_password_mode(ap_password_textarea, false); // clear text
+    lv_obj_set_size(ap_password_textarea, screenWidth - 40, 40);
+    lv_obj_align(ap_password_textarea, LV_ALIGN_TOP_LEFT, 20, 260);
+    lv_obj_set_style_text_font(ap_password_textarea, &lv_font_montserrat_12, LV_PART_MAIN);
+
+    // PIN Management Button
+    lv_obj_t * pin_btn = lv_btn_create(lv_scr_act());
+    lv_obj_set_size(pin_btn, screenWidth - 40, 50);
+    lv_obj_align(pin_btn, LV_ALIGN_TOP_LEFT, 20, 315);
+    
+    lv_obj_t * pin_label = lv_label_create(pin_btn);
+    lv_label_set_text(pin_label, "Change PIN Code");
+    lv_obj_center(pin_label);
+    
+    lv_obj_add_event_cb(pin_btn, [](lv_event_t *e) {
+        lv_event_code_t code = lv_event_get_code(e);
+        if (code == LV_EVENT_CLICKED) {
+            show_pin_management_screen();
+        }
+    }, LV_EVENT_CLICKED, NULL);
+
+    // Style for PIN button (Orange)
+    lv_obj_set_style_bg_color(pin_btn, lv_color_hex(0xFF9800), LV_PART_MAIN);
+    lv_obj_set_style_text_color(pin_btn, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+    lv_obj_set_style_bg_color(pin_btn, lv_color_hex(0xF57C00), LV_STATE_PRESSED);
+    lv_obj_set_style_text_color(pin_btn, lv_color_hex(0xFFFFFF), LV_STATE_PRESSED);
+
+    // Store reference to PIN button
+    settings_pin_btn = pin_btn;
+
+    // Save Button
+    lv_obj_t * save_btn = lv_btn_create(lv_scr_act());
+    lv_obj_set_size(save_btn, screenWidth - 40, 50);
+    lv_obj_align(save_btn, LV_ALIGN_TOP_LEFT, 20, 380);
+    
+    lv_obj_t * save_label = lv_label_create(save_btn);
+    lv_label_set_text(save_label, "Save");
+    lv_obj_center(save_label);
+    
+    lv_obj_add_event_cb(save_btn, settings_save_event_handler, LV_EVENT_CLICKED, NULL);
+
+    // Style for Save button (Green)
+    lv_obj_set_style_bg_color(save_btn, lv_color_hex(0x4CAF50), LV_PART_MAIN);
+    lv_obj_set_style_text_color(save_btn, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+    lv_obj_set_style_bg_color(save_btn, lv_color_hex(0x45A049), LV_STATE_PRESSED);
+    lv_obj_set_style_text_color(save_btn, lv_color_hex(0xFFFFFF), LV_STATE_PRESSED);
+
+    // Store reference to Save button
+    settings_save_btn = save_btn;
+
+        // Keyboard for shop name
+    shop_name_keyboard = lv_keyboard_create(lv_scr_act());
+    lv_keyboard_set_textarea(shop_name_keyboard, shop_name_textarea);
+    lv_obj_add_event_cb(shop_name_keyboard, shop_name_kb_event_handler, LV_EVENT_ALL, NULL);
+    lv_obj_add_flag(shop_name_keyboard, LV_OBJ_FLAG_HIDDEN); // Initially hidden
+
+    // Add click event to text area to show keyboard
+    lv_obj_add_event_cb(shop_name_textarea, [](lv_event_t *e) {
+        lv_event_code_t code = lv_event_get_code(e);
+        if (code == LV_EVENT_CLICKED) {
+            if (shop_name_keyboard != NULL) {
+                lv_obj_clear_flag(shop_name_keyboard, LV_OBJ_FLAG_HIDDEN);
+            }
+        }
+    }, LV_EVENT_CLICKED, NULL);
+
+        // Keyboard for AP password
+    ap_password_keyboard = lv_keyboard_create(lv_scr_act());
+    lv_keyboard_set_textarea(ap_password_keyboard, ap_password_textarea);
+    lv_obj_add_event_cb(ap_password_keyboard, ap_password_kb_event_handler, LV_EVENT_ALL, NULL);
+    lv_obj_add_flag(ap_password_keyboard, LV_OBJ_FLAG_HIDDEN); // Initially hidden
+
+    // Add click event to AP password text area to show keyboard
+    lv_obj_add_event_cb(ap_password_textarea, [](lv_event_t *e) {
+        lv_event_code_t code = lv_event_get_code(e);
+        if (code == LV_EVENT_CLICKED) {
+            if (ap_password_keyboard != NULL) {
+                lv_obj_clear_flag(ap_password_keyboard, LV_OBJ_FLAG_HIDDEN);
+            }
+        }
+    }, LV_EVENT_CLICKED, NULL);
+}
+
+static void currency_dropdown_event_handler(lv_event_t *e) {
+    lv_event_code_t code = lv_event_get_code(e);
+    if (code == LV_EVENT_VALUE_CHANGED) {
+        lv_obj_t *dropdown = lv_event_get_target(e);
+        uint16_t selected = lv_dropdown_get_selected(dropdown);
+        
+        switch (selected) {
+            case 0:
+                selected_currency = "sats";
+                break;
+            case 1:
+                selected_currency = "USD";
+                break;
+            case 2:
+                selected_currency = "GBP";
+                break;
+            case 3:
+                selected_currency = "EUR";
+                break;
+            case 4:
+                selected_currency = "CHF";
+                break;
+        }
+        
+        Serial.println("Currency changed to: " + selected_currency);
+    }
+}
+
+static void shop_name_kb_event_handler(lv_event_t *e) {
+    lv_event_code_t code = lv_event_get_code(e);
+    lv_obj_t *kb = lv_event_get_target(e);
+    
+    if (code == LV_EVENT_READY) {
+        lv_obj_t *ta = lv_keyboard_get_textarea(kb);
+        const char *text = lv_textarea_get_text(ta);
+        shop_name = String(text);
+        
+        Serial.println("Shop name changed to: " + shop_name);
+        
+        lv_obj_add_flag(kb, LV_OBJ_FLAG_HIDDEN);
+        
+        // Show the PIN and Save buttons when keyboard is hidden
+        if (settings_pin_btn != NULL && lv_obj_is_valid(settings_pin_btn)) {
+            lv_obj_clear_flag(settings_pin_btn, LV_OBJ_FLAG_HIDDEN);
+        }
+        if (settings_save_btn != NULL && lv_obj_is_valid(settings_save_btn)) {
+            lv_obj_clear_flag(settings_save_btn, LV_OBJ_FLAG_HIDDEN);
+        }
+    } else if (code == LV_EVENT_CANCEL) {
+        lv_obj_add_flag(kb, LV_OBJ_FLAG_HIDDEN);
+        
+        // Show the PIN and Save buttons when keyboard is hidden
+        if (settings_pin_btn != NULL && lv_obj_is_valid(settings_pin_btn)) {
+            lv_obj_clear_flag(settings_pin_btn, LV_OBJ_FLAG_HIDDEN);
+        }
+        if (settings_save_btn != NULL && lv_obj_is_valid(settings_save_btn)) {
+            lv_obj_clear_flag(settings_save_btn, LV_OBJ_FLAG_HIDDEN);
+        }
+    }
+}
+
+static void settings_save_event_handler(lv_event_t *e) {
+    lv_event_code_t code = lv_event_get_code(e);
+    if (code == LV_EVENT_CLICKED) {
+        // Get the current shop name from the text area
+        if (shop_name_textarea != NULL) {
+            const char *text = lv_textarea_get_text(shop_name_textarea);
+            shop_name = String(text);
+            Serial.println("Shop name updated from text area: " + shop_name);
+        }
+        
+        save_shop_settings_to_preferences();
+        show_message("Settings Saved", "Shop settings have been saved successfully.");
+        
+        // Return to main settings screen
+        static screen_state_t settings_screen_state = SCREEN_SETTINGS;
+        load_screen(settings_screen_state);
+    }
+}
+
+static void settings_back_event_handler(lv_event_t *e) {
+    lv_event_code_t code = lv_event_get_code(e);
+    if (code == LV_EVENT_CLICKED) {
+        // Return to main settings screen
+        static screen_state_t settings_screen_state = SCREEN_SETTINGS;
+        load_screen(settings_screen_state);
+    }
+}
+
+// Bitcoin price fetching functions
+static void fetch_bitcoin_prices(void) {
+    if (WiFi.status() != WL_CONNECTED) {
+        Serial.println("WiFi not connected, cannot fetch prices");
+        return;
+    }
+    
+    Serial.println("Fetching Bitcoin prices from mempool.space...");
+    
+    HTTPClient http;
+    http.begin("https://mempool.space/api/v1/prices");
+    
+    int httpCode = http.GET();
+    
+    if (httpCode == HTTP_CODE_OK) {
+        String payload = http.getString();
+        Serial.println("Price data received: " + payload);
+        update_prices_from_json(payload);
+        last_price_update = millis();
+        prices_loaded = true;
+    } else {
+        Serial.printf("HTTP GET failed, error: %s\n", http.errorToString(httpCode).c_str());
+    }
+    
+    http.end();
+}
+
+static void update_prices_from_json(String json_response) {
+    DynamicJsonDocument doc(1024);
+    DeserializationError error = deserializeJson(doc, json_response);
+    
+    if (error) {
+        Serial.print("JSON parsing failed: ");
+        Serial.println(error.c_str());
+        return;
+    }
+    
+    // Extract prices in order: USD, EUR, GBP, CAD, CHF, AUD, JPY
+    btc_prices[0] = doc["USD"] | 0;  // USD
+    btc_prices[1] = doc["EUR"] | 0;  // EUR
+    btc_prices[2] = doc["GBP"] | 0;  // GBP
+    btc_prices[3] = doc["CAD"] | 0;  // CAD
+    btc_prices[4] = doc["CHF"] | 0;  // CHF
+    btc_prices[5] = doc["AUD"] | 0;  // AUD
+    btc_prices[6] = doc["JPY"] | 0;  // JPY
+    
+    Serial.println("Bitcoin prices updated:");
+    Serial.println("USD: " + String(btc_prices[0]));
+    Serial.println("EUR: " + String(btc_prices[1]));
+    Serial.println("GBP: " + String(btc_prices[2]));
+    Serial.println("CAD: " + String(btc_prices[3]));
+    Serial.println("CHF: " + String(btc_prices[4]));
+    Serial.println("AUD: " + String(btc_prices[5]));
+    Serial.println("JPY: " + String(btc_prices[6]));
+    
+    doc.clear();
+}
+
+static int calculate_sats_from_amount(float amount, String currency) {
+    if (!prices_loaded) {
+        Serial.println("Prices not loaded, using fallback calculation");
+        // Fallback: rough estimate based on $100,000 per BTC
+        return (int)(amount * 100000); // Very rough conversion
+    }
+    
+    long btc_price = 0;
+    
+    // Get the appropriate price based on currency
+    if (currency == "USD") btc_price = btc_prices[0];
+    else if (currency == "EUR") btc_price = btc_prices[1];
+    else if (currency == "GBP") btc_price = btc_prices[2];
+    else if (currency == "CAD") btc_price = btc_prices[3];
+    else if (currency == "CHF") btc_price = btc_prices[4];
+    else if (currency == "AUD") btc_price = btc_prices[5];
+    else if (currency == "JPY") btc_price = btc_prices[6];
+    else btc_price = btc_prices[0]; // Default to USD
+    
+    if (btc_price == 0) {
+        Serial.println("Invalid BTC price for currency: " + currency);
+        return (int)(amount * 100000); // Fallback
+    }
+    
+    // calculate sats value of amount
+    float sats = ((float)(amount) / btc_price) * 100000000;
+    
+    Serial.printf("Calculated %f %s = %d sats (BTC price: %ld)\n", amount, currency.c_str(), sats, btc_price);
+    
+    return sats;
+}
+
+void create_info_screen(void) {
+    // Back Button - same style as shop settings
+    lv_obj_t * back_btn = lv_btn_create(lv_scr_act());
+    lv_obj_set_size(back_btn, 80, 40);
+    lv_obj_align(back_btn, LV_ALIGN_TOP_LEFT, 20, 10);
+    
+    lv_obj_t * back_label = lv_label_create(back_btn);
+    lv_label_set_text(back_label, LV_SYMBOL_LEFT " Back");
+    lv_obj_center(back_label);
+    
+    lv_obj_add_event_cb(back_btn, settings_back_event_handler, LV_EVENT_CLICKED, NULL);
+
+    // Style for Back button (transparent with white border)
+    lv_obj_set_style_bg_color(back_btn, lv_color_hex(0x000000), LV_PART_MAIN);
+    lv_obj_set_style_bg_opa(back_btn, LV_OPA_0, LV_PART_MAIN); // Transparent background
+    lv_obj_set_style_border_color(back_btn, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+    lv_obj_set_style_border_width(back_btn, 2, LV_PART_MAIN);
+    lv_obj_set_style_text_color(back_btn, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+    lv_obj_set_style_radius(back_btn, 5, LV_PART_MAIN);
+    
+    // Pressed state - dark grey background
+    lv_obj_set_style_bg_color(back_btn, lv_color_hex(0x424242), LV_STATE_PRESSED);
+    lv_obj_set_style_bg_opa(back_btn, LV_OPA_COVER, LV_STATE_PRESSED);
+    lv_obj_set_style_text_color(back_btn, lv_color_hex(0xFFFFFF), LV_STATE_PRESSED);
+
+    // Title
+    lv_obj_t * title = lv_label_create(lv_scr_act());
+    lv_label_set_text(title, "Device Information");
+    lv_obj_align(title, LV_ALIGN_TOP_LEFT, 20, 70);
+    lv_obj_set_style_text_font(title, &lv_font_montserrat_16, LV_PART_MAIN);
+
+    // Nostr Relay info
+    lv_obj_t * relay_info_label = lv_label_create(lv_scr_act());
+    lv_label_set_text(relay_info_label, "Nostr Relay:");
+    lv_obj_align(relay_info_label, LV_ALIGN_TOP_LEFT, 20, 110);
+    lv_obj_set_style_text_font(relay_info_label, &lv_font_montserrat_12, LV_PART_MAIN);
+
+    //  wss://" + relayUrl + relayPath).c_str());
+    lv_obj_t * relay_url_label = lv_label_create(lv_scr_act());
+    lv_label_set_text(relay_url_label, ("wss://" + relayUrl + relayPath).c_str());
+    lv_obj_align(relay_url_label, LV_ALIGN_TOP_LEFT, 20, 130);
+    lv_obj_set_style_text_font(relay_url_label, &lv_font_montserrat_12, LV_PART_MAIN);
+
+    // Wallet Service Public Key
+    lv_obj_t * nostr_pubkey_label = lv_label_create(lv_scr_act());
+    lv_label_set_text(nostr_pubkey_label, "Wallet Service Public Key:");
+    lv_obj_align(nostr_pubkey_label, LV_ALIGN_TOP_LEFT, 20, 165);
+    lv_obj_set_style_text_font(nostr_pubkey_label, &lv_font_montserrat_12, LV_PART_MAIN);
+
+    lv_obj_t * wallet_pubkey_label = lv_label_create(lv_scr_act());
+    lv_label_set_text(wallet_pubkey_label, walletPubKey.c_str());
+    lv_obj_align(wallet_pubkey_label, LV_ALIGN_TOP_LEFT, 20, 185);
+    lv_obj_set_style_text_font(wallet_pubkey_label, &lv_font_montserrat_12, LV_PART_MAIN);
+    lv_label_set_long_mode(wallet_pubkey_label, LV_LABEL_LONG_WRAP);
+    lv_obj_set_width(wallet_pubkey_label, screenWidth - 40); // Leave 20px margin on each side
+
+    // Device public key
+    lv_obj_t * device_pubkey_label = lv_label_create(lv_scr_act());
+    lv_label_set_text(device_pubkey_label, "Device Public Key:");
+    lv_obj_align(device_pubkey_label, LV_ALIGN_TOP_LEFT, 20, 220);
+    lv_obj_set_style_text_font(device_pubkey_label, &lv_font_montserrat_12, LV_PART_MAIN);
+
+    lv_obj_t * device_pubkey_value = lv_label_create(lv_scr_act());
+    lv_label_set_text(device_pubkey_value, npubHexStr.c_str());
+    lv_obj_align(device_pubkey_value, LV_ALIGN_TOP_LEFT, 20, 240);
+    lv_obj_set_style_text_font(device_pubkey_value, &lv_font_montserrat_12, LV_PART_MAIN);
+
+    // Software version
+    lv_obj_t * version_label = lv_label_create(lv_scr_act());
+    lv_label_set_text(version_label, "Software version:");
+    lv_obj_align(version_label, LV_ALIGN_TOP_LEFT, 20, 275);
+    lv_obj_set_style_text_font(version_label, &lv_font_montserrat_12, LV_PART_MAIN);
+    lv_obj_t * version_value = lv_label_create(lv_scr_act());
+    lv_label_set_text(version_value, SOFTWARE_VERSION.c_str());
+    lv_obj_align(version_value, LV_ALIGN_TOP_LEFT, 20, 295);
+    lv_obj_set_style_text_font(version_value, &lv_font_montserrat_12, LV_PART_MAIN);
+
+}
+
+static void attempt_reconnection_if_needed(void) {
+    // Don't attempt reconnection if in AP mode
+    if (ap_mode_active) {
+        Serial.println("Reconnection skipped - AP mode active");
+        return;
+    }
+    
+    bool wifi_connected = (WiFi.status() == WL_CONNECTED);
+    bool websocket_connected = webSocket.isConnected();
+    
+    Serial.printf("Connection status - WiFi: %s, WebSocket: %s\n", 
+                  wifi_connected ? "Connected" : "Disconnected",
+                  websocket_connected ? "Connected" : "Disconnected");
+
+    // update relay status display
+    update_relay_status_display(websocket_connected);
+    
+    // If WiFi is not connected, try to reconnect first
+    if (!wifi_connected) {
+        Serial.println("WiFi not connected, attempting to reconnect...");
+        
+        // Load saved WiFi credentials
+        preferences.begin("wifi-creds", true);
+        String saved_ssid = preferences.getString("ssid", "");
+        String saved_pass = preferences.getString("password", "");
+        preferences.end();
+        
+        if (saved_ssid.length() > 0) {
+            Serial.println("Found saved WiFi credentials, attempting connection...");
+            WiFi.begin(saved_ssid.c_str(), saved_pass.c_str());
+            wifi_connect_start_time = millis();
+            wifi_connection_attempted = true;
+        } else {
+            Serial.println("No saved WiFi credentials found");
+        }
+    }
+    
+    // If WiFi is connected but WebSocket is not, try to reconnect WebSocket
+    if (wifi_connected && !websocket_connected) {
+        Serial.println("WiFi connected but WebSocket not connected, attempting to reconnect...");
+        
+        if (nwc_initialized) {
+            // Disconnect and reinitialize
+            webSocket.disconnect();
+            nwc_initialized = false;
+            delay(1000); // Wait for disconnect to complete
+        }
+        
+        // Reinitialize WebSocket connection
+        setup_nwc_data(nwcPairingUrl);
+        connect_to_relay();
+        
+        Serial.println("WebSocket reconnection initiated");
+        
+        // Update relay status to show connecting state
+        if (relay_status_label != NULL && lv_obj_is_valid(relay_status_label)) {
+            String relay_status_text = "Relay: Connecting...";
+            lv_label_set_text(relay_status_label, relay_status_text.c_str());
+            lv_obj_set_style_text_color(relay_status_label, lv_color_hex(0xFF9800), 0); // Orange for connecting
+        }
+    }
+    
+    // If both WiFi and WebSocket are connected, ensure relay status is updated
+    if (wifi_connected && websocket_connected) {
+        update_relay_status_display(true);
+    }
+}
+
+/**
+ * @brief Update the relay status display
+ * 
+ * @param connected true if the relay is connected, false otherwise
+ */
+static void update_relay_status_display(bool connected) {
+    if (relay_status_label != NULL && lv_obj_is_valid(relay_status_label)) {
+        if (connected) {
+            String relay_status_text = LV_SYMBOL_OK + String(" Relay: Connected");
+            lv_label_set_text(relay_status_label, relay_status_text.c_str());
+            lv_obj_set_style_text_color(relay_status_label, lv_color_hex(0x00FF00), 0);
+        } else {
+            String relay_status_text = "Relay: Disconnected";
+            lv_label_set_text(relay_status_label, relay_status_text.c_str());
+            lv_obj_set_style_text_color(relay_status_label, lv_color_hex(0x9E9E9E), 0);
+        }
+    }
+}
+
+// Add this function implementation
+static void stop_wifi_scanning(void) {
+    Serial.println("Stopping WiFi scanning...");
+    
+    // Stop any active WiFi scan timer
+    if (wifi_scan_timer != NULL) {
+        lv_timer_del(wifi_scan_timer);
+        wifi_scan_timer = NULL;
+        Serial.println("WiFi scan timer stopped");
+    }
+    
+    // Send stop scan command to WiFi task
+    if (wifiCommandQueue != NULL) {
+        wifi_command_t command;
+        command.type = WIFI_STOP_SCAN;
+        if (xQueueSend(wifiCommandQueue, &command, 0) == pdTRUE) {
+            Serial.println("Stop scan command sent to WiFi task");
+        } else {
+            Serial.println("Failed to send stop scan command to WiFi task");
+        }
+    }
+    
+    // Clear any pending scan results
+    if (wifiScanResultQueue != NULL) {
+        wifi_scan_result_t result;
+        while (xQueueReceive(wifiScanResultQueue, &result, 0) == pdTRUE) {
+            // Just clear the queue
+        }
+    }
+}
+
+// PIN code management function implementations
+static void save_pin_to_preferences(const String& pin) {
+    preferences.begin("pin-config", false);
+    preferences.putString("pin", pin);
+    preferences.end();
+    Serial.println("PIN saved to preferences");
+}
+
+static void load_pin_from_preferences(void) {
+    preferences.begin("pin-config", true);
+    current_pin = preferences.getString("pin", "1234"); // Default PIN is 1234
+    preferences.end();
+    Serial.println("PIN loaded from preferences");
+}
+
+static bool verify_pin_code(const String& entered_pin) {
+    return entered_pin == current_pin;
+}
+
+static void show_pin_management_screen(void) {
+    if (pin_management_screen != NULL) {
+        lv_obj_del(pin_management_screen);
+    }
+    
+    pin_management_screen = lv_obj_create(lv_scr_act());
+    lv_obj_set_size(pin_management_screen, lv_pct(100), lv_pct(100));
+    lv_obj_set_style_bg_color(pin_management_screen, lv_color_hex(0x000000), LV_PART_MAIN);
+    lv_obj_set_style_bg_opa(pin_management_screen, LV_OPA_100, LV_PART_MAIN);
+    
+    // Title
+    lv_obj_t * title = lv_label_create(pin_management_screen);
+    lv_label_set_text(title, "PIN Management");
+    lv_obj_align(title, LV_ALIGN_TOP_MID, 0, 20);
+    lv_obj_set_style_text_font(title, &lv_font_montserrat_16, LV_PART_MAIN);
+    
+    // Current PIN field
+    lv_obj_t * current_pin_label = lv_label_create(pin_management_screen);
+    lv_label_set_text(current_pin_label, "Current PIN:");
+    lv_obj_align(current_pin_label, LV_ALIGN_TOP_LEFT, 20, 80);
+    
+    pin_current_textarea = lv_textarea_create(pin_management_screen);
+    lv_textarea_set_password_mode(pin_current_textarea, true);
+    lv_textarea_set_one_line(pin_current_textarea, true);
+    lv_obj_set_size(pin_current_textarea, 120, 40);
+    lv_obj_align(pin_current_textarea, LV_ALIGN_TOP_RIGHT, -20, 70);
+    lv_obj_add_event_cb(pin_current_textarea, pin_current_kb_event_handler, LV_EVENT_CLICKED, NULL);
+    
+    // New PIN field
+    lv_obj_t * new_pin_label = lv_label_create(pin_management_screen);
+    lv_label_set_text(new_pin_label, "New PIN:");
+    lv_obj_align(new_pin_label, LV_ALIGN_TOP_LEFT, 20, 140);
+    
+    pin_new_textarea = lv_textarea_create(pin_management_screen);
+    lv_textarea_set_password_mode(pin_new_textarea, true);
+    lv_textarea_set_one_line(pin_new_textarea, true);
+    lv_obj_set_size(pin_new_textarea, 120, 40);
+    lv_obj_align(pin_new_textarea, LV_ALIGN_TOP_RIGHT, -20, 130);
+    lv_obj_add_event_cb(pin_new_textarea, pin_new_kb_event_handler, LV_EVENT_CLICKED, NULL);
+    
+    // Verify PIN field
+    lv_obj_t * verify_pin_label = lv_label_create(pin_management_screen);
+    lv_label_set_text(verify_pin_label, "Verify PIN:");
+    lv_obj_align(verify_pin_label, LV_ALIGN_TOP_LEFT, 20, 200);
+    
+    pin_verify_textarea = lv_textarea_create(pin_management_screen);
+    lv_textarea_set_password_mode(pin_verify_textarea, true);
+    lv_textarea_set_one_line(pin_verify_textarea, true);
+    lv_obj_set_size(pin_verify_textarea, 120, 40);
+    lv_obj_align(pin_verify_textarea, LV_ALIGN_TOP_RIGHT, -20, 190);
+    lv_obj_add_event_cb(pin_verify_textarea, pin_verify_kb_event_handler, LV_EVENT_CLICKED, NULL);
+    
+    // Save button
+    lv_obj_t * save_btn = lv_btn_create(pin_management_screen);
+    lv_obj_set_size(save_btn, 100, 50);
+    lv_obj_align(save_btn, LV_ALIGN_TOP_MID, -60, 260);
+    lv_obj_add_event_cb(save_btn, pin_save_event_handler, LV_EVENT_CLICKED, NULL);
+    
+    lv_obj_t * save_label = lv_label_create(save_btn);
+    lv_label_set_text(save_label, "Save");
+    lv_obj_center(save_label);
+    
+    // Cancel button
+    lv_obj_t * cancel_btn = lv_btn_create(pin_management_screen);
+    lv_obj_set_size(cancel_btn, 100, 50);
+    lv_obj_align(cancel_btn, LV_ALIGN_TOP_MID, 60, 260);
+    lv_obj_add_event_cb(cancel_btn, pin_cancel_event_handler, LV_EVENT_CLICKED, NULL);
+    
+    lv_obj_t * cancel_label = lv_label_create(cancel_btn);
+    lv_label_set_text(cancel_label, "Cancel");
+    lv_obj_center(cancel_label);
+    
+    // Create keyboard
+    pin_keyboard = lv_keyboard_create(pin_management_screen);
+    lv_keyboard_set_mode(pin_keyboard, LV_KEYBOARD_MODE_NUMBER);
+    lv_obj_add_flag(pin_keyboard, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_event_cb(pin_keyboard, [](lv_event_t *e) {
+        lv_event_code_t code = lv_event_get_code(e);
+        if (code == LV_EVENT_READY || code == LV_EVENT_CANCEL) {
+            lv_obj_add_flag(pin_keyboard, LV_OBJ_FLAG_HIDDEN);
+        }
+    }, LV_EVENT_ALL, NULL);
+}
+
+static void hide_pin_management_screen(void) {
+    if (pin_management_screen != NULL) {
+        lv_obj_del(pin_management_screen);
+        pin_management_screen = NULL;
+    }
+    pin_keyboard = NULL;
+    pin_current_textarea = NULL;
+    pin_new_textarea = NULL;
+    pin_verify_textarea = NULL;
+}
+
+static void show_pin_verification_screen(void) {
+    if (pin_verification_screen != NULL) {
+        lv_obj_del(pin_verification_screen);
+    }
+    
+    pin_verification_screen = lv_obj_create(lv_scr_act());
+    lv_obj_set_size(pin_verification_screen, lv_pct(100), lv_pct(100));
+    lv_obj_set_style_bg_color(pin_verification_screen, lv_color_hex(0x000000), LV_PART_MAIN);
+    lv_obj_set_style_bg_opa(pin_verification_screen, LV_OPA_100, LV_PART_MAIN);
+    
+    // Title
+    lv_obj_t * title = lv_label_create(pin_verification_screen);
+    lv_label_set_text(title, "Enter PIN");
+    lv_obj_align(title, LV_ALIGN_TOP_MID, 0, 20);
+    lv_obj_set_style_text_font(title, &lv_font_montserrat_16, LV_PART_MAIN);
+    
+    // PIN input field
+    pin_verification_textarea = lv_textarea_create(pin_verification_screen);
+    lv_textarea_set_password_mode(pin_verification_textarea, true);
+    lv_textarea_set_one_line(pin_verification_textarea, true);
+    lv_obj_set_size(pin_verification_textarea, 200, 50);
+    lv_obj_align(pin_verification_textarea, LV_ALIGN_TOP_MID, 0, 80);
+    lv_obj_add_event_cb(pin_verification_textarea, pin_verification_kb_event_handler, LV_EVENT_CLICKED, NULL);
+    lv_obj_add_event_cb(pin_verification_textarea, [](lv_event_t *e) {
+        lv_event_code_t code = lv_event_get_code(e);
+        if (code == LV_EVENT_VALUE_CHANGED) {
+            if (pin_verification_status != NULL) {
+                lv_obj_add_flag(pin_verification_status, LV_OBJ_FLAG_HIDDEN);
+            }
+        }
+    }, LV_EVENT_VALUE_CHANGED, NULL);
+    
+    // Status label
+    pin_verification_status = lv_label_create(pin_verification_screen);
+    lv_label_set_text(pin_verification_status, "");
+    lv_obj_align(pin_verification_status, LV_ALIGN_TOP_MID, 0, 140);
+    lv_obj_set_style_text_color(pin_verification_status, lv_color_hex(0xFF0000), LV_PART_MAIN);
+    lv_obj_add_flag(pin_verification_status, LV_OBJ_FLAG_HIDDEN);
+    
+    // Launch button
+    lv_obj_t * launch_btn = lv_btn_create(pin_verification_screen);
+    lv_obj_set_size(launch_btn, 100, 50);
+    lv_obj_align(launch_btn, LV_ALIGN_TOP_MID, -60, 180);
+    lv_obj_add_event_cb(launch_btn, [](lv_event_t *e) {
+        lv_event_code_t code = lv_event_get_code(e);
+        if (code == LV_EVENT_CLICKED) {
+            const char* entered_pin = lv_textarea_get_text(pin_verification_textarea);
+            if (verify_pin_code(String(entered_pin))) {
+                if (pin_verification_screen != NULL) {
+                    lv_obj_del(pin_verification_screen);
+                    pin_verification_screen = NULL;
+                }
+                start_ap_mode();
+            } else {
+                lv_textarea_set_text(pin_verification_textarea, "");
+                lv_label_set_text(pin_verification_status, "Incorrect PIN");
+                lv_obj_clear_flag(pin_verification_status, LV_OBJ_FLAG_HIDDEN);
+            }
+        }
+    }, LV_EVENT_CLICKED, NULL);
+    
+    lv_obj_t * launch_label = lv_label_create(launch_btn);
+    lv_label_set_text(launch_label, "Launch");
+    lv_obj_center(launch_label);
+    
+    // Style for Launch button (Green)
+    lv_obj_set_style_bg_color(launch_btn, lv_color_hex(0x4CAF50), LV_PART_MAIN);
+    lv_obj_set_style_text_color(launch_btn, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+    lv_obj_set_style_bg_color(launch_btn, lv_color_hex(0x45A049), LV_STATE_PRESSED);
+    
+    // Cancel button
+    lv_obj_t * cancel_btn = lv_btn_create(pin_verification_screen);
+    lv_obj_set_size(cancel_btn, 100, 50);
+    lv_obj_align(cancel_btn, LV_ALIGN_TOP_MID, 60, 180);
+    lv_obj_add_event_cb(cancel_btn, pin_verification_cancel_event_handler, LV_EVENT_CLICKED, NULL);
+    
+    lv_obj_t * cancel_label = lv_label_create(cancel_btn);
+    lv_label_set_text(cancel_label, "Cancel");
+    lv_obj_center(cancel_label);
+    
+    // Style for Cancel button (Grey)
+    lv_obj_set_style_bg_color(cancel_btn, lv_color_hex(0x9E9E9E), LV_PART_MAIN);
+    lv_obj_set_style_text_color(cancel_btn, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+    lv_obj_set_style_bg_color(cancel_btn, lv_color_hex(0x616161), LV_STATE_PRESSED);
+    
+    // Create keyboard
+    pin_verification_keyboard = lv_keyboard_create(pin_verification_screen);
+    lv_keyboard_set_mode(pin_verification_keyboard, LV_KEYBOARD_MODE_NUMBER);
+    lv_obj_clear_flag(pin_verification_keyboard, LV_OBJ_FLAG_HIDDEN);
+    lv_keyboard_set_textarea(pin_verification_keyboard, pin_verification_textarea);
+    lv_obj_add_event_cb(pin_verification_keyboard, [](lv_event_t *e) {
+        lv_event_code_t code = lv_event_get_code(e);
+        if (code == LV_EVENT_READY || code == LV_EVENT_CANCEL) {
+            lv_obj_add_flag(pin_verification_keyboard, LV_OBJ_FLAG_HIDDEN);
+        }
+    }, LV_EVENT_ALL, NULL);
+}
+
+static void pin_current_kb_event_handler(lv_event_t *e) {
+    lv_event_code_t code = lv_event_get_code(e);
+    if (code == LV_EVENT_CLICKED) {
+        if (pin_keyboard != NULL) {
+            lv_keyboard_set_textarea(pin_keyboard, pin_current_textarea);
+            lv_obj_clear_flag(pin_keyboard, LV_OBJ_FLAG_HIDDEN);
+        }
+    } else if (code == LV_EVENT_READY || code == LV_EVENT_CANCEL) {
+        if (pin_keyboard != NULL) {
+            lv_obj_add_flag(pin_keyboard, LV_OBJ_FLAG_HIDDEN);
+        }
+    }
+}
+
+static void pin_new_kb_event_handler(lv_event_t *e) {
+    lv_event_code_t code = lv_event_get_code(e);
+    if (code == LV_EVENT_CLICKED) {
+        if (pin_keyboard != NULL) {
+            lv_keyboard_set_textarea(pin_keyboard, pin_new_textarea);
+            lv_obj_clear_flag(pin_keyboard, LV_OBJ_FLAG_HIDDEN);
+        }
+    } else if (code == LV_EVENT_READY || code == LV_EVENT_CANCEL) {
+        if (pin_keyboard != NULL) {
+            lv_obj_add_flag(pin_keyboard, LV_OBJ_FLAG_HIDDEN);
+        }
+    }
+}
+
+static void pin_verify_kb_event_handler(lv_event_t *e) {
+    lv_event_code_t code = lv_event_get_code(e);
+    if (code == LV_EVENT_CLICKED) {
+        if (pin_keyboard != NULL) {
+            lv_keyboard_set_textarea(pin_keyboard, pin_verify_textarea);
+            lv_obj_clear_flag(pin_keyboard, LV_OBJ_FLAG_HIDDEN);
+        }
+    } else if (code == LV_EVENT_READY || code == LV_EVENT_CANCEL) {
+        if (pin_keyboard != NULL) {
+            lv_obj_add_flag(pin_keyboard, LV_OBJ_FLAG_HIDDEN);
+        }
+    }
+}
+
+static void pin_save_event_handler(lv_event_t *e) {
+    lv_event_code_t code = lv_event_get_code(e);
+    if (code == LV_EVENT_CLICKED) {
+        const char* current_pin_entered = lv_textarea_get_text(pin_current_textarea);
+        const char* new_pin = lv_textarea_get_text(pin_new_textarea);
+        const char* verify_pin = lv_textarea_get_text(pin_verify_textarea);
+        
+        if (!verify_pin_code(String(current_pin_entered))) {
+            show_message("Error", "Current PIN is incorrect");
+            return;
+        }
+        
+        if (String(new_pin) != String(verify_pin)) {
+            show_message("Error", "New PINs do not match");
+            return;
+        }
+        
+        if (strlen(new_pin) < 4) {
+            show_message("Error", "PIN must be at least 4 digits");
+            return;
+        }
+        
+        save_pin_to_preferences(String(new_pin));
+        current_pin = String(new_pin);
+        show_message("Success", "PIN updated successfully");
+        hide_pin_management_screen();
+    }
+}
+
+static void pin_cancel_event_handler(lv_event_t *e) {
+    lv_event_code_t code = lv_event_get_code(e);
+    if (code == LV_EVENT_CLICKED) {
+        hide_pin_management_screen();
+    }
+}
+
+static void pin_verification_kb_event_handler(lv_event_t *e) {
+    lv_event_code_t code = lv_event_get_code(e);
+    if (code == LV_EVENT_READY) {
+        const char* entered_pin = lv_textarea_get_text(pin_verification_textarea);
+        if (verify_pin_code(String(entered_pin))) {
+            if (pin_verification_screen != NULL) {
+                lv_obj_del(pin_verification_screen);
+                pin_verification_screen = NULL;
+            }
+            start_ap_mode();
+        } else {
+            lv_textarea_set_text(pin_verification_textarea, "");
+            lv_label_set_text(pin_verification_status, "Incorrect PIN");
+            lv_obj_clear_flag(pin_verification_status, LV_OBJ_FLAG_HIDDEN);
+        }
+    }
+}
+
+static void pin_verification_cancel_event_handler(lv_event_t *e) {
+    lv_event_code_t code = lv_event_get_code(e);
+    if (code == LV_EVENT_CLICKED) {
+        if (pin_verification_screen != NULL) {
+            lv_obj_del(pin_verification_screen);
+            pin_verification_screen = NULL;
+        }
+    }
+}
+
+static void ap_password_kb_event_handler(lv_event_t *e) {
+    lv_event_code_t code = lv_event_get_code(e);
+    lv_obj_t *kb = lv_event_get_target(e);
+    
+    if (code == LV_EVENT_READY) {
+        lv_obj_t *ta = lv_keyboard_get_textarea(kb);
+        const char *text = lv_textarea_get_text(ta);
+        ap_password = String(text);
+        
+        Serial.println("AP password changed to: " + ap_password);
+        
+        lv_obj_add_flag(kb, LV_OBJ_FLAG_HIDDEN);
+        // Show the PIN and Save buttons when keyboard is hidden
+        if (settings_pin_btn != NULL && lv_obj_is_valid(settings_pin_btn)) {
+            lv_obj_clear_flag(settings_pin_btn, LV_OBJ_FLAG_HIDDEN);
+        }
+        if (settings_save_btn != NULL && lv_obj_is_valid(settings_save_btn)) {
+            lv_obj_clear_flag(settings_save_btn, LV_OBJ_FLAG_HIDDEN);
+        }
+    } else if (code == LV_EVENT_CANCEL) {
+        lv_obj_add_flag(kb, LV_OBJ_FLAG_HIDDEN);
+        // Show the PIN and Save buttons when keyboard is hidden
+        if (settings_pin_btn != NULL && lv_obj_is_valid(settings_pin_btn)) {
+            lv_obj_clear_flag(settings_pin_btn, LV_OBJ_FLAG_HIDDEN);
+        }
+        if (settings_save_btn != NULL && lv_obj_is_valid(settings_save_btn)) {
+            lv_obj_clear_flag(settings_save_btn, LV_OBJ_FLAG_HIDDEN);
+        }
+    }
+}
+
+// Helper function to reset WebSocket fragment state
+static void reset_websocket_fragment_state() {
+    ws_fragment_in_progress = false;
+    ws_fragmented_message = "";
+    ws_fragment_total_size = 0;
+    ws_fragment_received_size = 0;
+    ws_fragment_is_binary = false;
+    ws_fragment_start_time = 0;
+}
