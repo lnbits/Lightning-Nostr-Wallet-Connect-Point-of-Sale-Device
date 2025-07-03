@@ -22,7 +22,14 @@ namespace NWC {
     static bool connection_in_progress = false;
     static unsigned long last_connection_attempt = 0;
     static unsigned long last_ws_ping = 0;
+    static unsigned long last_ws_message_received = 0;
+    static unsigned long last_connection_health_check = 0;
+    static int reconnection_attempts = 0;
     static const unsigned long MIN_RECONNECT_INTERVAL = 5000; // 5 seconds
+    static const unsigned long CONNECTION_TIMEOUT = 30000; // 30 seconds without response
+    static const unsigned long HEALTH_CHECK_INTERVAL = 10000; // 10 seconds
+    static const unsigned long PING_INTERVAL = 15000; // 15 seconds
+    static const int MAX_RECONNECT_ATTEMPTS = 10;
     
     // WebSocket fragment management
     static bool ws_fragment_in_progress = false;
@@ -64,6 +71,11 @@ namespace NWC {
         timeClient.begin();
         timeClient.setTimeOffset(0);
         bootTimestamp = millis();
+        
+        // Initialize connection tracking variables
+        last_ws_message_received = millis();
+        last_connection_health_check = millis();
+        reconnection_attempts = 0;
         
         // Load NWC URL from preferences
         loadUrlFromPreferences();
@@ -281,6 +293,7 @@ namespace NWC {
                 nwc_initialized = false;
                 connection_in_progress = false;
                 resetWebsocketFragmentState();
+                updateRelayStatusDisplay(false);
                 if (status_callback) {
                     status_callback(false, "Disconnected");
                 }
@@ -291,6 +304,9 @@ namespace NWC {
                 nwc_initialized = true;
                 connection_in_progress = false;
                 last_ws_ping = millis();
+                last_ws_message_received = millis();
+                reconnection_attempts = 0; // Reset reconnection counter on successful connection
+                updateRelayStatusDisplay(true);
                 if (status_callback) {
                     status_callback(true, "Connected");
                 }
@@ -310,10 +326,12 @@ namespace NWC {
                 
             case WStype_TEXT:
                 Serial.printf("[WSc] Received text: %s\\n", payload);
+                last_ws_message_received = millis(); // Track message reception
                 handleWebsocketMessage(NULL, payload, length);
                 break;
                 
             case WStype_BIN:
+                last_ws_message_received = millis(); // Track binary message reception
                 Serial.printf("[WSc] Received binary length: %u\\n", length);
                 break;
                 
@@ -726,13 +744,56 @@ namespace NWC {
     }
     
     void attemptReconnectionIfNeeded() {
-        // Only attempt reconnection if WiFi is connected, WebSocket is not connected,
-        // and we're not already in the middle of a connection attempt
-        if (WiFi.status() == WL_CONNECTED && !isConnected() && !connection_in_progress) {
-            unsigned long current_time = millis();
-            if (current_time - last_connection_attempt >= MIN_RECONNECT_INTERVAL) {
-                Serial.println("WiFi connected but WebSocket disconnected, attempting reconnection");
-                connectToRelay();  // Use connectToRelay directly instead of restartConnection
+        unsigned long current_time = millis();
+        
+        // Only proceed if WiFi is connected
+        if (WiFi.status() != WL_CONNECTED) {
+            if (isConnected() || nwc_initialized) {
+                Serial.println("WiFi disconnected, resetting NWC connection state");
+                nwc_initialized = false;
+                updateRelayStatusDisplay(false);
+            }
+            return;
+        }
+        
+        // Check connection health periodically
+        if (current_time - last_connection_health_check >= HEALTH_CHECK_INTERVAL) {
+            last_connection_health_check = current_time;
+            
+            // If we think we're connected but haven't received any messages for too long, force reconnect
+            if (isConnected() && nwc_initialized) {
+                if (current_time - last_ws_message_received > CONNECTION_TIMEOUT) {
+                    Serial.println("Connection appears stale (no messages for " + String(CONNECTION_TIMEOUT/1000) + "s), forcing disconnect");
+                    webSocket.disconnect();
+                    nwc_initialized = false;
+                    updateRelayStatusDisplay(false);
+                    return;
+                }
+                
+                // Send periodic ping to keep connection alive
+                if (current_time - last_ws_ping > PING_INTERVAL) {
+                    sendPing();
+                }
+            }
+        }
+        
+        // Attempt reconnection if not connected and not already trying
+        if (!isConnected() && !connection_in_progress) {
+            // Calculate backoff interval based on number of attempts
+            unsigned long backoff_interval = MIN_RECONNECT_INTERVAL * (1 << min(reconnection_attempts, 5)); // Exponential backoff, max 32x
+            
+            if (current_time - last_connection_attempt >= backoff_interval) {
+                if (reconnection_attempts < MAX_RECONNECT_ATTEMPTS) {
+                    Serial.println("Attempting WebSocket reconnection (attempt " + String(reconnection_attempts + 1) + "/" + String(MAX_RECONNECT_ATTEMPTS) + ")");
+                    reconnection_attempts++;
+                    connectToRelay();
+                } else {
+                    // Reset reconnection attempts after max attempts reached, but wait longer
+                    if (current_time - last_connection_attempt >= (backoff_interval * 4)) {
+                        Serial.println("Resetting reconnection attempts after extended wait");
+                        reconnection_attempts = 0;
+                    }
+                }
             }
         }
     }
@@ -802,11 +863,7 @@ namespace NWC {
                 resetWebsocketFragmentState();
             }
             
-            // Send periodic ping only when connected
-            unsigned long current_time = millis();
-            if (current_time - last_ws_ping >= Config::WS_PING_INTERVAL) {
-                sendPing();
-            }
+            // Ping handling is now done in attemptReconnectionIfNeeded()
         } else {
             // WiFi not connected - reset connection state to prevent hanging
             if (nwc_initialized && !connection_in_progress) {
