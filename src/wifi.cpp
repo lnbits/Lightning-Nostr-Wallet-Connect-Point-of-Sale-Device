@@ -55,20 +55,53 @@ namespace WiFiManager {
                 switch (command.type) {
                     case WIFI_SCAN: {
                         Serial.println("Starting WiFi scan...");
+                        
+                        // Stop auto-reconnect and put WiFi in scan mode
+                        WiFi.setAutoReconnect(false);
+                        WiFi.disconnect(true);  // Disconnect and clear config
+                        delay(1000);  // Wait for clean disconnect
+                        
+                        // Set WiFi to station mode for scanning
+                        WiFi.mode(WIFI_STA);
+                        delay(100);
+                        
                         int n = WiFi.scanNetworks();
                         Serial.print("Scan completed, found ");
                         Serial.print(n);
                         Serial.println(" networks");
                         
                         wifi_scan_result_t result;
-                        result.network_count = (n > 9) ? 9 : n;
                         
-                        for (int i = 0; i < result.network_count; i++) {
-                            strncpy(result.ssids[i], WiFi.SSID(i).c_str(), 32);
-                            result.ssids[i][32] = '\0';
-                            result.rssi[i] = WiFi.RSSI(i);
-                            result.encrypted[i] = (WiFi.encryptionType(i) != WIFI_AUTH_OPEN);
+                        // Check for scan errors (negative return values)
+                        if (n < 0) {
+                            Serial.print("WiFi scan failed with error code: ");
+                            Serial.println(n);
+                            Serial.println("Retrying scan in 1 second...");
+                            delay(1000);
+                            
+                            // Retry scan once
+                            n = WiFi.scanNetworks();
+                            Serial.print("Retry scan found ");
+                            Serial.print(n);
+                            Serial.println(" networks");
                         }
+                        
+                        if (n < 0) {
+                            Serial.println("Scan failed after retry, returning empty results");
+                            result.network_count = 0;
+                        } else {
+                            result.network_count = (n > 9) ? 9 : n;
+                            
+                            for (int i = 0; i < result.network_count; i++) {
+                                strncpy(result.ssids[i], WiFi.SSID(i).c_str(), 32);
+                                result.ssids[i][32] = '\0';
+                                result.rssi[i] = WiFi.RSSI(i);
+                                result.encrypted[i] = (WiFi.encryptionType(i) != WIFI_AUTH_OPEN);
+                            }
+                        }
+                        
+                        // Re-enable auto-reconnect for normal operation
+                        WiFi.setAutoReconnect(true);
                         
                         if (wifi_scan_result_queue != NULL) {
                             if (xQueueSend(wifi_scan_result_queue, &result, 0) == pdTRUE) {
