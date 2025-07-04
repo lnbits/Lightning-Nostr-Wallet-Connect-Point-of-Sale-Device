@@ -126,7 +126,7 @@ namespace App {
         
         // Deep Sleep Configuration
         const unsigned long SLEEP_TIMEOUT = 30 * 1000; // 30 seconds
-        const gpio_num_t WAKE_PIN = GPIO_NUM_12; // GPIO for wake up
+        const gpio_num_t WAKE_PIN = GPIO_NUM_10; // GPIO for wake up
         const unsigned long SLEEP_CHECK_INTERVAL = 1000; // Check every second
     }
 }
