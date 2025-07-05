@@ -76,9 +76,11 @@ namespace App {
      */
     void enterSleepMode();
     void exitSleepMode();
+    void enterLightSleepMode();
+    void exitLightSleepMode();
     
     /**
-     * Deep Sleep Management
+     * Sleep Management
      */
     void initSleepMode();
     void cleanupSleepMode();
@@ -86,8 +88,12 @@ namespace App {
     void sleepCheckCallback(lv_timer_t* timer);
     void setSleepEnabled(bool enabled);
     bool isSleepEnabled();
+    bool isInLightSleep();
+    bool isBacklightOff();
     unsigned long getInactiveTime();
-    unsigned long getSleepTimeout();
+    unsigned long getLightSleepTimeout();
+    unsigned long getDeepSleepTimeout();
+    void handleTouchWake();
     
     /**
      * Module Health Monitoring

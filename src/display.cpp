@@ -1,4 +1,5 @@
 #include "display.h"
+#include "app.h"
 #include <Arduino.h>
 
 // Forward declarations for external UI elements from ui.cpp
@@ -175,6 +176,9 @@ namespace Display {
             data->point.y = touchY;
             last_x = touchX;
             last_y = touchY;
+            
+            // Handle touch wake from light sleep
+            App::handleTouchWake();
         }
     }
     

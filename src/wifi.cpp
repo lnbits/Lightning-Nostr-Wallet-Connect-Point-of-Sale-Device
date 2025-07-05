@@ -1,5 +1,6 @@
 #include "wifi.h"
 #include "settings.h"
+#include "app.h"
 
 #include "ui.h"
 #include "nwc.h"
@@ -626,6 +627,9 @@ namespace WiFiManager {
     void connectEventHandler(lv_event_t* e) {
         lv_event_code_t code = lv_event_get_code(e);
         if (code == LV_EVENT_CLICKED) {
+            // Reset activity timer on WiFi network selection
+            App::resetActivityTimer();
+            
             int index = (int)(uintptr_t)lv_event_get_user_data(e);
             
             if (index < wifi_ssids.size()) {

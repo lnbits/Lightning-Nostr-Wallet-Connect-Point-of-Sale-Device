@@ -1,8 +1,8 @@
+#include <Arduino.h>
 #include "nwc.h"
 #include "settings.h"
 #include "ui.h"
 #include <Preferences.h>
-#include <Arduino.h>
 
 namespace NWC {
     // WebSocket client

@@ -1,4 +1,5 @@
 #include "settings.h"
+#include "app.h"
 #include <Arduino.h>
 
 #include "ui.h"
@@ -439,6 +440,9 @@ namespace Settings {
         lv_obj_add_event_cb(launch_btn, [](lv_event_t *e) {
             lv_event_code_t code = lv_event_get_code(e);
             if (code == LV_EVENT_CLICKED) {
+                // Reset activity timer on PIN verification
+                App::resetActivityTimer();
+                
                 const char* entered_pin = lv_textarea_get_text(pin_verification_textarea);
                 if (Settings::verifyPin(String(entered_pin))) {
                     if (pin_verification_screen != NULL) {

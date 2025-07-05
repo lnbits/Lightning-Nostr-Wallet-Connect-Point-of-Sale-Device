@@ -12,10 +12,16 @@ namespace App
     static unsigned long last_health_check = 0;
     static unsigned long last_status_report = 0;
 
-    // Deep sleep management
+    // Sleep management
     static unsigned long last_activity_time = 0;
     static bool sleep_enabled = true;
     static lv_timer_t *sleep_check_timer = NULL;
+    static bool in_light_sleep = false;
+    static bool backlight_off = false;
+
+    // Sleep timing constants
+    static const unsigned long LIGHT_SLEEP_TIMEOUT = 10 * 1000; // 10 seconds
+    static const unsigned long DEEP_SLEEP_TIMEOUT = 2 * 60 * 1000; // 2 minutes
 
     void init()
     {
@@ -61,8 +67,8 @@ namespace App
                 notifyWiFiStatusChanged(true);
             }
 
-            // Initialize deep sleep functionality
-            Serial.println("Initializing deep sleep management...");
+            // Initialize sleep functionality
+            Serial.println("Initializing sleep management...");
             initSleepMode();
 
             setState(APP_STATE_READY);
@@ -347,17 +353,35 @@ namespace App
         Serial.println("Going to deep sleep. Wake when " + String(Config::WAKE_PIN) + " goes HIGH.");
         Serial.flush();
         esp_deep_sleep_start();
+    }
 
-        Serial.println("This will never be printed");
+    void enterLightSleepMode()
+    {
+        Serial.println("=== Entering light sleep mode (backlight off) ===");
+        
+        in_light_sleep = true;
+        backlight_off = true;
+        
+        // Turn off display backlight
+        Display::turnOffBacklight();
+        
+        fireEvent("light_sleep", "entered");
+    }
 
-        Serial.println("Going to sleep in 1 second...");
-        Serial.flush();
-
-        delay(1000);
-
-        fireEvent("sleep_mode", "entered");
-
-        esp_deep_sleep_start();
+    void exitLightSleepMode()
+    {
+        Serial.println("=== Exiting light sleep mode ===");
+        
+        in_light_sleep = false;
+        backlight_off = false;
+        
+        // Turn display backlight back on
+        Display::turnOnBacklight();
+        
+        // Reset activity timer
+        resetActivityTimer();
+        
+        fireEvent("light_sleep", "exited");
     }
 
     void exitSleepMode()
@@ -384,6 +408,7 @@ namespace App
 
         // Turn display backlight back on
         Display::turnOnBacklight();
+        backlight_off = false;
 
         // Reset activity timer
         resetActivityTimer();
@@ -534,7 +559,7 @@ namespace App
         Serial.println("EVENT: " + event + " - " + data);
     }
 
-    // ========== Deep Sleep Management Functions ==========
+    // ========== Sleep Management Functions ==========
 
     void initSleepMode()
     {
@@ -563,9 +588,10 @@ namespace App
             exitSleepMode(); // Handle wake up
         }
 
-        Serial.println("Deep sleep management initialized");
+        Serial.println("Sleep management initialized");
         Serial.println("Wake pin: GPIO " + String(Config::WAKE_PIN));
-        Serial.println("Sleep timeout: " + String(Config::SLEEP_TIMEOUT / 1000) + " seconds");
+        Serial.println("Light sleep timeout: " + String(LIGHT_SLEEP_TIMEOUT / 1000) + " seconds");
+        Serial.println("Deep sleep timeout: " + String(DEEP_SLEEP_TIMEOUT / 1000) + " seconds");
     }
 
     void cleanupSleepMode()
@@ -575,12 +601,19 @@ namespace App
             lv_timer_del(sleep_check_timer);
             sleep_check_timer = NULL;
         }
-        Serial.println("Deep sleep management cleaned up");
+        Serial.println("Sleep management cleaned up");
     }
 
     void resetActivityTimer()
     {
         last_activity_time = millis();
+        
+        // If we were in light sleep, exit it
+        if (in_light_sleep)
+        {
+            exitLightSleepMode();
+        }
+        
         Serial.println("Activity timer reset");
     }
 
@@ -606,16 +639,23 @@ namespace App
             return;
         }
 
-        // Only allow deep sleep from the keypad screen
+        // Only allow sleep from the keypad screen
         if (UI::getCurrentScreen() != UI::SCREEN_KEYPAD)
         {
             return;
         }
 
-        if (inactive_time >= Config::SLEEP_TIMEOUT)
+        // Check for deep sleep timeout (2 minutes)
+        if (inactive_time >= DEEP_SLEEP_TIMEOUT)
         {
-            Serial.println("Inactivity timeout reached (" + String(inactive_time / 1000) + "s), entering sleep mode");
+            Serial.println("Deep sleep timeout reached (" + String(inactive_time / 1000) + "s), entering deep sleep");
             enterSleepMode();
+        }
+        // Check for light sleep timeout (10 seconds) - only if not already in light sleep
+        else if (!in_light_sleep && inactive_time >= LIGHT_SLEEP_TIMEOUT)
+        {
+            Serial.println("Light sleep timeout reached (" + String(inactive_time / 1000) + "s), entering light sleep");
+            enterLightSleepMode();
         }
     }
 
@@ -641,13 +681,38 @@ namespace App
         return sleep_enabled;
     }
 
+    bool isInLightSleep()
+    {
+        return in_light_sleep;
+    }
+
+    bool isBacklightOff()
+    {
+        return backlight_off;
+    }
+
     unsigned long getInactiveTime()
     {
         return millis() - last_activity_time;
     }
 
-    unsigned long getSleepTimeout()
+    unsigned long getLightSleepTimeout()
     {
-        return Config::SLEEP_TIMEOUT;
+        return LIGHT_SLEEP_TIMEOUT;
+    }
+
+    unsigned long getDeepSleepTimeout()
+    {
+        return DEEP_SLEEP_TIMEOUT;
+    }
+
+    // Touch wake handler - should be called from Display::touchpadRead when touch is detected
+    void handleTouchWake()
+    {
+        if (in_light_sleep || backlight_off)
+        {
+            Serial.println("Touch detected - waking from light sleep");
+            exitLightSleepMode();
+        }
     }
 }
