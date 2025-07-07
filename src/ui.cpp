@@ -74,8 +74,12 @@ namespace UI {
     void loadScreen(screen_state_t screen) {
         current_screen = screen;
         
+        // Use smoother screen clearing
         lv_obj_clean(lv_scr_act());
         cleanupGlobalPointers();
+        
+        // Add a small delay to allow the clear to complete
+        lv_timer_handler();
         
         switch (screen) {
             case SCREEN_KEYPAD:
@@ -97,6 +101,9 @@ namespace UI {
                 createInfoScreen();
                 break;
         }
+        
+        // Force an immediate refresh after screen creation
+        lv_timer_handler();
     }
     
     void createKeypadScreen() {
