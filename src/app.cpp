@@ -365,14 +365,14 @@ namespace App
         Display::turnOffBacklight();
 
         // Set Config::WAKE_PIN as input with pulldown (to default LOW)
-        pinMode(Config::WAKE_PIN, INPUT);
-        rtc_gpio_pulldown_en(Config::WAKE_PIN);
-        rtc_gpio_pullup_dis(Config::WAKE_PIN);
+        // pinMode(Config::WAKE_PIN, INPUT);
+        // rtc_gpio_pulldown_en(Config::WAKE_PIN);
+        // rtc_gpio_pullup_dis(Config::WAKE_PIN);
 
-        // Enable EXT1 wakeup when GPIO12 goes HIGH
-        esp_sleep_enable_ext1_wakeup(1ULL << Config::WAKE_PIN, ESP_EXT1_WAKEUP_ANY_HIGH);
+        // // Enable EXT1 wakeup when GPIO12 goes HIGH
+        // esp_sleep_enable_ext1_wakeup(1ULL << Config::WAKE_PIN, ESP_EXT1_WAKEUP_ANY_HIGH);
 
-        Serial.println("Going to deep sleep. Wake when " + String(Config::WAKE_PIN) + " goes HIGH.");
+        // Serial.println("Going to deep sleep. Wake when " + String(Config::WAKE_PIN) + " goes HIGH.");
         Serial.flush();
         esp_deep_sleep_start();
     }
