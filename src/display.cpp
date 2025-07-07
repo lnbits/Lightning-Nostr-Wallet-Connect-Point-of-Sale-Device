@@ -61,7 +61,7 @@ namespace Display {
             // Run comprehensive touch diagnostics
             Serial.println("=== TOUCH DIAGNOSTICS ===");
             TouchDebug::scanI2C();
-            TouchDebug::testInterruptPin();
+            // TouchDebug::testInterruptPin();
             TouchDebug::directTouchTest();
             
             // Initialize touch controller
@@ -155,7 +155,24 @@ namespace Display {
         lv_indev_drv_init(&indev_drv);
         indev_drv.type = LV_INDEV_TYPE_POINTER;
         indev_drv.read_cb = touchpadRead;
-        lv_indev_drv_register(&indev_drv);
+        
+        // Set faster polling for input devices (default might be too slow)
+        indev_drv.read_timer = lv_timer_create([](lv_timer_t *timer) {
+            lv_indev_read_timer_cb(timer);
+        }, 10, nullptr);  // Poll every 10ms instead of default
+        
+        lv_indev_t *indev = lv_indev_drv_register(&indev_drv);
+        
+        if (indev) {
+            Serial.println("LVGL input device registered successfully");
+            Serial.printf("Input device pointer: %p\n", indev);
+            
+            // Ensure the input device is set as the active one
+            lv_indev_set_group(indev, lv_group_get_default());
+            Serial.println("Input device linked to default group");
+        } else {
+            Serial.println("ERROR: Failed to register LVGL input device!");
+        }
         
         Serial.println("LVGL initialized with ArduinoGFX backend");
     }
@@ -176,8 +193,8 @@ namespace Display {
         static int debug_counter = 0;
         static bool last_touch_state = false;
         
-        // Debug: Print every 5000 calls to show function is being called
-        if (debug_counter++ % 5000 == 0) {
+        // Debug: Print every 1000 calls to show function is being called
+        if (debug_counter++ % 1000 == 0) {
             Serial.printf("LVGL touch callback active (called %d times)\n", debug_counter);
         }
         
@@ -198,6 +215,44 @@ namespace Display {
             // Only print on new touch (not continuous)
             if (!last_touch_state) {
                 Serial.printf("LVGL TOUCH: Pressed at X=%d, Y=%d\n", touchX, touchY);
+                
+                // Debug: Check what UI object is at this coordinate
+                lv_obj_t* obj = lv_indev_get_obj_act();
+                if (obj) {
+                    Serial.printf("Touch target object: %p\n", obj);
+                } else {
+                    Serial.println("No object found at touch coordinates");
+                    
+                    // Debug: Manually search for object at coordinates
+                    lv_obj_t* screen = lv_scr_act();
+                    if (screen) {
+                        Serial.printf("Active screen: %p\n", screen);
+                        
+                        // Try to find object manually using coordinate search
+                        lv_point_t point = {(lv_coord_t)touchX, (lv_coord_t)touchY};
+                        lv_obj_t* target = lv_indev_search_obj(screen, &point);
+                        if (target) {
+                            Serial.printf("Manual search found object: %p\n", target);
+                            
+                            // TEMPORARY FIX: Manually trigger the event since automatic doesn't work
+                            lv_event_send(target, LV_EVENT_CLICKED, indev_driver);
+                            Serial.println("Manually sent CLICKED event to object");
+                            
+                            // Force immediate display update
+                            lv_refr_now(lv_disp_get_default());
+                            Serial.println("Forced display refresh");
+                        } else {
+                            Serial.printf("Manual search also found no object at X=%d, Y=%d\n", touchX, touchY);
+                        }
+                        
+                        // Check if coordinates are within screen bounds
+                        if (touchX >= 0 && touchX < TFT_WIDTH && touchY >= 0 && touchY < TFT_HEIGHT) {
+                            Serial.printf("Touch within screen bounds (%dx%d)\n", TFT_WIDTH, TFT_HEIGHT);
+                        } else {
+                            Serial.printf("Touch OUTSIDE screen bounds! Screen is %dx%d\n", TFT_WIDTH, TFT_HEIGHT);
+                        }
+                    }
+                }
             }
             
             // Handle touch wake from light sleep

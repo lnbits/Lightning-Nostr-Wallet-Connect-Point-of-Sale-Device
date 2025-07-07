@@ -158,15 +158,42 @@ namespace App
             Serial.println("ERROR: NWC::attemptReconnectionIfNeeded() threw exception");
         }
 
-        // Touch status monitoring (very reduced frequency)
+        // Touch system status and manual LVGL test
         static unsigned long lastTouchDebug = 0;
-        if (current_time - lastTouchDebug > 1000) { // Every 1 second
-            bool touchResult = Display::touch.touched();
-            if (touchResult) {
-                uint16_t x, y;
-                Display::touch.readData(&x, &y);
-                Serial.printf("Touch active: X=%d, Y=%d\n", x, y);
+        if (current_time - lastTouchDebug > 5000) { // Every 5 seconds
+            Serial.println("Touch system: Testing LVGL callback manually...");
+            
+            // Debug: Check what UI objects exist on screen
+            lv_obj_t* screen = lv_scr_act();
+            if (screen) {
+                uint32_t child_count = lv_obj_get_child_cnt(screen);
+                Serial.printf("UI Debug: Screen has %u child objects\n", child_count);
+                
+                for (uint32_t i = 0; i < child_count && i < 12; i++) {  // Check first 12 children
+                    lv_obj_t* child = lv_obj_get_child(screen, i);
+                    if (child) {
+                        lv_area_t coords;
+                        lv_obj_get_coords(child, &coords);
+                        
+                        // Check if object is clickable
+                        bool clickable = lv_obj_has_flag(child, LV_OBJ_FLAG_CLICKABLE);
+                        Serial.printf("  Child %u: %p at (%d,%d) to (%d,%d) - %s\n", 
+                                    i, child, coords.x1, coords.y1, coords.x2, coords.y2,
+                                    clickable ? "CLICKABLE" : "NOT_CLICKABLE");
+                        
+                        // TEMPORARY FIX: Make all objects clickable for testing
+                        if (!clickable) {
+                            lv_obj_add_flag(child, LV_OBJ_FLAG_CLICKABLE);
+                            Serial.printf("    Made child %u clickable\n", i);
+                        }
+                    }
+                }
             }
+            
+            // Manually call our LVGL callback to test if it works
+            lv_indev_data_t test_data;
+            Display::touchpadRead(nullptr, &test_data);
+            
             lastTouchDebug = current_time;
         }
 
@@ -175,7 +202,7 @@ namespace App
         
         // Reduce debug spam - only print every 100 cycles
         static int cycle_count = 0;
-        if (++cycle_count % 100 == 0) {
+        if (++cycle_count % 500 == 0) {
             Serial.println("DEBUG: App::run() cycle completed (x100)");
         }
     }
