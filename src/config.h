@@ -12,7 +12,7 @@ static const uint16_t SCREEN_WIDTH = 320;   // Portrait mode
 static const uint16_t SCREEN_HEIGHT = 480;
 
 // Buffer size for LVGL
-static const uint16_t BUFFER_SIZE = SCREEN_WIDTH * 10;
+static const uint16_t BUFFER_SIZE = SCREEN_WIDTH * 30;  // Double the buffer size
 
 // WiFi credentials storage
 #define WIFI_PREFERENCES_NAMESPACE "wifi-creds"
