@@ -5,7 +5,7 @@
 #define TFT_res_H 480
 
 // Touch offsets
-#define Touch_X_min 12
-#define Touch_X_max 310
-#define Touch_Y_min 14
-#define Touch_Y_max 461
+#define Touch_X_min 0
+#define Touch_X_max 319
+#define Touch_Y_min 0
+#define Touch_Y_max 479
