@@ -160,7 +160,7 @@ namespace App
 
         // Touch system status and manual LVGL test
         static unsigned long lastTouchDebug = 0;
-        if (current_time - lastTouchDebug > 5000) { // Every 5 seconds
+        if (current_time - lastTouchDebug > 100) { // Every 100ms
             Serial.println("Touch system: Testing LVGL callback manually...");
             
             // Debug: Check what UI objects exist on screen
@@ -190,9 +190,12 @@ namespace App
                 }
             }
             
-            // Manually call our LVGL callback to test if it works
+            // Manually call our LVGL callback to ensure it runs regularly
             lv_indev_data_t test_data;
             Display::touchpadRead(nullptr, &test_data);
+            
+            // Also force LVGL to process input devices
+            lv_timer_handler();
             
             lastTouchDebug = current_time;
         }

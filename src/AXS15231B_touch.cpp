@@ -74,6 +74,7 @@ bool AXS15231B_Touch::update() {
         return false;
     } else {
         touch_int = false;
+        Serial.println("Touch interrupt processed, reading data...");
     }
 
     uint8_t tmp_buf[8] = {0};
