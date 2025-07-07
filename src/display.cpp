@@ -130,8 +130,8 @@ namespace Display {
     }
     
     void setupLVGL() {
-        // Allocate display buffer using heap capabilities for optimal performance
-        uint32_t bufSize = screenWidth * screenHeight / 10;
+        // Increase buffer size for smoother rendering
+        uint32_t bufSize = screenWidth * screenHeight / 5;
         buf1 = (lv_color_t*)heap_caps_malloc(bufSize * sizeof(lv_color_t), MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT);
         buf2 = (lv_color_t*)heap_caps_malloc(bufSize * sizeof(lv_color_t), MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT);
         
