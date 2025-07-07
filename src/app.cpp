@@ -112,23 +112,26 @@ namespace App
         
         unsigned long current_time = millis();
 
-        // TEMPORARILY SKIP PROBLEMATIC MODULES FOR TOUCH TESTING
-        /*
-        // Process WiFi AP mode events
-        Serial.println("DEBUG: About to call WiFiManager::processLoop()");
-        WiFiManager::processLoop();
-        Serial.println("DEBUG: WiFiManager::processLoop() completed");
+        // Process WiFi AP mode events (with error handling)
+        try {
+            WiFiManager::processLoop();
+        } catch (...) {
+            Serial.println("ERROR: WiFiManager::processLoop() threw exception");
+        }
 
-        // Process NWC WebSocket events
-        Serial.println("DEBUG: About to call NWC::processLoop()");
-        NWC::processLoop();
-        Serial.println("DEBUG: NWC::processLoop() completed");
+        // Process NWC WebSocket events (with error handling)
+        try {
+            NWC::processLoop();
+        } catch (...) {
+            Serial.println("ERROR: NWC::processLoop() threw exception");
+        }
 
-        // Update NWC time synchronization
-        Serial.println("DEBUG: About to call NWC::updateTime()");
-        NWC::updateTime();
-        Serial.println("DEBUG: NWC::updateTime() completed");
-        */
+        // Update NWC time synchronization (with error handling)
+        try {
+            NWC::updateTime();
+        } catch (...) {
+            Serial.println("ERROR: NWC::updateTime() threw exception");
+        }
 
         // Periodic health checks - TEMPORARILY DISABLED FOR TOUCH DEBUGGING
         /*
@@ -148,23 +151,21 @@ namespace App
         }
         */
 
-        // Handle reconnection attempts - TEMPORARILY DISABLED FOR TOUCH TESTING
-        /*
-        Serial.println("DEBUG: About to call NWC::attemptReconnectionIfNeeded()");
-        NWC::attemptReconnectionIfNeeded();
-        Serial.println("DEBUG: NWC::attemptReconnectionIfNeeded() completed");
-        */
+        // Handle reconnection attempts (with error handling)
+        try {
+            NWC::attemptReconnectionIfNeeded();
+        } catch (...) {
+            Serial.println("ERROR: NWC::attemptReconnectionIfNeeded() threw exception");
+        }
 
-        // Touch debugging - call touch update directly for testing
+        // Touch status monitoring (very reduced frequency)
         static unsigned long lastTouchDebug = 0;
-        if (current_time - lastTouchDebug > 2000) { // Every 2 seconds
-            Serial.println("=== DIRECT TOUCH TEST ===");
+        if (current_time - lastTouchDebug > 1000) { // Every 1 second
             bool touchResult = Display::touch.touched();
-            Serial.printf("Touch test result: %s\n", touchResult ? "TOUCHED" : "NOT_TOUCHED");
             if (touchResult) {
                 uint16_t x, y;
                 Display::touch.readData(&x, &y);
-                Serial.printf("Touch coordinates: X=%d, Y=%d\n", x, y);
+                Serial.printf("Touch active: X=%d, Y=%d\n", x, y);
             }
             lastTouchDebug = current_time;
         }

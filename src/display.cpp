@@ -174,14 +174,17 @@ namespace Display {
     // Touchpad callback to read the touchpad
     void touchpadRead(lv_indev_drv_t *indev_driver, lv_indev_data_t *data) {
         static int debug_counter = 0;
+        static bool last_touch_state = false;
         
-        // Debug: Print every 1000 calls to show function is being called
-        if (debug_counter++ % 1000 == 0) {
-            Serial.printf("Touch callback called %d times\n", debug_counter);
+        // Debug: Print every 5000 calls to show function is being called
+        if (debug_counter++ % 5000 == 0) {
+            Serial.printf("LVGL touch callback active (called %d times)\n", debug_counter);
         }
         
         uint16_t touchX, touchY;
-        if (touch.touched()) {
+        bool currently_touched = touch.touched();
+        
+        if (currently_touched) {
             // Read touched point from touch module
             touch.readData(&touchX, &touchY);
 
@@ -192,13 +195,23 @@ namespace Display {
             last_x = touchX;
             last_y = touchY;
             
-            Serial.println("TOUCH DETECTED - Pressed at " + String(touchX) + ", " + String(touchY));
+            // Only print on new touch (not continuous)
+            if (!last_touch_state) {
+                Serial.printf("LVGL TOUCH: Pressed at X=%d, Y=%d\n", touchX, touchY);
+            }
             
             // Handle touch wake from light sleep
             App::handleTouchWake();
         } else {
             data->state = LV_INDEV_STATE_RELEASED;
+            
+            // Print on release
+            if (last_touch_state) {
+                Serial.println("LVGL TOUCH: Released");
+            }
         }
+        
+        last_touch_state = currently_touched;
     }
     
     // QR Code display function using LVGL QR code library

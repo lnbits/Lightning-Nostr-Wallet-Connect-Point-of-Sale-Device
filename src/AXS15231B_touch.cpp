@@ -69,23 +69,10 @@ void AXS15231B_Touch::correctOffset(uint16_t *x, uint16_t *y) {
 }
 
 bool AXS15231B_Touch::update() {
-    // Debug: Show interrupt status periodically
-    static unsigned long lastDebug = 0;
-    static uint32_t lastIsrCount = 0;
-    
-    if (millis() - lastDebug > 5000) {
-        Serial.printf("Touch update() - interrupt flag: %s, pin state: %d, ISR count: %u (delta: %u)\n", 
-                     touch_int ? "SET" : "CLEAR", digitalRead(int_pin), 
-                     isr_count, isr_count - lastIsrCount);
-        lastIsrCount = isr_count;
-        lastDebug = millis();
-    }
-    
     // Check if interrupt occured, if there was an interrupt get data from touch controller and clear flag
     if (!touch_int) {
         return false;
     } else {
-        Serial.println("Touch interrupt detected, reading I2C data...");
         touch_int = false;
     }
 
