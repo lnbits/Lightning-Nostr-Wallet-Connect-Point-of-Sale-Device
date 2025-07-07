@@ -158,55 +158,22 @@ namespace App
             Serial.println("ERROR: NWC::attemptReconnectionIfNeeded() threw exception");
         }
 
-        // Touch system status and manual LVGL test
-        static unsigned long lastTouchDebug = 0;
-        if (current_time - lastTouchDebug > 100) { // Every 100ms
-            Serial.println("Touch system: Testing LVGL callback manually...");
-            
-            // Debug: Check what UI objects exist on screen
-            lv_obj_t* screen = lv_scr_act();
-            if (screen) {
-                uint32_t child_count = lv_obj_get_child_cnt(screen);
-                Serial.printf("UI Debug: Screen has %u child objects\n", child_count);
-                
-                for (uint32_t i = 0; i < child_count && i < 12; i++) {  // Check first 12 children
-                    lv_obj_t* child = lv_obj_get_child(screen, i);
-                    if (child) {
-                        lv_area_t coords;
-                        lv_obj_get_coords(child, &coords);
-                        
-                        // Check if object is clickable
-                        bool clickable = lv_obj_has_flag(child, LV_OBJ_FLAG_CLICKABLE);
-                        Serial.printf("  Child %u: %p at (%d,%d) to (%d,%d) - %s\n", 
-                                    i, child, coords.x1, coords.y1, coords.x2, coords.y2,
-                                    clickable ? "CLICKABLE" : "NOT_CLICKABLE");
-                        
-                        // TEMPORARY FIX: Make all objects clickable for testing
-                        if (!clickable) {
-                            lv_obj_add_flag(child, LV_OBJ_FLAG_CLICKABLE);
-                            Serial.printf("    Made child %u clickable\n", i);
-                        }
-                    }
-                }
-            }
-            
-            // Manually call our LVGL callback to ensure it runs regularly
-            lv_indev_data_t test_data;
-            Display::touchpadRead(nullptr, &test_data);
-            
-            // Also force LVGL to process input devices
-            lv_timer_handler();
-            
-            lastTouchDebug = current_time;
+        // Ensure touch processing continues to work (minimal polling)
+        static unsigned long lastTouchPoll = 0;
+        if (current_time - lastTouchPoll > 50) { // Every 50ms for responsive touch
+            // Manually call touch callback to ensure it runs regularly
+            lv_indev_data_t touch_data;
+            Display::touchpadRead(nullptr, &touch_data);
+            lastTouchPoll = current_time;
         }
 
         // Small delay to prevent watchdog triggers
         delay(1);
         
-        // Reduce debug spam - only print every 100 cycles
+        // Minimal debug output
         static int cycle_count = 0;
-        if (++cycle_count % 500 == 0) {
-            Serial.println("DEBUG: App::run() cycle completed (x100)");
+        if (++cycle_count % 10000 == 0) {
+            Serial.printf("App running normally (cycles: %d)\n", cycle_count);
         }
     }
 

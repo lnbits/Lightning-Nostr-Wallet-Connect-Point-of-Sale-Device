@@ -191,9 +191,9 @@ namespace Display {
         static bool last_touch_state = false;
         static lv_obj_t* last_target = nullptr;
         
-        // Debug: Print every 1000 calls to show function is being called
-        if (debug_counter++ % 1000 == 0) {
-            Serial.printf("LVGL touch callback active (called %d times)\n", debug_counter);
+        // Minimal debug - only print every 10000 calls 
+        if (debug_counter++ % 10000 == 0) {
+            Serial.printf("Touch system active (%d calls)\n", debug_counter);
         }
         
         uint16_t touchX, touchY;
@@ -208,14 +208,12 @@ namespace Display {
             currently_touched = false;
         }
         
-        // Debug touch state changes
-        static bool debug_last_state = false;
-        if (currently_touched != debug_last_state) {
-            Serial.printf("Touch state changed: %s -> %s\n", 
-                         debug_last_state ? "TOUCHED" : "RELEASED",
-                         currently_touched ? "TOUCHED" : "RELEASED");
-            debug_last_state = currently_touched;
-        }
+        // Optional: Uncomment for touch debugging
+        // static bool debug_last_state = false;
+        // if (currently_touched != debug_last_state) {
+        //     Serial.printf("Touch: %s\n", currently_touched ? "PRESS" : "RELEASE");
+        //     debug_last_state = currently_touched;
+        // }
         
         if (currently_touched) {
             // Read touched point from touch module
