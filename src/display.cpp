@@ -9,129 +9,115 @@ namespace UI {
 }
 
 namespace Display {
-    // Global display instance
-    static LGFX lcd;
+    // Global display instances
+    Arduino_DataBus *bus = nullptr;
+    Arduino_GFX *g = nullptr;
+    Arduino_Canvas *gfx = nullptr;
+    AXS15231B_Touch *touch = nullptr;
     
     // Display configuration
-    static const uint16_t screenWidth = 320;
-    static const uint16_t screenHeight = 480;
+    static const uint16_t screenWidth = TFT_WIDTH;
+    static const uint16_t screenHeight = TFT_HEIGHT;
     static lv_disp_draw_buf_t draw_buf;
-    static lv_color_t buf[screenWidth * 10];
+    static lv_color_t *buf = nullptr;
     
     // Touch coordinates
     static int32_t last_x = 0, last_y = 0;
     
     // Display objects
-    static lv_obj_t* qr_canvas = NULL;
+    static lv_obj_t* qr_canvas = nullptr;
     
-    
-    // LGFX Display Driver Class Implementation
-    LGFX::LGFX(void) {
-        {
-            auto cfg = _bus_instance.config();
-            cfg.freq_write = 40000000;    
-            cfg.pin_wr = 47;             
-            cfg.pin_rd = -1;             
-            cfg.pin_rs = 0;              
-
-            // LCD data interface, 8bit MCU (8080)
-            cfg.pin_d0 = 9;              
-            cfg.pin_d1 = 46;             
-            cfg.pin_d2 = 3;              
-            cfg.pin_d3 = 8;              
-            cfg.pin_d4 = 18;             
-            cfg.pin_d5 = 17;             
-            cfg.pin_d6 = 16;             
-            cfg.pin_d7 = 15;             
-
-            _bus_instance.config(cfg);   
-            _panel_instance.setBus(&_bus_instance);      
-        }
-
-        { 
-            auto cfg = _panel_instance.config();    
-
-            cfg.pin_cs           =    -1;  
-            cfg.pin_rst          =    4;  
-            cfg.pin_busy         =    -1; 
-
-            cfg.panel_width      =   TFT_WIDTH;
-            cfg.panel_height     =   TFT_HEIGHT;
-            cfg.offset_x         =     0;
-            cfg.offset_y         =     0;
-            cfg.offset_rotation  =     0;
-            cfg.dummy_read_pixel =     8;
-            cfg.dummy_read_bits  =     1;
-            cfg.readable         =  false;
-            cfg.invert           = true;
-            cfg.rgb_order        = false;
-            cfg.dlen_16bit       = false;
-            cfg.bus_shared       = false;
-
-            _panel_instance.config(cfg);
-        }
-
-        {
-            auto cfg = _light_instance.config();    
-
-            cfg.pin_bl = 45;              
-            cfg.invert = false;           
-            cfg.freq   = 44100;           
-            cfg.pwm_channel = 7;          
-
-            _light_instance.config(cfg);
-            _panel_instance.setLight(&_light_instance);  
-        }
-
-        { 
-            auto cfg = _touch_instance.config();
-
-            cfg.x_min      = 0;
-            cfg.x_max      = 319;
-            cfg.y_min      = 0;  
-            cfg.y_max      = 479;
-            cfg.pin_int    = 7;  
-            cfg.bus_shared = true; 
-            cfg.offset_rotation = 0;
-
-            cfg.i2c_port = 1;
-            cfg.i2c_addr = 0x38;
-            cfg.pin_sda  = 6;   
-            cfg.pin_scl  = 5;   
-            cfg.freq = 400000;  
-
-            _touch_instance.config(cfg);
-            _panel_instance.setTouch(&_touch_instance);  
-        }
-
-        setPanel(&_panel_instance); 
-    }
-    
-
     void init() {
-        lcd.init();
+        Serial.println("Initializing ArduinoGFX display...");
+        
+        // Initialize ArduinoGFX display
+        bus = new Arduino_ESP32QSPI(TFT_CS, TFT_SCK, TFT_SDA0, TFT_SDA1, TFT_SDA2, TFT_SDA3);
+        g = new Arduino_AXS15231B(bus, GFX_NOT_DEFINED, 0, false, TFT_res_W, TFT_res_H);
+        gfx = new Arduino_Canvas(TFT_res_W, TFT_res_H, g, 0, 0, TFT_rot);
+        
+        if (!gfx->begin(40000000UL)) {
+            Serial.println("ERROR: Failed to initialize display!");
+            return;
+        }
+        
+        // Initialize touch controller
+        touch = new AXS15231B_Touch(Touch_SCL, Touch_SDA, Touch_INT, Touch_ADDR, TFT_rot);
+        if (!touch->begin()) {
+            Serial.println("ERROR: Failed to initialize touch!");
+            return;
+        }
+        
+        // Configure touch calibration
+        touch->enOffsetCorrection(true);
+        touch->setOffsets(Touch_X_min, Touch_X_max, TFT_res_W-1, Touch_Y_min, Touch_Y_max, TFT_res_H-1);
+        
+        // Turn on backlight
+        pinMode(TFT_BL, OUTPUT);
+        digitalWrite(TFT_BL, HIGH);
+        
+        // Clear display
+        gfx->fillScreen(BLACK);
+        gfx->flush();
+        
+        // Initialize LVGL
         lv_init();
-        setRotation(2);
         setupLVGL();
+        
+        Serial.println("ArduinoGFX display initialized successfully");
     }
     
     void cleanup() {
         // Clean up LVGL objects
         if (qr_canvas && lv_obj_is_valid(qr_canvas)) {
             lv_obj_del(qr_canvas);
-            qr_canvas = NULL;
+            qr_canvas = nullptr;
         }
         
-        // Serial.println("Display module cleaned up");
+        // Clean up display buffer
+        if (buf != nullptr) {
+            heap_caps_free(buf);
+            buf = nullptr;
+        }
+        
+        // Clean up ArduinoGFX objects
+        if (touch != nullptr) {
+            delete touch;
+            touch = nullptr;
+        }
+        if (gfx != nullptr) {
+            delete gfx;
+            gfx = nullptr;
+        }
+        if (g != nullptr) {
+            delete g;
+            g = nullptr;
+        }
+        if (bus != nullptr) {
+            delete bus;
+            bus = nullptr;
+        }
+        
+        Serial.println("Display module cleaned up");
     }
     
     void setRotation(int rotation) {
-        lcd.setRotation(rotation);
+        // ArduinoGFX rotation is set during Canvas creation
+        // For runtime rotation changes, would need to recreate canvas
+        Serial.printf("Rotation set to: %d\n", rotation);
     }
     
     void setupLVGL() {
+        // Allocate display buffer using heap capabilities for optimal performance
+        uint32_t bufSize = screenWidth * screenHeight / 10;
+        buf = (lv_color_t*)heap_caps_malloc(bufSize * sizeof(lv_color_t), MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT);
+        
+        if (!buf) {
+            Serial.println("ERROR: Failed to allocate LVGL display buffer!");
+            return;
+        }
+        
         // Setup buffer to use for display
-        lv_disp_draw_buf_init(&draw_buf, buf, NULL, screenWidth * 10);
+        lv_disp_draw_buf_init(&draw_buf, buf, nullptr, bufSize);
 
         // Setup & Initialize the display device driver
         static lv_disp_drv_t disp_drv;
@@ -148,17 +134,17 @@ namespace Display {
         indev_drv.type = LV_INDEV_TYPE_POINTER;
         indev_drv.read_cb = touchpadRead;
         lv_indev_drv_register(&indev_drv);
+        
+        Serial.println("LVGL initialized with ArduinoGFX backend");
     }
     
     // Display callback to flush the buffer to screen
     void displayFlush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p) {
-        uint32_t w = (area->x2 - area->x1 + 1);
-        uint32_t h = (area->y2 - area->y1 + 1);
+        uint32_t w = lv_area_get_width(area);
+        uint32_t h = lv_area_get_height(area);
 
-        lcd.startWrite();
-        lcd.setAddrWindow(area->x1, area->y1, w, h);
-        lcd.pushPixels((uint16_t *)&color_p->full, w * h, true);
-        lcd.endWrite();
+        gfx->draw16bitRGBBitmap(area->x1, area->y1, (uint16_t *)color_p, w, h);
+        gfx->flush();
 
         lv_disp_flush_ready(disp);
     }
@@ -166,11 +152,12 @@ namespace Display {
     // Touchpad callback to read the touchpad
     void touchpadRead(lv_indev_drv_t *indev_driver, lv_indev_data_t *data) {
         uint16_t touchX, touchY;
-        bool touched = lcd.getTouch(&touchX, &touchY);
+        bool touched = touch->touched();
 
         if (!touched) {
             data->state = LV_INDEV_STATE_REL;
         } else {
+            touch->readData(&touchX, &touchY);
             data->state = LV_INDEV_STATE_PR;
             data->point.x = touchX;
             data->point.y = touchY;
@@ -188,15 +175,15 @@ namespace Display {
         Serial.println("Free heap: " + String(ESP.getFreeHeap()));
         Serial.println("Invoice length: " + String(invoice.length()));
         
-        if (qr_canvas == NULL || !lv_obj_is_valid(qr_canvas)) {
-            // Serial.println("ERROR: QR canvas not available");
+        if (qr_canvas == nullptr || !lv_obj_is_valid(qr_canvas)) {
+            Serial.println("ERROR: QR canvas not available");
             displayInvoiceTextFallback(invoice);
             return;
         }
         
         // Safety check - ensure invoice is not empty
         if (invoice.length() == 0) {
-            // Serial.println("ERROR: Empty invoice string");
+            Serial.println("ERROR: Empty invoice string");
             displayInvoiceTextFallback(invoice);
             return;
         }
@@ -209,8 +196,8 @@ namespace Display {
         
         // Create LVGL QR code object with all parameters
         lv_obj_t* qr = lv_qrcode_create(qr_canvas, qr_size, lv_color_black(), lv_color_white());
-        if (qr == NULL) {
-            // Serial.println("ERROR: Failed to create LVGL QR code object");
+        if (qr == nullptr) {
+            Serial.println("ERROR: Failed to create LVGL QR code object");
             displayInvoiceTextFallback(invoice);
             return;
         }
@@ -218,7 +205,7 @@ namespace Display {
         // Set QR code data - LVGL handles all the complexity
         lv_res_t result = lv_qrcode_update(qr, invoice.c_str(), invoice.length());
         if (result != LV_RES_OK) {
-            // Serial.printf("ERROR: Failed to update QR code data, result: %d\n", result);
+            Serial.printf("ERROR: Failed to update QR code data, result: %d\n", result);
             lv_obj_del(qr);
             displayInvoiceTextFallback(invoice);
             return;
@@ -229,12 +216,12 @@ namespace Display {
         
         // Hide spinner and text label since we have QR code
         lv_obj_t* spinner = UI::getInvoiceSpinner();
-        if (spinner != NULL && lv_obj_is_valid(spinner)) {
+        if (spinner != nullptr && lv_obj_is_valid(spinner)) {
             lv_obj_add_flag(spinner, LV_OBJ_FLAG_HIDDEN);
         }
         
         lv_obj_t* label = UI::getInvoiceLabel();
-        if (label != NULL && lv_obj_is_valid(label)) {
+        if (label != nullptr && lv_obj_is_valid(label)) {
             lv_obj_add_flag(label, LV_OBJ_FLAG_HIDDEN);
         }
         
@@ -247,7 +234,7 @@ namespace Display {
     // Fallback function to display invoice as text
     void displayInvoiceTextFallback(const String& invoice) {
         lv_obj_t* label = UI::getInvoiceLabel();
-        if (label == NULL || !lv_obj_is_valid(label)) {
+        if (label == nullptr || !lv_obj_is_valid(label)) {
             return;
         }
         
@@ -275,21 +262,21 @@ namespace Display {
         
         // Hide spinner
         lv_obj_t* spinner = UI::getInvoiceSpinner();
-        if (spinner != NULL && lv_obj_is_valid(spinner)) {
+        if (spinner != nullptr && lv_obj_is_valid(spinner)) {
             lv_obj_add_flag(spinner, LV_OBJ_FLAG_HIDDEN);
         }
         
         // Hide QR canvas since we're not using it
-        if (qr_canvas != NULL && lv_obj_is_valid(qr_canvas)) {
+        if (qr_canvas != nullptr && lv_obj_is_valid(qr_canvas)) {
             lv_obj_add_flag(qr_canvas, LV_OBJ_FLAG_HIDDEN);
         }
         
-        // Serial.println("Text fallback display configured for long invoice");
+        Serial.println("Text fallback display configured for long invoice");
     }
     
     // Getters and accessors
-    LGFX& getLCD() {
-        return lcd;
+    Arduino_GFX& getGFX() {
+        return *gfx;
     }
     
     lv_obj_t* getQRCanvas() {
@@ -307,16 +294,18 @@ namespace Display {
     
     // Power management functions
     void setBacklightBrightness(uint8_t brightness) {
-        lcd.setBrightness(brightness);
+        // ArduinoGFX doesn't have built-in brightness control
+        // Use PWM on backlight pin for brightness control
+        analogWrite(TFT_BL, brightness);
     }
     
     void turnOffBacklight() {
         Serial.println("Turning off display backlight");
-        lcd.setBrightness(0);
+        digitalWrite(TFT_BL, LOW);
     }
     
     void turnOnBacklight() {
         Serial.println("Turning on display backlight");
-        lcd.setBrightness(255); // Full brightness
+        digitalWrite(TFT_BL, HIGH);
     }
 }
