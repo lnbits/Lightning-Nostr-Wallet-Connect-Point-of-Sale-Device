@@ -104,16 +104,31 @@ namespace App
 
     void run()
     {
+        static bool first_run = true;
+        if (first_run) {
+            Serial.println("=== App::run() started ===");
+            first_run = false;
+        }
+        
         unsigned long current_time = millis();
 
+        // TEMPORARILY SKIP PROBLEMATIC MODULES FOR TOUCH TESTING
+        /*
         // Process WiFi AP mode events
+        Serial.println("DEBUG: About to call WiFiManager::processLoop()");
         WiFiManager::processLoop();
+        Serial.println("DEBUG: WiFiManager::processLoop() completed");
 
         // Process NWC WebSocket events
+        Serial.println("DEBUG: About to call NWC::processLoop()");
         NWC::processLoop();
+        Serial.println("DEBUG: NWC::processLoop() completed");
 
         // Update NWC time synchronization
+        Serial.println("DEBUG: About to call NWC::updateTime()");
         NWC::updateTime();
+        Serial.println("DEBUG: NWC::updateTime() completed");
+        */
 
         // Periodic health checks - TEMPORARILY DISABLED FOR TOUCH DEBUGGING
         /*
@@ -133,11 +148,35 @@ namespace App
         }
         */
 
-        // Handle reconnection attempts
+        // Handle reconnection attempts - TEMPORARILY DISABLED FOR TOUCH TESTING
+        /*
+        Serial.println("DEBUG: About to call NWC::attemptReconnectionIfNeeded()");
         NWC::attemptReconnectionIfNeeded();
+        Serial.println("DEBUG: NWC::attemptReconnectionIfNeeded() completed");
+        */
+
+        // Touch debugging - call touch update directly for testing
+        static unsigned long lastTouchDebug = 0;
+        if (current_time - lastTouchDebug > 2000) { // Every 2 seconds
+            Serial.println("=== DIRECT TOUCH TEST ===");
+            bool touchResult = Display::touch.touched();
+            Serial.printf("Touch test result: %s\n", touchResult ? "TOUCHED" : "NOT_TOUCHED");
+            if (touchResult) {
+                uint16_t x, y;
+                Display::touch.readData(&x, &y);
+                Serial.printf("Touch coordinates: X=%d, Y=%d\n", x, y);
+            }
+            lastTouchDebug = current_time;
+        }
 
         // Small delay to prevent watchdog triggers
         delay(1);
+        
+        // Reduce debug spam - only print every 100 cycles
+        static int cycle_count = 0;
+        if (++cycle_count % 100 == 0) {
+            Serial.println("DEBUG: App::run() cycle completed (x100)");
+        }
     }
 
     app_state_t getState()
