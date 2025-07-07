@@ -1,6 +1,5 @@
 #include "display.h"
 #include "app.h"
-#include "touch_debug.h"
 #include <Arduino.h>
 
 // Forward declarations for external UI elements from ui.cpp
@@ -58,11 +57,8 @@ namespace Display {
             gfx->flush();
             Serial.println("Display cleared");
             
-            // Run comprehensive touch diagnostics
-            Serial.println("=== TOUCH DIAGNOSTICS ===");
-            TouchDebug::scanI2C();
-            // TouchDebug::testInterruptPin();
-            TouchDebug::directTouchTest();
+            // Basic touch initialization only
+            Serial.println("=== TOUCH INITIALIZATION ===");
             
             // Initialize touch controller
             Serial.println("Initializing touch controller...");
@@ -156,7 +152,8 @@ namespace Display {
         indev_drv.type = LV_INDEV_TYPE_POINTER;
         indev_drv.read_cb = touchpadRead;
         
-        // Remove problematic manual timer - let LVGL handle polling automatically
+        // Set input device polling period (default might be too slow or disabled)
+        indev_drv.read_timer = NULL; // Let LVGL create its own timer
         
         lv_indev_t *indev = lv_indev_drv_register(&indev_drv);
         
@@ -187,83 +184,25 @@ namespace Display {
 
     // Touchpad callback to read the touchpad
     void touchpadRead(lv_indev_drv_t *indev_driver, lv_indev_data_t *data) {
-        static int debug_counter = 0;
         static bool last_touch_state = false;
-        static lv_obj_t* last_target = nullptr;
-        
-        // Minimal debug - only print every 10000 calls 
-        if (debug_counter++ % 10000 == 0) {
-            Serial.printf("Touch system active (%d calls)\n", debug_counter);
-        }
         
         uint16_t touchX, touchY;
         bool currently_touched = touch.touched();
-        
-        // Force touch timeout after 1 second to prevent stuck state
-        static unsigned long last_touch_time = 0;
-        if (currently_touched) {
-            last_touch_time = millis();
-        } else if (last_touch_state && (millis() - last_touch_time > 1000)) {
-            Serial.println("Touch timeout - forcing release");
-            currently_touched = false;
-        }
-        
-        // Optional: Uncomment for touch debugging
-        // static bool debug_last_state = false;
-        // if (currently_touched != debug_last_state) {
-        //     Serial.printf("Touch: %s\n", currently_touched ? "PRESS" : "RELEASE");
-        //     debug_last_state = currently_touched;
-        // }
         
         if (currently_touched) {
             // Read touched point from touch module
             touch.readData(&touchX, &touchY);
 
-            // Set the coordinates
+            // Set the coordinates (LVGL will handle object detection and events automatically)
             data->point.x = touchX;
             data->point.y = touchY;
             data->state = LV_INDEV_STATE_PRESSED;
             last_x = touchX;
             last_y = touchY;
             
-            // Handle new touch press
+            // Simple debug output for new touches
             if (!last_touch_state) {
-                Serial.printf("LVGL TOUCH: NEW PRESS at X=%d, Y=%d\n", touchX, touchY);
-                
-                // Find object manually and send click event
-                lv_obj_t* screen = lv_scr_act();
-                if (screen) {
-                    lv_point_t point = {(lv_coord_t)touchX, (lv_coord_t)touchY};
-                    lv_obj_t* target = lv_indev_search_obj(screen, &point);
-                    if (target) {
-                        Serial.printf("Found target: %p\n", target);
-                        last_target = target;  // Remember for release event
-                        
-                        // Safety check: Ensure object is still valid before sending event
-                        if (lv_obj_is_valid(target)) {
-                            lv_event_send(target, LV_EVENT_CLICKED, indev_driver);
-                            Serial.println("Sent CLICKED event");
-                        } else {
-                            Serial.println("ERROR: Target object is invalid!");
-                            last_target = nullptr;
-                        }
-                        
-                        // Force immediate display update
-                        lv_refr_now(lv_disp_get_default());
-                        
-                        // Also invalidate the entire screen to ensure updates
-                        lv_obj_invalidate(lv_scr_act());
-                    } else {
-                        Serial.printf("ERROR: No object found at X=%d, Y=%d\n", touchX, touchY);
-                        last_target = nullptr;
-                    }
-                }
-            } else {
-                // Debug: Show continued touch (but don't spam)
-                static int cont_count = 0;
-                if (++cont_count % 10 == 0) {
-                    Serial.printf("Continuing touch at X=%d, Y=%d\n", touchX, touchY);
-                }
+                Serial.printf("Touch: X=%d, Y=%d\n", touchX, touchY);
             }
             
             // Handle touch wake from light sleep
@@ -271,26 +210,9 @@ namespace Display {
         } else {
             data->state = LV_INDEV_STATE_RELEASED;
             
-            // Handle release
+            // Simple debug output for releases
             if (last_touch_state) {
-                Serial.println("LVGL TOUCH: Released");
-                
-                // Send release event to the last touched object (with safety check)
-                if (last_target) {
-                    if (lv_obj_is_valid(last_target)) {
-                        lv_event_send(last_target, LV_EVENT_RELEASED, indev_driver);
-                        Serial.println("Sent RELEASED event");
-                    } else {
-                        Serial.println("Release target object is invalid - skipping");
-                    }
-                    last_target = nullptr;
-                }
-                
-                // Force display refresh on release
-                lv_refr_now(lv_disp_get_default());
-                
-                // Force clear touch state for next press
-                Serial.println("Clearing touch state for next press");
+                Serial.println("Touch: Released");
             }
         }
         

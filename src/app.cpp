@@ -158,23 +158,11 @@ namespace App
             Serial.println("ERROR: NWC::attemptReconnectionIfNeeded() threw exception");
         }
 
-        // Ensure touch processing continues to work (minimal polling)
-        static unsigned long lastTouchPoll = 0;
-        if (current_time - lastTouchPoll > 50) { // Every 50ms for responsive touch
-            // Manually call touch callback to ensure it runs regularly
-            lv_indev_data_t touch_data;
-            Display::touchpadRead(nullptr, &touch_data);
-            lastTouchPoll = current_time;
-        }
+        // LVGL now handles input device polling automatically via lv_timer_handler()
+        // Touch events are processed through the touchpadRead callback
 
         // Small delay to prevent watchdog triggers
         delay(1);
-        
-        // Minimal debug output
-        static int cycle_count = 0;
-        if (++cycle_count % 10000 == 0) {
-            Serial.printf("App running normally (cycles: %d)\n", cycle_count);
-        }
     }
 
     app_state_t getState()
