@@ -133,23 +133,19 @@ namespace App
             Serial.println("ERROR: NWC::updateTime() threw exception");
         }
 
-        // Periodic health checks - TEMPORARILY DISABLED FOR TOUCH DEBUGGING
-        /*
+        // Periodic health checks
         if (current_time - last_health_check >= Config::HEALTH_CHECK_INTERVAL)
         {
             checkModuleHealth();
             last_health_check = current_time;
         }
-        */
 
-        // Periodic status reports - TEMPORARILY DISABLED FOR TOUCH DEBUGGING
-        /*
+        // Periodic status reports
         if (current_time - last_status_report >= Config::STATUS_REPORT_INTERVAL)
         {
             reportModuleStatus();
             last_status_report = current_time;
         }
-        */
 
         // Handle reconnection attempts (with error handling)
         try {
@@ -157,9 +153,6 @@ namespace App
         } catch (...) {
             Serial.println("ERROR: NWC::attemptReconnectionIfNeeded() threw exception");
         }
-
-        // LVGL now handles input device polling automatically via lv_timer_handler()
-        // Touch events are processed through the touchpadRead callback
 
         // Small delay to prevent watchdog triggers
         delay(1);
