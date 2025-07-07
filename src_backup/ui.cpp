@@ -2,7 +2,7 @@
 
 #include "ui.h"
 #include "settings.h"
-#include "wifi_manager.h"
+#include "wifi.h"
 #include "display.h"
 #include "nwc.h"
 #include "app.h"

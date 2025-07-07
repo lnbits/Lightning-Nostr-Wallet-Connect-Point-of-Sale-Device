@@ -12,7 +12,7 @@
 #include "driver/gpio.h"
 #include "settings.h"
 #include "display.h"
-#include "wifi_manager.h"
+#include "wifi.h"
 #include "ui.h"
 #include "nwc.h"
 

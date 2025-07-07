@@ -3,7 +3,7 @@
 #include <Arduino.h>
 
 #include "ui.h"
-#include "wifi_manager.h"
+#include "wifi.h"
 
 namespace Settings {
     // Global preferences instance
