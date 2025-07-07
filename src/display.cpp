@@ -19,7 +19,8 @@ namespace Display {
     static const uint16_t screenWidth = TFT_WIDTH;
     static const uint16_t screenHeight = TFT_HEIGHT;
     static lv_disp_draw_buf_t draw_buf;
-    static lv_color_t *buf = nullptr;
+    static lv_color_t *buf1 = nullptr;
+    static lv_color_t *buf2 = nullptr;
     
     // Touch coordinates
     static int32_t last_x = 0, last_y = 0;
@@ -96,9 +97,13 @@ namespace Display {
         }
         
         // Clean up display buffer
-        if (buf != nullptr) {
-            heap_caps_free(buf);
-            buf = nullptr;
+        if (buf1 != nullptr) {
+            heap_caps_free(buf1);
+            buf1 = nullptr;
+        }
+        if (buf2 != nullptr) {
+            heap_caps_free(buf2);
+            buf2 = nullptr;
         }
         
         // Touch cleanup handled automatically (stack object)
@@ -127,15 +132,16 @@ namespace Display {
     void setupLVGL() {
         // Allocate display buffer using heap capabilities for optimal performance
         uint32_t bufSize = screenWidth * screenHeight / 10;
-        buf = (lv_color_t*)heap_caps_malloc(bufSize * sizeof(lv_color_t), MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT);
+        buf1 = (lv_color_t*)heap_caps_malloc(bufSize * sizeof(lv_color_t), MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT);
+        buf2 = (lv_color_t*)heap_caps_malloc(bufSize * sizeof(lv_color_t), MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT);
         
-        if (!buf) {
+        if (!buf1 || !buf2) {
             Serial.println("ERROR: Failed to allocate LVGL display buffer!");
             return;
         }
         
         // Setup buffer to use for display
-        lv_disp_draw_buf_init(&draw_buf, buf, nullptr, bufSize);
+        lv_disp_draw_buf_init(&draw_buf, buf1, buf2, bufSize);
 
         // Setup & Initialize the display device driver
         static lv_disp_drv_t disp_drv;

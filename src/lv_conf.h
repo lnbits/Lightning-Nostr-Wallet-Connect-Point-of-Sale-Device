@@ -81,7 +81,7 @@
 #define LV_DISP_DEF_REFR_PERIOD 10      /*[ms]*/
 
 /*Input device read period in milliseconds*/
-#define LV_INDEV_DEF_READ_PERIOD 5     /*[ms] - faster for better touch response*/
+#define LV_INDEV_DEF_READ_PERIOD 10     /*[ms] - faster for better touch response*/
 
 /*Use a custom tick source that tells the elapsed time in milliseconds.
  *It removes the need to manually update the tick with `lv_tick_inc()`)*/
@@ -134,7 +134,7 @@
 /*-------------
  * GPU
  *-----------*/
-
+#define LV_USE_GPU_ESP32_DMA2D 1
 /*Use STM32's DMA2D (aka Chrom Art) GPU*/
 #define LV_USE_GPU_STM32_DMA2D 0
 #if LV_USE_GPU_STM32_DMA2D
