@@ -9,11 +9,17 @@ AXS15231B_Touch* AXS15231B_Touch::instance = nullptr;
 bool AXS15231B_Touch::begin() {
     instance = this;
 
+    Serial.printf("Touch begin() - SDA:%d, SCL:%d, INT:%d, ADDR:0x%02X\n", sda, scl, int_pin, addr);
+    
     // Attach interrupt. Interrupt -> display touched
     attachInterrupt(digitalPinToInterrupt(int_pin), isrTouched, FALLING);
+    Serial.printf("Touch interrupt attached to pin %d\n", int_pin);
 
     // Start I2C
-    return (Wire.begin(sda, scl));
+    bool i2c_result = Wire.begin(sda, scl);
+    Serial.printf("I2C begin result: %s\n", i2c_result ? "SUCCESS" : "FAILED");
+    
+    return i2c_result;
 }
 
 ISR_PREFIX
@@ -21,6 +27,7 @@ void AXS15231B_Touch::isrTouched() {
     // This ISR gets executed if the display reports a touch interrupt
     if (instance) {
         instance->touch_int = true;
+        instance->isr_count++;
     }
 }
 
@@ -62,10 +69,23 @@ void AXS15231B_Touch::correctOffset(uint16_t *x, uint16_t *y) {
 }
 
 bool AXS15231B_Touch::update() {
+    // Debug: Show interrupt status periodically
+    static unsigned long lastDebug = 0;
+    static uint32_t lastIsrCount = 0;
+    
+    if (millis() - lastDebug > 5000) {
+        Serial.printf("Touch update() - interrupt flag: %s, pin state: %d, ISR count: %u (delta: %u)\n", 
+                     touch_int ? "SET" : "CLEAR", digitalRead(int_pin), 
+                     isr_count, isr_count - lastIsrCount);
+        lastIsrCount = isr_count;
+        lastDebug = millis();
+    }
+    
     // Check if interrupt occured, if there was an interrupt get data from touch controller and clear flag
     if (!touch_int) {
         return false;
     } else {
+        Serial.println("Touch interrupt detected, reading I2C data...");
         touch_int = false;
     }
 

@@ -104,6 +104,9 @@ void loop(void)
     
     // Run main application logic through App coordinator
     App::run();
+    
+    // Small delay for stability
+    delay(5);
 }
 
 // Temporary status update function (will be moved to appropriate module)

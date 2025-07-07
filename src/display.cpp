@@ -1,5 +1,6 @@
 #include "display.h"
 #include "app.h"
+#include "touch_debug.h"
 #include <Arduino.h>
 
 // Forward declarations for external UI elements from ui.cpp
@@ -13,7 +14,7 @@ namespace Display {
     Arduino_DataBus *bus = nullptr;
     Arduino_GFX *g = nullptr;
     Arduino_Canvas *gfx = nullptr;
-    AXS15231B_Touch *touch = nullptr;
+    AXS15231B_Touch touch(Touch_SCL, Touch_SDA, Touch_INT, Touch_ADDR, TFT_rot);
     
     // Display configuration
     static const uint16_t screenWidth = TFT_WIDTH;
@@ -57,18 +58,25 @@ namespace Display {
             gfx->flush();
             Serial.println("Display cleared");
             
+            // Run comprehensive touch diagnostics
+            Serial.println("=== TOUCH DIAGNOSTICS ===");
+            TouchDebug::scanI2C();
+            TouchDebug::testInterruptPin();
+            TouchDebug::directTouchTest();
+            
             // Initialize touch controller
             Serial.println("Initializing touch controller...");
-            touch = new AXS15231B_Touch(Touch_SCL, Touch_SDA, Touch_INT, Touch_ADDR, 0);
-            if (!touch->begin()) {
-                Serial.println("WARNING: Failed to initialize touch - continuing without touch");
-                // Don't return, continue without touch
+            Serial.printf("Touch pins - SDA:%d, SCL:%d, INT:%d, ADDR:0x%02X\n", Touch_SDA, Touch_SCL, Touch_INT, Touch_ADDR);
+            
+            if (!touch.begin()) {
+                Serial.println("ERROR: Failed to initialize touch controller!");
+                // Continue anyway for debugging
             } else {
-                Serial.println("Touch controller initialized");
+                Serial.println("Touch controller initialized successfully");
                 
                 // Configure touch calibration
-                touch->enOffsetCorrection(true);
-                touch->setOffsets(Touch_X_min, Touch_X_max, TFT_res_W-1, Touch_Y_min, Touch_Y_max, TFT_res_H-1);
+                touch.enOffsetCorrection(true);
+                touch.setOffsets(Touch_X_min, Touch_X_max, TFT_res_W-1, Touch_Y_min, Touch_Y_max, TFT_res_H-1);
                 Serial.println("Touch calibration configured");
             }
             
@@ -97,11 +105,7 @@ namespace Display {
             buf = nullptr;
         }
         
-        // Clean up ArduinoGFX objects
-        if (touch != nullptr) {
-            delete touch;
-            touch = nullptr;
-        }
+        // Touch cleanup handled automatically (stack object)
         if (gfx != nullptr) {
             delete gfx;
             gfx = nullptr;
@@ -169,29 +173,31 @@ namespace Display {
 
     // Touchpad callback to read the touchpad
     void touchpadRead(lv_indev_drv_t *indev_driver, lv_indev_data_t *data) {
-        if (touch == nullptr) {
-            data->state = LV_INDEV_STATE_REL;
-            return;
+        static int debug_counter = 0;
+        
+        // Debug: Print every 1000 calls to show function is being called
+        if (debug_counter++ % 1000 == 0) {
+            Serial.printf("Touch callback called %d times\n", debug_counter);
         }
         
         uint16_t touchX, touchY;
-        bool touched = touch->touched();
+        if (touch.touched()) {
+            // Read touched point from touch module
+            touch.readData(&touchX, &touchY);
 
-        if (!touched) {
-            data->state = LV_INDEV_STATE_REL;
-        } else {
-            touch->readData(&touchX, &touchY);
-            data->state = LV_INDEV_STATE_PR;
+            // Set the coordinates
             data->point.x = touchX;
             data->point.y = touchY;
+            data->state = LV_INDEV_STATE_PRESSED;
             last_x = touchX;
             last_y = touchY;
             
-            // Debug touch coordinates
-            Serial.printf("Touch: x=%d, y=%d\n", touchX, touchY);
+            Serial.println("TOUCH DETECTED - Pressed at " + String(touchX) + ", " + String(touchY));
             
             // Handle touch wake from light sleep
             App::handleTouchWake();
+        } else {
+            data->state = LV_INDEV_STATE_RELEASED;
         }
     }
     

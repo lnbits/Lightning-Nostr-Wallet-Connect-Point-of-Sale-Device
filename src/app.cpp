@@ -115,19 +115,23 @@ namespace App
         // Update NWC time synchronization
         NWC::updateTime();
 
-        // Periodic health checks
+        // Periodic health checks - TEMPORARILY DISABLED FOR TOUCH DEBUGGING
+        /*
         if (current_time - last_health_check >= Config::HEALTH_CHECK_INTERVAL)
         {
             checkModuleHealth();
             last_health_check = current_time;
         }
+        */
 
-        // Periodic status reports
+        // Periodic status reports - TEMPORARILY DISABLED FOR TOUCH DEBUGGING
+        /*
         if (current_time - last_status_report >= Config::STATUS_REPORT_INTERVAL)
         {
             reportModuleStatus();
             last_status_report = current_time;
         }
+        */
 
         // Handle reconnection attempts
         NWC::attemptReconnectionIfNeeded();

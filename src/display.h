@@ -16,7 +16,7 @@ namespace Display {
     extern Arduino_DataBus *bus;
     extern Arduino_GFX *g;
     extern Arduino_Canvas *gfx;
-    extern AXS15231B_Touch *touch;
+    extern AXS15231B_Touch touch;
 
     // Initialization and cleanup
     void init();

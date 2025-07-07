@@ -23,6 +23,7 @@ public:
 
 protected:
     volatile bool touch_int = false;
+    volatile uint32_t isr_count = 0;
 
 private:
     bool en_offset_correction = false;
