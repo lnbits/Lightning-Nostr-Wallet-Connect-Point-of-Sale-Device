@@ -206,20 +206,15 @@ namespace Display {
             last_x = touchX;
             last_y = touchY;
             
-            // Simple debug output for new touches
-            if (!last_touch_state) {
-                Serial.printf("Touch: X=%d, Y=%d\n", touchX, touchY);
-            }
+            // // Simple debug output for new touches
+            // if (!last_touch_state) {
+            //     Serial.printf("Touch: X=%d, Y=%d\n", touchX, touchY);
+            // }
             
             // Handle touch wake from light sleep
             App::handleTouchWake();
         } else {
             data->state = LV_INDEV_STATE_RELEASED;
-            
-            // Simple debug output for releases
-            if (last_touch_state) {
-                Serial.println("Touch: Released");
-            }
         }
         
         last_touch_state = currently_touched;

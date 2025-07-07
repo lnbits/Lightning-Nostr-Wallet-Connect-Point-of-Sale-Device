@@ -513,6 +513,30 @@ namespace UI {
         lv_obj_set_style_bg_color(main_container, lv_color_hex(Colors::BACKGROUND), LV_PART_MAIN);
         lv_obj_set_style_border_width(main_container, 0, LV_PART_MAIN);
         lv_obj_set_style_pad_all(main_container, 10, LV_PART_MAIN);
+                
+        // Back button
+        lv_obj_t* back_btn = lv_btn_create(lv_scr_act());
+        lv_obj_set_size(back_btn, 40, 40);
+        lv_obj_align(back_btn, LV_ALIGN_TOP_LEFT, 10, 10);
+        lv_obj_add_event_cb(back_btn, settingsBackEventHandler, LV_EVENT_CLICKED, NULL);
+        
+        // Ensure back button is on top
+        lv_obj_move_foreground(back_btn);
+        
+        lv_obj_t* back_label = lv_label_create(back_btn);
+        lv_label_set_text(back_label, LV_SYMBOL_LEFT);
+        lv_obj_center(back_label);
+        
+        // Style for Back button (transparent with white border)
+        lv_obj_set_style_bg_color(back_btn, lv_color_hex(0x000000), LV_PART_MAIN);
+        lv_obj_set_style_bg_opa(back_btn, LV_OPA_0, LV_PART_MAIN);
+        lv_obj_set_style_border_color(back_btn, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+        lv_obj_set_style_border_width(back_btn, 2, LV_PART_MAIN);
+        lv_obj_set_style_text_color(back_btn, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+        lv_obj_set_style_radius(back_btn, 5, LV_PART_MAIN);
+        lv_obj_set_style_bg_color(back_btn, lv_color_hex(0x424242), LV_STATE_PRESSED);
+        lv_obj_set_style_bg_opa(back_btn, LV_OPA_COVER, LV_STATE_PRESSED);
+        lv_obj_set_style_text_color(back_btn, lv_color_hex(0xFFFFFF), LV_STATE_PRESSED);
         
         // Title
         lv_obj_t* title = lv_label_create(main_container);
@@ -620,27 +644,6 @@ namespace UI {
         lv_obj_t* save_label = lv_label_create(settings_save_btn);
         lv_label_set_text(save_label, "Save");
         lv_obj_center(save_label);
-        
-        // Back button - old style at top left
-        lv_obj_t* back_btn = lv_btn_create(lv_scr_act());
-        lv_obj_set_size(back_btn, 40, 40);
-        lv_obj_align(back_btn, LV_ALIGN_TOP_LEFT, 10, 10);
-        lv_obj_add_event_cb(back_btn, settingsBackEventHandler, LV_EVENT_CLICKED, NULL);
-        
-        lv_obj_t* back_label = lv_label_create(back_btn);
-        lv_label_set_text(back_label, LV_SYMBOL_LEFT);
-        lv_obj_center(back_label);
-        
-        // Style for Back button (transparent with white border)
-        lv_obj_set_style_bg_color(back_btn, lv_color_hex(0x000000), LV_PART_MAIN);
-        lv_obj_set_style_bg_opa(back_btn, LV_OPA_0, LV_PART_MAIN);
-        lv_obj_set_style_border_color(back_btn, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
-        lv_obj_set_style_border_width(back_btn, 2, LV_PART_MAIN);
-        lv_obj_set_style_text_color(back_btn, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
-        lv_obj_set_style_radius(back_btn, 5, LV_PART_MAIN);
-        lv_obj_set_style_bg_color(back_btn, lv_color_hex(0x424242), LV_STATE_PRESSED);
-        lv_obj_set_style_bg_opa(back_btn, LV_OPA_COVER, LV_STATE_PRESSED);
-        lv_obj_set_style_text_color(back_btn, lv_color_hex(0xFFFFFF), LV_STATE_PRESSED);
         
         // Create keyboards (hidden initially)
         shop_name_keyboard = lv_keyboard_create(lv_scr_act());
