@@ -239,12 +239,20 @@ namespace Display {
                         Serial.printf("Found target: %p\n", target);
                         last_target = target;  // Remember for release event
                         
-                        // Only send CLICKED event (not PRESSED to avoid stuck state)
-                        lv_event_send(target, LV_EVENT_CLICKED, indev_driver);
-                        Serial.println("Sent CLICKED event");
+                        // Safety check: Ensure object is still valid before sending event
+                        if (lv_obj_is_valid(target)) {
+                            lv_event_send(target, LV_EVENT_CLICKED, indev_driver);
+                            Serial.println("Sent CLICKED event");
+                        } else {
+                            Serial.println("ERROR: Target object is invalid!");
+                            last_target = nullptr;
+                        }
                         
                         // Force immediate display update
                         lv_refr_now(lv_disp_get_default());
+                        
+                        // Also invalidate the entire screen to ensure updates
+                        lv_obj_invalidate(lv_scr_act());
                     } else {
                         Serial.printf("ERROR: No object found at X=%d, Y=%d\n", touchX, touchY);
                         last_target = nullptr;
@@ -267,10 +275,14 @@ namespace Display {
             if (last_touch_state) {
                 Serial.println("LVGL TOUCH: Released");
                 
-                // Send release event to the last touched object
+                // Send release event to the last touched object (with safety check)
                 if (last_target) {
-                    lv_event_send(last_target, LV_EVENT_RELEASED, indev_driver);
-                    Serial.println("Sent RELEASED event");
+                    if (lv_obj_is_valid(last_target)) {
+                        lv_event_send(last_target, LV_EVENT_RELEASED, indev_driver);
+                        Serial.println("Sent RELEASED event");
+                    } else {
+                        Serial.println("Release target object is invalid - skipping");
+                    }
                     last_target = nullptr;
                 }
                 
