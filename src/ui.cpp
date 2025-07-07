@@ -321,12 +321,23 @@ namespace UI {
         lv_label_set_text(info_label, "Device Information");
         lv_obj_center(info_label);
         
-        // AP Mode section
+        // Reboot Device button
+        lv_obj_t* reboot_btn = lv_btn_create(main_container);
+        lv_obj_set_size(reboot_btn, lv_pct(100), 50);
+        lv_obj_align(reboot_btn, LV_ALIGN_TOP_MID, 0, 240);
+        lv_obj_set_style_bg_color(reboot_btn, lv_color_hex(0xFF5722), LV_PART_MAIN); // Orange/Red color for reboot
+        lv_obj_add_event_cb(reboot_btn, rebootDeviceEventHandler, LV_EVENT_CLICKED, NULL);
+        
+        lv_obj_t* reboot_label = lv_label_create(reboot_btn);
+        lv_label_set_text(reboot_label, LV_SYMBOL_REFRESH " Reboot Device");
+        lv_obj_center(reboot_label);
+        
+        // AP Mode section - moved down by 60 pixels to accommodate reboot button
         if (WiFiManager::isAPModeActive()) {
             // Exit AP Mode button
             lv_obj_t* exit_ap_btn = lv_btn_create(main_container);
             lv_obj_set_size(exit_ap_btn, lv_pct(100), 50);
-            lv_obj_align(exit_ap_btn, LV_ALIGN_TOP_MID, 0, 240);
+            lv_obj_align(exit_ap_btn, LV_ALIGN_TOP_MID, 0, 300);
             lv_obj_set_style_bg_color(exit_ap_btn, lv_color_hex(Colors::WARNING), LV_PART_MAIN);
             lv_obj_add_event_cb(exit_ap_btn, WiFiManager::exitAPModeEventHandler, LV_EVENT_CLICKED, NULL);
             
@@ -340,7 +351,7 @@ namespace UI {
                            "\nPassword: " + WiFiManager::getAPPassword() + 
                            "\nIP: " + WiFiManager::getAPIP();
             lv_label_set_text(ap_info, ap_text.c_str());
-            lv_obj_align(ap_info, LV_ALIGN_TOP_MID, 0, 300);
+            lv_obj_align(ap_info, LV_ALIGN_TOP_MID, 0, 360);
             lv_obj_set_style_text_color(ap_info, lv_color_hex(Colors::SUCCESS), 0);
             lv_label_set_long_mode(ap_info, LV_LABEL_LONG_WRAP);
             lv_obj_set_width(ap_info, lv_pct(100));
@@ -348,7 +359,7 @@ namespace UI {
             // Launch AP Mode button
             lv_obj_t* launch_ap_btn = lv_btn_create(main_container);
             lv_obj_set_size(launch_ap_btn, lv_pct(100), 50);
-            lv_obj_align(launch_ap_btn, LV_ALIGN_TOP_MID, 0, 240);
+            lv_obj_align(launch_ap_btn, LV_ALIGN_TOP_MID, 0, 300);
             lv_obj_set_style_bg_color(launch_ap_btn, lv_color_hex(Colors::SUCCESS), LV_PART_MAIN);
             lv_obj_add_event_cb(launch_ap_btn, WiFiManager::launchAPModeEventHandler, LV_EVENT_CLICKED, NULL);
             
@@ -1214,6 +1225,36 @@ namespace UI {
             // Reset activity timer on invoice close
             App::resetActivityTimer();
             closeInvoiceOverlay();
+        }
+    }
+    
+    void rebootDeviceEventHandler(lv_event_t* e) {
+        lv_event_code_t code = lv_event_get_code(e);
+        if (code == LV_EVENT_CLICKED) {
+            // Reset activity timer on reboot button click
+            App::resetActivityTimer();
+            
+            // Show confirmation dialog
+            showMessage("Reboot Device", "Are you sure you want to reboot the device? This will restart all services.");
+            
+            // Create a timer to reboot after showing the message
+            lv_timer_create([](lv_timer_t* timer) {
+                Serial.println("Rebooting device...");
+                showMessage("Rebooting...", "Please wait while the device reboots...");
+                
+                // Clean up any resources before reboot
+                Display::turnOffBacklight();
+                Display::cleanup();
+                UI::cleanup();
+                
+                // Small delay to ensure cleanup is complete
+                delay(500);
+                
+                // Reboot the ESP32
+                ESP.restart();
+                
+                lv_timer_del(timer);
+            }, 3000, NULL); // 3 second delay to show the message
         }
     }
     

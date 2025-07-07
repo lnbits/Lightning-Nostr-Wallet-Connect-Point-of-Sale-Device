@@ -394,6 +394,13 @@ namespace App
         // Turn off display backlight
         Display::turnOffBacklight();
         
+        // Stop invoice lookup timer if no invoice is being processed
+        if (!UI::isInvoiceProcessing()) {
+            Serial.println("Stopping invoice lookup timer for light sleep");
+            NWC::stopInvoiceLookupTimer();
+            NWC::stopInvoiceNotificationWatchdog();
+        }
+        
         fireEvent("light_sleep", "entered");
     }
 
