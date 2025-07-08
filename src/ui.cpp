@@ -107,6 +107,9 @@ namespace UI {
     }
     
     void createKeypadScreen() {
+        // Set black background for the main screen
+        lv_obj_set_style_bg_color(lv_scr_act(), lv_color_hex(Colors::BACKGROUND), LV_PART_MAIN);
+        
         // Status Bar
         main_wifi_status_label = lv_label_create(lv_scr_act());
         lv_obj_align(main_wifi_status_label, LV_ALIGN_TOP_LEFT, 10, 5);
