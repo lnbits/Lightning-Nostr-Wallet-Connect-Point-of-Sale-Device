@@ -420,17 +420,28 @@ namespace UI {
         
         // WiFi list
         wifi_list = lv_list_create(main_container);
-        lv_obj_set_size(wifi_list, lv_pct(100), 350);
-        lv_obj_align(wifi_list, LV_ALIGN_TOP_MID, 10, 50);
-        lv_obj_set_style_bg_color(wifi_list, lv_color_hex(0x2c2c2c), LV_PART_MAIN);
-        lv_obj_set_style_border_color(wifi_list, lv_color_hex(0x555555), LV_PART_MAIN);
+        lv_obj_set_size(wifi_list, lv_pct(100), 320);
+        lv_obj_align(wifi_list, LV_ALIGN_TOP_MID, 0, 50);
+        lv_obj_set_style_bg_color(wifi_list, lv_color_hex(Colors::BACKGROUND), LV_PART_MAIN);
+        lv_obj_set_style_border_color(wifi_list, lv_color_hex(Colors::TEXT), LV_PART_MAIN);
+        lv_obj_set_style_border_width(wifi_list, 2, LV_PART_MAIN);
+        lv_obj_set_style_pad_all(wifi_list, 10, LV_PART_MAIN);
         
-        lv_list_add_text(wifi_list, "Press Scan to find networks");
+        // Remove horizontal scroll
+        lv_obj_set_scroll_dir(wifi_list, LV_DIR_VER);
         
-        // Scan button - positioned beneath the WiFi list
+        // Style for list items - transparent background with white text
+        lv_obj_set_style_bg_color(wifi_list, lv_color_hex(Colors::BACKGROUND), LV_PART_ITEMS);
+        lv_obj_set_style_bg_opa(wifi_list, LV_OPA_TRANSP, LV_PART_ITEMS);
+        lv_obj_set_style_text_color(wifi_list, lv_color_hex(Colors::TEXT), LV_PART_ITEMS);
+        
+        lv_obj_t* scan_text = lv_list_add_text(wifi_list, "Press Scan to find networks");
+        lv_obj_set_style_text_color(scan_text, lv_color_hex(Colors::TEXT), LV_PART_MAIN);
+        
+        // Scan button - positioned beneath the WiFi list with more spacing
         lv_obj_t* scan_btn = lv_btn_create(main_container);
         lv_obj_set_size(scan_btn, lv_pct(100), 40);
-        lv_obj_align(scan_btn, LV_ALIGN_TOP_MID, 0, 400);
+        lv_obj_align(scan_btn, LV_ALIGN_TOP_MID, 0, 390);
         lv_obj_set_style_bg_color(scan_btn, lv_color_hex(Colors::PRIMARY), LV_PART_MAIN);
         lv_obj_add_event_cb(scan_btn, WiFiManager::scanEventHandler, LV_EVENT_CLICKED, NULL);
         
@@ -570,6 +581,7 @@ namespace UI {
         lv_obj_t* currency_label = lv_label_create(main_container);
         lv_label_set_text(currency_label, "Currency:");
         lv_obj_align(currency_label, LV_ALIGN_TOP_LEFT, 0, 50);
+        lv_obj_set_style_text_color(currency_label, lv_color_hex(Colors::TEXT), 0);
         
         lv_obj_t* currency_dropdown = lv_dropdown_create(main_container);
         lv_dropdown_set_options(currency_dropdown, "sats\nUSD\nGBP\nEUR\nCHF");
@@ -589,6 +601,7 @@ namespace UI {
         lv_obj_t* shop_name_label = lv_label_create(main_container);
         lv_label_set_text(shop_name_label, "Shop Name:");
         lv_obj_align(shop_name_label, LV_ALIGN_TOP_LEFT, 0, 110);
+        lv_obj_set_style_text_color(shop_name_label, lv_color_hex(Colors::TEXT), 0);
         
         shop_name_textarea = lv_textarea_create(main_container);
         lv_obj_set_size(shop_name_textarea, 180, 40);
@@ -615,6 +628,7 @@ namespace UI {
         lv_obj_t* ap_password_label = lv_label_create(main_container);
         lv_label_set_text(ap_password_label, "AP Password:");
         lv_obj_align(ap_password_label, LV_ALIGN_TOP_LEFT, 0, 170);
+        lv_obj_set_style_text_color(ap_password_label, lv_color_hex(Colors::TEXT), 0);
         
         ap_password_textarea = lv_textarea_create(main_container);
         lv_obj_set_size(ap_password_textarea, 180, 40);
