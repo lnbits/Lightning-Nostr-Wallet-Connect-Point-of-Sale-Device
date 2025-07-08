@@ -493,17 +493,25 @@ namespace UI {
         // Title
         lv_obj_t* title = lv_label_create(main_container);
         lv_label_set_text_fmt(title, "Connect to: %s", ssid);
-        lv_obj_align(title, LV_ALIGN_TOP_MID, 0, 0);
-        lv_obj_set_style_text_font(title, Fonts::FONT_DEFAULT, LV_PART_MAIN);
+        lv_obj_align(title, LV_ALIGN_TOP_MID, 0, 15);
+        lv_obj_set_style_text_font(title, Fonts::FONT_LARGE, LV_PART_MAIN);
         lv_obj_set_style_text_color(title, lv_color_hex(Colors::TEXT), 0);
         
         // Password input
         lv_obj_t* password_textarea = lv_textarea_create(main_container);
         lv_obj_set_size(password_textarea, lv_pct(100), 50);
-        lv_obj_align(password_textarea, LV_ALIGN_TOP_MID, 0, 40);
+        lv_obj_align(password_textarea, LV_ALIGN_TOP_MID, 0, 60);
         lv_textarea_set_placeholder_text(password_textarea, "Enter WiFi password");
         lv_textarea_set_password_mode(password_textarea, false);
         lv_textarea_set_one_line(password_textarea, true);
+        
+        // Style the password input field
+        lv_obj_set_style_bg_color(password_textarea, lv_color_hex(0x2c2c2c), LV_PART_MAIN);
+        lv_obj_set_style_border_color(password_textarea, lv_color_hex(Colors::TEXT), LV_PART_MAIN);
+        lv_obj_set_style_border_width(password_textarea, 2, LV_PART_MAIN);
+        lv_obj_set_style_text_color(password_textarea, lv_color_hex(Colors::TEXT), LV_PART_MAIN);
+        lv_obj_set_style_text_color(password_textarea, lv_color_hex(0x9E9E9E), LV_PART_TEXTAREA_PLACEHOLDER);
+        lv_obj_set_style_pad_all(password_textarea, 10, LV_PART_MAIN);
         
         // Status label (hidden initially)
         lv_obj_t* status_label = lv_label_create(main_container);
