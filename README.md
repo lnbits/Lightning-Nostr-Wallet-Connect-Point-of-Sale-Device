@@ -4,7 +4,7 @@ A Bitcoin Lightning point of Sale Device that uses NWC for wallet communications
 
 ## Overview
 
-This is a Bitcoin Lightning Network point of sale device built for the Guition JC3248W535 touch screen ESP32-S3 board. The device enables Bitcoin payments using Nostr Wallet Connect (NWC) protocol for wallet communications.
+This is a Bitcoin Lightning Network point of sale device built for the Guition JC3248W535 3.5" ESP32-S3 development board with touch screen display. The device enables Bitcoin payments using Nostr Wallet Connect (NWC) protocol for wallet communications.
 
 ## Features
 
@@ -19,8 +19,7 @@ This is a Bitcoin Lightning Network point of sale device built for the Guition J
 
 ## Hardware Requirements
 
-- ESP32 or ESP32-S3 development board
-- Guition JC3248W535 3.5" touch screen display (320x480)
+- Guition JC3248W535 3.5" ESP32-S3 development board with touch screen display (320x480)
 - Power supply (USB or battery)
 
 ## Getting Started
