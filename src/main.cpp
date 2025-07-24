@@ -1,13 +1,18 @@
-/*
-    NWC Powered Point of Sale Device
-    
-    Modular ESP32 Point of Sale system with:
-    - Touch screen interface
-    - WiFi connectivity 
-    - Nostr Wallet Connect integration
-    - Bitcoin Lightning payments
-    - QR code generation
-*/
+/**
+ * @file main.cpp
+ * @brief NWC Powered Point of Sale Device - Main Entry Point
+ * 
+ * Modular ESP32 Point of Sale system featuring:
+ * - Touch screen interface
+ * - WiFi connectivity with AP mode setup
+ * - Nostr Wallet Connect integration for Lightning payments
+ * - LVGL-based user interface with QR code generation
+ * - Deep sleep power management
+ * 
+ * @author BlackCoffee bc@lnbits.com
+ * @version 1.0.0
+ * @date 07-2025
+ */
 
 // ArduinoGFX is now included via display.h
 #include <Arduino.h>
