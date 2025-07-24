@@ -1,4 +1,5 @@
-#include "wifi.h"
+#include "wifi_manager.h"
+#include <WiFi.h>
 #include "settings.h"
 #include "app.h"
 
@@ -303,7 +304,10 @@ namespace WiFiManager {
         Serial.println("Scanning for WiFi networks...");
         if (UI::getWiFiList()) {
             lv_obj_clean(UI::getWiFiList());
-            lv_list_add_text(UI::getWiFiList(), "Scanning for networks...");
+            lv_obj_t* scanning_text = lv_list_add_text(UI::getWiFiList(), "Scanning for networks...");
+            lv_obj_set_style_bg_opa(scanning_text, LV_OPA_TRANSP, LV_PART_MAIN);
+            lv_obj_set_style_text_color(scanning_text, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+            lv_obj_set_style_pad_all(scanning_text, 5, LV_PART_MAIN);
         }
         
         if (wifi_command_queue != NULL) {
@@ -379,6 +383,12 @@ namespace WiFiManager {
                         
                         lv_obj_t* list_btn = lv_list_add_btn(UI::getWiFiList(), NULL, item_text.c_str());
                         lv_obj_add_event_cb(list_btn, connectEventHandler, LV_EVENT_CLICKED, (void*)(uintptr_t)i);
+                        
+                        // Style the list button - transparent background with white text
+                        lv_obj_set_style_bg_opa(list_btn, LV_OPA_TRANSP, LV_PART_MAIN);
+                        lv_obj_set_style_text_color(list_btn, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+                        lv_obj_set_style_border_width(list_btn, 0, LV_PART_MAIN);
+                        lv_obj_set_style_outline_width(list_btn, 0, LV_PART_MAIN);
                         
                         if (i % 3 == 0) {
                             delay(1);

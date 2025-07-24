@@ -66,6 +66,7 @@ namespace UI {
     void shopNameKBEventHandler(lv_event_t* e);
     void apPasswordKBEventHandler(lv_event_t* e);
     void invoiceCloseButtonEventHandler(lv_event_t* e);
+    void rebootDeviceEventHandler(lv_event_t* e);
     
     // Utility functions
     void updateAmountDisplay(const String& amount);

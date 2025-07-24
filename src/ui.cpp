@@ -2,7 +2,7 @@
 
 #include "ui.h"
 #include "settings.h"
-#include "wifi.h"
+#include "wifi_manager.h"
 #include "display.h"
 #include "nwc.h"
 #include "app.h"
@@ -74,8 +74,12 @@ namespace UI {
     void loadScreen(screen_state_t screen) {
         current_screen = screen;
         
+        // Use smoother screen clearing
         lv_obj_clean(lv_scr_act());
         cleanupGlobalPointers();
+        
+        // Add a small delay to allow the clear to complete
+        lv_timer_handler();
         
         switch (screen) {
             case SCREEN_KEYPAD:
@@ -97,9 +101,15 @@ namespace UI {
                 createInfoScreen();
                 break;
         }
+        
+        // Force an immediate refresh after screen creation
+        lv_timer_handler();
     }
     
     void createKeypadScreen() {
+        // Set black background for the main screen
+        lv_obj_set_style_bg_color(lv_scr_act(), lv_color_hex(Colors::BACKGROUND), LV_PART_MAIN);
+        
         // Status Bar
         main_wifi_status_label = lv_label_create(lv_scr_act());
         lv_obj_align(main_wifi_status_label, LV_ALIGN_TOP_LEFT, 10, 5);
@@ -321,12 +331,23 @@ namespace UI {
         lv_label_set_text(info_label, "Device Information");
         lv_obj_center(info_label);
         
-        // AP Mode section
+        // Reboot Device button
+        lv_obj_t* reboot_btn = lv_btn_create(main_container);
+        lv_obj_set_size(reboot_btn, lv_pct(100), 50);
+        lv_obj_align(reboot_btn, LV_ALIGN_TOP_MID, 0, 240);
+        lv_obj_set_style_bg_color(reboot_btn, lv_color_hex(0xFF5722), LV_PART_MAIN); // Orange/Red color for reboot
+        lv_obj_add_event_cb(reboot_btn, rebootDeviceEventHandler, LV_EVENT_CLICKED, NULL);
+        
+        lv_obj_t* reboot_label = lv_label_create(reboot_btn);
+        lv_label_set_text(reboot_label, LV_SYMBOL_REFRESH " Reboot Device");
+        lv_obj_center(reboot_label);
+        
+        // AP Mode section - moved down by 60 pixels to accommodate reboot button
         if (WiFiManager::isAPModeActive()) {
             // Exit AP Mode button
             lv_obj_t* exit_ap_btn = lv_btn_create(main_container);
             lv_obj_set_size(exit_ap_btn, lv_pct(100), 50);
-            lv_obj_align(exit_ap_btn, LV_ALIGN_TOP_MID, 0, 240);
+            lv_obj_align(exit_ap_btn, LV_ALIGN_TOP_MID, 0, 300);
             lv_obj_set_style_bg_color(exit_ap_btn, lv_color_hex(Colors::WARNING), LV_PART_MAIN);
             lv_obj_add_event_cb(exit_ap_btn, WiFiManager::exitAPModeEventHandler, LV_EVENT_CLICKED, NULL);
             
@@ -340,7 +361,7 @@ namespace UI {
                            "\nPassword: " + WiFiManager::getAPPassword() + 
                            "\nIP: " + WiFiManager::getAPIP();
             lv_label_set_text(ap_info, ap_text.c_str());
-            lv_obj_align(ap_info, LV_ALIGN_TOP_MID, 0, 300);
+            lv_obj_align(ap_info, LV_ALIGN_TOP_MID, 0, 360);
             lv_obj_set_style_text_color(ap_info, lv_color_hex(Colors::SUCCESS), 0);
             lv_label_set_long_mode(ap_info, LV_LABEL_LONG_WRAP);
             lv_obj_set_width(ap_info, lv_pct(100));
@@ -348,7 +369,7 @@ namespace UI {
             // Launch AP Mode button
             lv_obj_t* launch_ap_btn = lv_btn_create(main_container);
             lv_obj_set_size(launch_ap_btn, lv_pct(100), 50);
-            lv_obj_align(launch_ap_btn, LV_ALIGN_TOP_MID, 0, 240);
+            lv_obj_align(launch_ap_btn, LV_ALIGN_TOP_MID, 0, 300);
             lv_obj_set_style_bg_color(launch_ap_btn, lv_color_hex(Colors::SUCCESS), LV_PART_MAIN);
             lv_obj_add_event_cb(launch_ap_btn, WiFiManager::launchAPModeEventHandler, LV_EVENT_CLICKED, NULL);
             
@@ -399,17 +420,28 @@ namespace UI {
         
         // WiFi list
         wifi_list = lv_list_create(main_container);
-        lv_obj_set_size(wifi_list, lv_pct(100), 350);
-        lv_obj_align(wifi_list, LV_ALIGN_TOP_MID, 10, 50);
-        lv_obj_set_style_bg_color(wifi_list, lv_color_hex(0x2c2c2c), LV_PART_MAIN);
-        lv_obj_set_style_border_color(wifi_list, lv_color_hex(0x555555), LV_PART_MAIN);
+        lv_obj_set_size(wifi_list, lv_pct(100), 320);
+        lv_obj_align(wifi_list, LV_ALIGN_TOP_MID, 0, 50);
+        lv_obj_set_style_bg_color(wifi_list, lv_color_hex(Colors::BACKGROUND), LV_PART_MAIN);
+        lv_obj_set_style_border_color(wifi_list, lv_color_hex(Colors::TEXT), LV_PART_MAIN);
+        lv_obj_set_style_border_width(wifi_list, 2, LV_PART_MAIN);
+        lv_obj_set_style_pad_all(wifi_list, 10, LV_PART_MAIN);
         
-        lv_list_add_text(wifi_list, "Press Scan to find networks");
+        // Remove horizontal scroll
+        lv_obj_set_scroll_dir(wifi_list, LV_DIR_VER);
         
-        // Scan button - positioned beneath the WiFi list
+        // Style for list items - transparent background with white text
+        lv_obj_set_style_bg_color(wifi_list, lv_color_hex(Colors::BACKGROUND), LV_PART_ITEMS);
+        lv_obj_set_style_bg_opa(wifi_list, LV_OPA_TRANSP, LV_PART_ITEMS);
+        lv_obj_set_style_text_color(wifi_list, lv_color_hex(Colors::TEXT), LV_PART_ITEMS);
+        
+        lv_obj_t* scan_text = lv_list_add_text(wifi_list, "Press Scan to find networks");
+        lv_obj_set_style_text_color(scan_text, lv_color_hex(Colors::TEXT), LV_PART_MAIN);
+        
+        // Scan button - positioned beneath the WiFi list with more spacing
         lv_obj_t* scan_btn = lv_btn_create(main_container);
         lv_obj_set_size(scan_btn, lv_pct(100), 40);
-        lv_obj_align(scan_btn, LV_ALIGN_TOP_MID, 0, 400);
+        lv_obj_align(scan_btn, LV_ALIGN_TOP_MID, 0, 390);
         lv_obj_set_style_bg_color(scan_btn, lv_color_hex(Colors::PRIMARY), LV_PART_MAIN);
         lv_obj_add_event_cb(scan_btn, WiFiManager::scanEventHandler, LV_EVENT_CLICKED, NULL);
         
@@ -461,17 +493,25 @@ namespace UI {
         // Title
         lv_obj_t* title = lv_label_create(main_container);
         lv_label_set_text_fmt(title, "Connect to: %s", ssid);
-        lv_obj_align(title, LV_ALIGN_TOP_MID, 0, 0);
-        lv_obj_set_style_text_font(title, Fonts::FONT_DEFAULT, LV_PART_MAIN);
+        lv_obj_align(title, LV_ALIGN_TOP_MID, 0, 15);
+        lv_obj_set_style_text_font(title, Fonts::FONT_LARGE, LV_PART_MAIN);
         lv_obj_set_style_text_color(title, lv_color_hex(Colors::TEXT), 0);
         
         // Password input
         lv_obj_t* password_textarea = lv_textarea_create(main_container);
         lv_obj_set_size(password_textarea, lv_pct(100), 50);
-        lv_obj_align(password_textarea, LV_ALIGN_TOP_MID, 0, 40);
+        lv_obj_align(password_textarea, LV_ALIGN_TOP_MID, 0, 60);
         lv_textarea_set_placeholder_text(password_textarea, "Enter WiFi password");
         lv_textarea_set_password_mode(password_textarea, false);
         lv_textarea_set_one_line(password_textarea, true);
+        
+        // Style the password input field
+        lv_obj_set_style_bg_color(password_textarea, lv_color_hex(0x2c2c2c), LV_PART_MAIN);
+        lv_obj_set_style_border_color(password_textarea, lv_color_hex(Colors::TEXT), LV_PART_MAIN);
+        lv_obj_set_style_border_width(password_textarea, 2, LV_PART_MAIN);
+        lv_obj_set_style_text_color(password_textarea, lv_color_hex(Colors::TEXT), LV_PART_MAIN);
+        lv_obj_set_style_text_color(password_textarea, lv_color_hex(0x9E9E9E), LV_PART_TEXTAREA_PLACEHOLDER);
+        lv_obj_set_style_pad_all(password_textarea, 10, LV_PART_MAIN);
         
         // Status label (hidden initially)
         lv_obj_t* status_label = lv_label_create(main_container);
@@ -513,6 +553,30 @@ namespace UI {
         lv_obj_set_style_bg_color(main_container, lv_color_hex(Colors::BACKGROUND), LV_PART_MAIN);
         lv_obj_set_style_border_width(main_container, 0, LV_PART_MAIN);
         lv_obj_set_style_pad_all(main_container, 10, LV_PART_MAIN);
+                
+        // Back button
+        lv_obj_t* back_btn = lv_btn_create(lv_scr_act());
+        lv_obj_set_size(back_btn, 40, 40);
+        lv_obj_align(back_btn, LV_ALIGN_TOP_LEFT, 10, 10);
+        lv_obj_add_event_cb(back_btn, settingsBackEventHandler, LV_EVENT_CLICKED, NULL);
+        
+        // Ensure back button is on top
+        lv_obj_move_foreground(back_btn);
+        
+        lv_obj_t* back_label = lv_label_create(back_btn);
+        lv_label_set_text(back_label, LV_SYMBOL_LEFT);
+        lv_obj_center(back_label);
+        
+        // Style for Back button (transparent with white border)
+        lv_obj_set_style_bg_color(back_btn, lv_color_hex(0x000000), LV_PART_MAIN);
+        lv_obj_set_style_bg_opa(back_btn, LV_OPA_0, LV_PART_MAIN);
+        lv_obj_set_style_border_color(back_btn, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+        lv_obj_set_style_border_width(back_btn, 2, LV_PART_MAIN);
+        lv_obj_set_style_text_color(back_btn, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+        lv_obj_set_style_radius(back_btn, 5, LV_PART_MAIN);
+        lv_obj_set_style_bg_color(back_btn, lv_color_hex(0x424242), LV_STATE_PRESSED);
+        lv_obj_set_style_bg_opa(back_btn, LV_OPA_COVER, LV_STATE_PRESSED);
+        lv_obj_set_style_text_color(back_btn, lv_color_hex(0xFFFFFF), LV_STATE_PRESSED);
         
         // Title
         lv_obj_t* title = lv_label_create(main_container);
@@ -525,6 +589,7 @@ namespace UI {
         lv_obj_t* currency_label = lv_label_create(main_container);
         lv_label_set_text(currency_label, "Currency:");
         lv_obj_align(currency_label, LV_ALIGN_TOP_LEFT, 0, 50);
+        lv_obj_set_style_text_color(currency_label, lv_color_hex(Colors::TEXT), 0);
         
         lv_obj_t* currency_dropdown = lv_dropdown_create(main_container);
         lv_dropdown_set_options(currency_dropdown, "sats\nUSD\nGBP\nEUR\nCHF");
@@ -544,6 +609,7 @@ namespace UI {
         lv_obj_t* shop_name_label = lv_label_create(main_container);
         lv_label_set_text(shop_name_label, "Shop Name:");
         lv_obj_align(shop_name_label, LV_ALIGN_TOP_LEFT, 0, 110);
+        lv_obj_set_style_text_color(shop_name_label, lv_color_hex(Colors::TEXT), 0);
         
         shop_name_textarea = lv_textarea_create(main_container);
         lv_obj_set_size(shop_name_textarea, 180, 40);
@@ -570,6 +636,7 @@ namespace UI {
         lv_obj_t* ap_password_label = lv_label_create(main_container);
         lv_label_set_text(ap_password_label, "AP Password:");
         lv_obj_align(ap_password_label, LV_ALIGN_TOP_LEFT, 0, 170);
+        lv_obj_set_style_text_color(ap_password_label, lv_color_hex(Colors::TEXT), 0);
         
         ap_password_textarea = lv_textarea_create(main_container);
         lv_obj_set_size(ap_password_textarea, 180, 40);
@@ -620,27 +687,6 @@ namespace UI {
         lv_obj_t* save_label = lv_label_create(settings_save_btn);
         lv_label_set_text(save_label, "Save");
         lv_obj_center(save_label);
-        
-        // Back button - old style at top left
-        lv_obj_t* back_btn = lv_btn_create(lv_scr_act());
-        lv_obj_set_size(back_btn, 40, 40);
-        lv_obj_align(back_btn, LV_ALIGN_TOP_LEFT, 10, 10);
-        lv_obj_add_event_cb(back_btn, settingsBackEventHandler, LV_EVENT_CLICKED, NULL);
-        
-        lv_obj_t* back_label = lv_label_create(back_btn);
-        lv_label_set_text(back_label, LV_SYMBOL_LEFT);
-        lv_obj_center(back_label);
-        
-        // Style for Back button (transparent with white border)
-        lv_obj_set_style_bg_color(back_btn, lv_color_hex(0x000000), LV_PART_MAIN);
-        lv_obj_set_style_bg_opa(back_btn, LV_OPA_0, LV_PART_MAIN);
-        lv_obj_set_style_border_color(back_btn, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
-        lv_obj_set_style_border_width(back_btn, 2, LV_PART_MAIN);
-        lv_obj_set_style_text_color(back_btn, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
-        lv_obj_set_style_radius(back_btn, 5, LV_PART_MAIN);
-        lv_obj_set_style_bg_color(back_btn, lv_color_hex(0x424242), LV_STATE_PRESSED);
-        lv_obj_set_style_bg_opa(back_btn, LV_OPA_COVER, LV_STATE_PRESSED);
-        lv_obj_set_style_text_color(back_btn, lv_color_hex(0xFFFFFF), LV_STATE_PRESSED);
         
         // Create keyboards (hidden initially)
         shop_name_keyboard = lv_keyboard_create(lv_scr_act());
@@ -1211,6 +1257,36 @@ namespace UI {
             // Reset activity timer on invoice close
             App::resetActivityTimer();
             closeInvoiceOverlay();
+        }
+    }
+    
+    void rebootDeviceEventHandler(lv_event_t* e) {
+        lv_event_code_t code = lv_event_get_code(e);
+        if (code == LV_EVENT_CLICKED) {
+            // Reset activity timer on reboot button click
+            App::resetActivityTimer();
+            
+            // Show confirmation dialog
+            showMessage("Reboot Device", "Are you sure you want to reboot the device? This will restart all services.");
+            
+            // Create a timer to reboot after showing the message
+            lv_timer_create([](lv_timer_t* timer) {
+                Serial.println("Rebooting device...");
+                showMessage("Rebooting...", "Please wait while the device reboots...");
+                
+                // Clean up any resources before reboot
+                Display::turnOffBacklight();
+                Display::cleanup();
+                UI::cleanup();
+                
+                // Small delay to ensure cleanup is complete
+                delay(500);
+                
+                // Reboot the ESP32
+                ESP.restart();
+                
+                lv_timer_del(timer);
+            }, 3000, NULL); // 3 second delay to show the message
         }
     }
     

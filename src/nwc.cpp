@@ -2,6 +2,7 @@
 #include "nwc.h"
 #include "settings.h"
 #include "ui.h"
+#include "app.h"
 #include <Preferences.h>
 
 namespace NWC {
@@ -899,6 +900,12 @@ namespace NWC {
         if (!UI::isInvoiceProcessing()) {
             Serial.println("Invoice lookup cancelled - overlay not active");
             stopInvoiceLookupTimer();
+            return;
+        }
+        
+        // Don't send lookup requests during light sleep (unless invoice is active)
+        if (App::isInLightSleep()) {
+            Serial.println("Invoice lookup skipped - device in light sleep");
             return;
         }
         
