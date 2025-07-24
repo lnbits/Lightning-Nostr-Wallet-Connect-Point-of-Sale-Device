@@ -1,0 +1,1680 @@
+\hypertarget{namespace_n_w_c}{}\doxysection{NWC Namespace Reference}
+\label{namespace_n_w_c}\index{NWC@{NWC}}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespace_n_w_c_1_1_config}{Config}}
+\item 
+namespace \mbox{\hyperlink{namespace_n_w_c_1_1_currency}{Currency}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef void($\ast$ \mbox{\hyperlink{namespace_n_w_c_a331436fb2caeba54627e342126185a74}{nwc\+\_\+status\+\_\+callback\+\_\+t}}) (bool connected, const String \&status)
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespace_n_w_c_a1c1d9172198a60da5d26688610968af8}{init}} ()
+\item 
+void \mbox{\hyperlink{namespace_n_w_c_a441487b7105f0c9cc662578d3600a034}{cleanup}} ()
+\item 
+void \mbox{\hyperlink{namespace_n_w_c_a99fdb7cc9f77370099522b3461ad84ab}{setup\+Data}} (const String \&url)
+\item 
+void \mbox{\hyperlink{namespace_n_w_c_a72c06bdc692eac76bc21d4e73ce31349}{connect\+To\+Relay}} ()
+\item 
+void \mbox{\hyperlink{namespace_n_w_c_a342261f4ab3c85e7f89e8664b3311bf4}{restart\+Connection}} ()
+\item 
+void \mbox{\hyperlink{namespace_n_w_c_a88a8c82c8be5fc4c9ef6fa6f35b8a581}{disconnect}} ()
+\item 
+bool \mbox{\hyperlink{namespace_n_w_c_a15d4ed6dee9570b25a02a7fe34b9ece0}{is\+Initialized}} ()
+\item 
+bool \mbox{\hyperlink{namespace_n_w_c_aa2e749abffc8f1f4995bb52e3a6e8f47}{is\+Connected}} ()
+\item 
+void \mbox{\hyperlink{namespace_n_w_c_a12351ef57b22b79c192426979a938cc3}{load\+Url\+From\+Preferences}} ()
+\item 
+void \mbox{\hyperlink{namespace_n_w_c_a14fff083f2b310dfa50fad5e75510d22}{save\+Url\+To\+Preferences}} (const String \&url)
+\item 
+String \mbox{\hyperlink{namespace_n_w_c_ae645013edf0be68e8ea57f7130b136e4}{get\+Pairing\+Url}} ()
+\item 
+void \mbox{\hyperlink{namespace_n_w_c_a66b3bd6f1962777af5011df44dcf85e7}{set\+Pairing\+Url}} (const String \&url)
+\item 
+void \mbox{\hyperlink{namespace_n_w_c_aa137fc6f2c6092d4b9464c4246e851c6}{websocket\+Event}} (WStype\+\_\+t type, uint8\+\_\+t $\ast$payload, size\+\_\+t length)
+\item 
+void \mbox{\hyperlink{namespace_n_w_c_a18f2ad2c95003389637ea9d84d18d5cf}{handle\+Websocket\+Message}} (void $\ast$arg, uint8\+\_\+t $\ast$data, size\+\_\+t len)
+\item 
+void \mbox{\hyperlink{namespace_n_w_c_a870035d4e450773ec8a50d0bf0b81702}{reset\+Websocket\+Fragment\+State}} ()
+\item 
+void \mbox{\hyperlink{namespace_n_w_c_a2ea8f4d93d51274c1ed01f85eadeb3c1}{handle\+Nwc\+Response\+Event}} (uint8\+\_\+t $\ast$data)
+\item 
+void \mbox{\hyperlink{namespace_n_w_c_a964d9daf0d78f7807e9dffc07d0b00df}{handle\+Nwc\+Nip04\+Notification\+Event}} (uint8\+\_\+t $\ast$data)
+\item 
+void \mbox{\hyperlink{namespace_n_w_c_a226efbf68836ffd12773687ebece1f06}{handle\+Nwc\+Nip44\+Notification\+Event}} (uint8\+\_\+t $\ast$data)
+\item 
+void \mbox{\hyperlink{namespace_n_w_c_a5d747ef50eeb74cee5612fd939452183}{make\+Invoice}} (float amount, const String \&currency)
+\item 
+void \mbox{\hyperlink{namespace_n_w_c_a86b3f2617b12ae02c2e60ea915a43076}{send\+Invoice\+Lookup\+Request}} ()
+\item 
+void \mbox{\hyperlink{namespace_n_w_c_a209d5a499b7718c1a0d5984a191091a9}{start\+Invoice\+Notification\+Watchdog}} ()
+\item 
+void \mbox{\hyperlink{namespace_n_w_c_a9a72ecf2c1ad80aafcb1d1a79651d0aa}{stop\+Invoice\+Notification\+Watchdog}} ()
+\item 
+void \mbox{\hyperlink{namespace_n_w_c_a1c4b50b7a22b309f6b6f3ddcf9f32a74}{start\+Invoice\+Lookup\+Timer}} ()
+\item 
+void \mbox{\hyperlink{namespace_n_w_c_a1dd636b9104cd24b5d2fbd91329a67cd}{stop\+Invoice\+Lookup\+Timer}} ()
+\item 
+String \mbox{\hyperlink{namespace_n_w_c_ac8bb8a5bfcd2f30e2e35458ceeac24cd}{get\+Current\+Invoice}} ()
+\item 
+void \mbox{\hyperlink{namespace_n_w_c_a4e5666c5f59ca4d455e2148a3f06d329}{set\+Current\+Invoice}} (const String \&invoice)
+\item 
+void \mbox{\hyperlink{namespace_n_w_c_aef169814af2af3b5a32f4f0c30456385}{fetch\+Bitcoin\+Prices}} ()
+\item 
+void \mbox{\hyperlink{namespace_n_w_c_a6084bca944be2b2f16e57728dbbc64dc}{update\+Prices\+From\+Json}} (const String \&json\+Response)
+\item 
+int \mbox{\hyperlink{namespace_n_w_c_adf733f5382e816e1e45d39bf3e3ec04f}{calculate\+Sats\+From\+Amount}} (float amount, const String \&currency)
+\item 
+long $\ast$ \mbox{\hyperlink{namespace_n_w_c_a2d1e53d84c677b6b30da4a0b845352d1}{get\+Bitcoin\+Prices}} ()
+\item 
+bool \mbox{\hyperlink{namespace_n_w_c_a26bfd6ee56d21e22fc6caa559711c011}{are\+Prices\+Loaded}} ()
+\item 
+unsigned long \mbox{\hyperlink{namespace_n_w_c_aeaebbdb90bbebb939c1149ad621e9455}{get\+Last\+Price\+Update}} ()
+\item 
+void \mbox{\hyperlink{namespace_n_w_c_acaa1e327e2f86e4e3101cc552c8ed24c}{attempt\+Reconnection\+If\+Needed}} ()
+\item 
+void \mbox{\hyperlink{namespace_n_w_c_a28e8eb156bed73d6466b37fe3d81241d}{update\+Relay\+Status\+Display}} (bool connected)
+\item 
+void \mbox{\hyperlink{namespace_n_w_c_acd1483629fef32437ab3d58cbfe11318}{update\+Time}} ()
+\item 
+unsigned long \mbox{\hyperlink{namespace_n_w_c_a08f91f132a611875988ba75c6d196318}{get\+Unix\+Timestamp}} ()
+\item 
+unsigned long \mbox{\hyperlink{namespace_n_w_c_a75a93db0e7805efd74eb67c4c458a66f}{get\+Boot\+Timestamp}} ()
+\item 
+NTPClient \& \mbox{\hyperlink{namespace_n_w_c_a8ef3c6df0ec5f0c7cbec9ee9a180db8f}{get\+Time\+Client}} ()
+\item 
+void \mbox{\hyperlink{namespace_n_w_c_af6a6e3b53f844f01887bfa71344c836f}{send\+Ping}} ()
+\item 
+void \mbox{\hyperlink{namespace_n_w_c_a10d04b654063bcec6d1bcf528fb3a24d}{process\+Loop}} ()
+\item 
+bool \mbox{\hyperlink{namespace_n_w_c_acbeaaf60838294051dacb43171560fbf}{is\+Fragment\+In\+Progress}} ()
+\item 
+void \mbox{\hyperlink{namespace_n_w_c_a952c9d2aa4e8bedd3484fd68feefab9b}{handle\+Fragment}} (uint8\+\_\+t $\ast$payload, size\+\_\+t length, bool is\+Binary, bool is\+Last)
+\item 
+void \mbox{\hyperlink{namespace_n_w_c_a8a33716d68e6fc7b598f13474a8aa3d0}{invoice\+Lookup\+Timer\+Callback}} (lv\+\_\+timer\+\_\+t $\ast$timer)
+\item 
+void \mbox{\hyperlink{namespace_n_w_c_a8f8ca7e2372b1dce642bba4ad410d190}{invoice\+Notification\+Watchdog\+Callback}} (lv\+\_\+timer\+\_\+t $\ast$timer)
+\item 
+void \mbox{\hyperlink{namespace_n_w_c_aa67b7139a1355f5f43c75c014796dd80}{set\+Status\+Callback}} (\mbox{\hyperlink{namespace_n_w_c_a331436fb2caeba54627e342126185a74}{nwc\+\_\+status\+\_\+callback\+\_\+t}} callback)
+\item 
+void \mbox{\hyperlink{namespace_n_w_c_ac164a3889940ecbe838a8d52cd0dd2f7}{set\+Relay\+Status\+Label}} (lv\+\_\+obj\+\_\+t $\ast$label)
+\item 
+Web\+Sockets\+Client \& \mbox{\hyperlink{namespace_n_w_c_aee89013cd6a45b02d0f848879e96da16}{get\+Web\+Socket\+Client}} ()
+\item 
+String \mbox{\hyperlink{namespace_n_w_c_abb2a09968c5b268eef33006b22a32c12}{get\+Relay\+Url}} ()
+\item 
+String \mbox{\hyperlink{namespace_n_w_c_a8b64dfdf4a3cc775ec132ba31825a340}{get\+Wallet\+Pub\+Key}} ()
+\item 
+String \mbox{\hyperlink{namespace_n_w_c_a8819a0f510ab7fcb3dc3381db3a0eab6}{get\+Nsec\+Hex}} ()
+\item 
+String \mbox{\hyperlink{namespace_n_w_c_a21272097203f647bcfc29821d1035eb8}{get\+Npub\+Hex}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{namespace_n_w_c_a331436fb2caeba54627e342126185a74}\label{namespace_n_w_c_a331436fb2caeba54627e342126185a74}} 
+\index{NWC@{NWC}!nwc\_status\_callback\_t@{nwc\_status\_callback\_t}}
+\index{nwc\_status\_callback\_t@{nwc\_status\_callback\_t}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{nwc\_status\_callback\_t}{nwc\_status\_callback\_t}}
+{\footnotesize\ttfamily typedef void($\ast$ NWC\+::nwc\+\_\+status\+\_\+callback\+\_\+t) (bool connected, const String \&status)}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8h_source_l00083}{83}} of file \mbox{\hyperlink{nwc_8h_source}{nwc.\+h}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespace_n_w_c_a26bfd6ee56d21e22fc6caa559711c011}\label{namespace_n_w_c_a26bfd6ee56d21e22fc6caa559711c011}} 
+\index{NWC@{NWC}!arePricesLoaded@{arePricesLoaded}}
+\index{arePricesLoaded@{arePricesLoaded}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{arePricesLoaded()}{arePricesLoaded()}}
+{\footnotesize\ttfamily bool NWC\+::are\+Prices\+Loaded (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00739}{739}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00739\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00740\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ prices\_loaded;}
+\DoxyCodeLine{00741\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_acaa1e327e2f86e4e3101cc552c8ed24c}\label{namespace_n_w_c_acaa1e327e2f86e4e3101cc552c8ed24c}} 
+\index{NWC@{NWC}!attemptReconnectionIfNeeded@{attemptReconnectionIfNeeded}}
+\index{attemptReconnectionIfNeeded@{attemptReconnectionIfNeeded}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{attemptReconnectionIfNeeded()}{attemptReconnectionIfNeeded()}}
+{\footnotesize\ttfamily void NWC\+::attempt\+Reconnection\+If\+Needed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00747}{747}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00747\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00748\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ current\_time\ =\ millis();}
+\DoxyCodeLine{00749\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00750\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Only\ proceed\ if\ WiFi\ is\ connected}}
+\DoxyCodeLine{00751\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (WiFi.status()\ !=\ WL\_CONNECTED)\ \{}
+\DoxyCodeLine{00752\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespace_n_w_c_aa2e749abffc8f1f4995bb52e3a6e8f47}{isConnected}}()\ ||\ \mbox{\hyperlink{ui_8cpp_a948b1584cfc5c1cf91af9d43729abf48}{nwc\_initialized}})\ \{}
+\DoxyCodeLine{00753\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}WiFi\ disconnected,\ resetting\ NWC\ connection\ state"{}});}
+\DoxyCodeLine{00754\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{ui_8cpp_a948b1584cfc5c1cf91af9d43729abf48}{nwc\_initialized}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00755\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_a28e8eb156bed73d6466b37fe3d81241d}{updateRelayStatusDisplay}}(\textcolor{keyword}{false});}
+\DoxyCodeLine{00756\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00757\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00758\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00759\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00760\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ connection\ health\ periodically}}
+\DoxyCodeLine{00761\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (current\_time\ -\/\ last\_connection\_health\_check\ >=\ HEALTH\_CHECK\_INTERVAL)\ \{}
+\DoxyCodeLine{00762\ \ \ \ \ \ \ \ \ \ \ \ \ last\_connection\_health\_check\ =\ current\_time;}
+\DoxyCodeLine{00763\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00764\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ we\ think\ we're\ connected\ but\ haven't\ received\ any\ messages\ for\ too\ long,\ force\ reconnect}}
+\DoxyCodeLine{00765\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespace_n_w_c_aa2e749abffc8f1f4995bb52e3a6e8f47}{isConnected}}()\ \&\&\ \mbox{\hyperlink{ui_8cpp_a948b1584cfc5c1cf91af9d43729abf48}{nwc\_initialized}})\ \{}
+\DoxyCodeLine{00766\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (current\_time\ -\/\ last\_ws\_message\_received\ >\ CONNECTION\_TIMEOUT)\ \{}
+\DoxyCodeLine{00767\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Connection\ appears\ stale\ (no\ messages\ for\ "{}}\ +\ String(CONNECTION\_TIMEOUT/1000)\ +\ \textcolor{stringliteral}{"{}s),\ forcing\ disconnect"{}});}
+\DoxyCodeLine{00768\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ webSocket.disconnect();}
+\DoxyCodeLine{00769\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{ui_8cpp_a948b1584cfc5c1cf91af9d43729abf48}{nwc\_initialized}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00770\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_a28e8eb156bed73d6466b37fe3d81241d}{updateRelayStatusDisplay}}(\textcolor{keyword}{false});}
+\DoxyCodeLine{00771\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00772\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00773\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00774\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Send\ periodic\ ping\ to\ keep\ connection\ alive}}
+\DoxyCodeLine{00775\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (current\_time\ -\/\ last\_ws\_ping\ >\ PING\_INTERVAL)\ \{}
+\DoxyCodeLine{00776\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_af6a6e3b53f844f01887bfa71344c836f}{sendPing}}();}
+\DoxyCodeLine{00777\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00778\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00779\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00780\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00781\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Attempt\ reconnection\ if\ not\ connected\ and\ not\ already\ trying}}
+\DoxyCodeLine{00782\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{namespace_n_w_c_aa2e749abffc8f1f4995bb52e3a6e8f47}{isConnected}}()\ \&\&\ !connection\_in\_progress)\ \{}
+\DoxyCodeLine{00783\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Calculate\ backoff\ interval\ based\ on\ number\ of\ attempts}}
+\DoxyCodeLine{00784\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ backoff\_interval\ =\ MIN\_RECONNECT\_INTERVAL\ *\ (1\ <<\ min(reconnection\_attempts,\ 5));\ \textcolor{comment}{//\ Exponential\ backoff,\ max\ 32x}}
+\DoxyCodeLine{00785\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00786\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (current\_time\ -\/\ last\_connection\_attempt\ >=\ backoff\_interval)\ \{}
+\DoxyCodeLine{00787\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (reconnection\_attempts\ <\ MAX\_RECONNECT\_ATTEMPTS)\ \{}
+\DoxyCodeLine{00788\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Attempting\ WebSocket\ reconnection\ (attempt\ "{}}\ +\ String(reconnection\_attempts\ +\ 1)\ +\ \textcolor{stringliteral}{"{}/"{}}\ +\ String(MAX\_RECONNECT\_ATTEMPTS)\ +\ \textcolor{stringliteral}{"{})"{}});}
+\DoxyCodeLine{00789\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ reconnection\_attempts++;}
+\DoxyCodeLine{00790\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_a72c06bdc692eac76bc21d4e73ce31349}{connectToRelay}}();}
+\DoxyCodeLine{00791\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00792\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Reset\ reconnection\ attempts\ after\ max\ attempts\ reached,\ but\ wait\ longer}}
+\DoxyCodeLine{00793\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (current\_time\ -\/\ last\_connection\_attempt\ >=\ (backoff\_interval\ *\ 4))\ \{}
+\DoxyCodeLine{00794\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Resetting\ reconnection\ attempts\ after\ extended\ wait"{}});}
+\DoxyCodeLine{00795\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ reconnection\_attempts\ =\ 0;}
+\DoxyCodeLine{00796\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00797\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00798\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00799\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00800\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_adf733f5382e816e1e45d39bf3e3ec04f}\label{namespace_n_w_c_adf733f5382e816e1e45d39bf3e3ec04f}} 
+\index{NWC@{NWC}!calculateSatsFromAmount@{calculateSatsFromAmount}}
+\index{calculateSatsFromAmount@{calculateSatsFromAmount}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{calculateSatsFromAmount()}{calculateSatsFromAmount()}}
+{\footnotesize\ttfamily int NWC\+::calculate\+Sats\+From\+Amount (\begin{DoxyParamCaption}\item[{float}]{amount,  }\item[{const String \&}]{currency }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00713}{713}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00713\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00714\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!prices\_loaded)\ \{}
+\DoxyCodeLine{00715\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00716\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00717\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00718\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{long}\ price\ =\ 0;}
+\DoxyCodeLine{00719\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (currency\ ==\ \textcolor{stringliteral}{"{}USD"{}})\ price\ =\ btc\_prices[Currency::USD];}
+\DoxyCodeLine{00720\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (currency\ ==\ \textcolor{stringliteral}{"{}EUR"{}})\ price\ =\ btc\_prices[Currency::EUR];}
+\DoxyCodeLine{00721\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (currency\ ==\ \textcolor{stringliteral}{"{}GBP"{}})\ price\ =\ btc\_prices[Currency::GBP];}
+\DoxyCodeLine{00722\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (currency\ ==\ \textcolor{stringliteral}{"{}CAD"{}})\ price\ =\ btc\_prices[Currency::CAD];}
+\DoxyCodeLine{00723\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (currency\ ==\ \textcolor{stringliteral}{"{}CHF"{}})\ price\ =\ btc\_prices[Currency::CHF];}
+\DoxyCodeLine{00724\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (currency\ ==\ \textcolor{stringliteral}{"{}AUD"{}})\ price\ =\ btc\_prices[Currency::AUD];}
+\DoxyCodeLine{00725\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (currency\ ==\ \textcolor{stringliteral}{"{}JPY"{}})\ price\ =\ btc\_prices[Currency::JPY];}
+\DoxyCodeLine{00726\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (currency\ ==\ \textcolor{stringliteral}{"{}CNY"{}})\ price\ =\ btc\_prices[Currency::CNY];}
+\DoxyCodeLine{00727\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00728\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (price\ >\ 0)\ \{}
+\DoxyCodeLine{00729\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keywordtype}{int})((amount\ /\ price)\ *\ 100000000);\ \textcolor{comment}{//\ Convert\ to\ satoshis}}
+\DoxyCodeLine{00730\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00731\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00732\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00733\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_a441487b7105f0c9cc662578d3600a034}\label{namespace_n_w_c_a441487b7105f0c9cc662578d3600a034}} 
+\index{NWC@{NWC}!cleanup@{cleanup}}
+\index{cleanup@{cleanup}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{cleanup()}{cleanup()}}
+{\footnotesize\ttfamily void NWC\+::cleanup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00090}{90}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (invoice\_notification\_watchdog\_timer)\ \{}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ lv\_timer\_del(invoice\_notification\_watchdog\_timer);}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ invoice\_notification\_watchdog\_timer\ =\ NULL;}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (invoice\_lookup\_timer)\ \{}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ lv\_timer\_del(invoice\_lookup\_timer);}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ invoice\_lookup\_timer\ =\ NULL;}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ webSocket.disconnect();}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{ui_8cpp_a948b1584cfc5c1cf91af9d43729abf48}{nwc\_initialized}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00103\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_a72c06bdc692eac76bc21d4e73ce31349}\label{namespace_n_w_c_a72c06bdc692eac76bc21d4e73ce31349}} 
+\index{NWC@{NWC}!connectToRelay@{connectToRelay}}
+\index{connectToRelay@{connectToRelay}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{connectToRelay()}{connectToRelay()}}
+{\footnotesize\ttfamily void NWC\+::connect\+To\+Relay (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00167}{167}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (relayUrl.length()\ ==\ 0)\ \{}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}No\ relay\ URL\ configured"{}});}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Prevent\ multiple\ simultaneous\ connection\ attempts}}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ current\_time\ =\ millis();}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (connection\_in\_progress)\ \{}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Connection\ already\ in\ progress,\ skipping"{}});}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Rate\ limit\ connection\ attempts}}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (current\_time\ -\/\ last\_connection\_attempt\ <\ MIN\_RECONNECT\_INTERVAL)\ \{}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Too\ soon\ to\ reconnect,\ waiting..."{}});}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ already\ connected}}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (webSocket.isConnected())\ \{}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}WebSocket\ already\ connected"{}});}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ connection\_in\_progress\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ last\_connection\_attempt\ =\ current\_time;}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Parse\ relay\ URL}}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ String\ host;}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ port\ =\ 443;\ \textcolor{comment}{//\ Default\ WSS\ port}}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ String\ path\ =\ \textcolor{stringliteral}{"{}/"{}};}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (relayUrl.startsWith(\textcolor{stringliteral}{"{}wss://"{}}))\ \{}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \ \ \ \ host\ =\ relayUrl.substring(6);}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ pathIndex\ =\ host.indexOf(\textcolor{charliteral}{'/'});}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (pathIndex\ !=\ -\/1)\ \{}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ path\ =\ host.substring(pathIndex);}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host\ =\ host.substring(0,\ pathIndex);}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ portIndex\ =\ host.indexOf(\textcolor{charliteral}{':'});}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (portIndex\ !=\ -\/1)\ \{}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ port\ =\ host.substring(portIndex\ +\ 1).toInt();}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ host\ =\ host.substring(0,\ portIndex);}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ Serial.printf(\textcolor{stringliteral}{"{}Connecting\ to\ relay:\ \%s:\%d\%s\(\backslash\)\(\backslash\)n"{}},\ host.c\_str(),\ port,\ path.c\_str());}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ webSocket.beginSSL(host,\ port,\ path,\ \textcolor{stringliteral}{"{}"{}},\ \textcolor{stringliteral}{"{}Sec-\/WebSocket-\/Protocol:\ echo-\/protocol"{}});}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ webSocket.onEvent([](WStype\_t\ type,\ uint8\_t*\ payload,\ \textcolor{keywordtype}{size\_t}\ length)\ \{}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_aa137fc6f2c6092d4b9464c4246e851c6}{websocketEvent}}(type,\ payload,\ length);}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ webSocket.setReconnectInterval(5000);}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ webSocket.enableHeartbeat(15000,\ 3000,\ 2);}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{ui_8cpp_a948b1584cfc5c1cf91af9d43729abf48}{nwc\_initialized}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}WebSocket\ connection\ initiated"{}});}
+\DoxyCodeLine{00227\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_a88a8c82c8be5fc4c9ef6fa6f35b8a581}\label{namespace_n_w_c_a88a8c82c8be5fc4c9ef6fa6f35b8a581}} 
+\index{NWC@{NWC}!disconnect@{disconnect}}
+\index{disconnect@{disconnect}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{disconnect()}{disconnect()}}
+{\footnotesize\ttfamily void NWC\+::disconnect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00241}{241}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ webSocket.disconnect();}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{ui_8cpp_a948b1584cfc5c1cf91af9d43729abf48}{nwc\_initialized}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ connection\_in\_progress\ =\ \textcolor{keyword}{false};\ \ \textcolor{comment}{//\ Reset\ connection\ state}}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_a870035d4e450773ec8a50d0bf0b81702}{resetWebsocketFragmentState}}();}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (status\_callback)\ \{}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \ \ \ \ status\_callback(\textcolor{keyword}{false},\ \textcolor{stringliteral}{"{}Disconnected"{}});}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00250\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_aef169814af2af3b5a32f4f0c30456385}\label{namespace_n_w_c_aef169814af2af3b5a32f4f0c30456385}} 
+\index{NWC@{NWC}!fetchBitcoinPrices@{fetchBitcoinPrices}}
+\index{fetchBitcoinPrices@{fetchBitcoinPrices}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{fetchBitcoinPrices()}{fetchBitcoinPrices()}}
+{\footnotesize\ttfamily void NWC\+::fetch\+Bitcoin\+Prices (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00667}{667}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00667\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00668\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!WiFi.isConnected())\ \{}
+\DoxyCodeLine{00669\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}WiFi\ not\ connected,\ cannot\ fetch\ prices"{}});}
+\DoxyCodeLine{00670\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00671\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00672\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00673\ \ \ \ \ \ \ \ \ HTTPClient\ http;}
+\DoxyCodeLine{00674\ \ \ \ \ \ \ \ \ http.begin(\textcolor{stringliteral}{"{}https://mempool.space/api/v1/prices"{}});}
+\DoxyCodeLine{00675\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ httpResponseCode\ =\ http.GET();}
+\DoxyCodeLine{00676\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00677\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (httpResponseCode\ ==\ 200)\ \{}
+\DoxyCodeLine{00678\ \ \ \ \ \ \ \ \ \ \ \ \ String\ response\ =\ http.getString();}
+\DoxyCodeLine{00679\ \ \ \ \ \ \ \ \ \ \ \ \ updatePricesFromJson(response);}
+\DoxyCodeLine{00680\ \ \ \ \ \ \ \ \ \ \ \ \ last\_price\_update\ =\ millis();}
+\DoxyCodeLine{00681\ \ \ \ \ \ \ \ \ \ \ \ \ prices\_loaded\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00682\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Bitcoin\ prices\ updated\ successfully"{}});}
+\DoxyCodeLine{00683\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00684\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.printf(\textcolor{stringliteral}{"{}HTTP\ request\ failed\ with\ code:\ \%d\(\backslash\)\(\backslash\)n"{}},\ httpResponseCode);}
+\DoxyCodeLine{00685\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00686\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00687\ \ \ \ \ \ \ \ \ http.end();}
+\DoxyCodeLine{00688\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_a2d1e53d84c677b6b30da4a0b845352d1}\label{namespace_n_w_c_a2d1e53d84c677b6b30da4a0b845352d1}} 
+\index{NWC@{NWC}!getBitcoinPrices@{getBitcoinPrices}}
+\index{getBitcoinPrices@{getBitcoinPrices}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{getBitcoinPrices()}{getBitcoinPrices()}}
+{\footnotesize\ttfamily long $\ast$ NWC\+::get\+Bitcoin\+Prices (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00735}{735}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00735\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00736\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ btc\_prices;}
+\DoxyCodeLine{00737\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_a75a93db0e7805efd74eb67c4c458a66f}\label{namespace_n_w_c_a75a93db0e7805efd74eb67c4c458a66f}} 
+\index{NWC@{NWC}!getBootTimestamp@{getBootTimestamp}}
+\index{getBootTimestamp@{getBootTimestamp}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{getBootTimestamp()}{getBootTimestamp()}}
+{\footnotesize\ttfamily unsigned long NWC\+::get\+Boot\+Timestamp (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00834}{834}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00834\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00835\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ bootTimestamp;}
+\DoxyCodeLine{00836\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_ac8bb8a5bfcd2f30e2e35458ceeac24cd}\label{namespace_n_w_c_ac8bb8a5bfcd2f30e2e35458ceeac24cd}} 
+\index{NWC@{NWC}!getCurrentInvoice@{getCurrentInvoice}}
+\index{getCurrentInvoice@{getCurrentInvoice}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{getCurrentInvoice()}{getCurrentInvoice()}}
+{\footnotesize\ttfamily String NWC\+::get\+Current\+Invoice (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00659}{659}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00659\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00660\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ current\_invoice\_str;}
+\DoxyCodeLine{00661\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_aeaebbdb90bbebb939c1149ad621e9455}\label{namespace_n_w_c_aeaebbdb90bbebb939c1149ad621e9455}} 
+\index{NWC@{NWC}!getLastPriceUpdate@{getLastPriceUpdate}}
+\index{getLastPriceUpdate@{getLastPriceUpdate}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{getLastPriceUpdate()}{getLastPriceUpdate()}}
+{\footnotesize\ttfamily unsigned long NWC\+::get\+Last\+Price\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00743}{743}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00743\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00744\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ last\_price\_update;}
+\DoxyCodeLine{00745\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_a21272097203f647bcfc29821d1035eb8}\label{namespace_n_w_c_a21272097203f647bcfc29821d1035eb8}} 
+\index{NWC@{NWC}!getNpubHex@{getNpubHex}}
+\index{getNpubHex@{getNpubHex}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{getNpubHex()}{getNpubHex()}}
+{\footnotesize\ttfamily String NWC\+::get\+Npub\+Hex (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00946}{946}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00946\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00947\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ npubHexStr;}
+\DoxyCodeLine{00948\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_a8819a0f510ab7fcb3dc3381db3a0eab6}\label{namespace_n_w_c_a8819a0f510ab7fcb3dc3381db3a0eab6}} 
+\index{NWC@{NWC}!getNsecHex@{getNsecHex}}
+\index{getNsecHex@{getNsecHex}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{getNsecHex()}{getNsecHex()}}
+{\footnotesize\ttfamily String NWC\+::get\+Nsec\+Hex (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00942}{942}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00942\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00943\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ nsecHexStr;}
+\DoxyCodeLine{00944\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_ae645013edf0be68e8ea57f7130b136e4}\label{namespace_n_w_c_ae645013edf0be68e8ea57f7130b136e4}} 
+\index{NWC@{NWC}!getPairingUrl@{getPairingUrl}}
+\index{getPairingUrl@{getPairingUrl}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{getPairingUrl()}{getPairingUrl()}}
+{\footnotesize\ttfamily String NWC\+::get\+Pairing\+Url (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00280}{280}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00280\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{ui_8cpp_aeaf5a5f752292b6ed1aa766532cd6bc0}{nwcPairingUrl}};}
+\DoxyCodeLine{00282\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_abb2a09968c5b268eef33006b22a32c12}\label{namespace_n_w_c_abb2a09968c5b268eef33006b22a32c12}} 
+\index{NWC@{NWC}!getRelayUrl@{getRelayUrl}}
+\index{getRelayUrl@{getRelayUrl}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{getRelayUrl()}{getRelayUrl()}}
+{\footnotesize\ttfamily String NWC\+::get\+Relay\+Url (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00934}{934}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00934\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00935\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ relayUrl;}
+\DoxyCodeLine{00936\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_a8ef3c6df0ec5f0c7cbec9ee9a180db8f}\label{namespace_n_w_c_a8ef3c6df0ec5f0c7cbec9ee9a180db8f}} 
+\index{NWC@{NWC}!getTimeClient@{getTimeClient}}
+\index{getTimeClient@{getTimeClient}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{getTimeClient()}{getTimeClient()}}
+{\footnotesize\ttfamily NTPClient \& NWC\+::get\+Time\+Client (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00838}{838}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00838\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00839\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ timeClient;}
+\DoxyCodeLine{00840\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_a08f91f132a611875988ba75c6d196318}\label{namespace_n_w_c_a08f91f132a611875988ba75c6d196318}} 
+\index{NWC@{NWC}!getUnixTimestamp@{getUnixTimestamp}}
+\index{getUnixTimestamp@{getUnixTimestamp}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{getUnixTimestamp()}{getUnixTimestamp()}}
+{\footnotesize\ttfamily unsigned long NWC\+::get\+Unix\+Timestamp (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00830}{830}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00830\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00831\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ unixTimestamp;}
+\DoxyCodeLine{00832\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_a8b64dfdf4a3cc775ec132ba31825a340}\label{namespace_n_w_c_a8b64dfdf4a3cc775ec132ba31825a340}} 
+\index{NWC@{NWC}!getWalletPubKey@{getWalletPubKey}}
+\index{getWalletPubKey@{getWalletPubKey}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{getWalletPubKey()}{getWalletPubKey()}}
+{\footnotesize\ttfamily String NWC\+::get\+Wallet\+Pub\+Key (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00938}{938}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00938\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00939\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ walletPubKey;}
+\DoxyCodeLine{00940\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_aee89013cd6a45b02d0f848879e96da16}\label{namespace_n_w_c_aee89013cd6a45b02d0f848879e96da16}} 
+\index{NWC@{NWC}!getWebSocketClient@{getWebSocketClient}}
+\index{getWebSocketClient@{getWebSocketClient}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{getWebSocketClient()}{getWebSocketClient()}}
+{\footnotesize\ttfamily Web\+Sockets\+Client \& NWC\+::get\+Web\+Socket\+Client (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00930}{930}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00930\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00931\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ webSocket;}
+\DoxyCodeLine{00932\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_a952c9d2aa4e8bedd3484fd68feefab9b}\label{namespace_n_w_c_a952c9d2aa4e8bedd3484fd68feefab9b}} 
+\index{NWC@{NWC}!handleFragment@{handleFragment}}
+\index{handleFragment@{handleFragment}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{handleFragment()}{handleFragment()}}
+{\footnotesize\ttfamily void NWC\+::handle\+Fragment (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{payload,  }\item[{size\+\_\+t}]{length,  }\item[{bool}]{is\+Binary,  }\item[{bool}]{is\+Last }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00883}{883}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00883\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00884\ \ \ \ \ \ \ \ \ ws\_fragment\_received\_size\ +=\ length;}
+\DoxyCodeLine{00885\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00886\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!isBinary)\ \{}
+\DoxyCodeLine{00887\ \ \ \ \ \ \ \ \ \ \ \ \ ws\_fragmented\_message\ +=\ String((\textcolor{keywordtype}{char}*)payload);}
+\DoxyCodeLine{00888\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00889\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00890\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (isLast)\ \{}
+\DoxyCodeLine{00891\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!isBinary)\ \{}
+\DoxyCodeLine{00892\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ handleWebsocketMessage(NULL,\ (uint8\_t*)ws\_fragmented\_message.c\_str(),\ ws\_fragmented\_message.length());}
+\DoxyCodeLine{00893\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00894\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_a870035d4e450773ec8a50d0bf0b81702}{resetWebsocketFragmentState}}();}
+\DoxyCodeLine{00895\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00896\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_a964d9daf0d78f7807e9dffc07d0b00df}\label{namespace_n_w_c_a964d9daf0d78f7807e9dffc07d0b00df}} 
+\index{NWC@{NWC}!handleNwcNip04NotificationEvent@{handleNwcNip04NotificationEvent}}
+\index{handleNwcNip04NotificationEvent@{handleNwcNip04NotificationEvent}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{handleNwcNip04NotificationEvent()}{handleNwcNip04NotificationEvent()}}
+{\footnotesize\ttfamily void NWC\+::handle\+Nwc\+Nip04\+Notification\+Event (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{data }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00556}{556}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00556\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00557\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Handling\ NWC\ NIP-\/04\ notification\ event\ (kind\ 23196)"{}});}
+\DoxyCodeLine{00558\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Implementation\ would\ go\ here}}
+\DoxyCodeLine{00559\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ would\ handle\ NIP-\/04\ encrypted\ notifications}}
+\DoxyCodeLine{00560\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_a226efbf68836ffd12773687ebece1f06}\label{namespace_n_w_c_a226efbf68836ffd12773687ebece1f06}} 
+\index{NWC@{NWC}!handleNwcNip44NotificationEvent@{handleNwcNip44NotificationEvent}}
+\index{handleNwcNip44NotificationEvent@{handleNwcNip44NotificationEvent}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{handleNwcNip44NotificationEvent()}{handleNwcNip44NotificationEvent()}}
+{\footnotesize\ttfamily void NWC\+::handle\+Nwc\+Nip44\+Notification\+Event (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{data }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00562}{562}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00562\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00563\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Handling\ NWC\ NIP-\/44\ notification\ event\ (kind\ 23197)"{}});}
+\DoxyCodeLine{00564\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Implementation\ would\ go\ here}}
+\DoxyCodeLine{00565\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ would\ handle\ NIP-\/44\ encrypted\ notifications}}
+\DoxyCodeLine{00566\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_a2ea8f4d93d51274c1ed01f85eadeb3c1}\label{namespace_n_w_c_a2ea8f4d93d51274c1ed01f85eadeb3c1}} 
+\index{NWC@{NWC}!handleNwcResponseEvent@{handleNwcResponseEvent}}
+\index{handleNwcResponseEvent@{handleNwcResponseEvent}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{handleNwcResponseEvent()}{handleNwcResponseEvent()}}
+{\footnotesize\ttfamily void NWC\+::handle\+Nwc\+Response\+Event (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{data }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00438}{438}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00438\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00439\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Handling\ NWC\ response\ event\ (kind\ 23195)"{}});}
+\DoxyCodeLine{00440\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00441\ \ \ \ \ \ \ \ \ String\ message\ =\ String((\textcolor{keywordtype}{char}*)data);}
+\DoxyCodeLine{00442\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00443\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Parse\ the\ event\ message}}
+\DoxyCodeLine{00444\ \ \ \ \ \ \ \ \ DynamicJsonDocument\ eventDoc(2048);}
+\DoxyCodeLine{00445\ \ \ \ \ \ \ \ \ DeserializationError\ error\ =\ deserializeJson(eventDoc,\ message);}
+\DoxyCodeLine{00446\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00447\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (error)\ \{}
+\DoxyCodeLine{00448\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}JSON\ parsing\ failed:\ "{}});}
+\DoxyCodeLine{00449\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(error.c\_str());}
+\DoxyCodeLine{00450\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00451\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00452\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00453\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Extract\ event\ content}}
+\DoxyCodeLine{00454\ \ \ \ \ \ \ \ \ JsonObject\ \textcolor{keyword}{event}\ =\ eventDoc[2];}
+\DoxyCodeLine{00455\ \ \ \ \ \ \ \ \ String\ content\ =\ \textcolor{keyword}{event}[\textcolor{stringliteral}{"{}content"{}}];}
+\DoxyCodeLine{00456\ \ \ \ \ \ \ \ \ String\ thirdPartyPubKey\ =\ \textcolor{keyword}{event}[\textcolor{stringliteral}{"{}pubkey"{}}];}
+\DoxyCodeLine{00457\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00458\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Third\ Party\ PubKey:\ "{}}\ +\ thirdPartyPubKey);}
+\DoxyCodeLine{00459\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Cipher\ Text:\ "{}}\ +\ content);}
+\DoxyCodeLine{00460\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00461\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (content.length()\ ==\ 0\ ||\ thirdPartyPubKey.length()\ ==\ 0)\ \{}
+\DoxyCodeLine{00462\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Failed\ to\ extract\ content\ or\ pubkey\ from\ event"{}});}
+\DoxyCodeLine{00463\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00464\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00465\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00466\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Decrypt\ the\ response}}
+\DoxyCodeLine{00467\ \ \ \ \ \ \ \ \ String\ decryptedResponse\ =\ \mbox{\hyperlink{namespacenostr_ad76c1eacccd66757ef146e3393a1442a}{nostr::decryptNip04Ciphertext}}(content,\ nsecHexStr.c\_str(),\ thirdPartyPubKey);}
+\DoxyCodeLine{00468\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Decrypted\ Response:\ "{}}\ +\ decryptedResponse);}
+\DoxyCodeLine{00469\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00470\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Parse\ the\ decrypted\ response}}
+\DoxyCodeLine{00471\ \ \ \ \ \ \ \ \ DynamicJsonDocument\ decryptedResponseDoc(1024);}
+\DoxyCodeLine{00472\ \ \ \ \ \ \ \ \ deserializeJson(decryptedResponseDoc,\ decryptedResponse);}
+\DoxyCodeLine{00473\ \ \ \ \ \ \ \ \ String\ resultType\ =\ decryptedResponseDoc[\textcolor{stringliteral}{"{}result\_type"{}}];}
+\DoxyCodeLine{00474\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Result\ Type:\ "{}}\ +\ resultType);}
+\DoxyCodeLine{00475\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00476\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (resultType\ ==\ \textcolor{stringliteral}{"{}make\_invoice"{}})\ \{}
+\DoxyCodeLine{00477\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}===\ Processing\ make\_invoice\ result\ ==="{}});}
+\DoxyCodeLine{00478\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Free\ heap\ before\ processing:\ "{}}\ +\ String(ESP.getFreeHeap()));}
+\DoxyCodeLine{00479\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00480\ \ \ \ \ \ \ \ \ \ \ \ \ JsonObject\ result\ =\ decryptedResponseDoc[\textcolor{stringliteral}{"{}result"{}}];}
+\DoxyCodeLine{00481\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00482\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ result\ object\ is\ valid}}
+\DoxyCodeLine{00483\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (result.isNull())\ \{}
+\DoxyCodeLine{00484\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}ERROR:\ Result\ object\ is\ null!"{}});}
+\DoxyCodeLine{00485\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00486\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00487\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00488\ \ \ \ \ \ \ \ \ \ \ \ \ String\ invoice\ =\ result[\textcolor{stringliteral}{"{}invoice"{}}].as<String>();}
+\DoxyCodeLine{00489\ \ \ \ \ \ \ \ \ \ \ \ \ String\ description\ =\ result[\textcolor{stringliteral}{"{}description"{}}];}
+\DoxyCodeLine{00490\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ amount\ =\ result[\textcolor{stringliteral}{"{}amount"{}}];}
+\DoxyCodeLine{00491\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00492\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Invoice:\ "{}}\ +\ invoice);}
+\DoxyCodeLine{00493\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Description:\ "{}}\ +\ description);}
+\DoxyCodeLine{00494\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Amount:\ "{}}\ +\ String(amount)\ +\ \textcolor{stringliteral}{"{}\ msats"{}});}
+\DoxyCodeLine{00495\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Invoice\ validity\ check:\ "{}}\ +\ String(invoice.length()\ >\ 0\ ?\ \textcolor{stringliteral}{"{}VALID"{}}\ :\ \textcolor{stringliteral}{"{}INVALID"{}}));}
+\DoxyCodeLine{00496\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00497\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (invoice.length()\ ==\ 0)\ \{}
+\DoxyCodeLine{00498\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}ERROR:\ Empty\ invoice\ received!"{}});}
+\DoxyCodeLine{00499\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00500\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00501\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00502\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Store\ the\ current\ invoice}}
+\DoxyCodeLine{00503\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Storing\ current\ invoice..."{}});}
+\DoxyCodeLine{00504\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_a4e5666c5f59ca4d455e2148a3f06d329}{setCurrentInvoice}}(invoice);}
+\DoxyCodeLine{00505\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Invoice\ stored\ successfully"{}});}
+\DoxyCodeLine{00506\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00507\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Free\ heap\ before\ UI\ update:\ "{}}\ +\ String(ESP.getFreeHeap()));}
+\DoxyCodeLine{00508\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00509\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Notify\ the\ App\ module\ that\ invoice\ was\ created}}
+\DoxyCodeLine{00510\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ App::notifyInvoiceCreated(invoice)\ will\ be\ called\ externally}}
+\DoxyCodeLine{00511\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Calling\ UI::updateInvoiceDisplay..."{}});}
+\DoxyCodeLine{00512\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_u_i_a69ebc6c2a7039e77b2a0c8e3b4d2235d}{UI::updateInvoiceDisplay}}(invoice,\ amount\ /\ 1000);\ \textcolor{comment}{//\ Convert\ msats\ to\ sats}}
+\DoxyCodeLine{00513\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}UI::updateInvoiceDisplay\ completed"{}});}
+\DoxyCodeLine{00514\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00515\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Free\ heap\ after\ UI\ update:\ "{}}\ +\ String(ESP.getFreeHeap()));}
+\DoxyCodeLine{00516\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00517\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Start\ watching\ for\ payment\ notifications}}
+\DoxyCodeLine{00518\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Starting\ invoice\ notification\ watchdog..."{}});}
+\DoxyCodeLine{00519\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_a209d5a499b7718c1a0d5984a191091a9}{startInvoiceNotificationWatchdog}}();}
+\DoxyCodeLine{00520\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00521\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Start\ invoice\ lookup\ timer\ (after\ 3\ seconds)}}
+\DoxyCodeLine{00522\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Starting\ invoice\ lookup\ timer..."{}});}
+\DoxyCodeLine{00523\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_a1c4b50b7a22b309f6b6f3ddcf9f32a74}{startInvoiceLookupTimer}}();}
+\DoxyCodeLine{00524\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}===\ make\_invoice\ processing\ completed\ ==="{}});}
+\DoxyCodeLine{00525\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (resultType\ ==\ \textcolor{stringliteral}{"{}lookup\_invoice"{}})\ \{}
+\DoxyCodeLine{00526\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Received\ lookup\_invoice\ response:"{}});}
+\DoxyCodeLine{00527\ \ \ \ \ \ \ \ \ \ \ \ \ String\ resultJson;}
+\DoxyCodeLine{00528\ \ \ \ \ \ \ \ \ \ \ \ \ serializeJson(decryptedResponseDoc[\textcolor{stringliteral}{"{}result"{}}],\ resultJson);}
+\DoxyCodeLine{00529\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(resultJson);}
+\DoxyCodeLine{00530\ }
+\DoxyCodeLine{00531\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Settled\ at\ value\ is:\ "{}}\ +\ decryptedResponseDoc[\textcolor{stringliteral}{"{}result"{}}][\textcolor{stringliteral}{"{}settled\_at"{}}].as<String>());}
+\DoxyCodeLine{00532\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00533\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ check\ if\ settled\ at\ is\ a\ timestamp}}
+\DoxyCodeLine{00534\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (decryptedResponseDoc[\textcolor{stringliteral}{"{}result"{}}].containsKey(\textcolor{stringliteral}{"{}settled\_at"{}})\ \&\&\ decryptedResponseDoc[\textcolor{stringliteral}{"{}result"{}}][\textcolor{stringliteral}{"{}settled\_at"{}}]\ >=\ 1231006505)\ \{}
+\DoxyCodeLine{00535\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Invoice\ is\ settled\ (paid)."{}});}
+\DoxyCodeLine{00536\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00537\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Stop\ the\ lookup\ timer}}
+\DoxyCodeLine{00538\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_a1dd636b9104cd24b5d2fbd91329a67cd}{stopInvoiceLookupTimer}}();}
+\DoxyCodeLine{00539\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00540\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Stop\ the\ notification\ watchdog}}
+\DoxyCodeLine{00541\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_a9a72ecf2c1ad80aafcb1d1a79651d0aa}{stopInvoiceNotificationWatchdog}}();}
+\DoxyCodeLine{00542\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00543\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Notify\ payment\ received}}
+\DoxyCodeLine{00544\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Payment\ received\ -\/\ updating\ UI"{}});}
+\DoxyCodeLine{00545\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_u_i_a85a9c95d4c743ddadfb3d0e8a4833482}{UI::showPaymentReceived}}();}
+\DoxyCodeLine{00546\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00547\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Clear\ the\ current\ invoice}}
+\DoxyCodeLine{00548\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_a4e5666c5f59ca4d455e2148a3f06d329}{setCurrentInvoice}}(\textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00549\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00550\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00551\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Invoice\ is\ not\ settled\ yet."{}});}
+\DoxyCodeLine{00552\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00553\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00554\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_a18f2ad2c95003389637ea9d84d18d5cf}\label{namespace_n_w_c_a18f2ad2c95003389637ea9d84d18d5cf}} 
+\index{NWC@{NWC}!handleWebsocketMessage@{handleWebsocketMessage}}
+\index{handleWebsocketMessage@{handleWebsocketMessage}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{handleWebsocketMessage()}{handleWebsocketMessage()}}
+{\footnotesize\ttfamily void NWC\+::handle\+Websocket\+Message (\begin{DoxyParamCaption}\item[{void $\ast$}]{arg,  }\item[{uint8\+\_\+t $\ast$}]{data,  }\item[{size\+\_\+t}]{len }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00391}{391}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00391\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00392\ \ \ \ \ \ \ \ \ String\ message\ =\ String((\textcolor{keywordtype}{char}*)data);}
+\DoxyCodeLine{00393\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Processing\ WebSocket\ message:\ "{}}\ +\ message);}
+\DoxyCodeLine{00394\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00395\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Parse\ JSON\ message}}
+\DoxyCodeLine{00396\ \ \ \ \ \ \ \ \ DynamicJsonDocument\ doc(4096);}
+\DoxyCodeLine{00397\ \ \ \ \ \ \ \ \ DeserializationError\ error\ =\ deserializeJson(doc,\ message);}
+\DoxyCodeLine{00398\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00399\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (error)\ \{}
+\DoxyCodeLine{00400\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Failed\ to\ parse\ JSON\ message"{}});}
+\DoxyCodeLine{00401\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00402\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00403\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00404\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ it's\ an\ event\ array}}
+\DoxyCodeLine{00405\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (doc.is<JsonArray>()\ \&\&\ doc.size()\ >=\ 3)\ \{}
+\DoxyCodeLine{00406\ \ \ \ \ \ \ \ \ \ \ \ \ String\ messageType\ =\ doc[0];}
+\DoxyCodeLine{00407\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (messageType\ ==\ \textcolor{stringliteral}{"{}EVENT"{}})\ \{}
+\DoxyCodeLine{00408\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ JsonObject\ \textcolor{keyword}{event}\ =\ doc[2];}
+\DoxyCodeLine{00409\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ kind\ =\ \textcolor{keyword}{event}[\textcolor{stringliteral}{"{}kind"{}}];}
+\DoxyCodeLine{00410\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00411\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (kind)\ \{}
+\DoxyCodeLine{00412\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 23195:}
+\DoxyCodeLine{00413\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ handleNwcResponseEvent(data);}
+\DoxyCodeLine{00414\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00415\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 23196:}
+\DoxyCodeLine{00416\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ handleNwcNip04NotificationEvent(data);}
+\DoxyCodeLine{00417\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00418\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 23197:}
+\DoxyCodeLine{00419\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ handleNwcNip44NotificationEvent(data);}
+\DoxyCodeLine{00420\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00421\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00422\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Received\ event\ with\ unknown\ kind:\ "{}}\ +\ String(kind));}
+\DoxyCodeLine{00423\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00424\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00425\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00426\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00427\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_a1c1d9172198a60da5d26688610968af8}\label{namespace_n_w_c_a1c1d9172198a60da5d26688610968af8}} 
+\index{NWC@{NWC}!init@{init}}
+\index{init@{init}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void NWC\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00068}{68}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Initialize\ Nostr\ memory\ space}}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_ad38d4b13131e9c51ec482ccfcbc32841}{nostr::initMemorySpace}}(2048,\ 2048);}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ timeClient.begin();}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ timeClient.setTimeOffset(0);}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ bootTimestamp\ =\ millis();}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Initialize\ connection\ tracking\ variables}}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ last\_ws\_message\_received\ =\ millis();}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ last\_connection\_health\_check\ =\ millis();}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ reconnection\_attempts\ =\ 0;}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Load\ NWC\ URL\ from\ preferences}}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_a12351ef57b22b79c192426979a938cc3}{loadUrlFromPreferences}}();}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Setup\ NWC\ data\ if\ URL\ is\ available}}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{ui_8cpp_aeaf5a5f752292b6ed1aa766532cd6bc0}{nwcPairingUrl}}.length()\ >\ 0)\ \{}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_a99fdb7cc9f77370099522b3461ad84ab}{setupData}}(\mbox{\hyperlink{ui_8cpp_aeaf5a5f752292b6ed1aa766532cd6bc0}{nwcPairingUrl}});}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00088\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_a8a33716d68e6fc7b598f13474a8aa3d0}\label{namespace_n_w_c_a8a33716d68e6fc7b598f13474a8aa3d0}} 
+\index{NWC@{NWC}!invoiceLookupTimerCallback@{invoiceLookupTimerCallback}}
+\index{invoiceLookupTimerCallback@{invoiceLookupTimerCallback}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{invoiceLookupTimerCallback()}{invoiceLookupTimerCallback()}}
+{\footnotesize\ttfamily void NWC\+::invoice\+Lookup\+Timer\+Callback (\begin{DoxyParamCaption}\item[{lv\+\_\+timer\+\_\+t $\ast$}]{timer }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00898}{898}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00898\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00899\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ invoice\ processing\ is\ still\ active}}
+\DoxyCodeLine{00900\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{namespace_u_i_a256c4320af439732def9402342903462}{UI::isInvoiceProcessing}}())\ \{}
+\DoxyCodeLine{00901\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Invoice\ lookup\ cancelled\ -\/\ overlay\ not\ active"{}});}
+\DoxyCodeLine{00902\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_a1dd636b9104cd24b5d2fbd91329a67cd}{stopInvoiceLookupTimer}}();}
+\DoxyCodeLine{00903\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00904\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00905\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00906\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Don't\ send\ lookup\ requests\ during\ light\ sleep\ (unless\ invoice\ is\ active)}}
+\DoxyCodeLine{00907\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespace_app_ac4ecbc30cf2ce9769c0dd6fab5e5a364}{App::isInLightSleep}}())\ \{}
+\DoxyCodeLine{00908\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Invoice\ lookup\ skipped\ -\/\ device\ in\ light\ sleep"{}});}
+\DoxyCodeLine{00909\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00910\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00911\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00912\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_a86b3f2617b12ae02c2e60ea915a43076}{sendInvoiceLookupRequest}}();}
+\DoxyCodeLine{00913\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_a8f8ca7e2372b1dce642bba4ad410d190}\label{namespace_n_w_c_a8f8ca7e2372b1dce642bba4ad410d190}} 
+\index{NWC@{NWC}!invoiceNotificationWatchdogCallback@{invoiceNotificationWatchdogCallback}}
+\index{invoiceNotificationWatchdogCallback@{invoiceNotificationWatchdogCallback}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{invoiceNotificationWatchdogCallback()}{invoiceNotificationWatchdogCallback()}}
+{\footnotesize\ttfamily void NWC\+::invoice\+Notification\+Watchdog\+Callback (\begin{DoxyParamCaption}\item[{lv\+\_\+timer\+\_\+t $\ast$}]{timer }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00915}{915}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00915\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00916\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Invoice\ notification\ watchdog\ timer\ fired"{}});}
+\DoxyCodeLine{00917\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Implementation\ would\ handle\ invoice\ timeout}}
+\DoxyCodeLine{00918\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_aa2e749abffc8f1f4995bb52e3a6e8f47}\label{namespace_n_w_c_aa2e749abffc8f1f4995bb52e3a6e8f47}} 
+\index{NWC@{NWC}!isConnected@{isConnected}}
+\index{isConnected@{isConnected}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{isConnected()}{isConnected()}}
+{\footnotesize\ttfamily bool NWC\+::is\+Connected (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00256}{256}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ webSocket.isConnected();}
+\DoxyCodeLine{00258\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_acbeaaf60838294051dacb43171560fbf}\label{namespace_n_w_c_acbeaaf60838294051dacb43171560fbf}} 
+\index{NWC@{NWC}!isFragmentInProgress@{isFragmentInProgress}}
+\index{isFragmentInProgress@{isFragmentInProgress}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{isFragmentInProgress()}{isFragmentInProgress()}}
+{\footnotesize\ttfamily bool NWC\+::is\+Fragment\+In\+Progress (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00879}{879}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00879\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00880\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ws\_fragment\_in\_progress;}
+\DoxyCodeLine{00881\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_a15d4ed6dee9570b25a02a7fe34b9ece0}\label{namespace_n_w_c_a15d4ed6dee9570b25a02a7fe34b9ece0}} 
+\index{NWC@{NWC}!isInitialized@{isInitialized}}
+\index{isInitialized@{isInitialized}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{isInitialized()}{isInitialized()}}
+{\footnotesize\ttfamily bool NWC\+::is\+Initialized (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00252}{252}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{ui_8cpp_a948b1584cfc5c1cf91af9d43729abf48}{nwc\_initialized}};}
+\DoxyCodeLine{00254\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_a12351ef57b22b79c192426979a938cc3}\label{namespace_n_w_c_a12351ef57b22b79c192426979a938cc3}} 
+\index{NWC@{NWC}!loadUrlFromPreferences@{loadUrlFromPreferences}}
+\index{loadUrlFromPreferences@{loadUrlFromPreferences}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{loadUrlFromPreferences()}{loadUrlFromPreferences()}}
+{\footnotesize\ttfamily void NWC\+::load\+Url\+From\+Preferences (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00260}{260}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ preferences.begin(\textcolor{stringliteral}{"{}nwc-\/config"{}},\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ String\ saved\_url\ =\ preferences.getString(\textcolor{stringliteral}{"{}nwc\_url"{}},\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ preferences.end();}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (saved\_url.length()\ >\ 0)\ \{}
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{ui_8cpp_aeaf5a5f752292b6ed1aa766532cd6bc0}{nwcPairingUrl}}\ =\ saved\_url;}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Loaded\ NWC\ URL\ from\ preferences:\ "{}}\ +\ \mbox{\hyperlink{ui_8cpp_aeaf5a5f752292b6ed1aa766532cd6bc0}{nwcPairingUrl}});}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}No\ saved\ NWC\ URL\ found,\ using\ default"{}});}
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00271\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_a5d747ef50eeb74cee5612fd939452183}\label{namespace_n_w_c_a5d747ef50eeb74cee5612fd939452183}} 
+\index{NWC@{NWC}!makeInvoice@{makeInvoice}}
+\index{makeInvoice@{makeInvoice}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{makeInvoice()}{makeInvoice()}}
+{\footnotesize\ttfamily void NWC\+::make\+Invoice (\begin{DoxyParamCaption}\item[{float}]{amount,  }\item[{const String \&}]{currency }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00568}{568}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00568\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00569\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{namespace_n_w_c_aa2e749abffc8f1f4995bb52e3a6e8f47}{isConnected}}())\ \{}
+\DoxyCodeLine{00570\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}WebSocket\ not\ connected,\ cannot\ create\ invoice"{}});}
+\DoxyCodeLine{00571\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00572\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00573\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00574\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Calculate\ sats\ based\ on\ entered\ amount\ and\ selected\ currency}}
+\DoxyCodeLine{00575\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ amount\_sats;}
+\DoxyCodeLine{00576\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (currency\ ==\ \textcolor{stringliteral}{"{}sats"{}})\ \{}
+\DoxyCodeLine{00577\ \ \ \ \ \ \ \ \ \ \ \ \ amount\_sats\ =\ (int)amount;}
+\DoxyCodeLine{00578\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00579\ \ \ \ \ \ \ \ \ \ \ \ \ amount\_sats\ =\ \mbox{\hyperlink{namespace_n_w_c_adf733f5382e816e1e45d39bf3e3ec04f}{calculateSatsFromAmount}}(amount,\ currency);}
+\DoxyCodeLine{00580\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00581\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00582\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Create\ the\ make\_invoice\ request}}
+\DoxyCodeLine{00583\ \ \ \ \ \ \ \ \ DynamicJsonDocument\ doc(512);}
+\DoxyCodeLine{00584\ \ \ \ \ \ \ \ \ doc[\textcolor{stringliteral}{"{}method"{}}]\ =\ \textcolor{stringliteral}{"{}make\_invoice"{}};}
+\DoxyCodeLine{00585\ \ \ \ \ \ \ \ \ JsonObject\ params\ =\ doc.createNestedObject(\textcolor{stringliteral}{"{}params"{}});}
+\DoxyCodeLine{00586\ \ \ \ \ \ \ \ \ params[\textcolor{stringliteral}{"{}amount"{}}]\ =\ amount\_sats\ *\ 1000;\ \textcolor{comment}{//\ Convert\ to\ msats}}
+\DoxyCodeLine{00587\ \ \ \ \ \ \ \ \ params[\textcolor{stringliteral}{"{}description"{}}]\ =\ \textcolor{stringliteral}{"{}Payment\ to\ "{}}\ +\ \mbox{\hyperlink{namespace_settings_a1019ae9148e79f599d5cd8f70d024853}{Settings::getShopName}}();}
+\DoxyCodeLine{00588\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00589\ \ \ \ \ \ \ \ \ String\ requestJson;}
+\DoxyCodeLine{00590\ \ \ \ \ \ \ \ \ serializeJson(doc,\ requestJson);}
+\DoxyCodeLine{00591\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00592\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Sending\ make\_invoice\ request:\ "{}}\ +\ requestJson);}
+\DoxyCodeLine{00593\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Amount:\ "{}}\ +\ String(amount)\ +\ \textcolor{stringliteral}{"{}\ "{}}\ +\ currency\ +\ \textcolor{stringliteral}{"{}\ =\ "{}}\ +\ String(amount\_sats)\ +\ \textcolor{stringliteral}{"{}\ sats"{}});}
+\DoxyCodeLine{00594\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00595\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Encrypt\ and\ send\ the\ request}}
+\DoxyCodeLine{00596\ \ \ \ \ \ \ \ \ String\ encryptedDm\ =\ \mbox{\hyperlink{namespacenostr_a8b5b9ccf35b878cc481ed6523f568a49}{nostr::getEncryptedDm}}(nsecHexStr.c\_str(),\ npubHexStr.c\_str(),\ walletPubKey.c\_str(),\ 23194,\ \mbox{\hyperlink{namespace_n_w_c_a08f91f132a611875988ba75c6d196318}{getUnixTimestamp}}(),\ requestJson,\ \textcolor{stringliteral}{"{}nip04"{}});}
+\DoxyCodeLine{00597\ \ \ \ \ \ \ \ \ webSocket.sendTXT(encryptedDm);}
+\DoxyCodeLine{00598\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00599\ \ \ \ \ \ \ \ \ doc.clear();}
+\DoxyCodeLine{00600\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_a10d04b654063bcec6d1bcf528fb3a24d}\label{namespace_n_w_c_a10d04b654063bcec6d1bcf528fb3a24d}} 
+\index{NWC@{NWC}!processLoop@{processLoop}}
+\index{processLoop@{processLoop}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{processLoop()}{processLoop()}}
+{\footnotesize\ttfamily void NWC\+::process\+Loop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00849}{849}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00849\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00850\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Only\ process\ WebSocket\ events\ if\ WiFi\ is\ connected}}
+\DoxyCodeLine{00851\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ prevents\ the\ WebSocket\ from\ blocking\ the\ main\ loop\ when\ there's\ no\ network}}
+\DoxyCodeLine{00852\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (WiFi.status()\ ==\ WL\_CONNECTED)\ \{}
+\DoxyCodeLine{00853\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ last\_loop\_time\ =\ 0;}
+\DoxyCodeLine{00854\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (millis()\ -\/\ last\_loop\_time\ >\ 3000)\ \{}
+\DoxyCodeLine{00855\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}===\ NWC\ loop\ ==="{}});}
+\DoxyCodeLine{00856\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Free\ heap:\ "{}}\ +\ String(ESP.getFreeHeap()));}
+\DoxyCodeLine{00857\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ last\_loop\_time\ =\ millis();}
+\DoxyCodeLine{00858\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00859\ \ \ \ \ \ \ \ \ \ \ \ \ webSocket.loop();}
+\DoxyCodeLine{00860\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00861\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ for\ fragment\ timeout}}
+\DoxyCodeLine{00862\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ws\_fragment\_in\_progress\ \&\&\ (millis()\ -\/\ ws\_fragment\_start\_time\ >\ Config::WS\_FRAGMENT\_TIMEOUT))\ \{}
+\DoxyCodeLine{00863\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Fragment\ timeout,\ resetting\ state"{}});}
+\DoxyCodeLine{00864\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ resetWebsocketFragmentState();}
+\DoxyCodeLine{00865\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00866\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00867\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Ping\ handling\ is\ now\ done\ in\ attemptReconnectionIfNeeded()}}
+\DoxyCodeLine{00868\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00869\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ WiFi\ not\ connected\ -\/\ reset\ connection\ state\ to\ prevent\ hanging}}
+\DoxyCodeLine{00870\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{ui_8cpp_a948b1584cfc5c1cf91af9d43729abf48}{nwc\_initialized}}\ \&\&\ !connection\_in\_progress)\ \{}
+\DoxyCodeLine{00871\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}WiFi\ disconnected,\ resetting\ NWC\ connection\ state"{}});}
+\DoxyCodeLine{00872\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{ui_8cpp_a948b1584cfc5c1cf91af9d43729abf48}{nwc\_initialized}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00873\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ connection\_in\_progress\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00874\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_a870035d4e450773ec8a50d0bf0b81702}{resetWebsocketFragmentState}}();}
+\DoxyCodeLine{00875\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00876\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00877\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_a870035d4e450773ec8a50d0bf0b81702}\label{namespace_n_w_c_a870035d4e450773ec8a50d0bf0b81702}} 
+\index{NWC@{NWC}!resetWebsocketFragmentState@{resetWebsocketFragmentState}}
+\index{resetWebsocketFragmentState@{resetWebsocketFragmentState}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{resetWebsocketFragmentState()}{resetWebsocketFragmentState()}}
+{\footnotesize\ttfamily void NWC\+::reset\+Websocket\+Fragment\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00429}{429}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00429\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00430\ \ \ \ \ \ \ \ \ ws\_fragment\_in\_progress\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00431\ \ \ \ \ \ \ \ \ ws\_fragmented\_message\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00432\ \ \ \ \ \ \ \ \ ws\_fragment\_total\_size\ =\ 0;}
+\DoxyCodeLine{00433\ \ \ \ \ \ \ \ \ ws\_fragment\_received\_size\ =\ 0;}
+\DoxyCodeLine{00434\ \ \ \ \ \ \ \ \ ws\_fragment\_is\_binary\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00435\ \ \ \ \ \ \ \ \ ws\_fragment\_start\_time\ =\ 0;}
+\DoxyCodeLine{00436\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_a342261f4ab3c85e7f89e8664b3311bf4}\label{namespace_n_w_c_a342261f4ab3c85e7f89e8664b3311bf4}} 
+\index{NWC@{NWC}!restartConnection@{restartConnection}}
+\index{restartConnection@{restartConnection}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{restartConnection()}{restartConnection()}}
+{\footnotesize\ttfamily void NWC\+::restart\+Connection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00229}{229}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Restarting\ NWC\ connection..."{}});}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ webSocket.disconnect();}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{ui_8cpp_a948b1584cfc5c1cf91af9d43729abf48}{nwc\_initialized}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ connection\_in\_progress\ =\ \textcolor{keyword}{false};\ \ \textcolor{comment}{//\ Reset\ connection\ state}}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (relayUrl.length()\ >\ 0)\ \{}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \ \ \ \ delay(1000);}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_a72c06bdc692eac76bc21d4e73ce31349}{connectToRelay}}();}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00239\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_a14fff083f2b310dfa50fad5e75510d22}\label{namespace_n_w_c_a14fff083f2b310dfa50fad5e75510d22}} 
+\index{NWC@{NWC}!saveUrlToPreferences@{saveUrlToPreferences}}
+\index{saveUrlToPreferences@{saveUrlToPreferences}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{saveUrlToPreferences()}{saveUrlToPreferences()}}
+{\footnotesize\ttfamily void NWC\+::save\+Url\+To\+Preferences (\begin{DoxyParamCaption}\item[{const String \&}]{url }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00273}{273}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ preferences.begin(\textcolor{stringliteral}{"{}nwc-\/config"{}},\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ preferences.putString(\textcolor{stringliteral}{"{}nwc\_url"{}},\ url);}
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ preferences.end();}
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Saved\ NWC\ URL\ to\ preferences:\ "{}}\ +\ url);}
+\DoxyCodeLine{00278\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_a86b3f2617b12ae02c2e60ea915a43076}\label{namespace_n_w_c_a86b3f2617b12ae02c2e60ea915a43076}} 
+\index{NWC@{NWC}!sendInvoiceLookupRequest@{sendInvoiceLookupRequest}}
+\index{sendInvoiceLookupRequest@{sendInvoiceLookupRequest}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{sendInvoiceLookupRequest()}{sendInvoiceLookupRequest()}}
+{\footnotesize\ttfamily void NWC\+::send\+Invoice\+Lookup\+Request (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00602}{602}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00602\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00603\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{namespace_n_w_c_aa2e749abffc8f1f4995bb52e3a6e8f47}{isConnected}}())\ \{}
+\DoxyCodeLine{00604\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}WebSocket\ not\ connected,\ cannot\ send\ invoice\ lookup"{}});}
+\DoxyCodeLine{00605\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00606\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00607\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00608\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (current\_invoice\_str.isEmpty())\ \{}
+\DoxyCodeLine{00609\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}No\ current\ invoice\ to\ lookup"{}});}
+\DoxyCodeLine{00610\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00611\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00612\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00613\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Sending\ invoice\ lookup\ request\ for:\ "{}}\ +\ current\_invoice\_str);}
+\DoxyCodeLine{00614\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00615\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Create\ the\ lookup\_invoice\ request}}
+\DoxyCodeLine{00616\ \ \ \ \ \ \ \ \ DynamicJsonDocument\ doc(512);}
+\DoxyCodeLine{00617\ \ \ \ \ \ \ \ \ doc[\textcolor{stringliteral}{"{}method"{}}]\ =\ \textcolor{stringliteral}{"{}lookup\_invoice"{}};}
+\DoxyCodeLine{00618\ \ \ \ \ \ \ \ \ JsonObject\ params\ =\ doc.createNestedObject(\textcolor{stringliteral}{"{}params"{}});}
+\DoxyCodeLine{00619\ \ \ \ \ \ \ \ \ params[\textcolor{stringliteral}{"{}invoice"{}}]\ =\ current\_invoice\_str;}
+\DoxyCodeLine{00620\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00621\ \ \ \ \ \ \ \ \ String\ requestJson;}
+\DoxyCodeLine{00622\ \ \ \ \ \ \ \ \ serializeJson(doc,\ requestJson);}
+\DoxyCodeLine{00623\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00624\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Sending\ lookup\_invoice\ request:\ "{}}\ +\ requestJson);}
+\DoxyCodeLine{00625\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00626\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Encrypt\ and\ send\ the\ request}}
+\DoxyCodeLine{00627\ \ \ \ \ \ \ \ \ String\ encryptedDm\ =\ \mbox{\hyperlink{namespacenostr_a8b5b9ccf35b878cc481ed6523f568a49}{nostr::getEncryptedDm}}(nsecHexStr.c\_str(),\ npubHexStr.c\_str(),\ walletPubKey.c\_str(),\ 23194,\ \mbox{\hyperlink{namespace_n_w_c_a08f91f132a611875988ba75c6d196318}{getUnixTimestamp}}(),\ requestJson,\ \textcolor{stringliteral}{"{}nip04"{}});}
+\DoxyCodeLine{00628\ \ \ \ \ \ \ \ \ webSocket.sendTXT(encryptedDm);}
+\DoxyCodeLine{00629\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00630\ \ \ \ \ \ \ \ \ doc.clear();}
+\DoxyCodeLine{00631\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_af6a6e3b53f844f01887bfa71344c836f}\label{namespace_n_w_c_af6a6e3b53f844f01887bfa71344c836f}} 
+\index{NWC@{NWC}!sendPing@{sendPing}}
+\index{sendPing@{sendPing}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{sendPing()}{sendPing()}}
+{\footnotesize\ttfamily void NWC\+::send\+Ping (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00842}{842}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00842\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00843\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespace_n_w_c_aa2e749abffc8f1f4995bb52e3a6e8f47}{isConnected}}())\ \{}
+\DoxyCodeLine{00844\ \ \ \ \ \ \ \ \ \ \ \ \ webSocket.sendPing();}
+\DoxyCodeLine{00845\ \ \ \ \ \ \ \ \ \ \ \ \ last\_ws\_ping\ =\ millis();}
+\DoxyCodeLine{00846\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00847\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_a4e5666c5f59ca4d455e2148a3f06d329}\label{namespace_n_w_c_a4e5666c5f59ca4d455e2148a3f06d329}} 
+\index{NWC@{NWC}!setCurrentInvoice@{setCurrentInvoice}}
+\index{setCurrentInvoice@{setCurrentInvoice}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{setCurrentInvoice()}{setCurrentInvoice()}}
+{\footnotesize\ttfamily void NWC\+::set\+Current\+Invoice (\begin{DoxyParamCaption}\item[{const String \&}]{invoice }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00663}{663}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00663\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00664\ \ \ \ \ \ \ \ \ current\_invoice\_str\ =\ invoice;}
+\DoxyCodeLine{00665\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_a66b3bd6f1962777af5011df44dcf85e7}\label{namespace_n_w_c_a66b3bd6f1962777af5011df44dcf85e7}} 
+\index{NWC@{NWC}!setPairingUrl@{setPairingUrl}}
+\index{setPairingUrl@{setPairingUrl}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{setPairingUrl()}{setPairingUrl()}}
+{\footnotesize\ttfamily void NWC\+::set\+Pairing\+Url (\begin{DoxyParamCaption}\item[{const String \&}]{url }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00284}{284}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{ui_8cpp_aeaf5a5f752292b6ed1aa766532cd6bc0}{nwcPairingUrl}}\ =\ url;}
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_a14fff083f2b310dfa50fad5e75510d22}{saveUrlToPreferences}}(url);}
+\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_a99fdb7cc9f77370099522b3461ad84ab}{setupData}}(url);}
+\DoxyCodeLine{00288\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_ac164a3889940ecbe838a8d52cd0dd2f7}\label{namespace_n_w_c_ac164a3889940ecbe838a8d52cd0dd2f7}} 
+\index{NWC@{NWC}!setRelayStatusLabel@{setRelayStatusLabel}}
+\index{setRelayStatusLabel@{setRelayStatusLabel}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{setRelayStatusLabel()}{setRelayStatusLabel()}}
+{\footnotesize\ttfamily void NWC\+::set\+Relay\+Status\+Label (\begin{DoxyParamCaption}\item[{lv\+\_\+obj\+\_\+t $\ast$}]{label }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00924}{924}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00924\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00925\ \ \ \ \ \ \ \ \ relay\_status\_label\ =\ label;}
+\DoxyCodeLine{00926\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Update\ display\ with\ current\ connection\ state}}
+\DoxyCodeLine{00927\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_a28e8eb156bed73d6466b37fe3d81241d}{updateRelayStatusDisplay}}(\mbox{\hyperlink{namespace_n_w_c_aa2e749abffc8f1f4995bb52e3a6e8f47}{isConnected}}());}
+\DoxyCodeLine{00928\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_aa67b7139a1355f5f43c75c014796dd80}\label{namespace_n_w_c_aa67b7139a1355f5f43c75c014796dd80}} 
+\index{NWC@{NWC}!setStatusCallback@{setStatusCallback}}
+\index{setStatusCallback@{setStatusCallback}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{setStatusCallback()}{setStatusCallback()}}
+{\footnotesize\ttfamily void NWC\+::set\+Status\+Callback (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespace_n_w_c_a331436fb2caeba54627e342126185a74}{nwc\+\_\+status\+\_\+callback\+\_\+t}}}]{callback }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00920}{920}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00920\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00921\ \ \ \ \ \ \ \ \ status\_callback\ =\ callback;}
+\DoxyCodeLine{00922\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_a99fdb7cc9f77370099522b3461ad84ab}\label{namespace_n_w_c_a99fdb7cc9f77370099522b3461ad84ab}} 
+\index{NWC@{NWC}!setupData@{setupData}}
+\index{setupData@{setupData}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{setupData()}{setupData()}}
+{\footnotesize\ttfamily void NWC\+::setup\+Data (\begin{DoxyParamCaption}\item[{const String \&}]{url }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00105}{105}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{ui_8cpp_aeaf5a5f752292b6ed1aa766532cd6bc0}{nwcPairingUrl}}\ =\ url;}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Parse\ the\ NWC\ URL\ to\ extract\ relay\ and\ secret}}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (url.startsWith(\textcolor{stringliteral}{"{}nostr+walletconnect://"{}}))\ \{}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ String\ urlPart\ =\ url.substring(22);\ \textcolor{comment}{//\ Remove\ "{}nostr+walletconnect://"{}}}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ queryIndex\ =\ urlPart.indexOf(\textcolor{charliteral}{'?'});}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (queryIndex\ !=\ -\/1)\ \{}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ walletPubKey\ =\ urlPart.substring(0,\ queryIndex);}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ String\ queryParams\ =\ urlPart.substring(queryIndex\ +\ 1);}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Parse\ query\ parameters}}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ relayIndex\ =\ queryParams.indexOf(\textcolor{stringliteral}{"{}relay="{}});}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ secretIndex\ =\ queryParams.indexOf(\textcolor{stringliteral}{"{}secret="{}});}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (relayIndex\ !=\ -\/1)\ \{}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ relayEnd\ =\ queryParams.indexOf(\textcolor{charliteral}{'\&'},\ relayIndex);}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (relayEnd\ ==\ -\/1)\ relayEnd\ =\ queryParams.length();}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ relayUrl\ =\ queryParams.substring(relayIndex\ +\ 6,\ relayEnd);}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ URL\ decode}}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ relayUrl.replace(\textcolor{stringliteral}{"{}\%3A"{}},\ \textcolor{stringliteral}{"{}:"{}});}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ relayUrl.replace(\textcolor{stringliteral}{"{}\%2F"{}},\ \textcolor{stringliteral}{"{}/"{}});}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (secretIndex\ !=\ -\/1)\ \{}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ secretEnd\ =\ queryParams.indexOf(\textcolor{charliteral}{'\&'},\ secretIndex);}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (secretEnd\ ==\ -\/1)\ secretEnd\ =\ queryParams.length();}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nsecHexStr\ =\ queryParams.substring(secretIndex\ +\ 7,\ secretEnd);}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}NWC\ Data\ Setup:"{}});}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Wallet\ PubKey:\ "{}}\ +\ walletPubKey);}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Relay\ URL:\ "{}}\ +\ relayUrl);}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Secret:\ "{}}\ +\ nsecHexStr);}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Generate\ npub\ from\ nsec\ if\ needed}}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (nsecHexStr.length()\ >\ 0)\ \{}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ byteSize\ =\ 32;}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{byte}\ privateKeyBytes[byteSize];}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ fromHex(nsecHexStr.c\_str(),\ privateKeyBytes,\ byteSize);}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ PrivateKey\ privateKey(privateKeyBytes);}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ \ \ PublicKey\ pub\ =\ privateKey.publicKey();}
+\DoxyCodeLine{00151\ \ \ \ \ }
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Extract\ only\ the\ X\ coordinate\ (32\ bytes)\ for\ Nostr}}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{byte}\ pubKeyBytes[33];}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ pub.serialize(pubKeyBytes,\ \textcolor{keyword}{sizeof}(pubKeyBytes));}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Convert\ the\ X\ coordinate\ (bytes\ 1-\/32)\ to\ hex\ string}}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ npubHex[65];}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <\ 33;\ i++)\ \{}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sprintf(npubHex\ +\ (i-\/1)*2,\ \textcolor{stringliteral}{"{}\%02x"{}},\ pubKeyBytes[i]);}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ npubHex[64]\ =\ \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \ npubHexStr\ =\ String(npubHex);}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_a14fff083f2b310dfa50fad5e75510d22}{saveUrlToPreferences}}(url);}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00165\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_a1c4b50b7a22b309f6b6f3ddcf9f32a74}\label{namespace_n_w_c_a1c4b50b7a22b309f6b6f3ddcf9f32a74}} 
+\index{NWC@{NWC}!startInvoiceLookupTimer@{startInvoiceLookupTimer}}
+\index{startInvoiceLookupTimer@{startInvoiceLookupTimer}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{startInvoiceLookupTimer()}{startInvoiceLookupTimer()}}
+{\footnotesize\ttfamily void NWC\+::start\+Invoice\+Lookup\+Timer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00646}{646}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00646\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00647\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (invoice\_lookup\_timer\ ==\ NULL)\ \{}
+\DoxyCodeLine{00648\ \ \ \ \ \ \ \ \ \ \ \ \ invoice\_lookup\_timer\ =\ lv\_timer\_create(invoiceLookupTimerCallback,\ 3000,\ NULL);\ \textcolor{comment}{//\ 3\ seconds}}
+\DoxyCodeLine{00649\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00650\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_a209d5a499b7718c1a0d5984a191091a9}\label{namespace_n_w_c_a209d5a499b7718c1a0d5984a191091a9}} 
+\index{NWC@{NWC}!startInvoiceNotificationWatchdog@{startInvoiceNotificationWatchdog}}
+\index{startInvoiceNotificationWatchdog@{startInvoiceNotificationWatchdog}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{startInvoiceNotificationWatchdog()}{startInvoiceNotificationWatchdog()}}
+{\footnotesize\ttfamily void NWC\+::start\+Invoice\+Notification\+Watchdog (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00633}{633}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00633\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00634\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (invoice\_notification\_watchdog\_timer\ ==\ NULL)\ \{}
+\DoxyCodeLine{00635\ \ \ \ \ \ \ \ \ \ \ \ \ invoice\_notification\_watchdog\_timer\ =\ lv\_timer\_create(invoiceNotificationWatchdogCallback,\ 30000,\ NULL);}
+\DoxyCodeLine{00636\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00637\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_a1dd636b9104cd24b5d2fbd91329a67cd}\label{namespace_n_w_c_a1dd636b9104cd24b5d2fbd91329a67cd}} 
+\index{NWC@{NWC}!stopInvoiceLookupTimer@{stopInvoiceLookupTimer}}
+\index{stopInvoiceLookupTimer@{stopInvoiceLookupTimer}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{stopInvoiceLookupTimer()}{stopInvoiceLookupTimer()}}
+{\footnotesize\ttfamily void NWC\+::stop\+Invoice\+Lookup\+Timer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00652}{652}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00652\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00653\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (invoice\_lookup\_timer)\ \{}
+\DoxyCodeLine{00654\ \ \ \ \ \ \ \ \ \ \ \ \ lv\_timer\_del(invoice\_lookup\_timer);}
+\DoxyCodeLine{00655\ \ \ \ \ \ \ \ \ \ \ \ \ invoice\_lookup\_timer\ =\ NULL;}
+\DoxyCodeLine{00656\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00657\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_a9a72ecf2c1ad80aafcb1d1a79651d0aa}\label{namespace_n_w_c_a9a72ecf2c1ad80aafcb1d1a79651d0aa}} 
+\index{NWC@{NWC}!stopInvoiceNotificationWatchdog@{stopInvoiceNotificationWatchdog}}
+\index{stopInvoiceNotificationWatchdog@{stopInvoiceNotificationWatchdog}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{stopInvoiceNotificationWatchdog()}{stopInvoiceNotificationWatchdog()}}
+{\footnotesize\ttfamily void NWC\+::stop\+Invoice\+Notification\+Watchdog (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00639}{639}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00639\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00640\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (invoice\_notification\_watchdog\_timer)\ \{}
+\DoxyCodeLine{00641\ \ \ \ \ \ \ \ \ \ \ \ \ lv\_timer\_del(invoice\_notification\_watchdog\_timer);}
+\DoxyCodeLine{00642\ \ \ \ \ \ \ \ \ \ \ \ \ invoice\_notification\_watchdog\_timer\ =\ NULL;}
+\DoxyCodeLine{00643\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00644\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_a6084bca944be2b2f16e57728dbbc64dc}\label{namespace_n_w_c_a6084bca944be2b2f16e57728dbbc64dc}} 
+\index{NWC@{NWC}!updatePricesFromJson@{updatePricesFromJson}}
+\index{updatePricesFromJson@{updatePricesFromJson}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{updatePricesFromJson()}{updatePricesFromJson()}}
+{\footnotesize\ttfamily void NWC\+::update\+Prices\+From\+Json (\begin{DoxyParamCaption}\item[{const String \&}]{json\+Response }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00690}{690}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00690\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00691\ \ \ \ \ \ \ \ \ DynamicJsonDocument\ doc(2048);}
+\DoxyCodeLine{00692\ \ \ \ \ \ \ \ \ DeserializationError\ error\ =\ deserializeJson(doc,\ jsonResponse);}
+\DoxyCodeLine{00693\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00694\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (error)\ \{}
+\DoxyCodeLine{00695\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Failed\ to\ parse\ price\ JSON"{}});}
+\DoxyCodeLine{00696\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00697\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00698\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00699\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Update\ price\ array}}
+\DoxyCodeLine{00700\ \ \ \ \ \ \ \ \ btc\_prices[Currency::USD]\ =\ doc[\textcolor{stringliteral}{"{}USD"{}}].as<\textcolor{keywordtype}{long}>();}
+\DoxyCodeLine{00701\ \ \ \ \ \ \ \ \ btc\_prices[Currency::EUR]\ =\ doc[\textcolor{stringliteral}{"{}EUR"{}}].as<\textcolor{keywordtype}{long}>();}
+\DoxyCodeLine{00702\ \ \ \ \ \ \ \ \ btc\_prices[Currency::GBP]\ =\ doc[\textcolor{stringliteral}{"{}GBP"{}}].as<\textcolor{keywordtype}{long}>();}
+\DoxyCodeLine{00703\ \ \ \ \ \ \ \ \ btc\_prices[Currency::CAD]\ =\ doc[\textcolor{stringliteral}{"{}CAD"{}}].as<\textcolor{keywordtype}{long}>();}
+\DoxyCodeLine{00704\ \ \ \ \ \ \ \ \ btc\_prices[Currency::CHF]\ =\ doc[\textcolor{stringliteral}{"{}CHF"{}}].as<\textcolor{keywordtype}{long}>();}
+\DoxyCodeLine{00705\ \ \ \ \ \ \ \ \ btc\_prices[Currency::AUD]\ =\ doc[\textcolor{stringliteral}{"{}AUD"{}}].as<\textcolor{keywordtype}{long}>();}
+\DoxyCodeLine{00706\ \ \ \ \ \ \ \ \ btc\_prices[Currency::JPY]\ =\ doc[\textcolor{stringliteral}{"{}JPY"{}}].as<\textcolor{keywordtype}{long}>();}
+\DoxyCodeLine{00707\ \ \ \ \ \ \ \ \ btc\_prices[Currency::CNY]\ =\ doc[\textcolor{stringliteral}{"{}CNY"{}}].as<\textcolor{keywordtype}{long}>();}
+\DoxyCodeLine{00708\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00709\ \ \ \ \ \ \ \ \ Serial.printf(\textcolor{stringliteral}{"{}Updated\ prices\ -\/\ USD:\ \%ld,\ EUR:\ \%ld,\ GBP:\ \%ld\(\backslash\)\(\backslash\)n"{}},\ }
+\DoxyCodeLine{00710\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ btc\_prices[Currency::USD],\ btc\_prices[Currency::EUR],\ btc\_prices[Currency::GBP]);}
+\DoxyCodeLine{00711\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_a28e8eb156bed73d6466b37fe3d81241d}\label{namespace_n_w_c_a28e8eb156bed73d6466b37fe3d81241d}} 
+\index{NWC@{NWC}!updateRelayStatusDisplay@{updateRelayStatusDisplay}}
+\index{updateRelayStatusDisplay@{updateRelayStatusDisplay}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{updateRelayStatusDisplay()}{updateRelayStatusDisplay()}}
+{\footnotesize\ttfamily void NWC\+::update\+Relay\+Status\+Display (\begin{DoxyParamCaption}\item[{bool}]{connected }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00802}{802}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00802\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00803\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (status\_callback)\ \{}
+\DoxyCodeLine{00804\ \ \ \ \ \ \ \ \ \ \ \ \ status\_callback(connected,\ connected\ ?\ \textcolor{stringliteral}{"{}Relay\ Connected"{}}\ :\ \textcolor{stringliteral}{"{}Relay\ Disconnected"{}});}
+\DoxyCodeLine{00805\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00806\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00807\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Update\ the\ relay\ status\ label}}
+\DoxyCodeLine{00808\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (relay\_status\_label\ !=\ NULL\ \&\&\ lv\_obj\_is\_valid(relay\_status\_label))\ \{}
+\DoxyCodeLine{00809\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (connected)\ \{}
+\DoxyCodeLine{00810\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ String\ relay\_status\_text\ =\ LV\_SYMBOL\_OK\ +\ String(\textcolor{stringliteral}{"{}\ Relay:\ Connected"{}});}
+\DoxyCodeLine{00811\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lv\_label\_set\_text(relay\_status\_label,\ relay\_status\_text.c\_str());}
+\DoxyCodeLine{00812\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lv\_obj\_set\_style\_text\_color(relay\_status\_label,\ lv\_color\_hex(0x00FF00),\ 0);}
+\DoxyCodeLine{00813\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00814\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ String\ relay\_status\_text\ =\ \textcolor{stringliteral}{"{}Relay:\ Disconnected"{}};}
+\DoxyCodeLine{00815\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lv\_label\_set\_text(relay\_status\_label,\ relay\_status\_text.c\_str());}
+\DoxyCodeLine{00816\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lv\_obj\_set\_style\_text\_color(relay\_status\_label,\ lv\_color\_hex(0x9E9E9E),\ 0);}
+\DoxyCodeLine{00817\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00818\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00819\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_acd1483629fef32437ab3d58cbfe11318}\label{namespace_n_w_c_acd1483629fef32437ab3d58cbfe11318}} 
+\index{NWC@{NWC}!updateTime@{updateTime}}
+\index{updateTime@{updateTime}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{updateTime()}{updateTime()}}
+{\footnotesize\ttfamily void NWC\+::update\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00821}{821}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00821\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00822\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Only\ update\ time\ from\ NTP\ server\ if\ WiFi\ is\ connected}}
+\DoxyCodeLine{00823\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ prevents\ DNS\ resolution\ failures\ when\ there's\ no\ network}}
+\DoxyCodeLine{00824\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (WiFi.status()\ ==\ WL\_CONNECTED)\ \{}
+\DoxyCodeLine{00825\ \ \ \ \ \ \ \ \ \ \ \ \ timeClient.update();}
+\DoxyCodeLine{00826\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00827\ \ \ \ \ \ \ \ \ unixTimestamp\ =\ timeClient.getEpochTime();}
+\DoxyCodeLine{00828\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_n_w_c_aa137fc6f2c6092d4b9464c4246e851c6}\label{namespace_n_w_c_aa137fc6f2c6092d4b9464c4246e851c6}} 
+\index{NWC@{NWC}!websocketEvent@{websocketEvent}}
+\index{websocketEvent@{websocketEvent}!NWC@{NWC}}
+\doxysubsubsection{\texorpdfstring{websocketEvent()}{websocketEvent()}}
+{\footnotesize\ttfamily void NWC\+::websocket\+Event (\begin{DoxyParamCaption}\item[{WStype\+\_\+t}]{type,  }\item[{uint8\+\_\+t $\ast$}]{payload,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nwc_8cpp_source_l00290}{290}} of file \mbox{\hyperlink{nwc_8cpp_source}{nwc.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (type)\ \{}
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ WStype\_DISCONNECTED:}
+\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.printf(\textcolor{stringliteral}{"{}[WSc]\ Disconnected!\(\backslash\)\(\backslash\)n"{}});}
+\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{ui_8cpp_a948b1584cfc5c1cf91af9d43729abf48}{nwc\_initialized}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00295\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ connection\_in\_progress\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_a870035d4e450773ec8a50d0bf0b81702}{resetWebsocketFragmentState}}();}
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_a28e8eb156bed73d6466b37fe3d81241d}{updateRelayStatusDisplay}}(\textcolor{keyword}{false});}
+\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (status\_callback)\ \{}
+\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ status\_callback(\textcolor{keyword}{false},\ \textcolor{stringliteral}{"{}Disconnected"{}});}
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ WStype\_CONNECTED:}
+\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.printf(\textcolor{stringliteral}{"{}[WSc]\ Connected\ to:\ \%s\(\backslash\)\(\backslash\)n"{}},\ payload);}
+\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{ui_8cpp_a948b1584cfc5c1cf91af9d43729abf48}{nwc\_initialized}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ connection\_in\_progress\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ last\_ws\_ping\ =\ millis();}
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ last\_ws\_message\_received\ =\ millis();}
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ reconnection\_attempts\ =\ 0;\ \textcolor{comment}{//\ Reset\ reconnection\ counter\ on\ successful\ connection}}
+\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ updateRelayStatusDisplay(\textcolor{keyword}{true});}
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (status\_callback)\ \{}
+\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ status\_callback(\textcolor{keyword}{true},\ \textcolor{stringliteral}{"{}Connected"{}});}
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00314\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Subscribe\ to\ events}}
+\DoxyCodeLine{00316\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00317\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ String\ subscriptionId\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00318\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 16;\ i++)\ \{}
+\DoxyCodeLine{00319\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ subscriptionId\ +=\ String(random(16),\ HEX);}
+\DoxyCodeLine{00320\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ String\ subscribeMessage\ =\ \textcolor{stringliteral}{"{}[\(\backslash\)"{}REQ\(\backslash\)"{},\(\backslash\)"{}"{}}\ +\ subscriptionId\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{},\{\(\backslash\)"{}kinds\(\backslash\)"{}:[23195,23196,23197],\(\backslash\)"{}\#p\(\backslash\)"{}:[\(\backslash\)"{}"{}}\ +\ npubHexStr\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{}]\}]"{}};}
+\DoxyCodeLine{00323\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ webSocket.sendTXT(subscribeMessage);}
+\DoxyCodeLine{00324\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Sent\ subscription:\ "{}}\ +\ subscribeMessage);}
+\DoxyCodeLine{00325\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00326\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00327\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00328\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ WStype\_TEXT:}
+\DoxyCodeLine{00329\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.printf(\textcolor{stringliteral}{"{}[WSc]\ Received\ text:\ \%s\(\backslash\)\(\backslash\)n"{}},\ payload);}
+\DoxyCodeLine{00330\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ last\_ws\_message\_received\ =\ millis();\ \textcolor{comment}{//\ Track\ message\ reception}}
+\DoxyCodeLine{00331\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_a18f2ad2c95003389637ea9d84d18d5cf}{handleWebsocketMessage}}(NULL,\ payload,\ length);}
+\DoxyCodeLine{00332\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00333\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00334\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ WStype\_BIN:}
+\DoxyCodeLine{00335\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ last\_ws\_message\_received\ =\ millis();\ \textcolor{comment}{//\ Track\ binary\ message\ reception}}
+\DoxyCodeLine{00336\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.printf(\textcolor{stringliteral}{"{}[WSc]\ Received\ binary\ length:\ \%u\(\backslash\)\(\backslash\)n"{}},\ length);}
+\DoxyCodeLine{00337\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00338\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ WStype\_FRAGMENT\_TEXT\_START:}
+\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.printf(\textcolor{stringliteral}{"{}[WSc]\ Fragment\ text\ start,\ length:\ \%u\(\backslash\)\(\backslash\)n"{}},\ length);}
+\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ws\_fragment\_in\_progress\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00342\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ws\_fragment\_is\_binary\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00343\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ws\_fragmented\_message\ =\ String((\textcolor{keywordtype}{char}*)payload);}
+\DoxyCodeLine{00344\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ws\_fragment\_start\_time\ =\ millis();}
+\DoxyCodeLine{00345\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ws\_fragment\_received\_size\ =\ length;}
+\DoxyCodeLine{00346\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00347\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00348\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ WStype\_FRAGMENT\_BIN\_START:}
+\DoxyCodeLine{00349\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.printf(\textcolor{stringliteral}{"{}[WSc]\ Fragment\ binary\ start,\ length:\ \%u\(\backslash\)\(\backslash\)n"{}},\ length);}
+\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ws\_fragment\_in\_progress\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00351\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ws\_fragment\_is\_binary\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00352\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ws\_fragment\_start\_time\ =\ millis();}
+\DoxyCodeLine{00353\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ws\_fragment\_received\_size\ =\ length;}
+\DoxyCodeLine{00354\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00355\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00356\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ WStype\_FRAGMENT:}
+\DoxyCodeLine{00357\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ws\_fragment\_in\_progress)\ \{}
+\DoxyCodeLine{00358\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ws\_fragment\_received\_size\ +=\ length;}
+\DoxyCodeLine{00359\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!ws\_fragment\_is\_binary)\ \{}
+\DoxyCodeLine{00360\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ws\_fragmented\_message\ +=\ String((\textcolor{keywordtype}{char}*)payload);}
+\DoxyCodeLine{00361\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00362\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.printf(\textcolor{stringliteral}{"{}[WSc]\ Fragment\ received,\ total\ size:\ \%u\(\backslash\)\(\backslash\)n"{}},\ ws\_fragment\_received\_size);}
+\DoxyCodeLine{00363\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00364\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00365\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00366\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ WStype\_FRAGMENT\_FIN:}
+\DoxyCodeLine{00367\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ws\_fragment\_in\_progress)\ \{}
+\DoxyCodeLine{00368\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ws\_fragment\_received\_size\ +=\ length;}
+\DoxyCodeLine{00369\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!ws\_fragment\_is\_binary)\ \{}
+\DoxyCodeLine{00370\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ws\_fragmented\_message\ +=\ String((\textcolor{keywordtype}{char}*)payload);}
+\DoxyCodeLine{00371\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.printf(\textcolor{stringliteral}{"{}[WSc]\ Fragment\ finished,\ final\ message:\ \%s\(\backslash\)\(\backslash\)n"{}},\ ws\_fragmented\_message.c\_str());}
+\DoxyCodeLine{00372\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_a18f2ad2c95003389637ea9d84d18d5cf}{handleWebsocketMessage}}(NULL,\ (uint8\_t*)ws\_fragmented\_message.c\_str(),\ ws\_fragmented\_message.length());}
+\DoxyCodeLine{00373\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00374\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_a870035d4e450773ec8a50d0bf0b81702}{resetWebsocketFragmentState}}();}
+\DoxyCodeLine{00375\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00376\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00377\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00378\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ WStype\_ERROR:}
+\DoxyCodeLine{00379\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.printf(\textcolor{stringliteral}{"{}[WSc]\ Error:\ \%s\(\backslash\)\(\backslash\)n"{}},\ payload);}
+\DoxyCodeLine{00380\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00381\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00382\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ WStype\_PONG:}
+\DoxyCodeLine{00383\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.printf(\textcolor{stringliteral}{"{}[WSc]\ Pong\ received\(\backslash\)\(\backslash\)n"{}});}
+\DoxyCodeLine{00384\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00385\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00386\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00387\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00388\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00389\ \ \ \ \ \}}
+
+\end{DoxyCode}

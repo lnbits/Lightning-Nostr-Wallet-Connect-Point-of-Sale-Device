@@ -1,0 +1,207 @@
+\hypertarget{namespacenip19}{}\doxysection{nip19 Namespace Reference}
+\label{namespacenip19}\index{nip19@{nip19}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespacenip19_a375620e2a6b82042af6aed871330718c}{hex\+String\+To\+Byte\+Array}} (const char $\ast$hex\+String, uint8\+\_\+t $\ast$bytes\+Array)
+\item 
+void \mbox{\hyperlink{namespacenip19_af1e501572517de94d24b4b6847435157}{convert\+To5bit\+Array}} (const uint8\+\_\+t $\ast$byte\+Array, size\+\_\+t byte\+Array\+Len, uint8\+\_\+t $\ast$bit5\+Array, size\+\_\+t $\ast$bit5\+Array\+Len)
+\item 
+void \mbox{\hyperlink{namespacenip19_a62479c62a5dcefbb9d19ac28eba449fe}{convert5bit\+Array\+To\+Byte\+Array}} (const uint8\+\_\+t $\ast$data5bit, size\+\_\+t data5bit\+Len, uint8\+\_\+t $\ast$byte\+Array, size\+\_\+t $\ast$byte\+Array\+Len)
+\item 
+void \mbox{\hyperlink{namespacenip19_a994f1d8ff64403b04fee8bb38893244c}{byte\+Array\+To\+Hex\+String}} (const uint8\+\_\+t $\ast$byte\+Array, size\+\_\+t byte\+Array\+Len, char $\ast$hex\+String)
+\item 
+const char $\ast$ \mbox{\hyperlink{namespacenip19_a5a93a1d6823ab9d9ff44cb261406d281}{encode\+Hex\+To\+Bech32}} (const char $\ast$nsec\+Hex, const char $\ast$hrp)
+\item 
+const char $\ast$ \mbox{\hyperlink{namespacenip19_a5dc3227e5470880e4e5a56971860fb99}{decode\+Bech32\+To\+Hex\+String}} (const char $\ast$input, const char $\ast$expected\+\_\+hrp)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacenip19_a994f1d8ff64403b04fee8bb38893244c}\label{namespacenip19_a994f1d8ff64403b04fee8bb38893244c}} 
+\index{nip19@{nip19}!byteArrayToHexString@{byteArrayToHexString}}
+\index{byteArrayToHexString@{byteArrayToHexString}!nip19@{nip19}}
+\doxysubsubsection{\texorpdfstring{byteArrayToHexString()}{byteArrayToHexString()}}
+{\footnotesize\ttfamily void nip19\+::byte\+Array\+To\+Hex\+String (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t $\ast$}]{byte\+Array,  }\item[{size\+\_\+t}]{byte\+Array\+Len,  }\item[{char $\ast$}]{hex\+String }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nip19_8cpp_source_l00064}{64}} of file \mbox{\hyperlink{nip19_8cpp_source}{nip19.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00065\ \ \ \ \ \{}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ byteArrayLen;\ ++i)}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ sprintf(hexString\ +\ (i\ *\ 2),\ \textcolor{stringliteral}{"{}\%02x"{}},\ byteArray[i]);}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00070\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacenip19_a62479c62a5dcefbb9d19ac28eba449fe}\label{namespacenip19_a62479c62a5dcefbb9d19ac28eba449fe}} 
+\index{nip19@{nip19}!convert5bitArrayToByteArray@{convert5bitArrayToByteArray}}
+\index{convert5bitArrayToByteArray@{convert5bitArrayToByteArray}!nip19@{nip19}}
+\doxysubsubsection{\texorpdfstring{convert5bitArrayToByteArray()}{convert5bitArrayToByteArray()}}
+{\footnotesize\ttfamily void nip19\+::convert5bit\+Array\+To\+Byte\+Array (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t $\ast$}]{data5bit,  }\item[{size\+\_\+t}]{data5bit\+Len,  }\item[{uint8\+\_\+t $\ast$}]{byte\+Array,  }\item[{size\+\_\+t $\ast$}]{byte\+Array\+Len }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nip19_8cpp_source_l00040}{40}} of file \mbox{\hyperlink{nip19_8cpp_source}{nip19.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00041\ \ \ \ \ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ *byteArrayLen\ =\ 0;}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ buffer\ =\ 0;\ \textcolor{comment}{//\ Use\ an\ int\ to\ ensure\ there's\ enough\ space\ for\ bit\ manipulation.}}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ bitPos\ =\ 0;\ \textcolor{comment}{//\ Tracks\ the\ current\ bit\ position\ in\ buffer.}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ data5bitLen;\ ++i)}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Shift\ the\ buffer\ to\ the\ left\ by\ 5\ bits\ and\ add\ the\ current\ 5-\/bit\ group.}}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ buffer\ =\ (buffer\ <<\ 5)\ |\ (data5bit[i]\ \&\ 0x1F);\ \textcolor{comment}{//\ Ensure\ only\ the\ lower\ 5\ bits\ are\ added.}}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ bitPos\ +=\ 5;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ We've\ added\ 5\ bits\ to\ the\ buffer.}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ While\ we\ have\ at\ least\ 8\ bits\ in\ the\ buffer,\ extract\ each\ byte.}}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (bitPos\ >=\ 8)}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bitPos\ -\/=\ 8;\ \textcolor{comment}{//\ Decrease\ bitPos\ by\ 8\ as\ we're\ extracting\ a\ byte.}}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Extract\ the\ byte\ from\ the\ buffer,\ leaving\ any\ remaining\ bits\ in\ place.}}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Shift\ right\ by\ the\ remaining\ bit\ count\ to\ get\ the\ next\ byte\ to\ the\ rightmost\ position.}}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ byteArray[(*byteArrayLen)++]\ =\ (buffer\ >>\ bitPos)\ \&\ 0xFF;}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00061\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacenip19_af1e501572517de94d24b4b6847435157}\label{namespacenip19_af1e501572517de94d24b4b6847435157}} 
+\index{nip19@{nip19}!convertTo5bitArray@{convertTo5bitArray}}
+\index{convertTo5bitArray@{convertTo5bitArray}!nip19@{nip19}}
+\doxysubsubsection{\texorpdfstring{convertTo5bitArray()}{convertTo5bitArray()}}
+{\footnotesize\ttfamily void nip19\+::convert\+To5bit\+Array (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t $\ast$}]{byte\+Array,  }\item[{size\+\_\+t}]{byte\+Array\+Len,  }\item[{uint8\+\_\+t $\ast$}]{bit5\+Array,  }\item[{size\+\_\+t $\ast$}]{bit5\+Array\+Len }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nip19_8cpp_source_l00014}{14}} of file \mbox{\hyperlink{nip19_8cpp_source}{nip19.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00015\ \ \ \ \ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ *bit5ArrayLen\ =\ 0;}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ bitPos\ =\ 0;}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ uint32\_t\ buffer\ =\ 0;}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ byteArrayLen;\ i++)}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ buffer\ =\ (buffer\ <<\ 8)\ |\ byteArray[i];}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ bitPos\ +=\ 8;}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (bitPos\ >=\ 5)}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bitPos\ -\/=\ 5;}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bit5Array[(*bit5ArrayLen)++]\ =\ (buffer\ >>\ bitPos)\ \&\ 0x1F;}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Handle\ remaining\ bits\ in\ buffer\ if\ any}}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (bitPos\ >\ 0)}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ bit5Array[(*bit5ArrayLen)++]\ =\ (buffer\ <<\ (5\ -\/\ bitPos))\ \&\ 0x1F;}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00037\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacenip19_a5dc3227e5470880e4e5a56971860fb99}\label{namespacenip19_a5dc3227e5470880e4e5a56971860fb99}} 
+\index{nip19@{nip19}!decodeBech32ToHexString@{decodeBech32ToHexString}}
+\index{decodeBech32ToHexString@{decodeBech32ToHexString}!nip19@{nip19}}
+\doxysubsubsection{\texorpdfstring{decodeBech32ToHexString()}{decodeBech32ToHexString()}}
+{\footnotesize\ttfamily const char $\ast$ nip19\+::decode\+Bech32\+To\+Hex\+String (\begin{DoxyParamCaption}\item[{const char $\ast$}]{input,  }\item[{const char $\ast$}]{expected\+\_\+hrp }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nip19_8cpp_source_l00090}{90}} of file \mbox{\hyperlink{nip19_8cpp_source}{nip19.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00091\ \ \ \ \ \{}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ hexString[2048];\ \textcolor{comment}{//\ Static\ storage\ for\ the\ return\ value}}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ hrp[1024];}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ uint8\_t\ data[1024];}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ data\_len;}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (bech32\_decode(hrp,\ data,\ \&data\_len,\ input))}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (strcmp(hrp,\ expected\_hrp)\ ==\ 0)}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ byteArray[1024];}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ byteArrayLen;}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenip19_a62479c62a5dcefbb9d19ac28eba449fe}{convert5bitArrayToByteArray}}(data,\ data\_len,\ byteArray,\ \&byteArrayLen);}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenip19_a994f1d8ff64403b04fee8bb38893244c}{byteArrayToHexString}}(byteArray,\ byteArrayLen,\ hexString);}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Error:\ HRP\ does\ not\ match\ expected\ value."{}});}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ strcpy(hexString,\ \textcolor{stringliteral}{"{}Error:\ HRP\ mismatch"{}});}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Bech32\ decoding\ failed."{}});}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ strcpy(hexString,\ \textcolor{stringliteral}{"{}Error:\ Decoding\ failed"{}});}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ hexString;}
+\DoxyCodeLine{00121\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacenip19_a5a93a1d6823ab9d9ff44cb261406d281}\label{namespacenip19_a5a93a1d6823ab9d9ff44cb261406d281}} 
+\index{nip19@{nip19}!encodeHexToBech32@{encodeHexToBech32}}
+\index{encodeHexToBech32@{encodeHexToBech32}!nip19@{nip19}}
+\doxysubsubsection{\texorpdfstring{encodeHexToBech32()}{encodeHexToBech32()}}
+{\footnotesize\ttfamily const char $\ast$ nip19\+::encode\+Hex\+To\+Bech32 (\begin{DoxyParamCaption}\item[{const char $\ast$}]{nsec\+Hex,  }\item[{const char $\ast$}]{hrp }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nip19_8cpp_source_l00072}{72}} of file \mbox{\hyperlink{nip19_8cpp_source}{nip19.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00073\ \ \ \ \ \{}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ output[1024];\ \textcolor{comment}{//\ Static\ storage\ for\ the\ Bech32\ encoded\ string}}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ byteArrayLen\ =\ strlen(nsecHex)\ /\ 2;}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ uint8\_t\ byteArray[byteArrayLen];}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenip19_a375620e2a6b82042af6aed871330718c}{hexStringToByteArray}}(nsecHex,\ byteArray);}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ uint8\_t\ bit5Array[byteArrayLen\ *\ 8\ /\ 5\ +\ 1];\ \textcolor{comment}{//\ Max\ possible\ size\ needed}}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ bit5ArrayLen\ =\ 0;}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenip19_af1e501572517de94d24b4b6847435157}{convertTo5bitArray}}(byteArray,\ byteArrayLen,\ bit5Array,\ \&bit5ArrayLen);}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ bech32\_encode(output,\ hrp,\ bit5Array,\ bit5ArrayLen);}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ output;}
+\DoxyCodeLine{00088\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacenip19_a375620e2a6b82042af6aed871330718c}\label{namespacenip19_a375620e2a6b82042af6aed871330718c}} 
+\index{nip19@{nip19}!hexStringToByteArray@{hexStringToByteArray}}
+\index{hexStringToByteArray@{hexStringToByteArray}!nip19@{nip19}}
+\doxysubsubsection{\texorpdfstring{hexStringToByteArray()}{hexStringToByteArray()}}
+{\footnotesize\ttfamily void nip19\+::hex\+String\+To\+Byte\+Array (\begin{DoxyParamCaption}\item[{const char $\ast$}]{hex\+String,  }\item[{uint8\+\_\+t $\ast$}]{bytes\+Array }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nip19_8cpp_source_l00006}{6}} of file \mbox{\hyperlink{nip19_8cpp_source}{nip19.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00007\ \ \ \ \ \{}
+\DoxyCodeLine{00008\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ hexString[i]\ \&\&\ hexString[i\ +\ 1];\ i\ +=\ 2)}
+\DoxyCodeLine{00009\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ \ \ \ \ sscanf(\&hexString[i],\ \textcolor{stringliteral}{"{}\%2hhx"{}},\ \&bytesArray[i\ /\ 2]);}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00012\ \ \ \ \ \}}
+
+\end{DoxyCode}

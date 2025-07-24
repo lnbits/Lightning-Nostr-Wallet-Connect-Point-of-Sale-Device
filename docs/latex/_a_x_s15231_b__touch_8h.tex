@@ -1,0 +1,91 @@
+\hypertarget{_a_x_s15231_b__touch_8h}{}\doxysection{src/\+AXS15231\+B\+\_\+touch.h File Reference}
+\label{_a_x_s15231_b__touch_8h}\index{src/AXS15231B\_touch.h@{src/AXS15231B\_touch.h}}
+{\ttfamily \#include $<$Arduino.\+h$>$}\newline
+{\ttfamily \#include $<$Wire.\+h$>$}\newline
+Include dependency graph for AXS15231\+B\+\_\+touch.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_a_x_s15231_b___touch}{AXS15231\+B\+\_\+\+Touch}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_a_x_s15231_b__touch_8h_afbda2c41c8f2adb5e4d2754b703c1edb}{AXS\+\_\+\+GET\+\_\+\+GESTURE\+\_\+\+TYPE}}(buf)~(buf\mbox{[}0\mbox{]})
+\item 
+\#define \mbox{\hyperlink{_a_x_s15231_b__touch_8h_a05d793d6784e8204c7980ee292a0c1af}{AXS\+\_\+\+GET\+\_\+\+FINGER\+\_\+\+NUMBER}}(buf)~(buf\mbox{[}1\mbox{]})
+\item 
+\#define \mbox{\hyperlink{_a_x_s15231_b__touch_8h_a803559cf29e4d5689387b69c973b73ff}{AXS\+\_\+\+GET\+\_\+\+EVENT}}(buf)~((buf\mbox{[}2\mbox{]} $>$$>$ 0) \& 0x03)
+\item 
+\#define \mbox{\hyperlink{_a_x_s15231_b__touch_8h_a72eb0c96b5abb7eab79ece6e2a5301e8}{AXS\+\_\+\+GET\+\_\+\+POINT\+\_\+X}}(buf)~(((uint16\+\_\+t)(buf\mbox{[}2\mbox{]} \& 0x0F) $<$$<$8) + (uint16\+\_\+t)buf\mbox{[}3\mbox{]})
+\item 
+\#define \mbox{\hyperlink{_a_x_s15231_b__touch_8h_a4673abbf8d3c77e2393ed979541d3ba2}{AXS\+\_\+\+GET\+\_\+\+POINT\+\_\+Y}}(buf)~(((uint16\+\_\+t)(buf\mbox{[}4\mbox{]} \& 0x0F) $<$$<$8) + (uint16\+\_\+t)buf\mbox{[}5\mbox{]})
+\item 
+\#define \mbox{\hyperlink{_a_x_s15231_b__touch_8h_ab88889208ad180d9427b0f8b1e3f2cd0}{ISR\+\_\+\+PREFIX}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{_a_x_s15231_b__touch_8h_a803559cf29e4d5689387b69c973b73ff}\label{_a_x_s15231_b__touch_8h_a803559cf29e4d5689387b69c973b73ff}} 
+\index{AXS15231B\_touch.h@{AXS15231B\_touch.h}!AXS\_GET\_EVENT@{AXS\_GET\_EVENT}}
+\index{AXS\_GET\_EVENT@{AXS\_GET\_EVENT}!AXS15231B\_touch.h@{AXS15231B\_touch.h}}
+\doxysubsubsection{\texorpdfstring{AXS\_GET\_EVENT}{AXS\_GET\_EVENT}}
+{\footnotesize\ttfamily \#define AXS\+\_\+\+GET\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{buf }\end{DoxyParamCaption})~((buf\mbox{[}2\mbox{]} $>$$>$ 0) \& 0x03)}
+
+
+
+Definition at line \mbox{\hyperlink{_a_x_s15231_b__touch_8h_source_l00043}{43}} of file \mbox{\hyperlink{_a_x_s15231_b__touch_8h_source}{AXS15231\+B\+\_\+touch.\+h}}.
+
+\mbox{\Hypertarget{_a_x_s15231_b__touch_8h_a05d793d6784e8204c7980ee292a0c1af}\label{_a_x_s15231_b__touch_8h_a05d793d6784e8204c7980ee292a0c1af}} 
+\index{AXS15231B\_touch.h@{AXS15231B\_touch.h}!AXS\_GET\_FINGER\_NUMBER@{AXS\_GET\_FINGER\_NUMBER}}
+\index{AXS\_GET\_FINGER\_NUMBER@{AXS\_GET\_FINGER\_NUMBER}!AXS15231B\_touch.h@{AXS15231B\_touch.h}}
+\doxysubsubsection{\texorpdfstring{AXS\_GET\_FINGER\_NUMBER}{AXS\_GET\_FINGER\_NUMBER}}
+{\footnotesize\ttfamily \#define AXS\+\_\+\+GET\+\_\+\+FINGER\+\_\+\+NUMBER(\begin{DoxyParamCaption}\item[{}]{buf }\end{DoxyParamCaption})~(buf\mbox{[}1\mbox{]})}
+
+
+
+Definition at line \mbox{\hyperlink{_a_x_s15231_b__touch_8h_source_l00042}{42}} of file \mbox{\hyperlink{_a_x_s15231_b__touch_8h_source}{AXS15231\+B\+\_\+touch.\+h}}.
+
+\mbox{\Hypertarget{_a_x_s15231_b__touch_8h_afbda2c41c8f2adb5e4d2754b703c1edb}\label{_a_x_s15231_b__touch_8h_afbda2c41c8f2adb5e4d2754b703c1edb}} 
+\index{AXS15231B\_touch.h@{AXS15231B\_touch.h}!AXS\_GET\_GESTURE\_TYPE@{AXS\_GET\_GESTURE\_TYPE}}
+\index{AXS\_GET\_GESTURE\_TYPE@{AXS\_GET\_GESTURE\_TYPE}!AXS15231B\_touch.h@{AXS15231B\_touch.h}}
+\doxysubsubsection{\texorpdfstring{AXS\_GET\_GESTURE\_TYPE}{AXS\_GET\_GESTURE\_TYPE}}
+{\footnotesize\ttfamily \#define AXS\+\_\+\+GET\+\_\+\+GESTURE\+\_\+\+TYPE(\begin{DoxyParamCaption}\item[{}]{buf }\end{DoxyParamCaption})~(buf\mbox{[}0\mbox{]})}
+
+
+
+Definition at line \mbox{\hyperlink{_a_x_s15231_b__touch_8h_source_l00041}{41}} of file \mbox{\hyperlink{_a_x_s15231_b__touch_8h_source}{AXS15231\+B\+\_\+touch.\+h}}.
+
+\mbox{\Hypertarget{_a_x_s15231_b__touch_8h_a72eb0c96b5abb7eab79ece6e2a5301e8}\label{_a_x_s15231_b__touch_8h_a72eb0c96b5abb7eab79ece6e2a5301e8}} 
+\index{AXS15231B\_touch.h@{AXS15231B\_touch.h}!AXS\_GET\_POINT\_X@{AXS\_GET\_POINT\_X}}
+\index{AXS\_GET\_POINT\_X@{AXS\_GET\_POINT\_X}!AXS15231B\_touch.h@{AXS15231B\_touch.h}}
+\doxysubsubsection{\texorpdfstring{AXS\_GET\_POINT\_X}{AXS\_GET\_POINT\_X}}
+{\footnotesize\ttfamily \#define AXS\+\_\+\+GET\+\_\+\+POINT\+\_\+X(\begin{DoxyParamCaption}\item[{}]{buf }\end{DoxyParamCaption})~(((uint16\+\_\+t)(buf\mbox{[}2\mbox{]} \& 0x0F) $<$$<$8) + (uint16\+\_\+t)buf\mbox{[}3\mbox{]})}
+
+
+
+Definition at line \mbox{\hyperlink{_a_x_s15231_b__touch_8h_source_l00044}{44}} of file \mbox{\hyperlink{_a_x_s15231_b__touch_8h_source}{AXS15231\+B\+\_\+touch.\+h}}.
+
+\mbox{\Hypertarget{_a_x_s15231_b__touch_8h_a4673abbf8d3c77e2393ed979541d3ba2}\label{_a_x_s15231_b__touch_8h_a4673abbf8d3c77e2393ed979541d3ba2}} 
+\index{AXS15231B\_touch.h@{AXS15231B\_touch.h}!AXS\_GET\_POINT\_Y@{AXS\_GET\_POINT\_Y}}
+\index{AXS\_GET\_POINT\_Y@{AXS\_GET\_POINT\_Y}!AXS15231B\_touch.h@{AXS15231B\_touch.h}}
+\doxysubsubsection{\texorpdfstring{AXS\_GET\_POINT\_Y}{AXS\_GET\_POINT\_Y}}
+{\footnotesize\ttfamily \#define AXS\+\_\+\+GET\+\_\+\+POINT\+\_\+Y(\begin{DoxyParamCaption}\item[{}]{buf }\end{DoxyParamCaption})~(((uint16\+\_\+t)(buf\mbox{[}4\mbox{]} \& 0x0F) $<$$<$8) + (uint16\+\_\+t)buf\mbox{[}5\mbox{]})}
+
+
+
+Definition at line \mbox{\hyperlink{_a_x_s15231_b__touch_8h_source_l00045}{45}} of file \mbox{\hyperlink{_a_x_s15231_b__touch_8h_source}{AXS15231\+B\+\_\+touch.\+h}}.
+
+\mbox{\Hypertarget{_a_x_s15231_b__touch_8h_ab88889208ad180d9427b0f8b1e3f2cd0}\label{_a_x_s15231_b__touch_8h_ab88889208ad180d9427b0f8b1e3f2cd0}} 
+\index{AXS15231B\_touch.h@{AXS15231B\_touch.h}!ISR\_PREFIX@{ISR\_PREFIX}}
+\index{ISR\_PREFIX@{ISR\_PREFIX}!AXS15231B\_touch.h@{AXS15231B\_touch.h}}
+\doxysubsubsection{\texorpdfstring{ISR\_PREFIX}{ISR\_PREFIX}}
+{\footnotesize\ttfamily \#define ISR\+\_\+\+PREFIX}
+
+
+
+Definition at line \mbox{\hyperlink{_a_x_s15231_b__touch_8h_source_l00053}{53}} of file \mbox{\hyperlink{_a_x_s15231_b__touch_8h_source}{AXS15231\+B\+\_\+touch.\+h}}.
+

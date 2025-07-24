@@ -1,0 +1,36 @@
+\label{index_md_README}%
+\Hypertarget{index_md_README}%
+ A Bitcoin Lightning point of Sale Device that uses \mbox{\hyperlink{namespace_n_w_c}{NWC}} for wallet communications\hypertarget{index_autotoc_md1}{}\doxysection{Overview}\label{index_autotoc_md1}
+This is a Bitcoin Lightning Network point of sale device built for the Guition JC3248\+W535 3.\+5\char`\"{} ESP32-\/\+S3 development board with touch screen display. The device enables Bitcoin payments using Nostr Wallet Connect (\+NWC) protocol for wallet communications.  @section autotoc\+\_\+md2 Features  -\/ $<$strong$>$\+Lightning Network Payments$<$/strong$>$\+: Accept Bitcoin payments via Lightning Network -\/ $<$strong$>$\+Touch Screen Interface$<$/strong$>$\+: 320x480 color touchscreen -\/ $<$strong$>$\+Nostr Wallet Connect$<$/strong$>$\+: Wallet communication using NWC protocol -\/ $<$strong$>$\+Multi-\/\+Currency Support$<$/strong$>$\+: USD, EUR, GBP, CAD, CHF, AUD, JPY, CNY with automatic Bitcoin price conversion -\/ $<$strong$>$\+Wi\+Fi Setup$<$/strong$>$\+: Easy configuration on device with AP mode for NWC pairing code setup -\/ $<$strong$>$\+PIN Protection$<$/strong$>$\+: Secure access to settings and configuration -\/ $<$strong$>$\+Power Management$<$/strong$>$\+: Light sleep after a short period of inactivity and deep sleep mode after a longer period of inactivity  $<$br$>$ -\/ $<$strong$>$\+QR Code Display$<$/strong$>$\+: Shows Lightning invoices for customer payments  @section autotoc\+\_\+md3 Hardware Requirements  -\/ Guition JC3248\+W535 3.\+5\char`\"{} ESP32-\/\+S3 development board with touch screen display (320x480)
+\begin{DoxyItemize}
+\item Power supply (USB or battery)
+\end{DoxyItemize}\hypertarget{index_autotoc_md4}{}\doxysection{Getting Started}\label{index_autotoc_md4}
+\hypertarget{index_autotoc_md5}{}\doxysubsection{Prerequisites}\label{index_autotoc_md5}
+
+\begin{DoxyItemize}
+\item \href{https://platformio.org/}{\texttt{ Platform\+IO}} installed
+\item Guition JC3248\+W535 3.\+5\char`\"{} touch screen display (320x480)  @subsection autotoc\+\_\+md6 Building and Flashing  @icode\{bash\}  \# Clone the repository git clone $<$repository-\/url$>$ cd nwc-\/pos  \# Build the project pio run  \# Upload to device pio run -\/-\/target upload  \# Monitor serial output pio device monitor @endicode  @subsection autotoc\+\_\+md7 Documentation  @icode\{bash\}  \# Generate documentation pio run -\/t docs @endicode   @subsection autotoc\+\_\+md8 Initial Setup  1. Power on the device 2. Enter settings using the Settings icon at the bottom left corner of the keypad 3. Enter Wi\+Fi settings and connect to your Wi\+Fi network 4. In your NWC compatible wallet, create a new connection and copy the pairing code to your clip board 1. In settings, enable the NWC Pairing Code settings, use the default pin code \char`\"{}1234\char`\"{} 3. Connect to the Wi\+Fi AP created by the device and open the portal in your browser 4. Paste the pairing code you copied from your wallet 5. Set a new PIN number using the default pin code \char`\"{}1234"{}
+\end{DoxyItemize}
+\begin{DoxyEnumerate}
+\item Start accepting payments
+\end{DoxyEnumerate}\hypertarget{index_autotoc_md9}{}\doxysection{Architecture}\label{index_autotoc_md9}
+The application uses a modular architecture with the following components\+:
+
+
+\begin{DoxyItemize}
+\item {\bfseries{\mbox{\hyperlink{namespace_app}{App}}}}\+: Central coordinator managing all modules
+\item {\bfseries{\mbox{\hyperlink{namespace_display}{Display}}}}\+: LVGL-\/based \mbox{\hyperlink{namespace_u_i}{UI}} with Lovyan\+GFX driver
+\item {\bfseries{Wi\+Fi}}\+: Network connectivity management
+\item {\bfseries{\mbox{\hyperlink{namespace_n_w_c}{NWC}}}}\+: Nostr Wallet Connect protocol implementation
+\item {\bfseries{\mbox{\hyperlink{namespace_settings}{Settings}}}}\+: Persistent configuration storage
+\item {\bfseries{\mbox{\hyperlink{namespace_u_i}{UI}}}}\+: User interface screens and interactions
+\end{DoxyItemize}\hypertarget{index_autotoc_md10}{}\doxysection{Development}\label{index_autotoc_md10}
+Built with\+:
+\begin{DoxyItemize}
+\item Platform\+IO Arduino framework
+\item LVGL graphics library
+\item Lovyan\+GFX display driver
+\item Nostr protocol implementation
+\item Web\+Socket communication
+\end{DoxyItemize}\hypertarget{index_autotoc_md11}{}\doxysection{License}\label{index_autotoc_md11}
+MIT License 

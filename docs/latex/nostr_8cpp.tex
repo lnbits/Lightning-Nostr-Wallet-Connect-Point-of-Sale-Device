@@ -1,0 +1,63 @@
+\hypertarget{nostr_8cpp}{}\doxysection{lib/nostr/nostr.cpp File Reference}
+\label{nostr_8cpp}\index{lib/nostr/nostr.cpp@{lib/nostr/nostr.cpp}}
+{\ttfamily \#include \char`\"{}nostr.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}nip44/nip44.\+h\char`\"{}}\newline
+Include dependency graph for nostr.\+cpp\+:
+% FIG 0
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacenostr}{nostr}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Dynamic\+Json\+Document \mbox{\hyperlink{namespacenostr_ac14cbc8a276a7d1106c23c8dba6f608c}{nostr\+::nostr\+Event\+Doc}} (0)
+\item 
+void \mbox{\hyperlink{namespacenostr_ae7add69f32ac7f6af83399c69374cc50}{nostr\+::\+\_\+start\+Timer}} (const char $\ast$timed\+Event)
+\item 
+void \mbox{\hyperlink{namespacenostr_a9b4c329f738edf5cebd6f9eacb0facbe}{nostr\+::\+\_\+stop\+Timer}} (const char $\ast$timed\+Event)
+\item 
+void \mbox{\hyperlink{namespacenostr_ad38d4b13131e9c51ec482ccfcbc32841}{nostr\+::init\+Memory\+Space}} (size\+\_\+t nostr\+Event\+Doc\+Capacity, size\+\_\+t encrypted\+Message\+Bin\+Size)
+\item 
+void \mbox{\hyperlink{namespacenostr_a5006a25d7135fb5bc420095e4773df9c}{nostr\+::\+\_\+log\+To\+Serial\+With\+Title}} (String title, String message)
+\item 
+void \mbox{\hyperlink{namespacenostr_aabcc2afe2028ae1da8d6e2154b11d799}{nostr\+::\+\_\+log\+Ok\+With\+Heap\+Size}} (const char $\ast$message)
+\item 
+String \mbox{\hyperlink{namespacenostr_afa02d1e6d1de0f264aa5582de5e54766}{nostr\+::decrypt\+Data}} (byte key\mbox{[}32\mbox{]}, byte iv\mbox{[}16\mbox{]}, byte $\ast$encrypted\+Message\+Bin, int byte\+Size)
+\item 
+String \mbox{\hyperlink{namespacenostr_ad76c1eacccd66757ef146e3393a1442a}{nostr\+::decrypt\+Nip04\+Ciphertext}} (String \&cipher\+Text, String private\+Key\+Hex, String sender\+Pub\+Key\+Hex)
+\item 
+String \mbox{\hyperlink{namespacenostr_a48b8b6f350edb9c7ef6667458376e74e}{nostr\+::get\+Content}} (const String \&serialised\+Json)
+\item 
+String \mbox{\hyperlink{namespacenostr_abdbc8350c239ae90de2c10744a2fad6c}{nostr\+::get\+Sender\+Pub\+Key\+Hex}} (const String \&serialised\+Json)
+\item 
+std\+::pair$<$ String, String $>$ \mbox{\hyperlink{namespacenostr_ae9b9b8005030f72e2136a4d0bda6879d}{nostr\+::get\+Pub\+Key\+And\+Content}} (const String \&serialised\+Json)
+\item 
+String \mbox{\hyperlink{namespacenostr_a99b54ccdb024947dfabe8ea69c57214e}{nostr\+::nip04\+Decrypt}} (const char $\ast$private\+Key\+Hex, String serialised\+Json)
+\item 
+String \mbox{\hyperlink{namespacenostr_a4a0c52a59a4083625f1704bf02966af8}{nostr\+::nip44\+Decrypt}} (const char $\ast$private\+Key\+Hex, String serialised\+Json)
+\item 
+String \mbox{\hyperlink{namespacenostr_a4848cccd6183bc9cfb6196fe18749b6c}{nostr\+::nip44\+Encrypt}} (const char $\ast$private\+Key\+Hex, String serialised\+Json)
+\item 
+String \mbox{\hyperlink{namespacenostr_a99a4781da61520d3c58841370c2c3a10}{nostr\+::get\+Note}} (char const $\ast$private\+Key\+Hex, char const $\ast$pub\+Key\+Hex, unsigned long timestamp, String \&content, uint16\+\_\+t kind, String tags)
+\begin{DoxyCompactList}\small\item\em Get a Note object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacenostr_afca44e9f58eaddb2737fee169753ad9c}{nostr\+::string\+To\+Byte\+Array}} (const char $\ast$input, int padding\+\_\+diff, byte $\ast$output)
+\begin{DoxyCompactList}\small\item\em Convert a string to a byte array. \end{DoxyCompactList}\item 
+String \mbox{\hyperlink{namespacenostr_a52ad606d41ff89c69df00732ee8e348d}{nostr\+::encrypt\+Data}} (byte key\mbox{[}32\mbox{]}, byte iv\mbox{[}16\mbox{]}, String \&msg)
+\begin{DoxyCompactList}\small\item\em encrypt data using AES-\/256-\/\+CBC \end{DoxyCompactList}\item 
+String \mbox{\hyperlink{namespacenostr_a2fa2b10644805a1cd2b329875134fdbd}{nostr\+::get\+Cipher\+Text}} (const char $\ast$private\+Key\+Hex, const char $\ast$recipient\+Pub\+Key\+Hex, String \&content)
+\begin{DoxyCompactList}\small\item\em Get the cipher text for a nip4 message. \end{DoxyCompactList}\item 
+String \mbox{\hyperlink{namespacenostr_a6153fcc43ae15291045b9c2a2bd89291}{nostr\+::get\+Serialised\+Encrypted\+Dm\+Object}} (const char $\ast$pub\+Key\+Hex, const char $\ast$recipient\+Pub\+Key\+Hex, uint16\+\_\+t kind, String \&msg\+Hash, int timestamp, String \&encrypted\+Message\+With\+Iv, String \&schnorr\+Sig)
+\begin{DoxyCompactList}\small\item\em Get the Serialised Encrypted Dm Object. \end{DoxyCompactList}\item 
+String \mbox{\hyperlink{namespacenostr_a754ce1cc38ea76f4a89fb5c26c264156}{nostr\+::get\+Serialised\+Encrypted\+Dm\+Array}} (char const $\ast$pub\+Key\+Hex, char const $\ast$recipient\+Pub\+Key\+Hex, uint16\+\_\+t kind, int timestamp, String \&encrypted\+Message\+With\+Iv)
+\item 
+String \mbox{\hyperlink{namespacenostr_a8b5b9ccf35b878cc481ed6523f568a49}{nostr\+::get\+Encrypted\+Dm}} (char const $\ast$private\+Key\+Hex, char const $\ast$pub\+Key\+Hex, char const $\ast$recipient\+Pub\+Key\+Hex, uint16\+\_\+t kind, unsigned long timestamp, String content, String type)
+\begin{DoxyCompactList}\small\item\em Get the Encrypted Dm object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+byte $\ast$ \mbox{\hyperlink{namespacenostr_a7b3cf922a571a696433d63e675ecaa38}{nostr\+::encrypted\+Message\+Bin}}
+\item 
+unsigned long \mbox{\hyperlink{namespacenostr_ac528623a09925500b6b787d0ddc5c9c7}{nostr\+::timer}} = 0
+\end{DoxyCompactItemize}

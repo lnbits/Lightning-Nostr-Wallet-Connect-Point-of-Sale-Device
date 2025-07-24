@@ -1,0 +1,108 @@
+\hypertarget{ui_8h_source}{}\doxysection{ui.\+h}
+\label{ui_8h_source}\index{src/ui.h@{src/ui.h}}
+\mbox{\hyperlink{ui_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <Arduino.h>}}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <lvgl.h>}}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00006}00006\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_u_i}{UI}}\ \{}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00007}00007\ \ \ \ \ \textcolor{comment}{//\ Screen\ state\ enumeration}}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00008}\mbox{\hyperlink{namespace_u_i_a435547818ef562dcc97cb3b9c29f7d3b}{00008}}\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00009}\mbox{\hyperlink{namespace_u_i_a435547818ef562dcc97cb3b9c29f7d3ba13f125a42d838784783275ce32b6e277}{00009}}\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_u_i_a435547818ef562dcc97cb3b9c29f7d3ba13f125a42d838784783275ce32b6e277}{SCREEN\_KEYPAD}},}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00010}\mbox{\hyperlink{namespace_u_i_a435547818ef562dcc97cb3b9c29f7d3bacedff97c3d308d48dda23b4505422956}{00010}}\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_u_i_a435547818ef562dcc97cb3b9c29f7d3bacedff97c3d308d48dda23b4505422956}{SCREEN\_SETTINGS}},}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00011}\mbox{\hyperlink{namespace_u_i_a435547818ef562dcc97cb3b9c29f7d3baad174f3034de428254af0b3ae43aa6bd}{00011}}\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_u_i_a435547818ef562dcc97cb3b9c29f7d3baad174f3034de428254af0b3ae43aa6bd}{SCREEN\_WIFI}},}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00012}\mbox{\hyperlink{namespace_u_i_a435547818ef562dcc97cb3b9c29f7d3ba159efe446c8b73c670063c4ac8f23438}{00012}}\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_u_i_a435547818ef562dcc97cb3b9c29f7d3ba159efe446c8b73c670063c4ac8f23438}{SCREEN\_WIFI\_PASSWORD}},}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00013}\mbox{\hyperlink{namespace_u_i_a435547818ef562dcc97cb3b9c29f7d3ba8040ceaff82c35389ff9f70b26a24fb6}{00013}}\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_u_i_a435547818ef562dcc97cb3b9c29f7d3ba8040ceaff82c35389ff9f70b26a24fb6}{SCREEN\_SETTINGS\_SUB}},}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00014}00014\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_u_i_a435547818ef562dcc97cb3b9c29f7d3ba2c5ae0d95658f0ee0dbcda3ce44c5c3f}{SCREEN\_INFO}}}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00015}\mbox{\hyperlink{namespace_u_i_a435547818ef562dcc97cb3b9c29f7d3ba2c5ae0d95658f0ee0dbcda3ce44c5c3f}{00015}}\ \ \ \ \ \}\ \mbox{\hyperlink{namespace_u_i_a435547818ef562dcc97cb3b9c29f7d3b}{screen\_state\_t}};}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00017}00017\ \ \ \ \ \textcolor{comment}{//\ Initialization\ and\ cleanup}}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00018}00018\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_u_i_a2277decc2cba013de2fbb5a64fbc1543}{init}}();}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00019}00019\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_u_i_a45e6a820c52945de0b31c1083648b8ca}{cleanup}}();}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00020}00020\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00021}00021\ \ \ \ \ \textcolor{comment}{//\ Screen\ creation\ functions}}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00022}00022\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_u_i_a2d8ca1ecf0a566260451af9087f396f3}{createKeypadScreen}}();}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00023}00023\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_u_i_a1a65423af3051eca667c6210a4fd4e3b}{createSettingsScreen}}();}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00024}00024\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_u_i_a92289f2675af6be72bb29192132034af}{createWiFiScreen}}();}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00025}00025\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_u_i_a36f4040a760beb9e230eb961d5fd807c}{createWiFiPasswordScreen}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ ssid);}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00026}00026\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_u_i_a1499c7a73752b49dd566b24986711662}{createSettingsSubScreen}}();}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00027}00027\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_u_i_a0456717e201a90171fc290495fe2a48d}{createInfoScreen}}();}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00028}00028\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00029}00029\ \ \ \ \ \textcolor{comment}{//\ Screen\ management}}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00030}00030\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_u_i_a7a0c6d0535a2e6dbc2c61c83a22dcfb0}{loadScreen}}(\mbox{\hyperlink{group___screen_states_gac99fecebca9e3a20e926681fe9e5beb9}{screen\_state\_t}}\ screen);}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00031}00031\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_u_i_a7b5471425bfe6a966057aa4e72537a56}{cleanupGlobalPointers}}();}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00032}00032\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00033}00033\ \ \ \ \ \textcolor{comment}{//\ Invoice\ overlay\ management}}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00034}00034\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_u_i_a8e08086366be0567c206956439cf07d3}{createInvoiceOverlay}}();}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00035}00035\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_u_i_a7bbab39abe50d5133bb309f45ee37609}{closeInvoiceOverlay}}();}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00036}00036\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_u_i_a69ebc6c2a7039e77b2a0c8e3b4d2235d}{updateInvoiceDisplay}}(\textcolor{keyword}{const}\ String\&\ invoice,\ \textcolor{keywordtype}{int}\ amount\_sats);}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00037}00037\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_u_i_a85a9c95d4c743ddadfb3d0e8a4833482}{showPaymentReceived}}();}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00038}00038\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespace_u_i_a256c4320af439732def9402342903462}{isInvoiceProcessing}}();}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00039}00039\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_u_i_a1d571a531143f16935470cfaab3d22c0}{setInvoiceProcessing}}(\textcolor{keywordtype}{bool}\ processing);}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00040}00040\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00041}00041\ \ \ \ \ \textcolor{comment}{//\ Message\ display}}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00042}00042\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_u_i_af2b3e98a71f79e360d843dd0d33a6e62}{showMessage}}(String\ title,\ String\ message);}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00043}00043\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00044}00044\ \ \ \ \ \textcolor{comment}{//\ UI\ element\ accessors\ for\ other\ modules}}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00045}00045\ \ \ \ \ lv\_obj\_t*\ \mbox{\hyperlink{namespace_u_i_a801e2a6c76b5ebd8c0897b374bb01cb0}{getDisplayLabel}}();}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00046}00046\ \ \ \ \ lv\_obj\_t*\ \mbox{\hyperlink{namespace_u_i_a216aede75a73d0d490526e326aaa6c02}{getWiFiList}}();}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00047}00047\ \ \ \ \ lv\_obj\_t*\ \mbox{\hyperlink{namespace_u_i_a4818b91137e99345d92ec869bd01c0b0}{getQRCanvas}}();}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00048}00048\ \ \ \ \ lv\_obj\_t*\ \mbox{\hyperlink{namespace_u_i_ac9299fb81be88e44c1a7cd5e19db5413}{getInvoiceLabel}}();}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00049}00049\ \ \ \ \ lv\_obj\_t*\ \mbox{\hyperlink{namespace_u_i_a68428dcbd48587cb1e1e8af2e5b5ba26}{getInvoiceSpinner}}();}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00050}00050\ \ \ \ \ lv\_obj\_t*\ \mbox{\hyperlink{namespace_u_i_a29f0a77919ea9a241d5151c2c4d457dc}{getMainWiFiStatusLabel}}();}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00051}00051\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00052}00052\ \ \ \ \ \textcolor{comment}{//\ UI\ element\ setters}}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00053}00053\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_u_i_af8ee282f90f6d9af58c1d9ad1a609b48}{setDisplayLabel}}(lv\_obj\_t*\ label);}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00054}00054\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_u_i_af0211975ea2fca629b7155fba91e6cce}{setWiFiList}}(lv\_obj\_t*\ list);}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00055}00055\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_u_i_aecdcea33bd82a4fc0aa1b1f3fbf7df9d}{setQRCanvas}}(lv\_obj\_t*\ canvas);}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00056}00056\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_u_i_a1ffb583ee83459709f08dbcfbd14eb26}{setInvoiceLabel}}(lv\_obj\_t*\ label);}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00057}00057\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_u_i_abc4b773c175c7d3545483f69f7489712}{setInvoiceSpinner}}(lv\_obj\_t*\ spinner);}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00058}00058\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_u_i_a85f5b5bcbf60a8f9232c53b2af8eb5a7}{setMainWiFiStatusLabel}}(lv\_obj\_t*\ label);}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00059}00059\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00060}00060\ \ \ \ \ \textcolor{comment}{//\ Event\ handlers\ for\ external\ use}}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00061}00061\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_u_i_ad401ada10ac0476ee072b7ed911b8146}{keypadEventHandler}}(lv\_event\_t*\ e);}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00062}00062\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_u_i_af1e32e971414329c3c506e41855317a6}{navigationEventHandler}}(lv\_event\_t*\ e);}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00063}00063\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_u_i_ac299369e02ef88cc5b8ab49d575189c5}{settingsSaveEventHandler}}(lv\_event\_t*\ e);}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00064}00064\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_u_i_a16bfecd6138d00f450bc5c8e1bde1bef}{settingsBackEventHandler}}(lv\_event\_t*\ e);}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00065}00065\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_u_i_ac310b5f5952d7f5091868999fdbb3bfb}{currencyDropdownEventHandler}}(lv\_event\_t*\ e);}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00066}00066\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_u_i_a81fa6a4db9aafd1fb789d2ee7cde2c5c}{shopNameKBEventHandler}}(lv\_event\_t*\ e);}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00067}00067\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_u_i_a88f110e483de181123f3620e44775cba}{apPasswordKBEventHandler}}(lv\_event\_t*\ e);}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00068}00068\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_u_i_a3a951a6d2b5d532d8321705ae237a2db}{invoiceCloseButtonEventHandler}}(lv\_event\_t*\ e);}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00069}00069\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_u_i_a8fdc8946d85d7e8cbe4d339e1e268f5d}{rebootDeviceEventHandler}}(lv\_event\_t*\ e);}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00070}00070\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00071}00071\ \ \ \ \ \textcolor{comment}{//\ Utility\ functions}}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00072}00072\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_u_i_a230e829eccc0f61ab056f024c9ed0212}{updateAmountDisplay}}(\textcolor{keyword}{const}\ String\&\ amount);}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00073}00073\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_u_i_a85d758c0282e4c9e9031eaedc95db532}{updateStatusDisplay}}(\textcolor{keyword}{const}\ String\&\ status);}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00074}00074\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_u_i_a9f8700b22f3cf1eb451e8a2b5cc4985a}{showLoadingSpinner}}(\textcolor{keywordtype}{bool}\ show);}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00075}00075\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00076}00076\ \ \ \ \ \textcolor{comment}{//\ Settings\ integration}}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00077}00077\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_u_i_a5b4ed56a4755e396af5d6c827cba06d6}{updateShopNameDisplay}}();}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00078}00078\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_u_i_ae20486f26830f5a8d6312a32e1a5dfec}{updateCurrencyDisplay}}();}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00079}00079\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_u_i_a4e3bb2b3151c48de6d865b4eab54f5e3}{updateAPPasswordDisplay}}();}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00080}00080\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00081}00081\ \ \ \ \ \textcolor{comment}{//\ Screen\ state\ queries}}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00082}00082\ \ \ \ \ \mbox{\hyperlink{group___screen_states_gac99fecebca9e3a20e926681fe9e5beb9}{screen\_state\_t}}\ \mbox{\hyperlink{namespace_u_i_a7e5dc627ead9b9c216342025ec188d66}{getCurrentScreen}}();}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00083}00083\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespace_u_i_a8ae46f670e76f7abcdc406083175a0ee}{isOverlayActive}}();}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00084}00084\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00085}00085\ \ \ \ \ \textcolor{comment}{//\ Constants\ for\ UI\ styling}}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00086}\mbox{\hyperlink{namespace_u_i_1_1_colors}{00086}}\ \ \ \ \ \textcolor{keyword}{namespace\ }Colors\ \{}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00087}\mbox{\hyperlink{namespace_u_i_1_1_colors_a159637a2d15bba6a0d54c87809f2ccbd}{00087}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ \mbox{\hyperlink{namespace_u_i_1_1_colors_a159637a2d15bba6a0d54c87809f2ccbd}{PRIMARY}}\ =\ 0x2196F3;}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00088}\mbox{\hyperlink{namespace_u_i_1_1_colors_a2cd5f020d6dffae2d37bae6e1df3c0d2}{00088}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ \mbox{\hyperlink{namespace_u_i_1_1_colors_a2cd5f020d6dffae2d37bae6e1df3c0d2}{SUCCESS}}\ =\ 0x4CAF50;}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00089}\mbox{\hyperlink{namespace_u_i_1_1_colors_ae06d47d58f5c016dfbe99759e46ce1fb}{00089}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ \mbox{\hyperlink{namespace_u_i_1_1_colors_ae06d47d58f5c016dfbe99759e46ce1fb}{WARNING}}\ =\ 0xFF9800;}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00090}\mbox{\hyperlink{namespace_u_i_1_1_colors_a2b46770a32ed67b16986889f5387b80e}{00090}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ \mbox{\hyperlink{namespace_u_i_1_1_colors_a2b46770a32ed67b16986889f5387b80e}{ERROR}}\ =\ 0xF44336;}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00091}\mbox{\hyperlink{namespace_u_i_1_1_colors_a2f693754fc47c8c6b6a4c194a88265e9}{00091}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ \mbox{\hyperlink{namespace_u_i_1_1_colors_a2f693754fc47c8c6b6a4c194a88265e9}{INFO}}\ =\ 0x607D8B;}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00092}\mbox{\hyperlink{namespace_u_i_1_1_colors_af5ade310da1c2729584778e5c6bf53e7}{00092}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ \mbox{\hyperlink{namespace_u_i_1_1_colors_af5ade310da1c2729584778e5c6bf53e7}{BACKGROUND}}\ =\ 0x000000;}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00093}\mbox{\hyperlink{namespace_u_i_1_1_colors_a755bebc7132be5423f8fb574d39eb974}{00093}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ \mbox{\hyperlink{namespace_u_i_1_1_colors_a755bebc7132be5423f8fb574d39eb974}{TEXT}}\ =\ 0xFFFFFF;}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00094}00094\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00095}00095\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00096}\mbox{\hyperlink{namespace_u_i_1_1_fonts}{00096}}\ \ \ \ \ \textcolor{keyword}{namespace\ }Fonts\ \{}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00097}00097\ \ \ \ \ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ lv\_font\_t*\ \mbox{\hyperlink{namespace_u_i_1_1_fonts_a42d14289602b95819a5ba854c18770e4}{FONT\_DEFAULT}};}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00098}00098\ \ \ \ \ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ lv\_font\_t*\ \mbox{\hyperlink{namespace_u_i_1_1_fonts_a432bb306b9a6c87d5458ee69392c9665}{FONT\_LARGE}};}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00099}00099\ \ \ \ \ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ lv\_font\_t*\ \mbox{\hyperlink{namespace_u_i_1_1_fonts_aa08eb4925f6c3b47f5021153d5ff81b6}{FONT\_XLARGE}};}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00100}00100\ \ \ \ \ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ lv\_font\_t*\ \mbox{\hyperlink{namespace_u_i_1_1_fonts_a8feba15808ef694bfc6d65f2424e80d1}{FONT\_SMALL}};}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00101}00101\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{ui_8h_source_l00102}00102\ \}}
+
+\end{DoxyCode}

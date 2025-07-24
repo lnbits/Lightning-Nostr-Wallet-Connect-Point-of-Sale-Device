@@ -1,0 +1,70 @@
+\hypertarget{settings_8h_source}{}\doxysection{settings.\+h}
+\label{settings_8h_source}\index{src/settings.h@{src/settings.h}}
+\mbox{\hyperlink{settings_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <Arduino.h>}}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <Preferences.h>}}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <lvgl.h>}}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00007}00007\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_settings}{Settings}}\ \{}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00008}00008\ \ \ \ \ \textcolor{comment}{//\ Initialization\ and\ cleanup}}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00009}00009\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_settings_ad47a8d3f696dcb0d38c1dc5088008885}{init}}();}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00010}00010\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_settings_adfd716c322069bdb999ecb9e6fb06635}{cleanup}}();}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00011}00011\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00012}00012\ \ \ \ \ \textcolor{comment}{//\ Shop\ settings}}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00013}00013\ \ \ \ \ String\ \mbox{\hyperlink{namespace_settings_a4ab40159f06865c9a1b91faa56070eda}{getCurrency}}();}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00014}00014\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_settings_a0c4770ece13e399ef56de5a256ced0ec}{setCurrency}}(\textcolor{keyword}{const}\ String\&\ currency);}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00015}00015\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00016}00016\ \ \ \ \ String\ \mbox{\hyperlink{namespace_settings_a1019ae9148e79f599d5cd8f70d024853}{getShopName}}();}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00017}00017\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_settings_a81316bea12b860f18554a2f72f8cdaf1}{setShopName}}(\textcolor{keyword}{const}\ String\&\ name);}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00018}00018\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00019}00019\ \ \ \ \ String\ \mbox{\hyperlink{namespace_settings_aa325e87dec40f15b995e5b3712ea2677}{getAPPassword}}();}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00020}00020\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_settings_a0fbd37790377b8f883d373560ec174d5}{setAPPassword}}(\textcolor{keyword}{const}\ String\&\ password);}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00021}00021\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00022}00022\ \ \ \ \ \textcolor{comment}{//\ NWC\ configuration}}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00023}00023\ \ \ \ \ String\ \mbox{\hyperlink{namespace_settings_a8c76299534a9005a9a2d5deea577b179}{getNWCUrl}}();}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00024}00024\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_settings_ad6c56624235c41776f37287b5b1d3ce8}{setNWCUrl}}(\textcolor{keyword}{const}\ String\&\ url);}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00025}00025\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00026}00026\ \ \ \ \ \textcolor{comment}{//\ PIN\ management}}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00027}00027\ \ \ \ \ String\ \mbox{\hyperlink{namespace_settings_a71d0fa12dcb3fa27c18b727a3f191cf9}{getCurrentPin}}();}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00028}00028\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_settings_a6dd7c0d52ea1eebd5293c99dc135384c}{setCurrentPin}}(\textcolor{keyword}{const}\ String\&\ pin);}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00029}00029\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespace_settings_a6d80377c0c3997b0300823bf73c6dfc5}{verifyPin}}(\textcolor{keyword}{const}\ String\&\ pin);}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00030}00030\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00031}00031\ \ \ \ \ \textcolor{comment}{//\ WiFi\ network\ management}}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00032}00032\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_settings_aa4bfc737bf8082b61432d7168f05bad6}{saveWiFiNetwork}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ ssid,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ password);}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00033}00033\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_settings_a89f43c7cc09d1df07bba570232cb3ba1}{loadAllWiFiNetworks}}();}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00034}00034\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00035}00035\ \ \ \ \ \textcolor{comment}{//\ Persistence}}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00036}00036\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_settings_ac225d9073ae68e129255f0dfabbe6a19}{loadFromPreferences}}();}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00037}00037\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_settings_af6a6f662bd9c9624532ac98521fdfd97}{saveToPreferences}}();}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00038}00038\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00039}00039\ \ \ \ \ \textcolor{comment}{//\ UI\ Event\ handlers}}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00040}00040\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_settings_a1c29f5c2f4a3f84ef2a370316b06749b}{settingsSaveEventHandler}}(lv\_event\_t\ *e);}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00041}00041\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_settings_a9eb32e0d68a9d00b625df4eaff2712d1}{settingsBackEventHandler}}(lv\_event\_t\ *e);}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00042}00042\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_settings_aa62a82ab3cabe27ed5f2078136266f0e}{shopNameKBEventHandler}}(lv\_event\_t\ *e);}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00043}00043\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_settings_a29d99f08b185214732f7a74eb370a143}{apPasswordKBEventHandler}}(lv\_event\_t\ *e);}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00044}00044\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00045}00045\ \ \ \ \ \textcolor{comment}{//\ PIN\ management\ UI}}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00046}00046\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_settings_ac28e2f95cfc715b237d6f7d6be867f96}{showPinManagementScreen}}();}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00047}00047\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_settings_aa8047ed6a81a008c34171402a2bbae7b}{hidePinManagementScreen}}();}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00048}00048\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_settings_a8d4326f2e60bf0939250a4a0291cec5f}{showPinVerificationScreen}}();}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00049}00049\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00050}00050\ \ \ \ \ \textcolor{comment}{//\ Configuration\ management}}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00051}00051\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_settings_aa26da663d96a908585fb90c6444f975b}{resetToDefaults}}();}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00052}00052\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_settings_a44b484c2a7865919950ac1d3134ef9e0}{pinCurrentKBEventHandler}}(lv\_event\_t\ *e);}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00053}00053\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_settings_aa2fe811907640d635ff03d68e882ddeb}{pinNewKBEventHandler}}(lv\_event\_t\ *e);}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00054}00054\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_settings_a9bdbe65c3c274b9cda185d818cd13d59}{pinVerifyKBEventHandler}}(lv\_event\_t\ *e);}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00055}00055\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_settings_ab49e6329f290a6e7ccf48a4803bf4926}{pinSaveEventHandler}}(lv\_event\_t\ *e);}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00056}00056\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_settings_ade418e65a12ef8473317caaef2bbb27e}{pinCancelEventHandler}}(lv\_event\_t\ *e);}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00057}00057\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_settings_a4b29986b7a9d3c24a455126f4516aecb}{pinVerificationKBEventHandler}}(lv\_event\_t\ *e);}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00058}00058\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_settings_acfc431be8212b2356532043211127d86}{pinVerificationCancelEventHandler}}(lv\_event\_t\ *e);}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00059}00059\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00060}00060\ \ \ \ \ \textcolor{comment}{//\ UI\ element\ references\ for\ keyboard\ handling}}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00061}00061\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_settings_a7cad658fd4b91c6175e369025962556f}{setSettingsUIElements}}(lv\_obj\_t\ *pin\_btn,\ lv\_obj\_t\ *save\_btn);}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00062}00062\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_settings_a3f3ced8d33340d7aab202d0f79153ed2}{setShopNameTextArea}}(lv\_obj\_t\ *textarea);}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00063}00063\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_settings_aff8d2a70469ecefe9fec7174019e58b6}{setAPPasswordTextArea}}(lv\_obj\_t\ *textarea);}
+\DoxyCodeLine{\Hypertarget{settings_8h_source_l00064}00064\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,303 @@
+\hypertarget{helpers_8h}{}\doxysection{lib/nostr/nip44/helpers.h File Reference}
+\label{helpers_8h}\index{lib/nostr/nip44/helpers.h@{lib/nostr/nip44/helpers.h}}
+{\ttfamily \#include $<$Arduino.\+h$>$}\newline
+{\ttfamily \#include $<$Bitcoin.\+h$>$}\newline
+{\ttfamily \#include $<$gmp-\/ino.\+h$>$}\newline
+{\ttfamily \#include $<$bootloader\+\_\+random.\+h$>$}\newline
+{\ttfamily \#include $<$mbedtls/base64.\+h$>$}\newline
+{\ttfamily \#include $<$mbedtls/md.\+h$>$}\newline
+{\ttfamily \#include $<$mbedtls/chacha20.\+h$>$}\newline
+Include dependency graph for helpers.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{helpers_8h_a5bef8eb35193fa4586662db6d111ded7}{log\+Info}} (const String msg)
+\item 
+void \mbox{\hyperlink{helpers_8h_a6ae1657637c7f60691f6aa6d8e2a909d}{generate\+Random\+IV}} (uint8\+\_\+t $\ast$iv, int length)
+\item 
+String \mbox{\hyperlink{helpers_8h_a17744626ecc0e0513ef3855b0310923d}{get\+Token\+At\+Position}} (String str, String separator, int position)
+\item 
+String \mbox{\hyperlink{helpers_8h_ad1ab262ea16780ef733d316495017766}{generate\+Shared\+Secret}} (String private\+Key\+Hex, String public\+Key\+Hex)
+\item 
+String \mbox{\hyperlink{helpers_8h_ab2ba8df35647b04ee987e759a580a660}{reconstruct\+Public\+Key}} (const String \&x\+Hex)
+\item 
+bool \mbox{\hyperlink{helpers_8h_aed2743c6a0172dcaed0d789775e01e22}{modular\+\_\+sqrt}} (mpz\+\_\+t result, const mpz\+\_\+t n, const mpz\+\_\+t p)
+\item 
+bool \mbox{\hyperlink{helpers_8h_ae988a492d91e393b7a984eb46cf10c87}{is\+Valid\+Hex\+Key}} (const String \&input)
+\item 
+void \mbox{\hyperlink{helpers_8h_acc8f4b269f561f9d11f305375a3ece4a}{log\+Time}} (const String \&message)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{helpers_8h_a6ae1657637c7f60691f6aa6d8e2a909d}\label{helpers_8h_a6ae1657637c7f60691f6aa6d8e2a909d}} 
+\index{helpers.h@{helpers.h}!generateRandomIV@{generateRandomIV}}
+\index{generateRandomIV@{generateRandomIV}!helpers.h@{helpers.h}}
+\doxysubsubsection{\texorpdfstring{generateRandomIV()}{generateRandomIV()}}
+{\footnotesize\ttfamily void generate\+Random\+IV (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{iv,  }\item[{int}]{length }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{helpers_8cpp_source_l00016}{16}} of file \mbox{\hyperlink{helpers_8cpp_source}{helpers.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ length;\ i++)\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ iv[i]\ =\ random(0,\ 256);}
+\DoxyCodeLine{00019\ \ \ \ \ \}}
+\DoxyCodeLine{00020\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{helpers_8h_ad1ab262ea16780ef733d316495017766}\label{helpers_8h_ad1ab262ea16780ef733d316495017766}} 
+\index{helpers.h@{helpers.h}!generateSharedSecret@{generateSharedSecret}}
+\index{generateSharedSecret@{generateSharedSecret}!helpers.h@{helpers.h}}
+\doxysubsubsection{\texorpdfstring{generateSharedSecret()}{generateSharedSecret()}}
+{\footnotesize\ttfamily String generate\+Shared\+Secret (\begin{DoxyParamCaption}\item[{String}]{private\+Key\+Hex,  }\item[{String}]{public\+Key\+Hex }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{helpers_8cpp_source_l00039}{39}} of file \mbox{\hyperlink{helpers_8cpp_source}{helpers.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00040\ \ \ \textcolor{comment}{//\ Reconstruct\ full\ public\ key\ if\ only\ X-\/coordinate\ is\ provided}}
+\DoxyCodeLine{00041\ \ \ \textcolor{keywordflow}{if}\ (publicKeyHex.length()\ ==\ 64)\ \{}
+\DoxyCodeLine{00042\ \ \ \ \ publicKeyHex\ =\ \mbox{\hyperlink{helpers_8cpp_ab2ba8df35647b04ee987e759a580a660}{reconstructPublicKey}}(publicKeyHex);}
+\DoxyCodeLine{00043\ \ \ \}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \textcolor{keywordtype}{int}\ byteSize\ =\ \ 32;}
+\DoxyCodeLine{00046\ \ \ \textcolor{keywordtype}{byte}\ privateKeyBytes[byteSize];}
+\DoxyCodeLine{00047\ \ \ fromHex(privateKeyHex,\ privateKeyBytes,\ byteSize);}
+\DoxyCodeLine{00048\ \ \ PrivateKey\ privateKey(privateKeyBytes);}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \textcolor{keywordtype}{byte}\ sharedSecret[32];}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \textcolor{keywordtype}{byte}\ publicKeyBin[64];}
+\DoxyCodeLine{00053\ \ \ fromHex(publicKeyHex,\ publicKeyBin,\ 64);}
+\DoxyCodeLine{00054\ \ \ PublicKey\ otherPublicKey(publicKeyBin,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00055\ \ \ privateKey.ecdh(otherPublicKey,\ sharedSecret,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \textcolor{keywordflow}{return}\ toHex(sharedSecret,\ \textcolor{keyword}{sizeof}(sharedSecret));}
+\DoxyCodeLine{00058\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{helpers_8h_a17744626ecc0e0513ef3855b0310923d}\label{helpers_8h_a17744626ecc0e0513ef3855b0310923d}} 
+\index{helpers.h@{helpers.h}!getTokenAtPosition@{getTokenAtPosition}}
+\index{getTokenAtPosition@{getTokenAtPosition}!helpers.h@{helpers.h}}
+\doxysubsubsection{\texorpdfstring{getTokenAtPosition()}{getTokenAtPosition()}}
+{\footnotesize\ttfamily String get\+Token\+At\+Position (\begin{DoxyParamCaption}\item[{String}]{str,  }\item[{String}]{separator,  }\item[{int}]{position }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{helpers_8cpp_source_l00022}{22}} of file \mbox{\hyperlink{helpers_8cpp_source}{helpers.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00023\ \ \ String\ s\ =\ str.substring(0);}
+\DoxyCodeLine{00024\ \ \ \textcolor{keywordtype}{int}\ separatorPos\ =\ 0;}
+\DoxyCodeLine{00025\ \ \ \textcolor{keywordtype}{int}\ i\ =\ 0;}
+\DoxyCodeLine{00026\ \ \ \textcolor{keywordflow}{while}\ (separatorPos\ !=\ -\/1)\ \{}
+\DoxyCodeLine{00027\ \ \ \ \ separatorPos\ =\ s.indexOf(separator);}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ ==\ position)\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (separatorPos\ ==\ -\/1)\ \textcolor{keywordflow}{return}\ s;}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ s.substring(0,\ separatorPos);}
+\DoxyCodeLine{00031\ \ \ \ \ \}}
+\DoxyCodeLine{00032\ \ \ \ \ s\ =\ s.substring(separatorPos\ +\ 1);}
+\DoxyCodeLine{00033\ \ \ \ \ i++;}
+\DoxyCodeLine{00034\ \ \ \}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00037\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{helpers_8h_ae988a492d91e393b7a984eb46cf10c87}\label{helpers_8h_ae988a492d91e393b7a984eb46cf10c87}} 
+\index{helpers.h@{helpers.h}!isValidHexKey@{isValidHexKey}}
+\index{isValidHexKey@{isValidHexKey}!helpers.h@{helpers.h}}
+\doxysubsubsection{\texorpdfstring{isValidHexKey()}{isValidHexKey()}}
+{\footnotesize\ttfamily bool is\+Valid\+Hex\+Key (\begin{DoxyParamCaption}\item[{const String \&}]{input }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{helpers_8cpp_source_l00149}{149}} of file \mbox{\hyperlink{helpers_8cpp_source}{helpers.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00150\ \ \ \ \ String\ trimmed\ =\ input;}
+\DoxyCodeLine{00151\ \ \ \ \ trimmed.trim();}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{comment}{//\ Check\ if\ the\ length\ is\ 64}}
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keywordflow}{if}\ (trimmed.length()\ !=\ 64)\ \{}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00156\ \ \ \ \ \}}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{comment}{//\ Check\ if\ all\ characters\ are\ valid\ lowercase\ hex}}
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ trimmed.length();\ i++)\ \{}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ c\ =\ trimmed.charAt(i);}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!(c\ >=\ \textcolor{charliteral}{'0'}\ \&\&\ c\ <=\ \textcolor{charliteral}{'9'})\ \&\&\ !(c\ >=\ \textcolor{charliteral}{'a'}\ \&\&\ c\ <=\ \textcolor{charliteral}{'f'}))\ \{}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00164\ \ \ \ \ \}}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00166\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00167\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{helpers_8h_a5bef8eb35193fa4586662db6d111ded7}\label{helpers_8h_a5bef8eb35193fa4586662db6d111ded7}} 
+\index{helpers.h@{helpers.h}!logInfo@{logInfo}}
+\index{logInfo@{logInfo}!helpers.h@{helpers.h}}
+\doxysubsubsection{\texorpdfstring{logInfo()}{logInfo()}}
+{\footnotesize\ttfamily void log\+Info (\begin{DoxyParamCaption}\item[{const String}]{msg }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{helpers_8cpp_source_l00012}{12}} of file \mbox{\hyperlink{helpers_8cpp_source}{helpers.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{comment}{//\ Serial.println("{}/log\ "{}\ +\ msg);}}
+\DoxyCodeLine{00014\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{helpers_8h_acc8f4b269f561f9d11f305375a3ece4a}\label{helpers_8h_acc8f4b269f561f9d11f305375a3ece4a}} 
+\index{helpers.h@{helpers.h}!logTime@{logTime}}
+\index{logTime@{logTime}!helpers.h@{helpers.h}}
+\doxysubsubsection{\texorpdfstring{logTime()}{logTime()}}
+{\footnotesize\ttfamily void log\+Time (\begin{DoxyParamCaption}\item[{const String \&}]{message }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{helpers_8cpp_source_l00171}{171}} of file \mbox{\hyperlink{helpers_8cpp_source}{helpers.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00172\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ currentTime\ =\ millis();}
+\DoxyCodeLine{00173\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ elapsedTime\ =\ currentTime\ -\/\ \mbox{\hyperlink{helpers_8cpp_abd261086b545b7803a5bd9d26ea11ec2}{lastLogTime}};}
+\DoxyCodeLine{00174\ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_abd261086b545b7803a5bd9d26ea11ec2}{lastLogTime}}\ =\ currentTime;}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ \ \ \ \ Serial.printf(\textcolor{stringliteral}{"{}\%s:\ \%lu\ ms\ since\ last\ log\(\backslash\)n"{}},\ message.c\_str(),\ elapsedTime);}
+\DoxyCodeLine{00177\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{helpers_8h_aed2743c6a0172dcaed0d789775e01e22}\label{helpers_8h_aed2743c6a0172dcaed0d789775e01e22}} 
+\index{helpers.h@{helpers.h}!modular\_sqrt@{modular\_sqrt}}
+\index{modular\_sqrt@{modular\_sqrt}!helpers.h@{helpers.h}}
+\doxysubsubsection{\texorpdfstring{modular\_sqrt()}{modular\_sqrt()}}
+{\footnotesize\ttfamily bool modular\+\_\+sqrt (\begin{DoxyParamCaption}\item[{mpz\+\_\+t}]{result,  }\item[{const mpz\+\_\+t}]{n,  }\item[{const mpz\+\_\+t}]{p }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{helpers_8cpp_source_l00117}{117}} of file \mbox{\hyperlink{helpers_8cpp_source}{helpers.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00118\ \ \ \ \ mpz\_t\ legendre,\ exponent,\ temp;}
+\DoxyCodeLine{00119\ \ \ \ \ mpz\_init(legendre);}
+\DoxyCodeLine{00120\ \ \ \ \ mpz\_init(exponent);}
+\DoxyCodeLine{00121\ \ \ \ \ mpz\_init(temp);}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{comment}{//\ Legendre\ symbol:\ (n/p)\ =\ n\string^((p-\/1)/2)\ mod\ p}}
+\DoxyCodeLine{00124\ \ \ \ \ mpz\_sub\_ui(temp,\ p,\ 1);\ \textcolor{comment}{//\ temp\ =\ p\ -\/\ 1}}
+\DoxyCodeLine{00125\ \ \ \ \ mpz\_fdiv\_q\_ui(exponent,\ temp,\ 2);\ \textcolor{comment}{//\ exponent\ =\ (p\ -\/\ 1)\ /\ 2}}
+\DoxyCodeLine{00126\ \ \ \ \ mpz\_powm(legendre,\ n,\ exponent,\ p);\ \textcolor{comment}{//\ legendre\ =\ n\string^((p-\/1)/2)\ mod\ p}}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keywordflow}{if}\ (mpz\_cmp\_ui(legendre,\ 1)\ !=\ 0)\ \{}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ No\ modular\ square\ root\ exists}}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ mpz\_clear(legendre);}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ mpz\_clear(exponent);}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ mpz\_clear(temp);}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00134\ \ \ \ \ \}}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{comment}{//\ Direct\ calculation\ for\ p\ ≡\ 3\ (mod\ 4)}}
+\DoxyCodeLine{00137\ \ \ \ \ mpz\_add\_ui(temp,\ p,\ 1);\ \textcolor{comment}{//\ temp\ =\ p\ +\ 1}}
+\DoxyCodeLine{00138\ \ \ \ \ mpz\_fdiv\_q\_ui(temp,\ temp,\ 4);\ \textcolor{comment}{//\ temp\ =\ (p\ +\ 1)\ /\ 4}}
+\DoxyCodeLine{00139\ \ \ \ \ mpz\_powm(result,\ n,\ temp,\ p);\ \textcolor{comment}{//\ result\ =\ n\string^((p+1)/4)\ mod\ p}}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ \ \ \ \ \textcolor{comment}{//\ Cleanup}}
+\DoxyCodeLine{00142\ \ \ \ \ mpz\_clear(legendre);}
+\DoxyCodeLine{00143\ \ \ \ \ mpz\_clear(exponent);}
+\DoxyCodeLine{00144\ \ \ \ \ mpz\_clear(temp);}
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00146\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{helpers_8h_ab2ba8df35647b04ee987e759a580a660}\label{helpers_8h_ab2ba8df35647b04ee987e759a580a660}} 
+\index{helpers.h@{helpers.h}!reconstructPublicKey@{reconstructPublicKey}}
+\index{reconstructPublicKey@{reconstructPublicKey}!helpers.h@{helpers.h}}
+\doxysubsubsection{\texorpdfstring{reconstructPublicKey()}{reconstructPublicKey()}}
+{\footnotesize\ttfamily String reconstruct\+Public\+Key (\begin{DoxyParamCaption}\item[{const String \&}]{x\+Hex }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{helpers_8cpp_source_l00060}{60}} of file \mbox{\hyperlink{helpers_8cpp_source}{helpers.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00061\ \ \ \ \ mpz\_t\ x,\ y,\ rhs,\ p,\ a,\ b;}
+\DoxyCodeLine{00062\ \ \ \ \ mpz\_init(x);}
+\DoxyCodeLine{00063\ \ \ \ \ mpz\_init(y);}
+\DoxyCodeLine{00064\ \ \ \ \ mpz\_init(rhs);}
+\DoxyCodeLine{00065\ \ \ \ \ mpz\_init(p);}
+\DoxyCodeLine{00066\ \ \ \ \ mpz\_init(a);}
+\DoxyCodeLine{00067\ \ \ \ \ mpz\_init(b);}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{comment}{//\ Set\ curve\ parameters\ for\ secp256k1}}
+\DoxyCodeLine{00070\ \ \ \ \ mpz\_set\_str(p,\ \textcolor{stringliteral}{"{}FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F"{}},\ 16);}
+\DoxyCodeLine{00071\ \ \ \ \ mpz\_set\_ui(a,\ 0);\ \textcolor{comment}{//\ a\ =\ 0}}
+\DoxyCodeLine{00072\ \ \ \ \ mpz\_set\_ui(b,\ 7);\ \textcolor{comment}{//\ b\ =\ 7}}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{comment}{//\ Parse\ X-\/coordinate}}
+\DoxyCodeLine{00075\ \ \ \ \ mpz\_set\_str(x,\ xHex.c\_str(),\ 16);}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{comment}{//\ Calculate\ rhs\ =\ x\string^3\ +\ ax\ +\ b\ mod\ p}}
+\DoxyCodeLine{00078\ \ \ \ \ mpz\_powm\_ui(rhs,\ x,\ 3,\ p);\ \textcolor{comment}{//\ rhs\ =\ x\string^3\ mod\ p}}
+\DoxyCodeLine{00079\ \ \ \ \ mpz\_add(rhs,\ rhs,\ b);\ \textcolor{comment}{//\ rhs\ =\ x\string^3\ +\ b\ mod\ p}}
+\DoxyCodeLine{00080\ \ \ \ \ mpz\_mod(rhs,\ rhs,\ p);\ \textcolor{comment}{//\ Normalize\ rhs\ mod\ p}}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{comment}{//\ Calculate\ Y-\/coordinate}}
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{helpers_8cpp_aed2743c6a0172dcaed0d789775e01e22}{modular\_sqrt}}(y,\ rhs,\ p))\ \{}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Handle\ error:\ invalid\ public\ key}}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}Error:\ No\ modular\ square\ root\ exists\ for\ the\ given\ X-\/coordinate."{}});}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ mpz\_clear(x);}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ mpz\_clear(y);}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ mpz\_clear(rhs);}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ mpz\_clear(p);}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ mpz\_clear(a);}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ mpz\_clear(b);}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00093\ \ \ \ \ \}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{comment}{//\ Ensure\ even\ Y\ (mimic\ '02'\ prefix\ behavior)}}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordflow}{if}\ (mpz\_odd\_p(y))\ \{}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ mpz\_sub(y,\ p,\ y);}
+\DoxyCodeLine{00098\ \ \ \ \ \}}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{comment}{//\ Convert\ X\ and\ Y\ back\ to\ hex\ strings}}
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keywordtype}{char}\ xHexStr[65],\ yHexStr[65];}
+\DoxyCodeLine{00102\ \ \ \ \ mpz\_get\_str(xHexStr,\ 16,\ x);}
+\DoxyCodeLine{00103\ \ \ \ \ mpz\_get\_str(yHexStr,\ 16,\ y);}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{comment}{//\ Cleanup}}
+\DoxyCodeLine{00106\ \ \ \ \ mpz\_clear(x);}
+\DoxyCodeLine{00107\ \ \ \ \ mpz\_clear(y);}
+\DoxyCodeLine{00108\ \ \ \ \ mpz\_clear(rhs);}
+\DoxyCodeLine{00109\ \ \ \ \ mpz\_clear(p);}
+\DoxyCodeLine{00110\ \ \ \ \ mpz\_clear(a);}
+\DoxyCodeLine{00111\ \ \ \ \ mpz\_clear(b);}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{comment}{//\ Return\ full\ 128-\/character\ public\ key}}
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordflow}{return}\ String(xHexStr)\ +\ String(yHexStr);}
+\DoxyCodeLine{00115\ \}}
+
+\end{DoxyCode}

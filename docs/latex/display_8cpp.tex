@@ -1,0 +1,62 @@
+\hypertarget{display_8cpp}{}\doxysection{src/display.cpp File Reference}
+\label{display_8cpp}\index{src/display.cpp@{src/display.cpp}}
+{\ttfamily \#include \char`\"{}display.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}app.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$Arduino.\+h$>$}\newline
+Include dependency graph for display.\+cpp\+:
+% FIG 0
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespace_u_i}{UI}}
+\item 
+namespace \mbox{\hyperlink{namespace_display}{Display}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+lv\+\_\+obj\+\_\+t $\ast$ \mbox{\hyperlink{namespace_u_i_ac9299fb81be88e44c1a7cd5e19db5413}{UI\+::get\+Invoice\+Label}} ()
+\item 
+lv\+\_\+obj\+\_\+t $\ast$ \mbox{\hyperlink{namespace_u_i_a68428dcbd48587cb1e1e8af2e5b5ba26}{UI\+::get\+Invoice\+Spinner}} ()
+\item 
+void \mbox{\hyperlink{namespace_display_aacbf91b9f8c57fc2cb892c45fd44e655}{Display\+::init}} ()
+\item 
+void \mbox{\hyperlink{namespace_display_a74136dce435d7a569c5fb00d5f7afbe6}{Display\+::cleanup}} ()
+\item 
+void \mbox{\hyperlink{namespace_display_a5edb1eb6aad9305091ed3479edc983d6}{Display\+::set\+Rotation}} (int rotation)
+\item 
+void \mbox{\hyperlink{namespace_display_ac8bef7d31e6dd87afcbcac8477f4c5c9}{Display\+::setup\+LVGL}} ()
+\item 
+void \mbox{\hyperlink{namespace_display_a78f08fa1900213ef37200b256396765c}{Display\+::display\+Flush}} (lv\+\_\+disp\+\_\+drv\+\_\+t $\ast$disp, const lv\+\_\+area\+\_\+t $\ast$area, lv\+\_\+color\+\_\+t $\ast$color\+\_\+p)
+\item 
+void \mbox{\hyperlink{namespace_display_a3d51aeecf9902984e423412bbe757155}{Display\+::touchpad\+Read}} (lv\+\_\+indev\+\_\+drv\+\_\+t $\ast$indev\+\_\+driver, lv\+\_\+indev\+\_\+data\+\_\+t $\ast$data)
+\item 
+void \mbox{\hyperlink{namespace_display_add3c94239d228504e67b3720541065cc}{Display\+::display\+QRCode}} (const String \&invoice)
+\item 
+void \mbox{\hyperlink{namespace_display_ace6d523c48cf82aef610774be829b85b}{Display\+::display\+Invoice\+Text\+Fallback}} (const String \&invoice)
+\item 
+Arduino\+\_\+\+GFX \& \mbox{\hyperlink{namespace_display_a18c2dedb3287a8213f6a7d8ce61de740}{Display\+::get\+GFX}} ()
+\item 
+lv\+\_\+obj\+\_\+t $\ast$ \mbox{\hyperlink{namespace_display_acb0d0237a8d03c78c35bad1248d26eeb}{Display\+::get\+QRCanvas}} ()
+\item 
+void \mbox{\hyperlink{namespace_display_a265f5a3b090df04fb0b928b84a2d7e17}{Display\+::set\+QRCanvas}} (lv\+\_\+obj\+\_\+t $\ast$canvas)
+\item 
+void \mbox{\hyperlink{namespace_display_a0c478a57b622918a8499d369db409f85}{Display\+::get\+Last\+Touch}} (int32\+\_\+t \&x, int32\+\_\+t \&y)
+\item 
+void \mbox{\hyperlink{namespace_display_a77664f233d6b5e98be33985eed783600}{Display\+::set\+Backlight\+Brightness}} (uint8\+\_\+t brightness)
+\item 
+void \mbox{\hyperlink{namespace_display_aa8aef5688a630d912c6d9bd1c764c542}{Display\+::turn\+Off\+Backlight}} ()
+\item 
+void \mbox{\hyperlink{namespace_display_a75d875ec473cbdd00bee7951951d81c0}{Display\+::turn\+On\+Backlight}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+Arduino\+\_\+\+Data\+Bus $\ast$ \mbox{\hyperlink{namespace_display_a73886cb9320187c094593787bd00d01c}{Display\+::bus}} = nullptr
+\item 
+Arduino\+\_\+\+GFX $\ast$ \mbox{\hyperlink{namespace_display_a07404a97983810db305db509cbf74a9a}{Display\+::g}} = nullptr
+\item 
+Arduino\+\_\+\+Canvas $\ast$ \mbox{\hyperlink{namespace_display_a6c60868b4fdb5a872686070ea0607be3}{Display\+::gfx}} = nullptr
+\item 
+\mbox{\hyperlink{class_a_x_s15231_b___touch}{AXS15231\+B\+\_\+\+Touch}} \mbox{\hyperlink{namespace_display_a0c9cc8a26de50584375ead7c4553f30b}{Display\+::touch}} (\mbox{\hyperlink{pincfg_8h_aadfd1e71ec456dc27c0b939972b57425}{Touch\+\_\+\+SCL}}, \mbox{\hyperlink{pincfg_8h_a2aa469c181d9c18e7f810f7c2505732e}{Touch\+\_\+\+SDA}}, \mbox{\hyperlink{pincfg_8h_a5a0375f1cc3ad48d5b72844acf697f1e}{Touch\+\_\+\+INT}}, \mbox{\hyperlink{pincfg_8h_a47174ce4cf77383332568190e90e7e2e}{Touch\+\_\+\+ADDR}}, \mbox{\hyperlink{dispcfg_8h_a966806ff3abf821022944c7aa191f997}{TFT\+\_\+rot}})
+\end{DoxyCompactItemize}

@@ -1,0 +1,31 @@
+\hypertarget{helpers_8h_source}{}\doxysection{helpers.\+h}
+\label{helpers_8h_source}\index{lib/nostr/nip44/helpers.h@{lib/nostr/nip44/helpers.h}}
+\mbox{\hyperlink{helpers_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{helpers_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{helpers_8h_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{helpers_8h_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <Arduino.h>}}
+\DoxyCodeLine{\Hypertarget{helpers_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <Bitcoin.h>}}
+\DoxyCodeLine{\Hypertarget{helpers_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <gmp-\/ino.h>}}
+\DoxyCodeLine{\Hypertarget{helpers_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <bootloader\_random.h>}}
+\DoxyCodeLine{\Hypertarget{helpers_8h_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <mbedtls/base64.h>}}
+\DoxyCodeLine{\Hypertarget{helpers_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <mbedtls/md.h>}}
+\DoxyCodeLine{\Hypertarget{helpers_8h_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <mbedtls/chacha20.h>}}
+\DoxyCodeLine{\Hypertarget{helpers_8h_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{helpers_8h_source_l00011}00011\ \textcolor{comment}{//\ Utility\ functions}}
+\DoxyCodeLine{\Hypertarget{helpers_8h_source_l00012}00012\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{helpers_8h_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{keyword}{const}\ String\ msg);}
+\DoxyCodeLine{\Hypertarget{helpers_8h_source_l00013}00013\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{helpers_8h_a6ae1657637c7f60691f6aa6d8e2a909d}{generateRandomIV}}(uint8\_t\ *iv,\ \textcolor{keywordtype}{int}\ length);}
+\DoxyCodeLine{\Hypertarget{helpers_8h_source_l00014}00014\ String\ \mbox{\hyperlink{helpers_8h_a17744626ecc0e0513ef3855b0310923d}{getTokenAtPosition}}(String\ str,\ String\ separator,\ \textcolor{keywordtype}{int}\ position);}
+\DoxyCodeLine{\Hypertarget{helpers_8h_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{helpers_8h_source_l00016}00016\ \textcolor{comment}{//\ Cryptographic\ functions}}
+\DoxyCodeLine{\Hypertarget{helpers_8h_source_l00017}00017\ String\ \mbox{\hyperlink{helpers_8h_ad1ab262ea16780ef733d316495017766}{generateSharedSecret}}(String\ privateKeyHex,\ String\ publicKeyHex);}
+\DoxyCodeLine{\Hypertarget{helpers_8h_source_l00018}00018\ String\ \mbox{\hyperlink{helpers_8h_ab2ba8df35647b04ee987e759a580a660}{reconstructPublicKey}}(\textcolor{keyword}{const}\ String\ \&xHex);}
+\DoxyCodeLine{\Hypertarget{helpers_8h_source_l00019}00019\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{helpers_8h_aed2743c6a0172dcaed0d789775e01e22}{modular\_sqrt}}(mpz\_t\ result,\ \textcolor{keyword}{const}\ mpz\_t\ n,\ \textcolor{keyword}{const}\ mpz\_t\ p);}
+\DoxyCodeLine{\Hypertarget{helpers_8h_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{helpers_8h_source_l00021}00021\ \textcolor{comment}{//\ Validation\ functions}}
+\DoxyCodeLine{\Hypertarget{helpers_8h_source_l00022}00022\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{helpers_8h_ae988a492d91e393b7a984eb46cf10c87}{isValidHexKey}}(\textcolor{keyword}{const}\ String\&\ input);}
+\DoxyCodeLine{\Hypertarget{helpers_8h_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{helpers_8h_source_l00024}00024\ \textcolor{comment}{//\ Timing\ functions}}
+\DoxyCodeLine{\Hypertarget{helpers_8h_source_l00025}00025\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{helpers_8h_acc8f4b269f561f9d11f305375a3ece4a}{logTime}}(\textcolor{keyword}{const}\ String\&\ message);}
+
+\end{DoxyCode}

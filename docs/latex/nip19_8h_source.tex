@@ -1,0 +1,28 @@
+\hypertarget{nip19_8h_source}{}\doxysection{nip19.\+h}
+\label{nip19_8h_source}\index{lib/nostr/nip19.h@{lib/nostr/nip19.h}}
+\mbox{\hyperlink{nip19_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{nip19_8h_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ NIP19\_H}}
+\DoxyCodeLine{\Hypertarget{nip19_8h_source_l00002}00002\ \textcolor{preprocessor}{\#define\ NIP19\_H}}
+\DoxyCodeLine{\Hypertarget{nip19_8h_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{nip19_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <Arduino.h>}}
+\DoxyCodeLine{\Hypertarget{nip19_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}Bitcoin.h"{}}}
+\DoxyCodeLine{\Hypertarget{nip19_8h_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{nip19_8h_source_l00007}00007\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacenip19}{nip19}}}
+\DoxyCodeLine{\Hypertarget{nip19_8h_source_l00008}00008\ \{}
+\DoxyCodeLine{\Hypertarget{nip19_8h_source_l00009}00009\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespacenip19_a375620e2a6b82042af6aed871330718c}{hexStringToByteArray}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *hexString,\ uint8\_t\ *bytesArray);}
+\DoxyCodeLine{\Hypertarget{nip19_8h_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{nip19_8h_source_l00011}00011\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespacenip19_af1e501572517de94d24b4b6847435157}{convertTo5bitArray}}(\textcolor{keyword}{const}\ uint8\_t\ *byteArray,\ \textcolor{keywordtype}{size\_t}\ byteArrayLen,\ uint8\_t\ *bit5Array,\ \textcolor{keywordtype}{size\_t}\ *bit5ArrayLen);}
+\DoxyCodeLine{\Hypertarget{nip19_8h_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{nip19_8h_source_l00013}00013\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespacenip19_a62479c62a5dcefbb9d19ac28eba449fe}{convert5bitArrayToByteArray}}(\textcolor{keyword}{const}\ uint8\_t\ *data5bit,\ \textcolor{keywordtype}{size\_t}\ data5bitLen,\ uint8\_t\ *byteArray,\ \textcolor{keywordtype}{size\_t}\ *byteArrayLen);}
+\DoxyCodeLine{\Hypertarget{nip19_8h_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{nip19_8h_source_l00015}00015\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespacenip19_a994f1d8ff64403b04fee8bb38893244c}{byteArrayToHexString}}(\textcolor{keyword}{const}\ uint8\_t\ *byteArray,\ \textcolor{keywordtype}{size\_t}\ byteArrayLen,\ \textcolor{keywordtype}{char}\ *hexString);}
+\DoxyCodeLine{\Hypertarget{nip19_8h_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{nip19_8h_source_l00017}00017\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{namespacenip19_a5dc3227e5470880e4e5a56971860fb99}{decodeBech32ToHexString}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *input,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *expected\_hrp);}
+\DoxyCodeLine{\Hypertarget{nip19_8h_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{nip19_8h_source_l00019}00019\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{namespacenip19_a5a93a1d6823ab9d9ff44cb261406d281}{encodeHexToBech32}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *nsecHex,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *hrp);}
+\DoxyCodeLine{\Hypertarget{nip19_8h_source_l00020}00020\ \}}
+\DoxyCodeLine{\Hypertarget{nip19_8h_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{nip19_8h_source_l00022}00022\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

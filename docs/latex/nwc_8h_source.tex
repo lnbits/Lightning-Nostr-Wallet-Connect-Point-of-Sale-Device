@@ -1,0 +1,122 @@
+\hypertarget{nwc_8h_source}{}\doxysection{nwc.\+h}
+\label{nwc_8h_source}\index{src/nwc.h@{src/nwc.h}}
+\mbox{\hyperlink{nwc_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <Arduino.h>}}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <WebSocketsClient.h>}}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <ArduinoJson.h>}}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <HTTPClient.h>}}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <WiFiUdp.h>}}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <NTPClient.h>}}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <lvgl.h>}}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00010}00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{nostr_8h}{nostr.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00011}00011\ \textcolor{preprocessor}{\#include\ "{}Bitcoin.h"{}}}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00013}00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_n_w_c}{NWC}}\ \{}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00014}00014\ \ \ \ \ \textcolor{comment}{//\ Initialization\ and\ cleanup}}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00015}00015\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_n_w_c_a1c1d9172198a60da5d26688610968af8}{init}}();}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00016}00016\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_n_w_c_a441487b7105f0c9cc662578d3600a034}{cleanup}}();}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00017}00017\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00018}00018\ \ \ \ \ \textcolor{comment}{//\ NWC\ connection\ management}}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00019}00019\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_n_w_c_a99fdb7cc9f77370099522b3461ad84ab}{setupData}}(\textcolor{keyword}{const}\ String\&\ nwcPairingUrl);}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00020}00020\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_n_w_c_a72c06bdc692eac76bc21d4e73ce31349}{connectToRelay}}();}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00021}00021\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_n_w_c_a342261f4ab3c85e7f89e8664b3311bf4}{restartConnection}}();}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00022}00022\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_n_w_c_a88a8c82c8be5fc4c9ef6fa6f35b8a581}{disconnect}}();}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00023}00023\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespace_n_w_c_a15d4ed6dee9570b25a02a7fe34b9ece0}{isInitialized}}();}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00024}00024\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespace_n_w_c_aa2e749abffc8f1f4995bb52e3a6e8f47}{isConnected}}();}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00025}00025\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00026}00026\ \ \ \ \ \textcolor{comment}{//\ Configuration\ management}}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00027}00027\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_n_w_c_a12351ef57b22b79c192426979a938cc3}{loadUrlFromPreferences}}();}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00028}00028\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_n_w_c_a14fff083f2b310dfa50fad5e75510d22}{saveUrlToPreferences}}(\textcolor{keyword}{const}\ String\&\ url);}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00029}00029\ \ \ \ \ String\ \mbox{\hyperlink{namespace_n_w_c_ae645013edf0be68e8ea57f7130b136e4}{getPairingUrl}}();}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00030}00030\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_n_w_c_a66b3bd6f1962777af5011df44dcf85e7}{setPairingUrl}}(\textcolor{keyword}{const}\ String\&\ url);}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00031}00031\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00032}00032\ \ \ \ \ \textcolor{comment}{//\ WebSocket\ event\ handling}}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00033}00033\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_n_w_c_aa137fc6f2c6092d4b9464c4246e851c6}{websocketEvent}}(WStype\_t\ type,\ uint8\_t*\ payload,\ \textcolor{keywordtype}{size\_t}\ length);}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00034}00034\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_n_w_c_a18f2ad2c95003389637ea9d84d18d5cf}{handleWebsocketMessage}}(\textcolor{keywordtype}{void}*\ arg,\ uint8\_t*\ data,\ \textcolor{keywordtype}{size\_t}\ len);}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00035}00035\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_n_w_c_a870035d4e450773ec8a50d0bf0b81702}{resetWebsocketFragmentState}}();}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00036}00036\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00037}00037\ \ \ \ \ \textcolor{comment}{//\ NWC\ protocol\ event\ handlers}}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00038}00038\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_n_w_c_a2ea8f4d93d51274c1ed01f85eadeb3c1}{handleNwcResponseEvent}}(uint8\_t*\ data);}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00039}00039\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_n_w_c_a964d9daf0d78f7807e9dffc07d0b00df}{handleNwcNip04NotificationEvent}}(uint8\_t*\ data);}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00040}00040\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_n_w_c_a226efbf68836ffd12773687ebece1f06}{handleNwcNip44NotificationEvent}}(uint8\_t*\ data);}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00041}00041\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00042}00042\ \ \ \ \ \textcolor{comment}{//\ Invoice\ management}}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00043}00043\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_n_w_c_a5d747ef50eeb74cee5612fd939452183}{makeInvoice}}(\textcolor{keywordtype}{float}\ amount,\ \textcolor{keyword}{const}\ String\&\ currency);}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00044}00044\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_n_w_c_a86b3f2617b12ae02c2e60ea915a43076}{sendInvoiceLookupRequest}}();}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00045}00045\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_n_w_c_a209d5a499b7718c1a0d5984a191091a9}{startInvoiceNotificationWatchdog}}();}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00046}00046\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_n_w_c_a9a72ecf2c1ad80aafcb1d1a79651d0aa}{stopInvoiceNotificationWatchdog}}();}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00047}00047\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_n_w_c_a1c4b50b7a22b309f6b6f3ddcf9f32a74}{startInvoiceLookupTimer}}();}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00048}00048\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_n_w_c_a1dd636b9104cd24b5d2fbd91329a67cd}{stopInvoiceLookupTimer}}();}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00049}00049\ \ \ \ \ String\ \mbox{\hyperlink{namespace_n_w_c_ac8bb8a5bfcd2f30e2e35458ceeac24cd}{getCurrentInvoice}}();}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00050}00050\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_n_w_c_a4e5666c5f59ca4d455e2148a3f06d329}{setCurrentInvoice}}(\textcolor{keyword}{const}\ String\&\ invoice);}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00051}00051\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00052}00052\ \ \ \ \ \textcolor{comment}{//\ Bitcoin\ price\ services}}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00053}00053\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_n_w_c_aef169814af2af3b5a32f4f0c30456385}{fetchBitcoinPrices}}();}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00054}00054\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_n_w_c_a6084bca944be2b2f16e57728dbbc64dc}{updatePricesFromJson}}(\textcolor{keyword}{const}\ String\&\ jsonResponse);}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00055}00055\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{namespace_n_w_c_adf733f5382e816e1e45d39bf3e3ec04f}{calculateSatsFromAmount}}(\textcolor{keywordtype}{float}\ amount,\ \textcolor{keyword}{const}\ String\&\ currency);}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00056}00056\ \ \ \ \ \textcolor{keywordtype}{long}*\ \mbox{\hyperlink{namespace_n_w_c_a2d1e53d84c677b6b30da4a0b845352d1}{getBitcoinPrices}}();}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00057}00057\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespace_n_w_c_a26bfd6ee56d21e22fc6caa559711c011}{arePricesLoaded}}();}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00058}00058\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{namespace_n_w_c_aeaebbdb90bbebb939c1149ad621e9455}{getLastPriceUpdate}}();}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00059}00059\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00060}00060\ \ \ \ \ \textcolor{comment}{//\ Connection\ monitoring\ and\ reconnection}}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00061}00061\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_n_w_c_acaa1e327e2f86e4e3101cc552c8ed24c}{attemptReconnectionIfNeeded}}();}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00062}00062\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_n_w_c_a28e8eb156bed73d6466b37fe3d81241d}{updateRelayStatusDisplay}}(\textcolor{keywordtype}{bool}\ connected);}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00063}00063\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00064}00064\ \ \ \ \ \textcolor{comment}{//\ Time\ synchronization}}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00065}00065\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_n_w_c_acd1483629fef32437ab3d58cbfe11318}{updateTime}}();}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00066}00066\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{namespace_n_w_c_a08f91f132a611875988ba75c6d196318}{getUnixTimestamp}}();}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00067}00067\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{namespace_n_w_c_a75a93db0e7805efd74eb67c4c458a66f}{getBootTimestamp}}();}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00068}00068\ \ \ \ \ NTPClient\&\ \mbox{\hyperlink{namespace_n_w_c_a8ef3c6df0ec5f0c7cbec9ee9a180db8f}{getTimeClient}}();}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00069}00069\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00070}00070\ \ \ \ \ \textcolor{comment}{//\ WebSocket\ management}}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00071}00071\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_n_w_c_af6a6e3b53f844f01887bfa71344c836f}{sendPing}}();}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00072}00072\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_n_w_c_a10d04b654063bcec6d1bcf528fb3a24d}{processLoop}}();}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00073}00073\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00074}00074\ \ \ \ \ \textcolor{comment}{//\ Fragment\ handling}}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00075}00075\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespace_n_w_c_acbeaaf60838294051dacb43171560fbf}{isFragmentInProgress}}();}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00076}00076\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_n_w_c_a952c9d2aa4e8bedd3484fd68feefab9b}{handleFragment}}(uint8\_t*\ payload,\ \textcolor{keywordtype}{size\_t}\ length,\ \textcolor{keywordtype}{bool}\ isBinary,\ \textcolor{keywordtype}{bool}\ isLast);}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00077}00077\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00078}00078\ \ \ \ \ \textcolor{comment}{//\ Timer\ callbacks}}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00079}00079\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_n_w_c_a8a33716d68e6fc7b598f13474a8aa3d0}{invoiceLookupTimerCallback}}(lv\_timer\_t*\ timer);}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00080}00080\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_n_w_c_a8f8ca7e2372b1dce642bba4ad410d190}{invoiceNotificationWatchdogCallback}}(lv\_timer\_t*\ timer);}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00081}00081\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00082}00082\ \ \ \ \ \textcolor{comment}{//\ Status\ callbacks}}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00083}\mbox{\hyperlink{namespace_n_w_c_a331436fb2caeba54627e342126185a74}{00083}}\ \ \ \ \ \textcolor{keyword}{typedef}\ void\ (*\mbox{\hyperlink{namespace_n_w_c_a331436fb2caeba54627e342126185a74}{nwc\_status\_callback\_t}})(\textcolor{keywordtype}{bool}\ connected,\ \textcolor{keyword}{const}\ String\&\ status);}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00084}00084\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_n_w_c_aa67b7139a1355f5f43c75c014796dd80}{setStatusCallback}}(\mbox{\hyperlink{namespace_n_w_c_a331436fb2caeba54627e342126185a74}{nwc\_status\_callback\_t}}\ callback);}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00085}00085\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00086}00086\ \ \ \ \ \textcolor{comment}{//\ UI\ element\ references}}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00087}00087\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_n_w_c_ac164a3889940ecbe838a8d52cd0dd2f7}{setRelayStatusLabel}}(lv\_obj\_t*\ label);}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00088}00088\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00089}00089\ \ \ \ \ \textcolor{comment}{//\ Access\ to\ internal\ components\ for\ other\ modules}}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00090}00090\ \ \ \ \ WebSocketsClient\&\ \mbox{\hyperlink{namespace_n_w_c_aee89013cd6a45b02d0f848879e96da16}{getWebSocketClient}}();}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00091}00091\ \ \ \ \ String\ \mbox{\hyperlink{namespace_n_w_c_abb2a09968c5b268eef33006b22a32c12}{getRelayUrl}}();}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00092}00092\ \ \ \ \ String\ \mbox{\hyperlink{namespace_n_w_c_a8b64dfdf4a3cc775ec132ba31825a340}{getWalletPubKey}}();}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00093}00093\ \ \ \ \ String\ \mbox{\hyperlink{namespace_n_w_c_a8819a0f510ab7fcb3dc3381db3a0eab6}{getNsecHex}}();}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00094}00094\ \ \ \ \ String\ \mbox{\hyperlink{namespace_n_w_c_a21272097203f647bcfc29821d1035eb8}{getNpubHex}}();}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00095}00095\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00096}00096\ \ \ \ \ \textcolor{comment}{//\ Constants\ for\ configuration}}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00097}\mbox{\hyperlink{namespace_n_w_c_1_1_config}{00097}}\ \ \ \ \ \textcolor{keyword}{namespace\ }Config\ \{}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00098}\mbox{\hyperlink{namespace_n_w_c_1_1_config_a75491996e49293c99932d65296266d67}{00098}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{namespace_n_w_c_1_1_config_a75491996e49293c99932d65296266d67}{WS\_PING\_INTERVAL}}\ =\ 5000;\ \textcolor{comment}{//\ 5\ seconds}}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00099}\mbox{\hyperlink{namespace_n_w_c_1_1_config_a4002f51fd948fdd9d651c3fe1b1f5808}{00099}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{namespace_n_w_c_1_1_config_a4002f51fd948fdd9d651c3fe1b1f5808}{WS\_FRAGMENT\_TIMEOUT}}\ =\ 30000;\ \textcolor{comment}{//\ 30\ seconds}}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00100}\mbox{\hyperlink{namespace_n_w_c_1_1_config_a8ee52e5b8334929242fef64c1f96d027}{00100}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{namespace_n_w_c_1_1_config_a8ee52e5b8334929242fef64c1f96d027}{WS\_MAX\_FRAGMENT\_SIZE}}\ =\ 1024\ *\ 1024;\ \textcolor{comment}{//\ 1MB}}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00101}\mbox{\hyperlink{namespace_n_w_c_1_1_config_a6cb0b6978cd4f197e98c536125a13fb9}{00101}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{namespace_n_w_c_1_1_config_a6cb0b6978cd4f197e98c536125a13fb9}{PRICE\_UPDATE\_INTERVAL}}\ =\ 300000;\ \textcolor{comment}{//\ 5\ minutes}}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00102}\mbox{\hyperlink{namespace_n_w_c_1_1_config_af356f7ca50fa683a6ffe1b57ec250336}{00102}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{namespace_n_w_c_1_1_config_af356f7ca50fa683a6ffe1b57ec250336}{MAX\_CURRENCIES}}\ =\ 8;\ \textcolor{comment}{//\ USD,\ EUR,\ GBP,\ CAD,\ CHF,\ AUD,\ JPY}}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00103}00103\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00104}00104\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00105}00105\ \ \ \ \ \textcolor{comment}{//\ Currency\ indices\ for\ price\ array}}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00106}\mbox{\hyperlink{namespace_n_w_c_1_1_currency}{00106}}\ \ \ \ \ \textcolor{keyword}{namespace\ }Currency\ \{}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00107}\mbox{\hyperlink{namespace_n_w_c_1_1_currency_abf207ba57921bb549a068700c202c9f2}{00107}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{namespace_n_w_c_1_1_currency_abf207ba57921bb549a068700c202c9f2}{USD}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00108}\mbox{\hyperlink{namespace_n_w_c_1_1_currency_a4868a6697ddfd1fa53b7cedf10e40356}{00108}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{namespace_n_w_c_1_1_currency_a4868a6697ddfd1fa53b7cedf10e40356}{EUR}}\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00109}\mbox{\hyperlink{namespace_n_w_c_1_1_currency_a3f8f160fb742134b199692a82bd419c0}{00109}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{namespace_n_w_c_1_1_currency_a3f8f160fb742134b199692a82bd419c0}{GBP}}\ =\ 2;}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00110}\mbox{\hyperlink{namespace_n_w_c_1_1_currency_ab2da9533ddd7b9fd2e01c8c32281901a}{00110}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{namespace_n_w_c_1_1_currency_ab2da9533ddd7b9fd2e01c8c32281901a}{CAD}}\ =\ 3;}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00111}\mbox{\hyperlink{namespace_n_w_c_1_1_currency_a5b003baf292042a6ccf3d56dedab8754}{00111}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{namespace_n_w_c_1_1_currency_a5b003baf292042a6ccf3d56dedab8754}{CHF}}\ =\ 4;}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00112}\mbox{\hyperlink{namespace_n_w_c_1_1_currency_aa6b84139f59085564cd68a0e063d1643}{00112}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{namespace_n_w_c_1_1_currency_aa6b84139f59085564cd68a0e063d1643}{AUD}}\ =\ 5;}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00113}\mbox{\hyperlink{namespace_n_w_c_1_1_currency_a77c8f472c8dd21ea02788aae0ee4d3f0}{00113}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{namespace_n_w_c_1_1_currency_a77c8f472c8dd21ea02788aae0ee4d3f0}{JPY}}\ =\ 6;}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00114}\mbox{\hyperlink{namespace_n_w_c_1_1_currency_afa58df12dc21a7990fe2344def8b455e}{00114}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{namespace_n_w_c_1_1_currency_afa58df12dc21a7990fe2344def8b455e}{CNY}}\ =\ 7;}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00115}00115\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nwc_8h_source_l00116}00116\ \}}
+
+\end{DoxyCode}

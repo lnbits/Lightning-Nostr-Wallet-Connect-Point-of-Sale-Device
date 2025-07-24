@@ -1,0 +1,55 @@
+\hypertarget{display_8h_source}{}\doxysection{display.\+h}
+\label{display_8h_source}\index{src/display.h@{src/display.h}}
+\mbox{\hyperlink{display_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <Arduino.h>}}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <Arduino\_GFX\_Library.h>}}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <lvgl.h>}}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{pincfg_8h}{pincfg.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00007}00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{dispcfg_8h}{dispcfg.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_a_x_s15231_b__touch_8h}{AXS15231B\_touch.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00010}00010\ \textcolor{comment}{//\ Portrait\ display\ constants}}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00011}\mbox{\hyperlink{display_8h_a83af0cb652728913ff58da7133c692ea}{00011}}\ \textcolor{preprocessor}{\#define\ TFT\_WIDTH\ \ \ TFT\_res\_W}}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00012}\mbox{\hyperlink{display_8h_a1c2d2e1cd167f90b809c3450fd6f3434}{00012}}\ \textcolor{preprocessor}{\#define\ TFT\_HEIGHT\ \ TFT\_res\_H}}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00014}00014\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_display}{Display}}\ \{}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00015}00015\ \ \ \ \ \textcolor{comment}{//\ ArduinoGFX\ objects}}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00016}00016\ \ \ \ \ \textcolor{keyword}{extern}\ Arduino\_DataBus\ *\mbox{\hyperlink{namespace_display_a73886cb9320187c094593787bd00d01c}{bus}};}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00017}00017\ \ \ \ \ \textcolor{keyword}{extern}\ Arduino\_GFX\ *\mbox{\hyperlink{namespace_display_a07404a97983810db305db509cbf74a9a}{g}};}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00018}00018\ \ \ \ \ \textcolor{keyword}{extern}\ Arduino\_Canvas\ *\mbox{\hyperlink{namespace_display_a6c60868b4fdb5a872686070ea0607be3}{gfx}};}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00019}\mbox{\hyperlink{namespace_display_a0c9cc8a26de50584375ead7c4553f30b}{00019}}\ \ \ \ \ \textcolor{keyword}{extern}\ \mbox{\hyperlink{class_a_x_s15231_b___touch}{AXS15231B\_Touch}}\ \mbox{\hyperlink{namespace_display_a0c9cc8a26de50584375ead7c4553f30b}{touch}};}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00021}00021\ \ \ \ \ \textcolor{comment}{//\ Initialization\ and\ cleanup}}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00022}00022\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_display_aacbf91b9f8c57fc2cb892c45fd44e655}{init}}();}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00023}00023\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_display_a74136dce435d7a569c5fb00d5f7afbe6}{cleanup}}();}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00024}00024\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_display_a5edb1eb6aad9305091ed3479edc983d6}{setRotation}}(\textcolor{keywordtype}{int}\ rotation);}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00025}00025\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00026}00026\ \ \ \ \ \textcolor{comment}{//\ Power\ management}}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00027}00027\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_display_a77664f233d6b5e98be33985eed783600}{setBacklightBrightness}}(uint8\_t\ brightness);\ \textcolor{comment}{//\ 0-\/255}}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00028}00028\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_display_aa8aef5688a630d912c6d9bd1c764c542}{turnOffBacklight}}();}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00029}00029\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_display_a75d875ec473cbdd00bee7951951d81c0}{turnOnBacklight}}();}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00030}00030\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00031}00031\ \ \ \ \ \textcolor{comment}{//\ Display\ driver\ callbacks}}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00032}00032\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_display_a78f08fa1900213ef37200b256396765c}{displayFlush}}(lv\_disp\_drv\_t\ *disp,\ \textcolor{keyword}{const}\ lv\_area\_t\ *area,\ lv\_color\_t\ *color\_p);}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00033}00033\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_display_a3d51aeecf9902984e423412bbe757155}{touchpadRead}}(lv\_indev\_drv\_t\ *indev\_driver,\ lv\_indev\_data\_t\ *data);}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00034}00034\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00035}00035\ \ \ \ \ \textcolor{comment}{//\ QR\ Code\ display\ functions}}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00036}00036\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_display_add3c94239d228504e67b3720541065cc}{displayQRCode}}(\textcolor{keyword}{const}\ String\&\ invoice);}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00037}00037\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_display_ace6d523c48cf82aef610774be829b85b}{displayInvoiceTextFallback}}(\textcolor{keyword}{const}\ String\&\ invoice);}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00038}00038\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00039}00039\ \ \ \ \ \textcolor{comment}{//\ LVGL\ setup}}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00040}00040\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_display_ac8bef7d31e6dd87afcbcac8477f4c5c9}{setupLVGL}}();}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00041}00041\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00042}00042\ \ \ \ \ \textcolor{comment}{//\ Display\ object\ getters\ (for\ UI\ module\ to\ access)}}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00043}00043\ \ \ \ \ Arduino\_GFX\&\ \mbox{\hyperlink{namespace_display_a18c2dedb3287a8213f6a7d8ce61de740}{getGFX}}();}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00044}00044\ \ \ \ \ lv\_obj\_t*\ \mbox{\hyperlink{namespace_display_acb0d0237a8d03c78c35bad1248d26eeb}{getQRCanvas}}();}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00045}00045\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_display_a265f5a3b090df04fb0b928b84a2d7e17}{setQRCanvas}}(lv\_obj\_t*\ canvas);}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00046}00046\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00047}00047\ \ \ \ \ \textcolor{comment}{//\ Touch\ coordinates}}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00048}00048\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_display_a0c478a57b622918a8499d369db409f85}{getLastTouch}}(int32\_t\&\ x,\ int32\_t\&\ y);}
+\DoxyCodeLine{\Hypertarget{display_8h_source_l00049}00049\ \}}
+
+\end{DoxyCode}

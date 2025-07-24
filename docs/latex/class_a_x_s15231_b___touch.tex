@@ -1,0 +1,281 @@
+\hypertarget{class_a_x_s15231_b___touch}{}\doxysection{AXS15231\+B\+\_\+\+Touch Class Reference}
+\label{class_a_x_s15231_b___touch}\index{AXS15231B\_Touch@{AXS15231B\_Touch}}
+
+
+{\ttfamily \#include $<$AXS15231\+B\+\_\+touch.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_a_x_s15231_b___touch_a24fc3d3360a6bee60180c4966d84e3c6}{AXS15231\+B\+\_\+\+Touch}} (uint8\+\_\+t \mbox{\hyperlink{class_a_x_s15231_b___touch_aee338043b4c50102ed1d2936136bd3b2}{scl}}, uint8\+\_\+t \mbox{\hyperlink{class_a_x_s15231_b___touch_ac5051bc618e15591bd86c98e84f6d08d}{sda}}, uint8\+\_\+t \mbox{\hyperlink{class_a_x_s15231_b___touch_af696edd976611915972531ddcf5be336}{int\+\_\+pin}}, uint8\+\_\+t \mbox{\hyperlink{class_a_x_s15231_b___touch_a3996ecda376db6f67b10962675d4d534}{addr}}, uint8\+\_\+t \mbox{\hyperlink{class_a_x_s15231_b___touch_a76ff9fc8f6376fdb8fa91cadd56c0249}{rotation}})
+\item 
+bool \mbox{\hyperlink{class_a_x_s15231_b___touch_af21a70509a9e97ff91767e8ca19c8586}{begin}} ()
+\item 
+bool \mbox{\hyperlink{class_a_x_s15231_b___touch_a96f053e30928d0fd8046a281a5cdaefb}{touched}} ()
+\item 
+void \mbox{\hyperlink{class_a_x_s15231_b___touch_a1540ae5d55bebd47dc3f6e6104f83d74}{set\+Rotation}} (uint8\+\_\+t)
+\item 
+void \mbox{\hyperlink{class_a_x_s15231_b___touch_a986f12df1baa1ade792189af93c08086}{read\+Data}} (uint16\+\_\+t $\ast$, uint16\+\_\+t $\ast$)
+\item 
+void \mbox{\hyperlink{class_a_x_s15231_b___touch_a7185bee1c9f8ef1f1cb3ddcdc8c094b7}{en\+Offset\+Correction}} (bool)
+\item 
+void \mbox{\hyperlink{class_a_x_s15231_b___touch_a5f7d916f1c81254768c73c84d19ab1f6}{set\+Offsets}} (uint16\+\_\+t, uint16\+\_\+t, uint16\+\_\+t, uint16\+\_\+t, uint16\+\_\+t, uint16\+\_\+t)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{class_a_x_s15231_b___touch_aee338043b4c50102ed1d2936136bd3b2}{scl}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{class_a_x_s15231_b___touch_ac5051bc618e15591bd86c98e84f6d08d}{sda}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{class_a_x_s15231_b___touch_af696edd976611915972531ddcf5be336}{int\+\_\+pin}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{class_a_x_s15231_b___touch_a3996ecda376db6f67b10962675d4d534}{addr}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{class_a_x_s15231_b___touch_a76ff9fc8f6376fdb8fa91cadd56c0249}{rotation}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+volatile bool \mbox{\hyperlink{class_a_x_s15231_b___touch_ac6a9df5f443fd8311eeda954b488ed01}{touch\+\_\+int}} = false
+\item 
+volatile uint32\+\_\+t \mbox{\hyperlink{class_a_x_s15231_b___touch_adae37f166595f7e34364e74b773fcad5}{isr\+\_\+count}} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{_a_x_s15231_b__touch_8h_source_l00007}{7}} of file \mbox{\hyperlink{_a_x_s15231_b__touch_8h_source}{AXS15231\+B\+\_\+touch.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_a_x_s15231_b___touch_a24fc3d3360a6bee60180c4966d84e3c6}\label{class_a_x_s15231_b___touch_a24fc3d3360a6bee60180c4966d84e3c6}} 
+\index{AXS15231B\_Touch@{AXS15231B\_Touch}!AXS15231B\_Touch@{AXS15231B\_Touch}}
+\index{AXS15231B\_Touch@{AXS15231B\_Touch}!AXS15231B\_Touch@{AXS15231B\_Touch}}
+\doxysubsubsection{\texorpdfstring{AXS15231B\_Touch()}{AXS15231B\_Touch()}}
+{\footnotesize\ttfamily AXS15231\+B\+\_\+\+Touch\+::\+AXS15231\+B\+\_\+\+Touch (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{scl,  }\item[{uint8\+\_\+t}]{sda,  }\item[{uint8\+\_\+t}]{int\+\_\+pin,  }\item[{uint8\+\_\+t}]{addr,  }\item[{uint8\+\_\+t}]{rotation }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{_a_x_s15231_b__touch_8h_source_l00010}{10}} of file \mbox{\hyperlink{_a_x_s15231_b__touch_8h_source}{AXS15231\+B\+\_\+touch.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{class_a_x_s15231_b___touch_aee338043b4c50102ed1d2936136bd3b2}{scl}}\ =\ \mbox{\hyperlink{class_a_x_s15231_b___touch_aee338043b4c50102ed1d2936136bd3b2}{scl}};}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{class_a_x_s15231_b___touch_ac5051bc618e15591bd86c98e84f6d08d}{sda}}\ =\ \mbox{\hyperlink{class_a_x_s15231_b___touch_ac5051bc618e15591bd86c98e84f6d08d}{sda}};}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{class_a_x_s15231_b___touch_af696edd976611915972531ddcf5be336}{int\_pin}}\ =\ \mbox{\hyperlink{class_a_x_s15231_b___touch_af696edd976611915972531ddcf5be336}{int\_pin}};}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{class_a_x_s15231_b___touch_a3996ecda376db6f67b10962675d4d534}{addr}}\ =\ \mbox{\hyperlink{class_a_x_s15231_b___touch_a3996ecda376db6f67b10962675d4d534}{addr}};}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{class_a_x_s15231_b___touch_a76ff9fc8f6376fdb8fa91cadd56c0249}{rotation}}\ =\ \mbox{\hyperlink{class_a_x_s15231_b___touch_a76ff9fc8f6376fdb8fa91cadd56c0249}{rotation}};}
+\DoxyCodeLine{00016\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_a_x_s15231_b___touch_af21a70509a9e97ff91767e8ca19c8586}\label{class_a_x_s15231_b___touch_af21a70509a9e97ff91767e8ca19c8586}} 
+\index{AXS15231B\_Touch@{AXS15231B\_Touch}!begin@{begin}}
+\index{begin@{begin}!AXS15231B\_Touch@{AXS15231B\_Touch}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}}
+{\footnotesize\ttfamily bool AXS15231\+B\+\_\+\+Touch\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_a_x_s15231_b__touch_8cpp_source_l00009}{9}} of file \mbox{\hyperlink{_a_x_s15231_b__touch_8cpp_source}{AXS15231\+B\+\_\+touch.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00009\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00010\ \ \ \ \ instance\ =\ \textcolor{keyword}{this};}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \ \ \ \ Serial.printf(\textcolor{stringliteral}{"{}Touch\ begin()\ -\/\ SDA:\%d,\ SCL:\%d,\ INT:\%d,\ ADDR:0x\%02X\(\backslash\)n"{}},\ \mbox{\hyperlink{class_a_x_s15231_b___touch_ac5051bc618e15591bd86c98e84f6d08d}{sda}},\ \mbox{\hyperlink{class_a_x_s15231_b___touch_aee338043b4c50102ed1d2936136bd3b2}{scl}},\ \mbox{\hyperlink{class_a_x_s15231_b___touch_af696edd976611915972531ddcf5be336}{int\_pin}},\ \mbox{\hyperlink{class_a_x_s15231_b___touch_a3996ecda376db6f67b10962675d4d534}{addr}});}
+\DoxyCodeLine{00013\ \ \ \ \ }
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{comment}{//\ Attach\ interrupt.\ Interrupt\ -\/>\ display\ touched}}
+\DoxyCodeLine{00015\ \ \ \ \ attachInterrupt(digitalPinToInterrupt(\mbox{\hyperlink{class_a_x_s15231_b___touch_af696edd976611915972531ddcf5be336}{int\_pin}}),\ isrTouched,\ FALLING);}
+\DoxyCodeLine{00016\ \ \ \ \ Serial.printf(\textcolor{stringliteral}{"{}Touch\ interrupt\ attached\ to\ pin\ \%d\(\backslash\)n"{}},\ \mbox{\hyperlink{class_a_x_s15231_b___touch_af696edd976611915972531ddcf5be336}{int\_pin}});}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{comment}{//\ Start\ I2C}}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{bool}\ i2c\_result\ =\ Wire.begin(\mbox{\hyperlink{class_a_x_s15231_b___touch_ac5051bc618e15591bd86c98e84f6d08d}{sda}},\ \mbox{\hyperlink{class_a_x_s15231_b___touch_aee338043b4c50102ed1d2936136bd3b2}{scl}});}
+\DoxyCodeLine{00020\ \ \ \ \ Serial.printf(\textcolor{stringliteral}{"{}I2C\ begin\ result:\ \%s\(\backslash\)n"{}},\ i2c\_result\ ?\ \textcolor{stringliteral}{"{}SUCCESS"{}}\ :\ \textcolor{stringliteral}{"{}FAILED"{}});}
+\DoxyCodeLine{00021\ \ \ \ \ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordflow}{return}\ i2c\_result;}
+\DoxyCodeLine{00023\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{class_a_x_s15231_b___touch_a7185bee1c9f8ef1f1cb3ddcdc8c094b7}\label{class_a_x_s15231_b___touch_a7185bee1c9f8ef1f1cb3ddcdc8c094b7}} 
+\index{AXS15231B\_Touch@{AXS15231B\_Touch}!enOffsetCorrection@{enOffsetCorrection}}
+\index{enOffsetCorrection@{enOffsetCorrection}!AXS15231B\_Touch@{AXS15231B\_Touch}}
+\doxysubsubsection{\texorpdfstring{enOffsetCorrection()}{enOffsetCorrection()}}
+{\footnotesize\ttfamily void AXS15231\+B\+\_\+\+Touch\+::en\+Offset\+Correction (\begin{DoxyParamCaption}\item[{bool}]{en }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_a_x_s15231_b__touch_8cpp_source_l00049}{49}} of file \mbox{\hyperlink{_a_x_s15231_b__touch_8cpp_source}{AXS15231\+B\+\_\+touch.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{comment}{//\ Enable\ offset\ correction}}
+\DoxyCodeLine{00051\ \ \ \ \ en\_offset\_correction\ =\ en;}
+\DoxyCodeLine{00052\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{class_a_x_s15231_b___touch_a986f12df1baa1ade792189af93c08086}\label{class_a_x_s15231_b___touch_a986f12df1baa1ade792189af93c08086}} 
+\index{AXS15231B\_Touch@{AXS15231B\_Touch}!readData@{readData}}
+\index{readData@{readData}!AXS15231B\_Touch@{AXS15231B\_Touch}}
+\doxysubsubsection{\texorpdfstring{readData()}{readData()}}
+{\footnotesize\ttfamily void AXS15231\+B\+\_\+\+Touch\+::read\+Data (\begin{DoxyParamCaption}\item[{uint16\+\_\+t $\ast$}]{x,  }\item[{uint16\+\_\+t $\ast$}]{y }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_a_x_s15231_b__touch_8cpp_source_l00043}{43}} of file \mbox{\hyperlink{_a_x_s15231_b__touch_8cpp_source}{AXS15231\+B\+\_\+touch.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ latest\ data\ points}}
+\DoxyCodeLine{00045\ \ \ \ \ *x\ =\ point\_X;}
+\DoxyCodeLine{00046\ \ \ \ \ *y\ =\ point\_Y;}
+\DoxyCodeLine{00047\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{class_a_x_s15231_b___touch_a5f7d916f1c81254768c73c84d19ab1f6}\label{class_a_x_s15231_b___touch_a5f7d916f1c81254768c73c84d19ab1f6}} 
+\index{AXS15231B\_Touch@{AXS15231B\_Touch}!setOffsets@{setOffsets}}
+\index{setOffsets@{setOffsets}!AXS15231B\_Touch@{AXS15231B\_Touch}}
+\doxysubsubsection{\texorpdfstring{setOffsets()}{setOffsets()}}
+{\footnotesize\ttfamily void AXS15231\+B\+\_\+\+Touch\+::set\+Offsets (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{x\+\_\+real\+\_\+min,  }\item[{uint16\+\_\+t}]{x\+\_\+real\+\_\+max,  }\item[{uint16\+\_\+t}]{x\+\_\+ideal\+\_\+max,  }\item[{uint16\+\_\+t}]{y\+\_\+real\+\_\+min,  }\item[{uint16\+\_\+t}]{y\+\_\+real\+\_\+max,  }\item[{uint16\+\_\+t}]{y\+\_\+ideal\+\_\+max }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_a_x_s15231_b__touch_8cpp_source_l00054}{54}} of file \mbox{\hyperlink{_a_x_s15231_b__touch_8cpp_source}{AXS15231\+B\+\_\+touch.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{comment}{//\ Offsets\ used\ for\ offset\ correction\ if\ enabled}}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{comment}{//\ Offsets\ should\ be\ determinded\ with\ rotation\ =\ 0}}
+\DoxyCodeLine{00057\ \ \ \ \ this-\/>x\_real\_min\ =\ x\_real\_min;}
+\DoxyCodeLine{00058\ \ \ \ \ this-\/>x\_real\_max\ =\ x\_real\_max;}
+\DoxyCodeLine{00059\ \ \ \ \ this-\/>y\_real\_min\ =\ y\_real\_min;}
+\DoxyCodeLine{00060\ \ \ \ \ this-\/>y\_real\_max\ =\ y\_real\_max;}
+\DoxyCodeLine{00061\ \ \ \ \ this-\/>x\_ideal\_max\ =\ x\_ideal\_max;}
+\DoxyCodeLine{00062\ \ \ \ \ this-\/>y\_ideal\_max\ =\ y\_ideal\_max;}
+\DoxyCodeLine{00063\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{class_a_x_s15231_b___touch_a1540ae5d55bebd47dc3f6e6104f83d74}\label{class_a_x_s15231_b___touch_a1540ae5d55bebd47dc3f6e6104f83d74}} 
+\index{AXS15231B\_Touch@{AXS15231B\_Touch}!setRotation@{setRotation}}
+\index{setRotation@{setRotation}!AXS15231B\_Touch@{AXS15231B\_Touch}}
+\doxysubsubsection{\texorpdfstring{setRotation()}{setRotation()}}
+{\footnotesize\ttfamily void AXS15231\+B\+\_\+\+Touch\+::set\+Rotation (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{rot }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_a_x_s15231_b__touch_8cpp_source_l00034}{34}} of file \mbox{\hyperlink{_a_x_s15231_b__touch_8cpp_source}{AXS15231\+B\+\_\+touch.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{class_a_x_s15231_b___touch_a76ff9fc8f6376fdb8fa91cadd56c0249}{rotation}}\ =\ rot;}
+\DoxyCodeLine{00036\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{class_a_x_s15231_b___touch_a96f053e30928d0fd8046a281a5cdaefb}\label{class_a_x_s15231_b___touch_a96f053e30928d0fd8046a281a5cdaefb}} 
+\index{AXS15231B\_Touch@{AXS15231B\_Touch}!touched@{touched}}
+\index{touched@{touched}!AXS15231B\_Touch@{AXS15231B\_Touch}}
+\doxysubsubsection{\texorpdfstring{touched()}{touched()}}
+{\footnotesize\ttfamily bool AXS15231\+B\+\_\+\+Touch\+::touched (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_a_x_s15231_b__touch_8cpp_source_l00038}{38}} of file \mbox{\hyperlink{_a_x_s15231_b__touch_8cpp_source}{AXS15231\+B\+\_\+touch.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{comment}{//\ Check\ if\ the\ display\ is\ touched\ /\ got\ touched}}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordflow}{return}\ update();}
+\DoxyCodeLine{00041\ \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_a_x_s15231_b___touch_a3996ecda376db6f67b10962675d4d534}\label{class_a_x_s15231_b___touch_a3996ecda376db6f67b10962675d4d534}} 
+\index{AXS15231B\_Touch@{AXS15231B\_Touch}!addr@{addr}}
+\index{addr@{addr}!AXS15231B\_Touch@{AXS15231B\_Touch}}
+\doxysubsubsection{\texorpdfstring{addr}{addr}}
+{\footnotesize\ttfamily uint8\+\_\+t AXS15231\+B\+\_\+\+Touch\+::addr}
+
+
+
+Definition at line \mbox{\hyperlink{_a_x_s15231_b__touch_8h_source_l00009}{9}} of file \mbox{\hyperlink{_a_x_s15231_b__touch_8h_source}{AXS15231\+B\+\_\+touch.\+h}}.
+
+\mbox{\Hypertarget{class_a_x_s15231_b___touch_af696edd976611915972531ddcf5be336}\label{class_a_x_s15231_b___touch_af696edd976611915972531ddcf5be336}} 
+\index{AXS15231B\_Touch@{AXS15231B\_Touch}!int\_pin@{int\_pin}}
+\index{int\_pin@{int\_pin}!AXS15231B\_Touch@{AXS15231B\_Touch}}
+\doxysubsubsection{\texorpdfstring{int\_pin}{int\_pin}}
+{\footnotesize\ttfamily uint8\+\_\+t AXS15231\+B\+\_\+\+Touch\+::int\+\_\+pin}
+
+
+
+Definition at line \mbox{\hyperlink{_a_x_s15231_b__touch_8h_source_l00009}{9}} of file \mbox{\hyperlink{_a_x_s15231_b__touch_8h_source}{AXS15231\+B\+\_\+touch.\+h}}.
+
+\mbox{\Hypertarget{class_a_x_s15231_b___touch_adae37f166595f7e34364e74b773fcad5}\label{class_a_x_s15231_b___touch_adae37f166595f7e34364e74b773fcad5}} 
+\index{AXS15231B\_Touch@{AXS15231B\_Touch}!isr\_count@{isr\_count}}
+\index{isr\_count@{isr\_count}!AXS15231B\_Touch@{AXS15231B\_Touch}}
+\doxysubsubsection{\texorpdfstring{isr\_count}{isr\_count}}
+{\footnotesize\ttfamily volatile uint32\+\_\+t AXS15231\+B\+\_\+\+Touch\+::isr\+\_\+count = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \mbox{\hyperlink{_a_x_s15231_b__touch_8h_source_l00026}{26}} of file \mbox{\hyperlink{_a_x_s15231_b__touch_8h_source}{AXS15231\+B\+\_\+touch.\+h}}.
+
+\mbox{\Hypertarget{class_a_x_s15231_b___touch_a76ff9fc8f6376fdb8fa91cadd56c0249}\label{class_a_x_s15231_b___touch_a76ff9fc8f6376fdb8fa91cadd56c0249}} 
+\index{AXS15231B\_Touch@{AXS15231B\_Touch}!rotation@{rotation}}
+\index{rotation@{rotation}!AXS15231B\_Touch@{AXS15231B\_Touch}}
+\doxysubsubsection{\texorpdfstring{rotation}{rotation}}
+{\footnotesize\ttfamily uint8\+\_\+t AXS15231\+B\+\_\+\+Touch\+::rotation}
+
+
+
+Definition at line \mbox{\hyperlink{_a_x_s15231_b__touch_8h_source_l00009}{9}} of file \mbox{\hyperlink{_a_x_s15231_b__touch_8h_source}{AXS15231\+B\+\_\+touch.\+h}}.
+
+\mbox{\Hypertarget{class_a_x_s15231_b___touch_aee338043b4c50102ed1d2936136bd3b2}\label{class_a_x_s15231_b___touch_aee338043b4c50102ed1d2936136bd3b2}} 
+\index{AXS15231B\_Touch@{AXS15231B\_Touch}!scl@{scl}}
+\index{scl@{scl}!AXS15231B\_Touch@{AXS15231B\_Touch}}
+\doxysubsubsection{\texorpdfstring{scl}{scl}}
+{\footnotesize\ttfamily uint8\+\_\+t AXS15231\+B\+\_\+\+Touch\+::scl}
+
+
+
+Definition at line \mbox{\hyperlink{_a_x_s15231_b__touch_8h_source_l00009}{9}} of file \mbox{\hyperlink{_a_x_s15231_b__touch_8h_source}{AXS15231\+B\+\_\+touch.\+h}}.
+
+\mbox{\Hypertarget{class_a_x_s15231_b___touch_ac5051bc618e15591bd86c98e84f6d08d}\label{class_a_x_s15231_b___touch_ac5051bc618e15591bd86c98e84f6d08d}} 
+\index{AXS15231B\_Touch@{AXS15231B\_Touch}!sda@{sda}}
+\index{sda@{sda}!AXS15231B\_Touch@{AXS15231B\_Touch}}
+\doxysubsubsection{\texorpdfstring{sda}{sda}}
+{\footnotesize\ttfamily uint8\+\_\+t AXS15231\+B\+\_\+\+Touch\+::sda}
+
+
+
+Definition at line \mbox{\hyperlink{_a_x_s15231_b__touch_8h_source_l00009}{9}} of file \mbox{\hyperlink{_a_x_s15231_b__touch_8h_source}{AXS15231\+B\+\_\+touch.\+h}}.
+
+\mbox{\Hypertarget{class_a_x_s15231_b___touch_ac6a9df5f443fd8311eeda954b488ed01}\label{class_a_x_s15231_b___touch_ac6a9df5f443fd8311eeda954b488ed01}} 
+\index{AXS15231B\_Touch@{AXS15231B\_Touch}!touch\_int@{touch\_int}}
+\index{touch\_int@{touch\_int}!AXS15231B\_Touch@{AXS15231B\_Touch}}
+\doxysubsubsection{\texorpdfstring{touch\_int}{touch\_int}}
+{\footnotesize\ttfamily volatile bool AXS15231\+B\+\_\+\+Touch\+::touch\+\_\+int = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \mbox{\hyperlink{_a_x_s15231_b__touch_8h_source_l00025}{25}} of file \mbox{\hyperlink{_a_x_s15231_b__touch_8h_source}{AXS15231\+B\+\_\+touch.\+h}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{_a_x_s15231_b__touch_8h}{AXS15231\+B\+\_\+touch.\+h}}\item 
+src/\mbox{\hyperlink{_a_x_s15231_b__touch_8cpp}{AXS15231\+B\+\_\+touch.\+cpp}}\end{DoxyCompactItemize}
