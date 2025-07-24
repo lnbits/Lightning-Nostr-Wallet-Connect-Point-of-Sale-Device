@@ -1,0 +1,128 @@
+\hypertarget{wifi__manager_8h_source}{}\doxysection{wifi\+\_\+manager.\+h}
+\label{wifi__manager_8h_source}\index{src/wifi\_manager.h@{src/wifi\_manager.h}}
+\mbox{\hyperlink{wifi__manager_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <Arduino.h>}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <WiFiUdp.h>}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <WebServer.h>}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <DNSServer.h>}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <HTTPClient.h>}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <Preferences.h>}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <NTPClient.h>}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <lvgl.h>}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}freertos/FreeRTOS.h"{}}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00013}00013\ \textcolor{preprocessor}{\#include\ "{}freertos/task.h"{}}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00014}00014\ \textcolor{preprocessor}{\#include\ "{}freertos/queue.h"{}}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00018}\mbox{\hyperlink{namespace_wi_fi_manager}{00018}}\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_wi_fi_manager}{WiFiManager}}\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00019}00019\ \ \ \ \ \textcolor{comment}{//\ WiFi\ command\ types}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00020}\mbox{\hyperlink{namespace_wi_fi_manager_a13aca7b0f742cd4e341fd9f564554c1e}{00020}}\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00021}\mbox{\hyperlink{namespace_wi_fi_manager_a13aca7b0f742cd4e341fd9f564554c1ea2a49dc40ced1f1c8878d9af409ab7dfc}{00021}}\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_wi_fi_manager_a13aca7b0f742cd4e341fd9f564554c1ea2a49dc40ced1f1c8878d9af409ab7dfc}{WIFI\_SCAN}},}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00022}\mbox{\hyperlink{namespace_wi_fi_manager_a13aca7b0f742cd4e341fd9f564554c1eaeb72173a3739edb98cc2214d65dcda40}{00022}}\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_wi_fi_manager_a13aca7b0f742cd4e341fd9f564554c1eaeb72173a3739edb98cc2214d65dcda40}{WIFI\_CONNECT}},}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00023}\mbox{\hyperlink{namespace_wi_fi_manager_a13aca7b0f742cd4e341fd9f564554c1ea986429df4b2cff5795ed0cd17bb13c58}{00023}}\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_wi_fi_manager_a13aca7b0f742cd4e341fd9f564554c1ea986429df4b2cff5795ed0cd17bb13c58}{WIFI\_DISCONNECT}},}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00024}00024\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_wi_fi_manager_a13aca7b0f742cd4e341fd9f564554c1eadb99ea8f650c95db02a6722a91a21873}{WIFI\_STOP\_SCAN}}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00025}\mbox{\hyperlink{namespace_wi_fi_manager_a13aca7b0f742cd4e341fd9f564554c1eadb99ea8f650c95db02a6722a91a21873}{00025}}\ \ \ \ \ \}\ \mbox{\hyperlink{namespace_wi_fi_manager_a13aca7b0f742cd4e341fd9f564554c1e}{wifi\_command\_type\_t}};}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00027}00027\ \ \ \ \ \textcolor{comment}{//\ WiFi\ command\ structure}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00028}\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__command__t}{00028}}\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00029}\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__command__t_a560e032549977d2b5cffd9289f046154}{00029}}\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_wi_fi_manager_a13aca7b0f742cd4e341fd9f564554c1e}{wifi\_command\_type\_t}}\ \mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__command__t_a560e032549977d2b5cffd9289f046154}{type}};}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00030}\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__command__t_ad02c76cb8da89adaa79a923c6aadd449}{00030}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ ssid[33];}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00031}\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__command__t_a4fbe846ebf82e5205cf47a4d3ec212a3}{00031}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ password[65];}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00032}00032\ \ \ \ \ \}\ \mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__command__t}{wifi\_command\_t}};}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00034}00034\ \ \ \ \ \textcolor{comment}{//\ WiFi\ scan\ result\ structure}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00035}\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__scan__result__t}{00035}}\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00036}\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__scan__result__t_a2cd58f9b8af709afd9b1c380f7a62cb9}{00036}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__scan__result__t_a2cd58f9b8af709afd9b1c380f7a62cb9}{network\_count}};}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00037}\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__scan__result__t_a1063b1d47871ac448588dfb9cc752808}{00037}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ ssids[9][33];\ \ \textcolor{comment}{//\ Store\ up\ to\ 9\ SSIDs}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00038}\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__scan__result__t_abce42aae7eb4a2de141c820b7ad473eb}{00038}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ rssi[9];}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00039}\mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__scan__result__t_a035ddbb0ae9e1e3cfa791f9b558a7fcd}{00039}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ encrypted[9];}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00040}00040\ \ \ \ \ \}\ \mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__scan__result__t}{wifi\_scan\_result\_t}};}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00042}00042\ \ \ \ \ \textcolor{comment}{//\ Initialization}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00043}\mbox{\hyperlink{namespace_wi_fi_manager_a307a74b2278e5f1c3ac148944034ca75}{00043}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a307a74b2278e5f1c3ac148944034ca75}{init}}();}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00044}\mbox{\hyperlink{namespace_wi_fi_manager_a65dac49e1bcceabd910231b2755d254d}{00044}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a65dac49e1bcceabd910231b2755d254d}{cleanup}}();}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00045}\mbox{\hyperlink{namespace_wi_fi_manager_a4600374afc464e50c6516ed52df26b81}{00045}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a4600374afc464e50c6516ed52df26b81}{processLoop}}();}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00046}00046\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00047}00047\ \ \ \ \ \textcolor{comment}{//\ Connection\ management}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00048}\mbox{\hyperlink{namespace_wi_fi_manager_aecf543cfe5d796167b7d92714ba27bee}{00048}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_aecf543cfe5d796167b7d92714ba27bee}{startConnection}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ ssid,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ password);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00049}\mbox{\hyperlink{namespace_wi_fi_manager_a390036853ea37ba2d30a0aaa5c37fe25}{00049}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a390036853ea37ba2d30a0aaa5c37fe25}{disconnect}}();}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00050}\mbox{\hyperlink{namespace_wi_fi_manager_aa6406a18b4523ef158247b902e770052}{00050}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespace_wi_fi_manager_aa6406a18b4523ef158247b902e770052}{isConnected}}();}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00051}\mbox{\hyperlink{namespace_wi_fi_manager_a0d7909fe5946dfd8e7024a61b0a9e048}{00051}}\ \ \ \ \ String\ \mbox{\hyperlink{namespace_wi_fi_manager_a0d7909fe5946dfd8e7024a61b0a9e048}{getSSID}}();}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00052}\mbox{\hyperlink{namespace_wi_fi_manager_a87f19df53f67ea0a4cb59ef57c184524}{00052}}\ \ \ \ \ String\ \mbox{\hyperlink{namespace_wi_fi_manager_a87f19df53f67ea0a4cb59ef57c184524}{getLocalIP}}();}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00053}\mbox{\hyperlink{namespace_wi_fi_manager_a1afb041d5ffe5293106eb38c9eb37690}{00053}}\ \ \ \ \ wl\_status\_t\ \mbox{\hyperlink{namespace_wi_fi_manager_a1afb041d5ffe5293106eb38c9eb37690}{getStatus}}();}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00054}00054\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00055}00055\ \ \ \ \ \textcolor{comment}{//\ Network\ scanning}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00056}\mbox{\hyperlink{namespace_wi_fi_manager_ac7951b652bea0671cd2e8e6bb26d81de}{00056}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_ac7951b652bea0671cd2e8e6bb26d81de}{startScan}}();}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00057}\mbox{\hyperlink{namespace_wi_fi_manager_a92d199a9af58bbd61060ec1151a87291}{00057}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a92d199a9af58bbd61060ec1151a87291}{stopScanning}}();}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00058}\mbox{\hyperlink{namespace_wi_fi_manager_acce9115c77844a236e1e722ca26b2d30}{00058}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespace_wi_fi_manager_acce9115c77844a236e1e722ca26b2d30}{processScanResults}}();}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00059}00059\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00060}00060\ \ \ \ \ \textcolor{comment}{//\ Credential\ management}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00061}\mbox{\hyperlink{namespace_wi_fi_manager_ab0afc95b9cccc0c9eaa4052a1d8e970f}{00061}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_ab0afc95b9cccc0c9eaa4052a1d8e970f}{saveCredentials}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ ssid,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ password);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00062}\mbox{\hyperlink{namespace_wi_fi_manager_ac2ae37228c5fb94ae3d8a28717976c03}{00062}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespace_wi_fi_manager_ac2ae37228c5fb94ae3d8a28717976c03}{findSavedCredentials}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ ssid,\ \textcolor{keywordtype}{char}*\ password,\ \textcolor{keywordtype}{size\_t}\ password\_size);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00063}\mbox{\hyperlink{namespace_wi_fi_manager_a979ffc34adde243292c287d2b4969978}{00063}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a979ffc34adde243292c287d2b4969978}{loadAllNetworks}}();}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00064}\mbox{\hyperlink{namespace_wi_fi_manager_acda899003fb96827cf623a31729fa276}{00064}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_acda899003fb96827cf623a31729fa276}{removeNetwork}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ ssid);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00065}00065\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00066}00066\ \ \ \ \ \textcolor{comment}{//\ Access\ Point\ mode}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00067}\mbox{\hyperlink{namespace_wi_fi_manager_af144d928f236289193728660e5697b46}{00067}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_af144d928f236289193728660e5697b46}{startAPMode}}();}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00068}\mbox{\hyperlink{namespace_wi_fi_manager_a4116ab699d4b132ac727840fab0c062e}{00068}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a4116ab699d4b132ac727840fab0c062e}{stopAPMode}}();}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00069}\mbox{\hyperlink{namespace_wi_fi_manager_a91219dd6aeea8f4e7f1960b8504a8b6f}{00069}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespace_wi_fi_manager_a91219dd6aeea8f4e7f1960b8504a8b6f}{isAPModeActive}}();}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00070}\mbox{\hyperlink{namespace_wi_fi_manager_a4c29afbf57b27bf7e7322269d8eb870e}{00070}}\ \ \ \ \ String\ \mbox{\hyperlink{namespace_wi_fi_manager_a4c29afbf57b27bf7e7322269d8eb870e}{getAPSSID}}();}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00071}\mbox{\hyperlink{namespace_wi_fi_manager_ae41c2e959336cc88a732b90a849c2606}{00071}}\ \ \ \ \ String\ \mbox{\hyperlink{namespace_wi_fi_manager_ae41c2e959336cc88a732b90a849c2606}{getAPPassword}}();}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00072}\mbox{\hyperlink{namespace_wi_fi_manager_a5e2288b0e0c4e5211d6d1222f105f9da}{00072}}\ \ \ \ \ String\ \mbox{\hyperlink{namespace_wi_fi_manager_a5e2288b0e0c4e5211d6d1222f105f9da}{getAPIP}}();}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00073}00073\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00074}00074\ \ \ \ \ \textcolor{comment}{//\ NWC\ URL\ management}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00075}\mbox{\hyperlink{namespace_wi_fi_manager_aae8539684c2100427ec84c959c4c41be}{00075}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_aae8539684c2100427ec84c959c4c41be}{loadNWCUrl}}();}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00076}\mbox{\hyperlink{namespace_wi_fi_manager_a0ad5d13aa01b899a242fafbeb5c59846}{00076}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a0ad5d13aa01b899a242fafbeb5c59846}{saveNWCUrl}}(\textcolor{keyword}{const}\ String\&\ url);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00077}\mbox{\hyperlink{namespace_wi_fi_manager_ae16ddb6337ee2503274a792efae0807e}{00077}}\ \ \ \ \ String\ \mbox{\hyperlink{namespace_wi_fi_manager_ae16ddb6337ee2503274a792efae0807e}{getNWCUrl}}();}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00078}\mbox{\hyperlink{namespace_wi_fi_manager_a097703a26a14ee99c6a7d13721e469ff}{00078}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a097703a26a14ee99c6a7d13721e469ff}{setNWCUrl}}(\textcolor{keyword}{const}\ String\&\ url);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00079}00079\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00080}00080\ \ \ \ \ \textcolor{comment}{//\ Status\ monitoring}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00081}\mbox{\hyperlink{namespace_wi_fi_manager_a3dbe1a7d671a87ebbdd4d3be1eecaea8}{00081}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a3dbe1a7d671a87ebbdd4d3be1eecaea8}{updateStatus}}();}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00082}\mbox{\hyperlink{namespace_wi_fi_manager_a4d23f7d8812d092f2be0aac81f5cb8ac}{00082}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a4d23f7d8812d092f2be0aac81f5cb8ac}{setStatusLabel}}(lv\_obj\_t*\ label);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00083}\mbox{\hyperlink{namespace_wi_fi_manager_a1401ba93320696ad67259cd4ed1986e1}{00083}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a1401ba93320696ad67259cd4ed1986e1}{setMainStatusLabel}}(lv\_obj\_t*\ label);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00084}00084\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00085}00085\ \ \ \ \ \textcolor{comment}{//\ Event\ handlers\ for\ UI\ integration}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00086}\mbox{\hyperlink{namespace_wi_fi_manager_a32c3f7851dec88fa0a0af25eac30a9ce}{00086}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a32c3f7851dec88fa0a0af25eac30a9ce}{scanEventHandler}}(lv\_event\_t*\ e);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00087}\mbox{\hyperlink{namespace_wi_fi_manager_a31680d46c796056057ae9dedd3e67af9}{00087}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a31680d46c796056057ae9dedd3e67af9}{connectEventHandler}}(lv\_event\_t*\ e);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00088}\mbox{\hyperlink{namespace_wi_fi_manager_ab0a62322259c53ddf5142935b2d373ce}{00088}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_ab0a62322259c53ddf5142935b2d373ce}{passwordKBEventHandler}}(lv\_event\_t*\ e);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00089}\mbox{\hyperlink{namespace_wi_fi_manager_af89611ddc9efbc6714f4cc1796968314}{00089}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_af89611ddc9efbc6714f4cc1796968314}{passwordBackEventHandler}}(lv\_event\_t*\ e);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00090}\mbox{\hyperlink{namespace_wi_fi_manager_a75f9204235fd981cc853216d83a6e6ac}{00090}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a75f9204235fd981cc853216d83a6e6ac}{launchAPModeEventHandler}}(lv\_event\_t*\ e);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00091}\mbox{\hyperlink{namespace_wi_fi_manager_ae100343aeb1989d3e3255515fe87fde7}{00091}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_ae100343aeb1989d3e3255515fe87fde7}{exitAPModeEventHandler}}(lv\_event\_t*\ e);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00092}00092\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00093}00093\ \ \ \ \ \textcolor{comment}{//\ Task\ management}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00094}\mbox{\hyperlink{namespace_wi_fi_manager_a5c15b5f5715e0601b9233cf5c4e5e1ac}{00094}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a5c15b5f5715e0601b9233cf5c4e5e1ac}{createTask}}();}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00095}\mbox{\hyperlink{namespace_wi_fi_manager_a88be8f7c113aef1ec1fbf348bec0515d}{00095}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a88be8f7c113aef1ec1fbf348bec0515d}{deleteTask}}();}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00096}\mbox{\hyperlink{namespace_wi_fi_manager_a21642cfac3d9379d2d1057956359f942}{00096}}\ \ \ \ \ TaskHandle\_t\ \mbox{\hyperlink{namespace_wi_fi_manager_a21642cfac3d9379d2d1057956359f942}{getTaskHandle}}();}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00097}00097\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00098}00098\ \ \ \ \ \textcolor{comment}{//\ Queue\ management}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00099}\mbox{\hyperlink{namespace_wi_fi_manager_a93c0292de075a9ac285e5100827a30f0}{00099}}\ \ \ \ \ QueueHandle\_t\ \mbox{\hyperlink{namespace_wi_fi_manager_a93c0292de075a9ac285e5100827a30f0}{getCommandQueue}}();}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00100}\mbox{\hyperlink{namespace_wi_fi_manager_a5ad74575fb22fb0e8c6193ff5c80db2a}{00100}}\ \ \ \ \ QueueHandle\_t\ \mbox{\hyperlink{namespace_wi_fi_manager_a5ad74575fb22fb0e8c6193ff5c80db2a}{getScanResultQueue}}();}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00101}00101\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00102}00102\ \ \ \ \ \textcolor{comment}{//\ Utility\ functions}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00103}\mbox{\hyperlink{namespace_wi_fi_manager_a5980532d43bbd1a132c31c6ebee6de4f}{00103}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a5980532d43bbd1a132c31c6ebee6de4f}{setCurrentCredentials}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ ssid,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ password);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00104}\mbox{\hyperlink{namespace_wi_fi_manager_a30d1efaf5d3133ad392c33cc9bf08e97}{00104}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a30d1efaf5d3133ad392c33cc9bf08e97}{getCurrentCredentials}}(\textcolor{keywordtype}{char}*\ ssid,\ \textcolor{keywordtype}{char}*\ password);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00105}\mbox{\hyperlink{namespace_wi_fi_manager_aa5e0282461086a2020d2033df2705d05}{00105}}\ \ \ \ \ std::vector<String>\&\ \mbox{\hyperlink{namespace_wi_fi_manager_aa5e0282461086a2020d2033df2705d05}{getSSIDList}}();}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00106}00106\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00107}00107\ \ \ \ \ \textcolor{comment}{//\ Status\ callbacks\ for\ integration}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00108}\mbox{\hyperlink{namespace_wi_fi_manager_a839fecd4b9065c1e1e4b79953d5f2c63}{00108}}\ \ \ \ \ \textcolor{keyword}{typedef}\ void\ (*\mbox{\hyperlink{namespace_wi_fi_manager_a839fecd4b9065c1e1e4b79953d5f2c63}{wifi\_status\_callback\_t}})(\textcolor{keywordtype}{bool}\ connected,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ status);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00109}\mbox{\hyperlink{namespace_wi_fi_manager_afbd1520be38dcf8df79b62059bc70113}{00109}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_afbd1520be38dcf8df79b62059bc70113}{setStatusCallback}}(\mbox{\hyperlink{namespace_wi_fi_manager_a839fecd4b9065c1e1e4b79953d5f2c63}{wifi\_status\_callback\_t}}\ callback);}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00110}00110\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00111}00111\ \ \ \ \ \textcolor{comment}{//\ NTP\ client\ access}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00112}\mbox{\hyperlink{namespace_wi_fi_manager_ad461825e802ccf532b007beb94549392}{00112}}\ \ \ \ \ NTPClient\&\ \mbox{\hyperlink{namespace_wi_fi_manager_ad461825e802ccf532b007beb94549392}{getNTPClient}}();}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00113}00113\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00114}00114\ \ \ \ \ \textcolor{comment}{//\ Timer\ management}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00115}\mbox{\hyperlink{namespace_wi_fi_manager_a02c69502601dcd050a76851836617b10}{00115}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a02c69502601dcd050a76851836617b10}{createStatusTimer}}();}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00116}\mbox{\hyperlink{namespace_wi_fi_manager_ab1c0505310d5aef0bd32d45a0b350a54}{00116}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_ab1c0505310d5aef0bd32d45a0b350a54}{deleteStatusTimer}}();}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00117}00117\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00118}00118\ \ \ \ \ \textcolor{comment}{//\ AP\ mode\ web\ server\ handlers}}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00119}\mbox{\hyperlink{namespace_wi_fi_manager_acee34f68f7c76be57917ada674c087c3}{00119}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_acee34f68f7c76be57917ada674c087c3}{handleAPRoot}}();}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00120}\mbox{\hyperlink{namespace_wi_fi_manager_a83adf4c440290cc3d725fbb7521dc5f1}{00120}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_a83adf4c440290cc3d725fbb7521dc5f1}{handleAPConfig}}();}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00121}\mbox{\hyperlink{namespace_wi_fi_manager_af6cbe35aefb4d1a58ba6b38fa0a8f9ec}{00121}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_wi_fi_manager_af6cbe35aefb4d1a58ba6b38fa0a8f9ec}{updateSettingsScreenForAPMode}}();}
+\DoxyCodeLine{\Hypertarget{wifi__manager_8h_source_l00122}00122\ \}}
+
+\end{DoxyCode}

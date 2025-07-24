@@ -1,0 +1,87 @@
+\hypertarget{settings_8cpp}{}\doxysection{src/settings.cpp File Reference}
+\label{settings_8cpp}\index{src/settings.cpp@{src/settings.cpp}}
+{\ttfamily \#include \char`\"{}settings.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}app.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$Arduino.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}ui.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}wifi\+\_\+manager.\+h\char`\"{}}\newline
+Include dependency graph for settings.\+cpp\+:
+% FIG 0
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespace_settings}{Settings}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespace_settings_ad47a8d3f696dcb0d38c1dc5088008885}{Settings\+::init}} ()
+\item 
+void \mbox{\hyperlink{namespace_settings_adfd716c322069bdb999ecb9e6fb06635}{Settings\+::cleanup}} ()
+\item 
+void \mbox{\hyperlink{namespace_settings_aa26da663d96a908585fb90c6444f975b}{Settings\+::reset\+To\+Defaults}} ()
+\item 
+String \mbox{\hyperlink{namespace_settings_a4ab40159f06865c9a1b91faa56070eda}{Settings\+::get\+Currency}} ()
+\item 
+void \mbox{\hyperlink{namespace_settings_a0c4770ece13e399ef56de5a256ced0ec}{Settings\+::set\+Currency}} (const String \&currency)
+\item 
+String \mbox{\hyperlink{namespace_settings_a1019ae9148e79f599d5cd8f70d024853}{Settings\+::get\+Shop\+Name}} ()
+\item 
+void \mbox{\hyperlink{namespace_settings_a81316bea12b860f18554a2f72f8cdaf1}{Settings\+::set\+Shop\+Name}} (const String \&name)
+\item 
+String \mbox{\hyperlink{namespace_settings_aa325e87dec40f15b995e5b3712ea2677}{Settings\+::get\+APPassword}} ()
+\item 
+void \mbox{\hyperlink{namespace_settings_a0fbd37790377b8f883d373560ec174d5}{Settings\+::set\+APPassword}} (const String \&password)
+\item 
+String \mbox{\hyperlink{namespace_settings_a8c76299534a9005a9a2d5deea577b179}{Settings\+::get\+NWCUrl}} ()
+\item 
+void \mbox{\hyperlink{namespace_settings_ad6c56624235c41776f37287b5b1d3ce8}{Settings\+::set\+NWCUrl}} (const String \&url)
+\item 
+String \mbox{\hyperlink{namespace_settings_a71d0fa12dcb3fa27c18b727a3f191cf9}{Settings\+::get\+Current\+Pin}} ()
+\item 
+void \mbox{\hyperlink{namespace_settings_a6dd7c0d52ea1eebd5293c99dc135384c}{Settings\+::set\+Current\+Pin}} (const String \&pin)
+\item 
+bool \mbox{\hyperlink{namespace_settings_a6d80377c0c3997b0300823bf73c6dfc5}{Settings\+::verify\+Pin}} (const String \&pin)
+\item 
+void \mbox{\hyperlink{namespace_settings_aa4bfc737bf8082b61432d7168f05bad6}{Settings\+::save\+Wi\+Fi\+Network}} (const char $\ast$ssid, const char $\ast$password)
+\item 
+void \mbox{\hyperlink{namespace_settings_a89f43c7cc09d1df07bba570232cb3ba1}{Settings\+::load\+All\+Wi\+Fi\+Networks}} ()
+\item 
+void \mbox{\hyperlink{namespace_settings_ac225d9073ae68e129255f0dfabbe6a19}{Settings\+::load\+From\+Preferences}} ()
+\item 
+void \mbox{\hyperlink{namespace_settings_af6a6f662bd9c9624532ac98521fdfd97}{Settings\+::save\+To\+Preferences}} ()
+\item 
+void \mbox{\hyperlink{namespace_settings_a7cad658fd4b91c6175e369025962556f}{Settings\+::set\+Settings\+UIElements}} (lv\+\_\+obj\+\_\+t $\ast$pin\+\_\+btn, lv\+\_\+obj\+\_\+t $\ast$save\+\_\+btn)
+\item 
+void \mbox{\hyperlink{namespace_settings_a3f3ced8d33340d7aab202d0f79153ed2}{Settings\+::set\+Shop\+Name\+Text\+Area}} (lv\+\_\+obj\+\_\+t $\ast$textarea)
+\item 
+void \mbox{\hyperlink{namespace_settings_aff8d2a70469ecefe9fec7174019e58b6}{Settings\+::set\+APPassword\+Text\+Area}} (lv\+\_\+obj\+\_\+t $\ast$textarea)
+\item 
+void \mbox{\hyperlink{namespace_settings_a1c29f5c2f4a3f84ef2a370316b06749b}{Settings\+::settings\+Save\+Event\+Handler}} (lv\+\_\+event\+\_\+t $\ast$e)
+\item 
+void \mbox{\hyperlink{namespace_settings_a9eb32e0d68a9d00b625df4eaff2712d1}{Settings\+::settings\+Back\+Event\+Handler}} (lv\+\_\+event\+\_\+t $\ast$e)
+\item 
+void \mbox{\hyperlink{namespace_settings_aa62a82ab3cabe27ed5f2078136266f0e}{Settings\+::shop\+Name\+KBEvent\+Handler}} (lv\+\_\+event\+\_\+t $\ast$e)
+\item 
+void \mbox{\hyperlink{namespace_settings_a29d99f08b185214732f7a74eb370a143}{Settings\+::ap\+Password\+KBEvent\+Handler}} (lv\+\_\+event\+\_\+t $\ast$e)
+\item 
+void \mbox{\hyperlink{namespace_settings_ac28e2f95cfc715b237d6f7d6be867f96}{Settings\+::show\+Pin\+Management\+Screen}} ()
+\item 
+void \mbox{\hyperlink{namespace_settings_aa8047ed6a81a008c34171402a2bbae7b}{Settings\+::hide\+Pin\+Management\+Screen}} ()
+\item 
+void \mbox{\hyperlink{namespace_settings_a8d4326f2e60bf0939250a4a0291cec5f}{Settings\+::show\+Pin\+Verification\+Screen}} ()
+\item 
+void \mbox{\hyperlink{namespace_settings_a44b484c2a7865919950ac1d3134ef9e0}{Settings\+::pin\+Current\+KBEvent\+Handler}} (lv\+\_\+event\+\_\+t $\ast$e)
+\item 
+void \mbox{\hyperlink{namespace_settings_aa2fe811907640d635ff03d68e882ddeb}{Settings\+::pin\+New\+KBEvent\+Handler}} (lv\+\_\+event\+\_\+t $\ast$e)
+\item 
+void \mbox{\hyperlink{namespace_settings_a9bdbe65c3c274b9cda185d818cd13d59}{Settings\+::pin\+Verify\+KBEvent\+Handler}} (lv\+\_\+event\+\_\+t $\ast$e)
+\item 
+void \mbox{\hyperlink{namespace_settings_ab49e6329f290a6e7ccf48a4803bf4926}{Settings\+::pin\+Save\+Event\+Handler}} (lv\+\_\+event\+\_\+t $\ast$e)
+\item 
+void \mbox{\hyperlink{namespace_settings_ade418e65a12ef8473317caaef2bbb27e}{Settings\+::pin\+Cancel\+Event\+Handler}} (lv\+\_\+event\+\_\+t $\ast$e)
+\item 
+void \mbox{\hyperlink{namespace_settings_a4b29986b7a9d3c24a455126f4516aecb}{Settings\+::pin\+Verification\+KBEvent\+Handler}} (lv\+\_\+event\+\_\+t $\ast$e)
+\item 
+void \mbox{\hyperlink{namespace_settings_acfc431be8212b2356532043211127d86}{Settings\+::pin\+Verification\+Cancel\+Event\+Handler}} (lv\+\_\+event\+\_\+t $\ast$e)
+\end{DoxyCompactItemize}

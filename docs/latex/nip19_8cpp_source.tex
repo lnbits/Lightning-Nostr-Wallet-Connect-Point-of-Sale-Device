@@ -1,0 +1,128 @@
+\hypertarget{nip19_8cpp_source}{}\doxysection{nip19.\+cpp}
+\label{nip19_8cpp_source}\index{lib/nostr/nip19.cpp@{lib/nostr/nip19.cpp}}
+\mbox{\hyperlink{nip19_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{nip19_8h}{nip19.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00003}\mbox{\hyperlink{namespacenip19}{00003}}\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacenip19}{nip19}}}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00004}00004\ \{}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00005}00005\ \ \ \ \ \textcolor{comment}{//\ Function\ to\ convert\ hex\ string\ to\ byte\ array}}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00006}\mbox{\hyperlink{namespacenip19_a375620e2a6b82042af6aed871330718c}{00006}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespacenip19_a375620e2a6b82042af6aed871330718c}{hexStringToByteArray}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *hexString,\ uint8\_t\ *bytesArray)}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00007}00007\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00008}00008\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ hexString[i]\ \&\&\ hexString[i\ +\ 1];\ i\ +=\ 2)}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00009}00009\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00010}00010\ \ \ \ \ \ \ \ \ \ \ \ \ sscanf(\&hexString[i],\ \textcolor{stringliteral}{"{}\%2hhx"{}},\ \&bytesArray[i\ /\ 2]);}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00011}00011\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00012}00012\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00014}\mbox{\hyperlink{namespacenip19_af1e501572517de94d24b4b6847435157}{00014}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespacenip19_af1e501572517de94d24b4b6847435157}{convertTo5bitArray}}(\textcolor{keyword}{const}\ uint8\_t\ *byteArray,\ \textcolor{keywordtype}{size\_t}\ byteArrayLen,\ uint8\_t\ *bit5Array,\ \textcolor{keywordtype}{size\_t}\ *bit5ArrayLen)}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00015}00015\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00016}00016\ \ \ \ \ \ \ \ \ *bit5ArrayLen\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00017}00017\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ bitPos\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00018}00018\ \ \ \ \ \ \ \ \ uint32\_t\ buffer\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00020}00020\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ byteArrayLen;\ i++)}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00021}00021\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00022}00022\ \ \ \ \ \ \ \ \ \ \ \ \ buffer\ =\ (buffer\ <<\ 8)\ |\ byteArray[i];}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00023}00023\ \ \ \ \ \ \ \ \ \ \ \ \ bitPos\ +=\ 8;}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (bitPos\ >=\ 5)}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bitPos\ -\/=\ 5;}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bit5Array[(*bit5ArrayLen)++]\ =\ (buffer\ >>\ bitPos)\ \&\ 0x1F;}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00030}00030\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00032}00032\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Handle\ remaining\ bits\ in\ buffer\ if\ any}}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00033}00033\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (bitPos\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00034}00034\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ bit5Array[(*bit5ArrayLen)++]\ =\ (buffer\ <<\ (5\ -\/\ bitPos))\ \&\ 0x1F;}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00036}00036\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00037}00037\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00039}00039\ \ \ \ \ \textcolor{comment}{//\ Function\ to\ convert\ 5-\/bit\ array\ back\ to\ byte\ array}}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00040}\mbox{\hyperlink{namespacenip19_a62479c62a5dcefbb9d19ac28eba449fe}{00040}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespacenip19_a62479c62a5dcefbb9d19ac28eba449fe}{convert5bitArrayToByteArray}}(\textcolor{keyword}{const}\ uint8\_t\ *data5bit,\ \textcolor{keywordtype}{size\_t}\ data5bitLen,\ uint8\_t\ *byteArray,\ \textcolor{keywordtype}{size\_t}\ *byteArrayLen)}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00041}00041\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00042}00042\ \ \ \ \ \ \ \ \ *byteArrayLen\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00043}00043\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ buffer\ =\ 0;\ \textcolor{comment}{//\ Use\ an\ int\ to\ ensure\ there's\ enough\ space\ for\ bit\ manipulation.}}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00044}00044\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ bitPos\ =\ 0;\ \textcolor{comment}{//\ Tracks\ the\ current\ bit\ position\ in\ buffer.}}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00046}00046\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ data5bitLen;\ ++i)}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00047}00047\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Shift\ the\ buffer\ to\ the\ left\ by\ 5\ bits\ and\ add\ the\ current\ 5-\/bit\ group.}}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ buffer\ =\ (buffer\ <<\ 5)\ |\ (data5bit[i]\ \&\ 0x1F);\ \textcolor{comment}{//\ Ensure\ only\ the\ lower\ 5\ bits\ are\ added.}}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ bitPos\ +=\ 5;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ We've\ added\ 5\ bits\ to\ the\ buffer.}}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ While\ we\ have\ at\ least\ 8\ bits\ in\ the\ buffer,\ extract\ each\ byte.}}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (bitPos\ >=\ 8)}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bitPos\ -\/=\ 8;\ \textcolor{comment}{//\ Decrease\ bitPos\ by\ 8\ as\ we're\ extracting\ a\ byte.}}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Extract\ the\ byte\ from\ the\ buffer,\ leaving\ any\ remaining\ bits\ in\ place.}}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Shift\ right\ by\ the\ remaining\ bit\ count\ to\ get\ the\ next\ byte\ to\ the\ rightmost\ position.}}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ byteArray[(*byteArrayLen)++]\ =\ (buffer\ >>\ bitPos)\ \&\ 0xFF;}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00060}00060\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00061}00061\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00063}00063\ \ \ \ \ \textcolor{comment}{//\ Function\ to\ convert\ byte\ array\ to\ hex\ string}}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00064}\mbox{\hyperlink{namespacenip19_a994f1d8ff64403b04fee8bb38893244c}{00064}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespacenip19_a994f1d8ff64403b04fee8bb38893244c}{byteArrayToHexString}}(\textcolor{keyword}{const}\ uint8\_t\ *byteArray,\ \textcolor{keywordtype}{size\_t}\ byteArrayLen,\ \textcolor{keywordtype}{char}\ *hexString)}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00065}00065\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00066}00066\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ byteArrayLen;\ ++i)}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00067}00067\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ sprintf(hexString\ +\ (i\ *\ 2),\ \textcolor{stringliteral}{"{}\%02x"{}},\ byteArray[i]);}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00069}00069\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00070}00070\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00072}\mbox{\hyperlink{namespacenip19_a5a93a1d6823ab9d9ff44cb261406d281}{00072}}\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{namespacenip19_a5a93a1d6823ab9d9ff44cb261406d281}{encodeHexToBech32}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *nsecHex,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *hrp)}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00073}00073\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00074}00074\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ output[1024];\ \textcolor{comment}{//\ Static\ storage\ for\ the\ Bech32\ encoded\ string}}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00075}00075\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ byteArrayLen\ =\ strlen(nsecHex)\ /\ 2;}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00076}00076\ \ \ \ \ \ \ \ \ uint8\_t\ byteArray[byteArrayLen];}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00078}00078\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenip19_a375620e2a6b82042af6aed871330718c}{hexStringToByteArray}}(nsecHex,\ byteArray);}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00080}00080\ \ \ \ \ \ \ \ \ uint8\_t\ bit5Array[byteArrayLen\ *\ 8\ /\ 5\ +\ 1];\ \textcolor{comment}{//\ Max\ possible\ size\ needed}}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00081}00081\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ bit5ArrayLen\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00083}00083\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenip19_af1e501572517de94d24b4b6847435157}{convertTo5bitArray}}(byteArray,\ byteArrayLen,\ bit5Array,\ \&bit5ArrayLen);}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00085}00085\ \ \ \ \ \ \ \ \ bech32\_encode(output,\ hrp,\ bit5Array,\ bit5ArrayLen);}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00087}00087\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ output;}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00088}00088\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00090}\mbox{\hyperlink{namespacenip19_a5dc3227e5470880e4e5a56971860fb99}{00090}}\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{namespacenip19_a5dc3227e5470880e4e5a56971860fb99}{decodeBech32ToHexString}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *input,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *expected\_hrp)}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00091}00091\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00092}00092\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ hexString[2048];\ \textcolor{comment}{//\ Static\ storage\ for\ the\ return\ value}}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00093}00093\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ hrp[1024];}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00094}00094\ \ \ \ \ \ \ \ \ uint8\_t\ data[1024];}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00095}00095\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ data\_len;}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00097}00097\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (bech32\_decode(hrp,\ data,\ \&data\_len,\ input))}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00098}00098\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (strcmp(hrp,\ expected\_hrp)\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ byteArray[1024];}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ byteArrayLen;}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenip19_a62479c62a5dcefbb9d19ac28eba449fe}{convert5bitArrayToByteArray}}(data,\ data\_len,\ byteArray,\ \&byteArrayLen);}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenip19_a994f1d8ff64403b04fee8bb38893244c}{byteArrayToHexString}}(byteArray,\ byteArrayLen,\ hexString);}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Error:\ HRP\ does\ not\ match\ expected\ value."{}});}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ strcpy(hexString,\ \textcolor{stringliteral}{"{}Error:\ HRP\ mismatch"{}});}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00113}00113\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00114}00114\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00115}00115\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Bech32\ decoding\ failed."{}});}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ strcpy(hexString,\ \textcolor{stringliteral}{"{}Error:\ Decoding\ failed"{}});}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00118}00118\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00119}00119\ }
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00120}00120\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ hexString;}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00121}00121\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip19_8cpp_source_l00122}00122\ \}}
+
+\end{DoxyCode}

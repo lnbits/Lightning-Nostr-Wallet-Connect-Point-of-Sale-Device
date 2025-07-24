@@ -1,0 +1,23 @@
+var searchData=
+[
+  ['tft_5fbl_0',['TFT_BL',['../pincfg_8h.html#a541b5fc642dbcc81f373d4b866c88f80',1,'pincfg.h']]],
+  ['tft_5fcs_1',['TFT_CS',['../pincfg_8h.html#a5f4d46ae101b77df78010c506601c87c',1,'pincfg.h']]],
+  ['tft_5fheight_2',['TFT_HEIGHT',['../display_8h.html#a1c2d2e1cd167f90b809c3450fd6f3434',1,'display.h']]],
+  ['tft_5fres_5fh_3',['TFT_res_H',['../dispcfg_8h.html#a3ed892b03a04858b1d132412428d5c97',1,'dispcfg.h']]],
+  ['tft_5fres_5fw_4',['TFT_res_W',['../dispcfg_8h.html#a7e76b7900a303c107f31414b2e231edb',1,'dispcfg.h']]],
+  ['tft_5frot_5',['TFT_rot',['../dispcfg_8h.html#a966806ff3abf821022944c7aa191f997',1,'dispcfg.h']]],
+  ['tft_5fsck_6',['TFT_SCK',['../pincfg_8h.html#ad71e70999bd20c255b8f3f2ce89722d9',1,'pincfg.h']]],
+  ['tft_5fsda0_7',['TFT_SDA0',['../pincfg_8h.html#a0ce0d651c46fde5cbaf7801404dabe91',1,'pincfg.h']]],
+  ['tft_5fsda1_8',['TFT_SDA1',['../pincfg_8h.html#a320010aba9dff9b68b8bc9ed50fe5dba',1,'pincfg.h']]],
+  ['tft_5fsda2_9',['TFT_SDA2',['../pincfg_8h.html#a01714c1a1a5f15730e6c48a81abeee6d',1,'pincfg.h']]],
+  ['tft_5fsda3_10',['TFT_SDA3',['../pincfg_8h.html#a86ad39a86a6a24439da28f19c47dc6f4',1,'pincfg.h']]],
+  ['tft_5fwidth_11',['TFT_WIDTH',['../display_8h.html#a83af0cb652728913ff58da7133c692ea',1,'display.h']]],
+  ['touch_5faddr_12',['Touch_ADDR',['../pincfg_8h.html#a47174ce4cf77383332568190e90e7e2e',1,'pincfg.h']]],
+  ['touch_5fint_13',['Touch_INT',['../pincfg_8h.html#a5a0375f1cc3ad48d5b72844acf697f1e',1,'pincfg.h']]],
+  ['touch_5fscl_14',['Touch_SCL',['../pincfg_8h.html#aadfd1e71ec456dc27c0b939972b57425',1,'pincfg.h']]],
+  ['touch_5fsda_15',['Touch_SDA',['../pincfg_8h.html#a2aa469c181d9c18e7f810f7c2505732e',1,'pincfg.h']]],
+  ['touch_5fx_5fmax_16',['Touch_X_max',['../dispcfg_8h.html#a583b55e2ca8bb7f5659ba4c88a69c114',1,'dispcfg.h']]],
+  ['touch_5fx_5fmin_17',['Touch_X_min',['../dispcfg_8h.html#ab02852ca4298c30325151b824f672482',1,'dispcfg.h']]],
+  ['touch_5fy_5fmax_18',['Touch_Y_max',['../dispcfg_8h.html#a36ccd5c68c4d57b6639e489cd390a02d',1,'dispcfg.h']]],
+  ['touch_5fy_5fmin_19',['Touch_Y_min',['../dispcfg_8h.html#a1d8fe9a018aa50b9683f4413d255c534',1,'dispcfg.h']]]
+];

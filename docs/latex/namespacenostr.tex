@@ -1,0 +1,883 @@
+\hypertarget{namespacenostr}{}\doxysection{nostr Namespace Reference}
+\label{namespacenostr}\index{nostr@{nostr}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Dynamic\+Json\+Document \mbox{\hyperlink{namespacenostr_ac14cbc8a276a7d1106c23c8dba6f608c}{nostr\+Event\+Doc}} (0)
+\item 
+void \mbox{\hyperlink{namespacenostr_ae7add69f32ac7f6af83399c69374cc50}{\+\_\+start\+Timer}} (const char $\ast$timed\+Event)
+\item 
+void \mbox{\hyperlink{namespacenostr_a9b4c329f738edf5cebd6f9eacb0facbe}{\+\_\+stop\+Timer}} (const char $\ast$timed\+Event)
+\item 
+void \mbox{\hyperlink{namespacenostr_ad38d4b13131e9c51ec482ccfcbc32841}{init\+Memory\+Space}} (size\+\_\+t nostr\+Event\+Doc\+Capacity, size\+\_\+t encrypted\+Message\+Bin\+Size)
+\item 
+void \mbox{\hyperlink{namespacenostr_a5006a25d7135fb5bc420095e4773df9c}{\+\_\+log\+To\+Serial\+With\+Title}} (String title, String message)
+\item 
+void \mbox{\hyperlink{namespacenostr_aabcc2afe2028ae1da8d6e2154b11d799}{\+\_\+log\+Ok\+With\+Heap\+Size}} (const char $\ast$message)
+\item 
+String \mbox{\hyperlink{namespacenostr_afa02d1e6d1de0f264aa5582de5e54766}{decrypt\+Data}} (byte key\mbox{[}32\mbox{]}, byte iv\mbox{[}16\mbox{]}, byte $\ast$\mbox{\hyperlink{namespacenostr_a7b3cf922a571a696433d63e675ecaa38}{encrypted\+Message\+Bin}}, int byte\+Size)
+\item 
+String \mbox{\hyperlink{namespacenostr_ad76c1eacccd66757ef146e3393a1442a}{decrypt\+Nip04\+Ciphertext}} (String \&cipher\+Text, String private\+Key\+Hex, String sender\+Pub\+Key\+Hex)
+\item 
+String \mbox{\hyperlink{namespacenostr_a48b8b6f350edb9c7ef6667458376e74e}{get\+Content}} (const String \&serialised\+Json)
+\item 
+String \mbox{\hyperlink{namespacenostr_abdbc8350c239ae90de2c10744a2fad6c}{get\+Sender\+Pub\+Key\+Hex}} (const String \&serialised\+Json)
+\item 
+std\+::pair$<$ String, String $>$ \mbox{\hyperlink{namespacenostr_ae9b9b8005030f72e2136a4d0bda6879d}{get\+Pub\+Key\+And\+Content}} (const String \&serialised\+Json)
+\item 
+String \mbox{\hyperlink{namespacenostr_a99b54ccdb024947dfabe8ea69c57214e}{nip04\+Decrypt}} (const char $\ast$private\+Key\+Hex, String serialised\+Json)
+\item 
+String \mbox{\hyperlink{namespacenostr_a4a0c52a59a4083625f1704bf02966af8}{nip44\+Decrypt}} (const char $\ast$private\+Key\+Hex, String serialised\+Json)
+\item 
+String \mbox{\hyperlink{namespacenostr_a4848cccd6183bc9cfb6196fe18749b6c}{nip44\+Encrypt}} (const char $\ast$private\+Key\+Hex, String serialised\+Json)
+\item 
+String \mbox{\hyperlink{namespacenostr_a99a4781da61520d3c58841370c2c3a10}{get\+Note}} (char const $\ast$private\+Key\+Hex, char const $\ast$pub\+Key\+Hex, unsigned long timestamp, String \&content, uint16\+\_\+t kind, String tags)
+\begin{DoxyCompactList}\small\item\em Get a Note object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacenostr_afca44e9f58eaddb2737fee169753ad9c}{string\+To\+Byte\+Array}} (const char $\ast$input, int padding\+\_\+diff, byte $\ast$output)
+\begin{DoxyCompactList}\small\item\em Convert a string to a byte array. \end{DoxyCompactList}\item 
+String \mbox{\hyperlink{namespacenostr_a52ad606d41ff89c69df00732ee8e348d}{encrypt\+Data}} (byte key\mbox{[}32\mbox{]}, byte iv\mbox{[}16\mbox{]}, String \&msg)
+\begin{DoxyCompactList}\small\item\em encrypt data using AES-\/256-\/\+CBC \end{DoxyCompactList}\item 
+String \mbox{\hyperlink{namespacenostr_a2fa2b10644805a1cd2b329875134fdbd}{get\+Cipher\+Text}} (const char $\ast$private\+Key\+Hex, const char $\ast$recipient\+Pub\+Key\+Hex, String \&content)
+\begin{DoxyCompactList}\small\item\em Get the cipher text for a nip4 message. \end{DoxyCompactList}\item 
+String \mbox{\hyperlink{namespacenostr_a6153fcc43ae15291045b9c2a2bd89291}{get\+Serialised\+Encrypted\+Dm\+Object}} (const char $\ast$pub\+Key\+Hex, const char $\ast$recipient\+Pub\+Key\+Hex, uint16\+\_\+t kind, String \&msg\+Hash, int timestamp, String \&encrypted\+Message\+With\+Iv, String \&schnorr\+Sig)
+\begin{DoxyCompactList}\small\item\em Get the Serialised Encrypted Dm Object. \end{DoxyCompactList}\item 
+String \mbox{\hyperlink{namespacenostr_a754ce1cc38ea76f4a89fb5c26c264156}{get\+Serialised\+Encrypted\+Dm\+Array}} (char const $\ast$pub\+Key\+Hex, char const $\ast$recipient\+Pub\+Key\+Hex, uint16\+\_\+t kind, int timestamp, String \&encrypted\+Message\+With\+Iv)
+\item 
+String \mbox{\hyperlink{namespacenostr_a8b5b9ccf35b878cc481ed6523f568a49}{get\+Encrypted\+Dm}} (char const $\ast$private\+Key\+Hex, char const $\ast$pub\+Key\+Hex, char const $\ast$recipient\+Pub\+Key\+Hex, uint16\+\_\+t kind, unsigned long timestamp, String content, String type)
+\begin{DoxyCompactList}\small\item\em Get the Encrypted Dm object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+byte $\ast$ \mbox{\hyperlink{namespacenostr_a7b3cf922a571a696433d63e675ecaa38}{encrypted\+Message\+Bin}}
+\item 
+unsigned long \mbox{\hyperlink{namespacenostr_ac528623a09925500b6b787d0ddc5c9c7}{timer}} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacenostr_aabcc2afe2028ae1da8d6e2154b11d799}\label{namespacenostr_aabcc2afe2028ae1da8d6e2154b11d799}} 
+\index{nostr@{nostr}!\_logOkWithHeapSize@{\_logOkWithHeapSize}}
+\index{\_logOkWithHeapSize@{\_logOkWithHeapSize}!nostr@{nostr}}
+\doxysubsubsection{\texorpdfstring{\_logOkWithHeapSize()}{\_logOkWithHeapSize()}}
+{\footnotesize\ttfamily void nostr\+::\+\_\+log\+Ok\+With\+Heap\+Size (\begin{DoxyParamCaption}\item[{const char $\ast$}]{message }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nostr_8cpp_source_l00038}{38}} of file \mbox{\hyperlink{nostr_8cpp_source}{nostr.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00039\ \ \ \ \ \{}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ Serial.print(message);}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}\ OK."{}});}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}\ Free\ heap\ size:\ "{}});}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ Serial.println(esp\_get\_free\_heap\_size());}
+\DoxyCodeLine{00044\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacenostr_a5006a25d7135fb5bc420095e4773df9c}\label{namespacenostr_a5006a25d7135fb5bc420095e4773df9c}} 
+\index{nostr@{nostr}!\_logToSerialWithTitle@{\_logToSerialWithTitle}}
+\index{\_logToSerialWithTitle@{\_logToSerialWithTitle}!nostr@{nostr}}
+\doxysubsubsection{\texorpdfstring{\_logToSerialWithTitle()}{\_logToSerialWithTitle()}}
+{\footnotesize\ttfamily void nostr\+::\+\_\+log\+To\+Serial\+With\+Title (\begin{DoxyParamCaption}\item[{String}]{title,  }\item[{String}]{message }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nostr_8cpp_source_l00033}{33}} of file \mbox{\hyperlink{nostr_8cpp_source}{nostr.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00034\ \ \ \ \ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ Serial.println(title\ +\ \textcolor{stringliteral}{"{}:\ "{}}\ +\ message);}
+\DoxyCodeLine{00036\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacenostr_ae7add69f32ac7f6af83399c69374cc50}\label{namespacenostr_ae7add69f32ac7f6af83399c69374cc50}} 
+\index{nostr@{nostr}!\_startTimer@{\_startTimer}}
+\index{\_startTimer@{\_startTimer}!nostr@{nostr}}
+\doxysubsubsection{\texorpdfstring{\_startTimer()}{\_startTimer()}}
+{\footnotesize\ttfamily void nostr\+::\+\_\+start\+Timer (\begin{DoxyParamCaption}\item[{const char $\ast$}]{timed\+Event }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nostr_8cpp_source_l00011}{11}} of file \mbox{\hyperlink{nostr_8cpp_source}{nostr.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00012\ \ \ \ \ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_ac528623a09925500b6b787d0ddc5c9c7}{timer}}\ =\ millis();}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Serial.print("{}Starting\ timer\ for\ "{});}}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Serial.println(timedEvent);}}
+\DoxyCodeLine{00016\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacenostr_a9b4c329f738edf5cebd6f9eacb0facbe}\label{namespacenostr_a9b4c329f738edf5cebd6f9eacb0facbe}} 
+\index{nostr@{nostr}!\_stopTimer@{\_stopTimer}}
+\index{\_stopTimer@{\_stopTimer}!nostr@{nostr}}
+\doxysubsubsection{\texorpdfstring{\_stopTimer()}{\_stopTimer()}}
+{\footnotesize\ttfamily void nostr\+::\+\_\+stop\+Timer (\begin{DoxyParamCaption}\item[{const char $\ast$}]{timed\+Event }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nostr_8cpp_source_l00018}{18}} of file \mbox{\hyperlink{nostr_8cpp_source}{nostr.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00019\ \ \ \ \ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ elapsedTime\ =\ millis()\ -\/\ \mbox{\hyperlink{namespacenostr_ac528623a09925500b6b787d0ddc5c9c7}{timer}};}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ Serial.print(elapsedTime);}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}\ ms\ -\/\ "{}});}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ Serial.println(timedEvent);}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_ac528623a09925500b6b787d0ddc5c9c7}{timer}}\ =\ millis();}
+\DoxyCodeLine{00025\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacenostr_afa02d1e6d1de0f264aa5582de5e54766}\label{namespacenostr_afa02d1e6d1de0f264aa5582de5e54766}} 
+\index{nostr@{nostr}!decryptData@{decryptData}}
+\index{decryptData@{decryptData}!nostr@{nostr}}
+\doxysubsubsection{\texorpdfstring{decryptData()}{decryptData()}}
+{\footnotesize\ttfamily String nostr\+::decrypt\+Data (\begin{DoxyParamCaption}\item[{byte}]{key\mbox{[}32\mbox{]},  }\item[{byte}]{iv\mbox{[}16\mbox{]},  }\item[{byte $\ast$}]{encrypted\+Message\+Bin,  }\item[{int}]{byte\+Size }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nostr_8cpp_source_l00046}{46}} of file \mbox{\hyperlink{nostr_8cpp_source}{nostr.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00047\ \ \ \ \ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!encryptedMessageBin)}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Invalid\ encryptedMessageBin"{}});}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};\ \textcolor{comment}{//\ Handle\ invalid\ input}}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ encryptedMessageBin\ is\ already\ a\ byte\ pointer\ to\ the\ binary\ data}}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ and\ byteSize\ is\ the\ size\ of\ this\ binary\ data}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_a_e_s__ctx}{AES\_ctx}}\ ctx;}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{aes_8cpp_a99d17d22ed909bd155007cdece29263a}{AES\_init\_ctx\_iv}}(\&ctx,\ key,\ iv);}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{aes_8cpp_a0672c442747b26b691202c493a08a104}{AES\_CBC\_decrypt\_buffer}}(\&ctx,\ encryptedMessageBin,\ byteSize);\ \textcolor{comment}{//\ Use\ byteSize\ directly}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ //\_logOkWithHeapSize("{}Decrypted\ AES\ data"{});}}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Convert\ the\ decrypted\ data\ to\ a\ String.\ Ensure\ that\ the\ data\ is\ null-\/terminated\ if\ treating\ as\ a\ C-\/string.}}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ the\ decrypted\ data\ may\ not\ be\ null-\/terminated\ or\ might\ contain\ null\ bytes\ within,}}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ you'll\ need\ a\ different\ strategy\ to\ create\ the\ String\ object\ correctly.}}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ String\ decryptedData;}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ byteSize;\ i++)}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (encryptedMessageBin[i]\ !=\ \textcolor{charliteral}{'\(\backslash\)0'})\ \textcolor{comment}{//\ Assuming\ the\ decrypted\ text\ does\ not\ include\ null\ characters}}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ decryptedData\ +=\ (char)encryptedMessageBin[i];}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};\ \textcolor{comment}{//\ Stop\ if\ a\ null\ character\ is\ found}}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Note:\ No\ need\ to\ free\ encryptedMessageBin\ here\ if\ it's\ managed\ outside\ this\ function}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ decryptedData;}
+\DoxyCodeLine{00078\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacenostr_ad76c1eacccd66757ef146e3393a1442a}\label{namespacenostr_ad76c1eacccd66757ef146e3393a1442a}} 
+\index{nostr@{nostr}!decryptNip04Ciphertext@{decryptNip04Ciphertext}}
+\index{decryptNip04Ciphertext@{decryptNip04Ciphertext}!nostr@{nostr}}
+\doxysubsubsection{\texorpdfstring{decryptNip04Ciphertext()}{decryptNip04Ciphertext()}}
+{\footnotesize\ttfamily String nostr\+::decrypt\+Nip04\+Ciphertext (\begin{DoxyParamCaption}\item[{String \&}]{cipher\+Text,  }\item[{String}]{private\+Key\+Hex,  }\item[{String}]{sender\+Pub\+Key\+Hex }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nostr_8cpp_source_l00080}{80}} of file \mbox{\hyperlink{nostr_8cpp_source}{nostr.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00081\ \ \ \ \ \{}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_ae7add69f32ac7f6af83399c69374cc50}{\_startTimer}}(\textcolor{stringliteral}{"{}decryptNip04Ciphertext"{}});}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ String\ encryptedMessage\ =\ cipherText.substring(0,\ cipherText.indexOf(\textcolor{stringliteral}{"{}?iv="{}}));}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ //\_logOkWithHeapSize("{}Got\ encryptedMessage"{});}}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ encryptedMessageSize\ =\ (encryptedMessage.length()\ *\ 3)\ /\ 4;}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ fromBase64(encryptedMessage,\ encryptedMessageBin,\ encryptedMessageSize);\ \textcolor{comment}{//\ Assuming\ fromBase64\ modifies\ encryptedMessageSize\ to\ actual\ decoded\ size}}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ String\ iv\ =\ cipherText.substring(cipherText.indexOf(\textcolor{stringliteral}{"{}?iv="{}})\ +\ 4);}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ calculate\ the\ ivSize\ for\ ivBin\ based\ on\ the\ iv\ size}}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ ivSize\ =\ (iv.length()\ *\ 3)\ /\ 4;}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{byte}\ ivBin[ivSize];}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ fromBase64(iv,\ ivBin,\ ivSize);}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_a5006a25d7135fb5bc420095e4773df9c}{\_logToSerialWithTitle}}(\textcolor{stringliteral}{"{}iv"{}},\ iv);}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_a9b4c329f738edf5cebd6f9eacb0facbe}{\_stopTimer}}(\textcolor{stringliteral}{"{}decryptNip04Ciphertext:\ Got\ ivBin"{}});}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ byteSize\ =\ 32;}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{byte}\ privateKeyBytes[byteSize];}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ fromHex(privateKeyHex,\ privateKeyBytes,\ byteSize);}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ PrivateKey\ privateKey(privateKeyBytes);}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_a9b4c329f738edf5cebd6f9eacb0facbe}{\_stopTimer}}(\textcolor{stringliteral}{"{}decryptNip04Ciphertext:\ Got\ privateKey"{}});}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_a5006a25d7135fb5bc420095e4773df9c}{\_logToSerialWithTitle}}(\textcolor{stringliteral}{"{}senderPubKeyHex"{}},\ senderPubKeyHex);}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{byte}\ senderPublicKeyBin[64];}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ fromHex(\textcolor{stringliteral}{"{}02"{}}\ +\ String(senderPubKeyHex),\ senderPublicKeyBin,\ 64);}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ PublicKey\ senderPublicKey(senderPublicKeyBin);}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_a9b4c329f738edf5cebd6f9eacb0facbe}{\_stopTimer}}(\textcolor{stringliteral}{"{}decryptNip04Ciphertext:\ Got\ senderPublicKey"{}});}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_a5006a25d7135fb5bc420095e4773df9c}{\_logToSerialWithTitle}}(\textcolor{stringliteral}{"{}senderPublicKey.toString()\ is"{}},\ senderPublicKey.toString());}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{byte}\ sharedPointX[32];}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ privateKey.ecdh(senderPublicKey,\ sharedPointX,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ String\ sharedPointXHex\ =\ toHex(sharedPointX,\ \textcolor{keyword}{sizeof}(sharedPointX));}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_a5006a25d7135fb5bc420095e4773df9c}{\_logToSerialWithTitle}}(\textcolor{stringliteral}{"{}sharedPointXHex\ is"{}},\ sharedPointXHex);}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_a9b4c329f738edf5cebd6f9eacb0facbe}{\_stopTimer}}(\textcolor{stringliteral}{"{}decryptNip04Ciphertext:\ Got\ sharedPointX"{}});}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ String\ message\ =\ \mbox{\hyperlink{namespacenostr_afa02d1e6d1de0f264aa5582de5e54766}{decryptData}}(sharedPointX,\ ivBin,\ encryptedMessageBin,\ encryptedMessageSize);}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ message.trim();}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_a9b4c329f738edf5cebd6f9eacb0facbe}{\_stopTimer}}(\textcolor{stringliteral}{"{}decryptNip04Ciphertext:\ Got\ message"{}});}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_a5006a25d7135fb5bc420095e4773df9c}{\_logToSerialWithTitle}}(\textcolor{stringliteral}{"{}message"{}},\ message);}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ message;}
+\DoxyCodeLine{00122\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacenostr_a52ad606d41ff89c69df00732ee8e348d}\label{namespacenostr_a52ad606d41ff89c69df00732ee8e348d}} 
+\index{nostr@{nostr}!encryptData@{encryptData}}
+\index{encryptData@{encryptData}!nostr@{nostr}}
+\doxysubsubsection{\texorpdfstring{encryptData()}{encryptData()}}
+{\footnotesize\ttfamily String nostr\+::encrypt\+Data (\begin{DoxyParamCaption}\item[{byte}]{key\mbox{[}32\mbox{]},  }\item[{byte}]{iv\mbox{[}16\mbox{]},  }\item[{String \&}]{msg }\end{DoxyParamCaption})}
+
+
+
+encrypt data using AES-\/256-\/\+CBC 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & \\
+\hline
+{\em iv} & \\
+\hline
+{\em msg} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+String 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{nostr_8cpp_source_l00334}{334}} of file \mbox{\hyperlink{nostr_8cpp_source}{nostr.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00335\ \ \ \ \ \{}
+\DoxyCodeLine{00336\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ message\ has\ to\ be\ padded\ at\ the\ end\ so\ it\ is\ a\ multiple\ of\ 16}}
+\DoxyCodeLine{00337\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ padding\_diff\ =\ msg.length()\ \%\ 16\ ==\ 0\ ?\ 16\ :\ 16\ -\/\ (msg.length()\ \%\ 16);}
+\DoxyCodeLine{00338\ }
+\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ byteSize\ =\ msg.length()\ +\ padding\_diff;}
+\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{byte}\ *messageBin\ =\ (\textcolor{keywordtype}{byte}\ *)malloc(byteSize);}
+\DoxyCodeLine{00341\ }
+\DoxyCodeLine{00342\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (messageBin\ ==\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00343\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00344\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Failed\ to\ allocate\ PSRAM"{}});}
+\DoxyCodeLine{00345\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00346\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00347\ }
+\DoxyCodeLine{00348\ \ \ \ \ \ \ \ \ stringToByteArray(msg.c\_str(),\ padding\_diff,\ messageBin);}
+\DoxyCodeLine{00349\ }
+\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_a_e_s__ctx}{AES\_ctx}}\ ctx;}
+\DoxyCodeLine{00351\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{aes_8cpp_a99d17d22ed909bd155007cdece29263a}{AES\_init\_ctx\_iv}}(\&ctx,\ key,\ iv);}
+\DoxyCodeLine{00352\ }
+\DoxyCodeLine{00353\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{aes_8cpp_a296bd30323044b07d69e0e3b5f676281}{AES\_CBC\_encrypt\_buffer}}(\&ctx,\ messageBin,\ byteSize);}
+\DoxyCodeLine{00354\ }
+\DoxyCodeLine{00355\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ toHex(messageBin,\ byteSize);}
+\DoxyCodeLine{00356\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacenostr_a2fa2b10644805a1cd2b329875134fdbd}\label{namespacenostr_a2fa2b10644805a1cd2b329875134fdbd}} 
+\index{nostr@{nostr}!getCipherText@{getCipherText}}
+\index{getCipherText@{getCipherText}!nostr@{nostr}}
+\doxysubsubsection{\texorpdfstring{getCipherText()}{getCipherText()}}
+{\footnotesize\ttfamily String nostr\+::get\+Cipher\+Text (\begin{DoxyParamCaption}\item[{const char $\ast$}]{private\+Key\+Hex,  }\item[{const char $\ast$}]{recipient\+Pub\+Key\+Hex,  }\item[{String \&}]{content }\end{DoxyParamCaption})}
+
+
+
+Get the cipher text for a nip4 message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em private\+Key\+Hex} & \\
+\hline
+{\em recipient\+Pub\+Key\+Hex} & \\
+\hline
+{\em content} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+String 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{nostr_8cpp_source_l00366}{366}} of file \mbox{\hyperlink{nostr_8cpp_source}{nostr.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00367\ \ \ \ \ \{}
+\DoxyCodeLine{00368\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_ae7add69f32ac7f6af83399c69374cc50}{\_startTimer}}(\textcolor{stringliteral}{"{}getCipherText"{}});}
+\DoxyCodeLine{00369\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ shared\ point}}
+\DoxyCodeLine{00370\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Create\ the\ private\ key\ object}}
+\DoxyCodeLine{00371\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ byteSize\ =\ 32;}
+\DoxyCodeLine{00372\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{byte}\ privateKeyBytes[byteSize];}
+\DoxyCodeLine{00373\ \ \ \ \ \ \ \ \ fromHex(privateKeyHex,\ privateKeyBytes,\ byteSize);}
+\DoxyCodeLine{00374\ \ \ \ \ \ \ \ \ PrivateKey\ privateKey(privateKeyBytes);}
+\DoxyCodeLine{00375\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_a9b4c329f738edf5cebd6f9eacb0facbe}{\_stopTimer}}(\textcolor{stringliteral}{"{}getCipherText:\ create\ privateKey\ object"{}});}
+\DoxyCodeLine{00376\ }
+\DoxyCodeLine{00377\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{byte}\ publicKeyBin[64];}
+\DoxyCodeLine{00378\ \ \ \ \ \ \ \ \ fromHex(\textcolor{stringliteral}{"{}02"{}}\ +\ String(recipientPubKeyHex),\ publicKeyBin,\ 64);}
+\DoxyCodeLine{00379\ \ \ \ \ \ \ \ \ PublicKey\ otherDhPublicKey(publicKeyBin);}
+\DoxyCodeLine{00380\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_a5006a25d7135fb5bc420095e4773df9c}{\_logToSerialWithTitle}}(\textcolor{stringliteral}{"{}otherDhPublicKey.toString()\ is"{}},\ otherDhPublicKey.toString());}
+\DoxyCodeLine{00381\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_a9b4c329f738edf5cebd6f9eacb0facbe}{\_stopTimer}}(\textcolor{stringliteral}{"{}getCipherText:\ create\ otherDhPublicKey\ object"{}});}
+\DoxyCodeLine{00382\ }
+\DoxyCodeLine{00383\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{byte}\ sharedPointX[32];}
+\DoxyCodeLine{00384\ \ \ \ \ \ \ \ \ privateKey.ecdh(otherDhPublicKey,\ sharedPointX,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00385\ \ \ \ \ \ \ \ \ String\ sharedPointXHex\ =\ toHex(sharedPointX,\ \textcolor{keyword}{sizeof}(sharedPointX));}
+\DoxyCodeLine{00386\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_a5006a25d7135fb5bc420095e4773df9c}{\_logToSerialWithTitle}}(\textcolor{stringliteral}{"{}sharedPointXHex\ is"{}},\ sharedPointXHex);}
+\DoxyCodeLine{00387\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_a9b4c329f738edf5cebd6f9eacb0facbe}{\_stopTimer}}(\textcolor{stringliteral}{"{}getCipherText:\ get\ sharedPointX"{}});}
+\DoxyCodeLine{00388\ }
+\DoxyCodeLine{00389\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Create\ the\ initialization\ vector}}
+\DoxyCodeLine{00390\ \ \ \ \ \ \ \ \ uint8\_t\ iv[16];}
+\DoxyCodeLine{00391\ \ \ \ \ \ \ \ \ esp\_random()\ \%\ 256;}
+\DoxyCodeLine{00392\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ \textcolor{keyword}{sizeof}(iv);\ i++)}
+\DoxyCodeLine{00393\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00394\ \ \ \ \ \ \ \ \ \ \ \ \ iv[i]\ =\ esp\_random()\ \%\ 256;}
+\DoxyCodeLine{00395\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00396\ \ \ \ \ \ \ \ \ \_stopTimer(\textcolor{stringliteral}{"{}getCipherText:\ create\ iv"{}});}
+\DoxyCodeLine{00397\ }
+\DoxyCodeLine{00398\ \ \ \ \ \ \ \ \ String\ ivHex\ =\ toHex(iv,\ 16);}
+\DoxyCodeLine{00399\ \ \ \ \ \ \ \ \ String\ ivBase64\ =\ hexToBase64(ivHex);}
+\DoxyCodeLine{00400\ \ \ \ \ \ \ \ \ \_stopTimer(\textcolor{stringliteral}{"{}getCipherText:\ get\ ivBase64"{}});}
+\DoxyCodeLine{00401\ }
+\DoxyCodeLine{00402\ \ \ \ \ \ \ \ \ String\ encryptedMessageHex\ =\ encryptData(sharedPointX,\ iv,\ content);}
+\DoxyCodeLine{00403\ \ \ \ \ \ \ \ \ \_stopTimer(\textcolor{stringliteral}{"{}getCipherText:\ get\ encryptedMessageHex"{}});}
+\DoxyCodeLine{00404\ }
+\DoxyCodeLine{00405\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ divide\ the\ length\ of\ the\ hex\ string\ 2\ to\ get\ the\ size\ of\ the\ byte\ array,\ since\ each\ byte\ consists\ of\ 2\ hexadecimal\ characters.}}
+\DoxyCodeLine{00406\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ encryptedMessageSize\ =\ encryptedMessageHex.length()\ /\ 2;}
+\DoxyCodeLine{00407\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Allocate\ memory\ for\ the\ encrypted\ message\ array}}
+\DoxyCodeLine{00408\ \ \ \ \ \ \ \ \ uint8\_t\ *encryptedMessage\ =\ (uint8\_t\ *)malloc(encryptedMessageSize);}
+\DoxyCodeLine{00409\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (encryptedMessage\ ==\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00410\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00411\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Failed\ to\ allocate\ PSRAM\ for\ encryptedMessage"{}});}
+\DoxyCodeLine{00412\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00413\ \ \ \ \ \ \ \ \ fromHex(encryptedMessageHex,\ encryptedMessage,\ encryptedMessageSize);}
+\DoxyCodeLine{00414\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_a9b4c329f738edf5cebd6f9eacb0facbe}{\_stopTimer}}(\textcolor{stringliteral}{"{}getCipherText:\ get\ encryptedMessage\ fromHex"{}});}
+\DoxyCodeLine{00415\ }
+\DoxyCodeLine{00416\ \ \ \ \ \ \ \ \ String\ encryptedMessageBase64\ =\ hexToBase64(encryptedMessageHex);}
+\DoxyCodeLine{00417\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_a9b4c329f738edf5cebd6f9eacb0facbe}{\_stopTimer}}(\textcolor{stringliteral}{"{}getCipherText:\ get\ encryptedMessageBase64"{}});}
+\DoxyCodeLine{00418\ }
+\DoxyCodeLine{00419\ \ \ \ \ \ \ \ \ encryptedMessageBase64\ +=\ \textcolor{stringliteral}{"{}?iv="{}}\ +\ ivBase64;}
+\DoxyCodeLine{00420\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ encryptedMessageBase64;}
+\DoxyCodeLine{00421\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacenostr_a48b8b6f350edb9c7ef6667458376e74e}\label{namespacenostr_a48b8b6f350edb9c7ef6667458376e74e}} 
+\index{nostr@{nostr}!getContent@{getContent}}
+\index{getContent@{getContent}!nostr@{nostr}}
+\doxysubsubsection{\texorpdfstring{getContent()}{getContent()}}
+{\footnotesize\ttfamily String nostr\+::get\+Content (\begin{DoxyParamCaption}\item[{const String \&}]{serialised\+Json }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nostr_8cpp_source_l00124}{124}} of file \mbox{\hyperlink{nostr_8cpp_source}{nostr.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00125\ \ \ \ \ \{}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ DeserializationError\ error\ =\ deserializeJson(nostrEventDoc,\ serialisedJson);}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (error)}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.print(F(\textcolor{stringliteral}{"{}deserializeJson()\ failed:\ "{}}));}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(error.c\_str());}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ nostrEventDoc[2][\textcolor{stringliteral}{"{}content"{}}];}
+\DoxyCodeLine{00133\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacenostr_a8b5b9ccf35b878cc481ed6523f568a49}\label{namespacenostr_a8b5b9ccf35b878cc481ed6523f568a49}} 
+\index{nostr@{nostr}!getEncryptedDm@{getEncryptedDm}}
+\index{getEncryptedDm@{getEncryptedDm}!nostr@{nostr}}
+\doxysubsubsection{\texorpdfstring{getEncryptedDm()}{getEncryptedDm()}}
+{\footnotesize\ttfamily String nostr\+::get\+Encrypted\+Dm (\begin{DoxyParamCaption}\item[{char const $\ast$}]{private\+Key\+Hex,  }\item[{char const $\ast$}]{pub\+Key\+Hex,  }\item[{char const $\ast$}]{recipient\+Pub\+Key\+Hex,  }\item[{uint16\+\_\+t}]{kind,  }\item[{unsigned long}]{timestamp,  }\item[{String}]{content,  }\item[{String}]{type }\end{DoxyParamCaption})}
+
+
+
+Get the Encrypted Dm object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em private\+Key\+Hex} & \\
+\hline
+{\em pub\+Key\+Hex} & \\
+\hline
+{\em recipient\+Pub\+Key\+Hex} & \\
+\hline
+{\em kind} & \\
+\hline
+{\em timestamp} & \\
+\hline
+{\em content} & \\
+\hline
+{\em type} & \char`\"{}nip44\char`\"{} or \char`\"{}nip04\char`\"{} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+String 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{nostr_8cpp_source_l00467}{467}} of file \mbox{\hyperlink{nostr_8cpp_source}{nostr.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00468\ \ \ \ \ \{}
+\DoxyCodeLine{00469\ \ \ \ \ \ \ \ \ String\ encryptedMessageBase64\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00470\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (type\ ==\ \textcolor{stringliteral}{"{}nip44"{}})\ \{}
+\DoxyCodeLine{00471\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_ae7add69f32ac7f6af83399c69374cc50}{\_startTimer}}(\textcolor{stringliteral}{"{}getEncrypted\ NIP44\ Dm"{}});}
+\DoxyCodeLine{00472\ \ \ \ \ \ \ \ \ \ \ \ \ encryptedMessageBase64\ =\ \mbox{\hyperlink{nip44_8cpp_a9fca4f5d3adc798444724f0ef23cb0c6}{executeEncryptMessageNip44}}(content,\ privateKeyHex,\ recipientPubKeyHex);}
+\DoxyCodeLine{00473\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}NIP44\ encrypted\ message:\ "{}}\ +\ encryptedMessageBase64);}
+\DoxyCodeLine{00474\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_a9b4c329f738edf5cebd6f9eacb0facbe}{\_stopTimer}}(\textcolor{stringliteral}{"{}executeEncryptMessageNip44"{}});}
+\DoxyCodeLine{00475\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00476\ \ \ \ \ \ \ \ \ \ \ \ \ \_startTimer(\textcolor{stringliteral}{"{}getEncrypted\ NIP44\ Dm"{}});}
+\DoxyCodeLine{00477\ \ \ \ \ \ \ \ \ \ \ \ \ encryptedMessageBase64\ =\ getCipherText(privateKeyHex,\ recipientPubKeyHex,\ content);}
+\DoxyCodeLine{00478\ \ \ \ \ \ \ \ \ \ \ \ \ \_stopTimer(\textcolor{stringliteral}{"{}getCipherText"{}});}
+\DoxyCodeLine{00479\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00480\ }
+\DoxyCodeLine{00481\ \ \ \ \ \ \ \ \ String\ message\ =\ \mbox{\hyperlink{namespacenostr_a754ce1cc38ea76f4a89fb5c26c264156}{nostr::getSerialisedEncryptedDmArray}}(pubKeyHex,\ recipientPubKeyHex,\ kind,\ timestamp,\ encryptedMessageBase64);}
+\DoxyCodeLine{00482\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_a9b4c329f738edf5cebd6f9eacb0facbe}{\_stopTimer}}(\textcolor{stringliteral}{"{}get\ serialised\ encrypted\ dm\ array"{}});}
+\DoxyCodeLine{00483\ }
+\DoxyCodeLine{00484\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{byte}\ hash[64]\ =\ \{0\};\ \textcolor{comment}{//\ hash}}
+\DoxyCodeLine{00485\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ hashLen\ =\ 0;}
+\DoxyCodeLine{00486\ }
+\DoxyCodeLine{00487\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ the\ sha256\ hash\ of\ the\ message}}
+\DoxyCodeLine{00488\ \ \ \ \ \ \ \ \ hashLen\ =\ sha256(message,\ hash);}
+\DoxyCodeLine{00489\ \ \ \ \ \ \ \ \ String\ msgHash\ =\ toHex(hash,\ hashLen);}
+\DoxyCodeLine{00490\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_a5006a25d7135fb5bc420095e4773df9c}{\_logToSerialWithTitle}}(\textcolor{stringliteral}{"{}SHA-\/256:"{}},\ msgHash);}
+\DoxyCodeLine{00491\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_a9b4c329f738edf5cebd6f9eacb0facbe}{\_stopTimer}}(\textcolor{stringliteral}{"{}get\ sha256\ hash\ of\ message"{}});}
+\DoxyCodeLine{00492\ }
+\DoxyCodeLine{00493\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ byteSize\ =\ 32;}
+\DoxyCodeLine{00494\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{byte}\ privateKeyBytes[byteSize];}
+\DoxyCodeLine{00495\ \ \ \ \ \ \ \ \ fromHex(privateKeyHex,\ privateKeyBytes,\ byteSize);}
+\DoxyCodeLine{00496\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_a9b4c329f738edf5cebd6f9eacb0facbe}{\_stopTimer}}(\textcolor{stringliteral}{"{}get\ privateKeyBytes\ from\ hex"{}});}
+\DoxyCodeLine{00497\ \ \ \ \ \ \ \ \ PrivateKey\ privateKey(privateKeyBytes);}
+\DoxyCodeLine{00498\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_a9b4c329f738edf5cebd6f9eacb0facbe}{\_stopTimer}}(\textcolor{stringliteral}{"{}create\ privateKey\ object"{}});}
+\DoxyCodeLine{00499\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Generate\ the\ schnorr\ sig\ of\ the\ messageHash}}
+\DoxyCodeLine{00500\ \ \ \ \ \ \ \ \ SchnorrSignature\ signature\ =\ privateKey.schnorr\_sign(hash);}
+\DoxyCodeLine{00501\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_a9b4c329f738edf5cebd6f9eacb0facbe}{\_stopTimer}}(\textcolor{stringliteral}{"{}generate\ schnorr\ sig"{}});}
+\DoxyCodeLine{00502\ \ \ \ \ \ \ \ \ String\ signatureHex\ =\ String(signature);}
+\DoxyCodeLine{00503\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_a5006a25d7135fb5bc420095e4773df9c}{\_logToSerialWithTitle}}(\textcolor{stringliteral}{"{}Schnorr\ sig\ is:\ "{}},\ signatureHex);}
+\DoxyCodeLine{00504\ }
+\DoxyCodeLine{00505\ \ \ \ \ \ \ \ \ String\ serialisedEventData\ =\ \mbox{\hyperlink{namespacenostr_a6153fcc43ae15291045b9c2a2bd89291}{nostr::getSerialisedEncryptedDmObject}}(pubKeyHex,\ recipientPubKeyHex,\ kind,\ msgHash,\ timestamp,\ encryptedMessageBase64,\ signatureHex);}
+\DoxyCodeLine{00506\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_a9b4c329f738edf5cebd6f9eacb0facbe}{\_stopTimer}}(\textcolor{stringliteral}{"{}get\ serialised\ encrypted\ dm\ object"{}});}
+\DoxyCodeLine{00507\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \_logToSerialWithTitle("{}serialisedEventData\ is"{},\ serialisedEventData);}}
+\DoxyCodeLine{00508\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ serialisedEventData;}
+\DoxyCodeLine{00509\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacenostr_a99a4781da61520d3c58841370c2c3a10}\label{namespacenostr_a99a4781da61520d3c58841370c2c3a10}} 
+\index{nostr@{nostr}!getNote@{getNote}}
+\index{getNote@{getNote}!nostr@{nostr}}
+\doxysubsubsection{\texorpdfstring{getNote()}{getNote()}}
+{\footnotesize\ttfamily String nostr\+::get\+Note (\begin{DoxyParamCaption}\item[{char const $\ast$}]{private\+Key\+Hex,  }\item[{char const $\ast$}]{pub\+Key\+Hex,  }\item[{unsigned long}]{timestamp,  }\item[{String \&}]{content,  }\item[{uint16\+\_\+t}]{kind,  }\item[{String}]{tags }\end{DoxyParamCaption})}
+
+
+
+Get a Note object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em private\+Key\+Hex} & \\
+\hline
+{\em pub\+Key\+Hex} & \\
+\hline
+{\em timestamp} & \\
+\hline
+{\em content} & \\
+\hline
+{\em kind} & \\
+\hline
+{\em tags} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+String 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{nostr_8cpp_source_l00243}{243}} of file \mbox{\hyperlink{nostr_8cpp_source}{nostr.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00244\ \ \ \ \ \{}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_ae7add69f32ac7f6af83399c69374cc50}{\_startTimer}}(\textcolor{stringliteral}{"{}getNote"{}});}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ convert}}
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ log\ timestamp}}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_a5006a25d7135fb5bc420095e4773df9c}{\_logToSerialWithTitle}}(\textcolor{stringliteral}{"{}timestamp\ is:\ "{}},\ String(timestamp));}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ String\ message\ =\ \textcolor{stringliteral}{"{}[0,\(\backslash\)"{}"{}}\ +\ String(pubKeyHex)\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{},"{}}\ +\ String(timestamp)\ +\ \textcolor{stringliteral}{"{},"{}}\ +\ String(kind)\ +\ \textcolor{stringliteral}{"{},"{}}\ +\ tags\ +\ \textcolor{stringliteral}{"{},\(\backslash\)"{}"{}}\ +\ content\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{}]"{}};}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_a5006a25d7135fb5bc420095e4773df9c}{\_logToSerialWithTitle}}(\textcolor{stringliteral}{"{}message\ is:\ "{}},\ message);}
+\DoxyCodeLine{00251\ }
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ sha256\ of\ message\ converted\ to\ hex,\ assign\ to\ msghash}}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{byte}\ hash[64]\ =\ \{0\};\ \textcolor{comment}{//\ hash}}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ hashLen\ =\ 0;}
+\DoxyCodeLine{00255\ }
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ the\ sha256\ hash\ of\ the\ message}}
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ hashLen\ =\ sha256(message,\ hash);}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \_stopTimer(\textcolor{stringliteral}{"{}get\ sha256\ hash\ of\ message"{}});}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ String\ msgHash\ =\ toHex(hash,\ hashLen);}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \_stopTimer(\textcolor{stringliteral}{"{}get\ msgHash\ as\ hex"{}});}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \_logToSerialWithTitle(\textcolor{stringliteral}{"{}SHA-\/256:\ "{}},\ msgHash);}
+\DoxyCodeLine{00262\ }
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Create\ the\ private\ key\ object}}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ byteSize\ =\ 32;}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{byte}\ privateKeyBytes[byteSize];}
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ fromHex(privateKeyHex,\ privateKeyBytes,\ byteSize);}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \_stopTimer(\textcolor{stringliteral}{"{}convert\ privateKeyHex\ to\ byte\ array"{}});}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ PrivateKey\ privateKey(privateKeyBytes);}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \_stopTimer(\textcolor{stringliteral}{"{}create\ privateKey\ object"{}});}
+\DoxyCodeLine{00270\ }
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Generate\ the\ schnorr\ sig\ of\ the\ messageHash}}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{byte}\ messageBytes[byteSize];}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ fromHex(msgHash,\ messageBytes,\ byteSize);}
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \_stopTimer(\textcolor{stringliteral}{"{}convert\ msgHash\ to\ byte\ array"{}});}
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ SchnorrSignature\ signature\ =\ privateKey.schnorr\_sign(messageBytes);}
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ \_stopTimer(\textcolor{stringliteral}{"{}generate\ schnorr\ sig"{}});}
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ String\ signatureHex\ =\ String(signature);}
+\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ \_logToSerialWithTitle(\textcolor{stringliteral}{"{}Schnorr\ sig\ is:\ "{}},\ signatureHex);}
+\DoxyCodeLine{00279\ }
+\DoxyCodeLine{00280\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Device\ the\ public\ key\ and\ verify\ the\ schnorr\ sig\ is\ valid}}
+\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ PublicKey\ pub\ =\ privateKey.publicKey();}
+\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ \_stopTimer(\textcolor{stringliteral}{"{}get\ public\ key"{}});}
+\DoxyCodeLine{00283\ }
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ if\ (pub.schnorr\_verify(signature,\ messageBytes))}}
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \{}}
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \_logToSerialWithTitle("{}All\ good,\ signature\ is\ valid"{},\ "{}"{});}}
+\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ else}}
+\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \{}}
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \_logToSerialWithTitle("{}Something\ went\ wrong,\ signature\ is\ invalid"{},\ "{}"{});}}
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ \_stopTimer(\textcolor{stringliteral}{"{}verify\ schnorr\ sig"{}});}
+\DoxyCodeLine{00293\ }
+\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ String\ serialisedDataString\ =\ \textcolor{stringliteral}{"{}\{\(\backslash\)"{}id\(\backslash\)"{}:\(\backslash\)"{}"{}}\ +\ msgHash\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{},\(\backslash\)"{}pubkey\(\backslash\)"{}:\(\backslash\)"{}"{}}\ +\ String(pubKeyHex)\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{},\(\backslash\)"{}created\_at\(\backslash\)"{}:"{}}\ +\ String(timestamp)\ +\ \textcolor{stringliteral}{"{},\(\backslash\)"{}kind\(\backslash\)"{}:"{}}\ +\ String(kind)\ +\ \textcolor{stringliteral}{"{},\(\backslash\)"{}tags\(\backslash\)"{}:"{}}\ +\ tags\ +\ \textcolor{stringliteral}{"{},\(\backslash\)"{}content\(\backslash\)"{}:\(\backslash\)"{}"{}}\ +\ content\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{},\(\backslash\)"{}sig\(\backslash\)"{}:\(\backslash\)"{}"{}}\ +\ signatureHex\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{}\}"{}};}
+\DoxyCodeLine{00295\ \ \ \ \ \ \ \ \ \_logToSerialWithTitle(\textcolor{stringliteral}{"{}serialisedEventDataString\ is:\ "{}},\ String(serialisedDataString));}
+\DoxyCodeLine{00296\ }
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Print\ the\ JSON\ to\ the\ serial\ monitor}}
+\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ \_logToSerialWithTitle(\textcolor{stringliteral}{"{}Event\ JSON"{}},\ serialisedDataString);}
+\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ serialisedDataString;}
+\DoxyCodeLine{00300\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacenostr_ae9b9b8005030f72e2136a4d0bda6879d}\label{namespacenostr_ae9b9b8005030f72e2136a4d0bda6879d}} 
+\index{nostr@{nostr}!getPubKeyAndContent@{getPubKeyAndContent}}
+\index{getPubKeyAndContent@{getPubKeyAndContent}!nostr@{nostr}}
+\doxysubsubsection{\texorpdfstring{getPubKeyAndContent()}{getPubKeyAndContent()}}
+{\footnotesize\ttfamily std\+::pair$<$ String, String $>$ nostr\+::get\+Pub\+Key\+And\+Content (\begin{DoxyParamCaption}\item[{const String \&}]{serialised\+Json }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nostr_8cpp_source_l00146}{146}} of file \mbox{\hyperlink{nostr_8cpp_source}{nostr.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00147\ \ \ \ \ \{}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ DeserializationError\ error\ =\ deserializeJson(nostrEventDoc,\ serialisedJson);}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (error)}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.print(F(\textcolor{stringliteral}{"{}deserializeJson()\ failed:\ "{}}));}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(error.c\_str());}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::make\_pair(\textcolor{stringliteral}{"{}"{}},\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Extract\ the\ sender\ public\ key\ and\ content\ from\ the\ document}}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ String\ senderPubKeyHex\ =\ nostrEventDoc[2][\textcolor{stringliteral}{"{}pubkey"{}}];}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ String\ content\ =\ nostrEventDoc[2][\textcolor{stringliteral}{"{}content"{}}];}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Return\ both\ values\ as\ a\ pair}}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::make\_pair(senderPubKeyHex,\ content);}
+\DoxyCodeLine{00162\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacenostr_abdbc8350c239ae90de2c10744a2fad6c}\label{namespacenostr_abdbc8350c239ae90de2c10744a2fad6c}} 
+\index{nostr@{nostr}!getSenderPubKeyHex@{getSenderPubKeyHex}}
+\index{getSenderPubKeyHex@{getSenderPubKeyHex}!nostr@{nostr}}
+\doxysubsubsection{\texorpdfstring{getSenderPubKeyHex()}{getSenderPubKeyHex()}}
+{\footnotesize\ttfamily String nostr\+::get\+Sender\+Pub\+Key\+Hex (\begin{DoxyParamCaption}\item[{const String \&}]{serialised\+Json }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nostr_8cpp_source_l00135}{135}} of file \mbox{\hyperlink{nostr_8cpp_source}{nostr.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00136\ \ \ \ \ \{}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ DeserializationError\ error\ =\ deserializeJson(nostrEventDoc,\ serialisedJson);}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (error)}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.print(F(\textcolor{stringliteral}{"{}deserializeJson()\ failed:\ "{}}));}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(error.c\_str());}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ nostrEventDoc[2][\textcolor{stringliteral}{"{}pubkey"{}}];}
+\DoxyCodeLine{00144\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacenostr_a754ce1cc38ea76f4a89fb5c26c264156}\label{namespacenostr_a754ce1cc38ea76f4a89fb5c26c264156}} 
+\index{nostr@{nostr}!getSerialisedEncryptedDmArray@{getSerialisedEncryptedDmArray}}
+\index{getSerialisedEncryptedDmArray@{getSerialisedEncryptedDmArray}!nostr@{nostr}}
+\doxysubsubsection{\texorpdfstring{getSerialisedEncryptedDmArray()}{getSerialisedEncryptedDmArray()}}
+{\footnotesize\ttfamily String nostr\+::get\+Serialised\+Encrypted\+Dm\+Array (\begin{DoxyParamCaption}\item[{char const $\ast$}]{pub\+Key\+Hex,  }\item[{char const $\ast$}]{recipient\+Pub\+Key\+Hex,  }\item[{uint16\+\_\+t}]{kind,  }\item[{int}]{timestamp,  }\item[{String \&}]{encrypted\+Message\+With\+Iv }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nostr_8cpp_source_l00445}{445}} of file \mbox{\hyperlink{nostr_8cpp_source}{nostr.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00446\ \ \ \ \ \{}
+\DoxyCodeLine{00447\ \ \ \ \ \ \ \ \ String\ serialisedTagsArray\ =\ \textcolor{stringliteral}{"{}[[\(\backslash\)"{}p\(\backslash\)"{},\(\backslash\)"{}"{}}\ +\ String(recipientPubKeyHex)\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{}]]"{}};}
+\DoxyCodeLine{00448\ \ \ \ \ \ \ \ \ String\ message\ =\ \textcolor{stringliteral}{"{}[0,\(\backslash\)"{}"{}}\ +\ String(pubKeyHex)\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{},"{}}\ +\ String(timestamp)\ +\ \textcolor{stringliteral}{"{},"{}}\ +\ String(kind)\ +\ \textcolor{stringliteral}{"{},"{}}\ +\ serialisedTagsArray\ +\ \textcolor{stringliteral}{"{},\(\backslash\)"{}"{}}\ +\ encryptedMessageWithIv\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{}]"{}};}
+\DoxyCodeLine{00449\ }
+\DoxyCodeLine{00450\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \_logToSerialWithTitle("{}message\ is:\ "{},\ message);}}
+\DoxyCodeLine{00451\ }
+\DoxyCodeLine{00452\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ message;}
+\DoxyCodeLine{00453\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacenostr_a6153fcc43ae15291045b9c2a2bd89291}\label{namespacenostr_a6153fcc43ae15291045b9c2a2bd89291}} 
+\index{nostr@{nostr}!getSerialisedEncryptedDmObject@{getSerialisedEncryptedDmObject}}
+\index{getSerialisedEncryptedDmObject@{getSerialisedEncryptedDmObject}!nostr@{nostr}}
+\doxysubsubsection{\texorpdfstring{getSerialisedEncryptedDmObject()}{getSerialisedEncryptedDmObject()}}
+{\footnotesize\ttfamily String nostr\+::get\+Serialised\+Encrypted\+Dm\+Object (\begin{DoxyParamCaption}\item[{const char $\ast$}]{pub\+Key\+Hex,  }\item[{const char $\ast$}]{recipient\+Pub\+Key\+Hex,  }\item[{uint16\+\_\+t}]{kind,  }\item[{String \&}]{msg\+Hash,  }\item[{int}]{timestamp,  }\item[{String \&}]{encrypted\+Message\+With\+Iv,  }\item[{String \&}]{schnorr\+Sig }\end{DoxyParamCaption})}
+
+
+
+Get the Serialised Encrypted Dm Object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pub\+Key\+Hex} & \\
+\hline
+{\em recipient\+Pub\+Key\+Hex} & \\
+\hline
+{\em kind} & \\
+\hline
+{\em msg\+Hash} & \\
+\hline
+{\em timestamp} & \\
+\hline
+{\em encrypted\+Message\+With\+Iv} & \\
+\hline
+{\em schnorr\+Sig} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+String 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{nostr_8cpp_source_l00435}{435}} of file \mbox{\hyperlink{nostr_8cpp_source}{nostr.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00436\ \ \ \ \ \{}
+\DoxyCodeLine{00437\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ parse\ a\ JSON\ array}}
+\DoxyCodeLine{00438\ \ \ \ \ \ \ \ \ String\ serialisedTagsArray\ =\ \textcolor{stringliteral}{"{}[[\(\backslash\)"{}p\(\backslash\)"{},\(\backslash\)"{}"{}}\ +\ String(recipientPubKeyHex)\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{}]]"{}};}
+\DoxyCodeLine{00439\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \_logToSerialWithTitle("{}serialisedTagsArray\ is:\ "{},\ serialisedTagsArray);}}
+\DoxyCodeLine{00440\ }
+\DoxyCodeLine{00441\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ create\ the\ serialised\ fullEvent\ string\ using\ sprintf\ instead\ of\ the\ Arduino\ JSON\ library}}
+\DoxyCodeLine{00442\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}[\(\backslash\)"{}EVENT\(\backslash\)"{},\{\(\backslash\)"{}id\(\backslash\)"{}:\(\backslash\)"{}"{}}\ +\ msgHash\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{},\(\backslash\)"{}pubkey\(\backslash\)"{}:\(\backslash\)"{}"{}}\ +\ pubKeyHex\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{},\(\backslash\)"{}created\_at\(\backslash\)"{}:"{}}\ +\ String(timestamp)\ +\ \textcolor{stringliteral}{"{},\(\backslash\)"{}kind\(\backslash\)"{}:"{}}\ +\ String(kind)\ +\ \textcolor{stringliteral}{"{},\(\backslash\)"{}tags\(\backslash\)"{}:"{}}\ +\ serialisedTagsArray\ +\ \textcolor{stringliteral}{"{},\(\backslash\)"{}content\(\backslash\)"{}:\(\backslash\)"{}"{}}\ +\ encryptedMessageWithIv\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{},\(\backslash\)"{}sig\(\backslash\)"{}:\(\backslash\)"{}"{}}\ +\ schnorrSig\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{}\}]"{}};}
+\DoxyCodeLine{00443\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacenostr_ad38d4b13131e9c51ec482ccfcbc32841}\label{namespacenostr_ad38d4b13131e9c51ec482ccfcbc32841}} 
+\index{nostr@{nostr}!initMemorySpace@{initMemorySpace}}
+\index{initMemorySpace@{initMemorySpace}!nostr@{nostr}}
+\doxysubsubsection{\texorpdfstring{initMemorySpace()}{initMemorySpace()}}
+{\footnotesize\ttfamily void nostr\+::init\+Memory\+Space (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{nostr\+Event\+Doc\+Capacity,  }\item[{size\+\_\+t}]{encrypted\+Message\+Bin\+Size }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nostr_8cpp_source_l00027}{27}} of file \mbox{\hyperlink{nostr_8cpp_source}{nostr.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00028\ \ \ \ \ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_ac14cbc8a276a7d1106c23c8dba6f608c}{nostrEventDoc}}\ =\ DynamicJsonDocument(nostrEventDocCapacity);}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_a7b3cf922a571a696433d63e675ecaa38}{encryptedMessageBin}}\ =\ (\textcolor{keywordtype}{byte}\ *)malloc(encryptedMessageBinSize);}
+\DoxyCodeLine{00031\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacenostr_a99b54ccdb024947dfabe8ea69c57214e}\label{namespacenostr_a99b54ccdb024947dfabe8ea69c57214e}} 
+\index{nostr@{nostr}!nip04Decrypt@{nip04Decrypt}}
+\index{nip04Decrypt@{nip04Decrypt}!nostr@{nostr}}
+\doxysubsubsection{\texorpdfstring{nip04Decrypt()}{nip04Decrypt()}}
+{\footnotesize\ttfamily String nostr\+::nip04\+Decrypt (\begin{DoxyParamCaption}\item[{const char $\ast$}]{private\+Key\+Hex,  }\item[{String}]{serialised\+Json }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nostr_8cpp_source_l00164}{164}} of file \mbox{\hyperlink{nostr_8cpp_source}{nostr.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00165\ \ \ \ \ \{}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_ae7add69f32ac7f6af83399c69374cc50}{\_startTimer}}(\textcolor{stringliteral}{"{}nip04Decrypt:\ nip04Decrypt"{}});}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ result\ =\ \mbox{\hyperlink{namespacenostr_ae9b9b8005030f72e2136a4d0bda6879d}{getPubKeyAndContent}}(serialisedJson);}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ String\ senderPubKeyHex\ =\ result.first;}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ String\ content\ =\ result.second;}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_a9b4c329f738edf5cebd6f9eacb0facbe}{\_stopTimer}}(\textcolor{stringliteral}{"{}nip04Decrypt:\ Got\ result\ from\ getPubKeyAndContent"{}});}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ ivIndex\ =\ content.indexOf(\textcolor{stringliteral}{"{}?iv="{}});}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ivIndex\ ==\ -\/1)}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}IV\ not\ found\ in\ content"{}});}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Extracting\ encryptedMessage\ directly\ from\ content\ without\ using\ String\ for\ the\ intermediate\ steps}}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ encryptedMessageLength\ =\ ivIndex;\ \textcolor{comment}{//\ Length\ of\ the\ encrypted\ message\ part}}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *encryptedMessage\ =\ content.c\_str();\ \textcolor{comment}{//\ Use\ the\ content\ directly}}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!encryptedMessage)}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Failed\ to\ allocate\ PSRAM\ for\ encryptedMessage"{}});}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ encryptedMessageSize\ =\ encryptedMessageLength\ /\ 4\ *\ 3;\ \textcolor{comment}{//\ Base64\ encoded\ size\ is\ 4/3\ of\ the\ binary\ size}}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ fromBase64(encryptedMessage,\ encryptedMessageBin,\ encryptedMessageSize);}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_a9b4c329f738edf5cebd6f9eacb0facbe}{\_stopTimer}}(\textcolor{stringliteral}{"{}nip04Decrypt:\ Got\ encryptedMessageBin"{}});}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_a5006a25d7135fb5bc420095e4773df9c}{\_logToSerialWithTitle}}(\textcolor{stringliteral}{"{}encryptedMessage"{}},\ encryptedMessage);}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ byteSize\ =\ 32;}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{byte}\ privateKeyBytes[byteSize];}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ fromHex(privateKeyHex,\ privateKeyBytes,\ byteSize);}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ PrivateKey\ privateKey(privateKeyBytes);}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_a9b4c329f738edf5cebd6f9eacb0facbe}{\_stopTimer}}(\textcolor{stringliteral}{"{}nip04Decrypt:\ Got\ privateKey"{}});}
+\DoxyCodeLine{00200\ }
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_a5006a25d7135fb5bc420095e4773df9c}{\_logToSerialWithTitle}}(\textcolor{stringliteral}{"{}senderPubKeyHex"{}},\ senderPubKeyHex);}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{byte}\ senderPublicKeyBin[64];}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ fromHex(\textcolor{stringliteral}{"{}02"{}}\ +\ String(senderPubKeyHex),\ senderPublicKeyBin,\ 64);}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ PublicKey\ senderPublicKey(senderPublicKeyBin);}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_a9b4c329f738edf5cebd6f9eacb0facbe}{\_stopTimer}}(\textcolor{stringliteral}{"{}nip04Decrypt:\ Got\ senderPublicKey"{}});}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_a5006a25d7135fb5bc420095e4773df9c}{\_logToSerialWithTitle}}(\textcolor{stringliteral}{"{}senderPublicKey.toString()\ is"{}},\ senderPublicKey.toString());}
+\DoxyCodeLine{00207\ }
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespacenostr_ad76c1eacccd66757ef146e3393a1442a}{decryptNip04Ciphertext}}(content,\ privateKeyHex,\ senderPubKeyHex);}
+\DoxyCodeLine{00209\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacenostr_a4a0c52a59a4083625f1704bf02966af8}\label{namespacenostr_a4a0c52a59a4083625f1704bf02966af8}} 
+\index{nostr@{nostr}!nip44Decrypt@{nip44Decrypt}}
+\index{nip44Decrypt@{nip44Decrypt}!nostr@{nostr}}
+\doxysubsubsection{\texorpdfstring{nip44Decrypt()}{nip44Decrypt()}}
+{\footnotesize\ttfamily String nostr\+::nip44\+Decrypt (\begin{DoxyParamCaption}\item[{const char $\ast$}]{private\+Key\+Hex,  }\item[{String}]{serialised\+Json }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nostr_8cpp_source_l00211}{211}} of file \mbox{\hyperlink{nostr_8cpp_source}{nostr.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00212\ \ \ \ \ \{}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_ae7add69f32ac7f6af83399c69374cc50}{\_startTimer}}(\textcolor{stringliteral}{"{}nip44Decrypt:\ nip44Decrypt"{}});}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ result\ =\ \mbox{\hyperlink{namespacenostr_ae9b9b8005030f72e2136a4d0bda6879d}{getPubKeyAndContent}}(serialisedJson);}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ String\ senderPubKeyHex\ =\ result.first;}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ String\ content\ =\ result.second;}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_a9b4c329f738edf5cebd6f9eacb0facbe}{\_stopTimer}}(\textcolor{stringliteral}{"{}nip44Decrypt:\ Got\ result\ from\ getPubKeyAndContent"{}});}
+\DoxyCodeLine{00218\ }
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{nip44_8cpp_a131b96ad7e7f560b2fd7194ade183695}{executeDecryptMessageNip44}}(content,\ privateKeyHex,\ senderPubKeyHex);}
+\DoxyCodeLine{00220\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacenostr_a4848cccd6183bc9cfb6196fe18749b6c}\label{namespacenostr_a4848cccd6183bc9cfb6196fe18749b6c}} 
+\index{nostr@{nostr}!nip44Encrypt@{nip44Encrypt}}
+\index{nip44Encrypt@{nip44Encrypt}!nostr@{nostr}}
+\doxysubsubsection{\texorpdfstring{nip44Encrypt()}{nip44Encrypt()}}
+{\footnotesize\ttfamily String nostr\+::nip44\+Encrypt (\begin{DoxyParamCaption}\item[{const char $\ast$}]{private\+Key\+Hex,  }\item[{String}]{serialised\+Json }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nostr_8cpp_source_l00222}{222}} of file \mbox{\hyperlink{nostr_8cpp_source}{nostr.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00223\ \ \ \ \ \{}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_ae7add69f32ac7f6af83399c69374cc50}{\_startTimer}}(\textcolor{stringliteral}{"{}nip44Encrypt:\ nip44Encrypt"{}});}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ result\ =\ \mbox{\hyperlink{namespacenostr_ae9b9b8005030f72e2136a4d0bda6879d}{getPubKeyAndContent}}(serialisedJson);}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ String\ senderPubKeyHex\ =\ result.first;}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ String\ content\ =\ result.second;}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacenostr_a9b4c329f738edf5cebd6f9eacb0facbe}{\_stopTimer}}(\textcolor{stringliteral}{"{}nip44Encrypt:\ Got\ result\ from\ getPubKeyAndContent"{}});}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{nip44_8cpp_a9fca4f5d3adc798444724f0ef23cb0c6}{executeEncryptMessageNip44}}(content,\ privateKeyHex,\ senderPubKeyHex);}
+\DoxyCodeLine{00230\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacenostr_ac14cbc8a276a7d1106c23c8dba6f608c}\label{namespacenostr_ac14cbc8a276a7d1106c23c8dba6f608c}} 
+\index{nostr@{nostr}!nostrEventDoc@{nostrEventDoc}}
+\index{nostrEventDoc@{nostrEventDoc}!nostr@{nostr}}
+\doxysubsubsection{\texorpdfstring{nostrEventDoc()}{nostrEventDoc()}}
+{\footnotesize\ttfamily Dynamic\+Json\+Document nostr\+::nostr\+Event\+Doc (\begin{DoxyParamCaption}\item[{0}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespacenostr_afca44e9f58eaddb2737fee169753ad9c}\label{namespacenostr_afca44e9f58eaddb2737fee169753ad9c}} 
+\index{nostr@{nostr}!stringToByteArray@{stringToByteArray}}
+\index{stringToByteArray@{stringToByteArray}!nostr@{nostr}}
+\doxysubsubsection{\texorpdfstring{stringToByteArray()}{stringToByteArray()}}
+{\footnotesize\ttfamily void nostr\+::string\+To\+Byte\+Array (\begin{DoxyParamCaption}\item[{const char $\ast$}]{input,  }\item[{int}]{padding\+\_\+diff,  }\item[{byte $\ast$}]{output }\end{DoxyParamCaption})}
+
+
+
+Convert a string to a byte array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & \\
+\hline
+{\em padding\+\_\+diff} & \\
+\hline
+{\em output} & \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{nostr_8cpp_source_l00309}{309}} of file \mbox{\hyperlink{nostr_8cpp_source}{nostr.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00310\ \ \ \ \ \{}
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ i\ =\ 0;}
+\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ remove\ end-\/of-\/string\ char}}
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (input[i]\ !=\ \textcolor{charliteral}{'\(\backslash\)0'})}
+\DoxyCodeLine{00314\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ \ \ \ \ output[i]\ =\ input[i];}
+\DoxyCodeLine{00316\ \ \ \ \ \ \ \ \ \ \ \ \ i++;}
+\DoxyCodeLine{00317\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00318\ }
+\DoxyCodeLine{00319\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ pad\ between\ 1\ and\ 16\ bytes}}
+\DoxyCodeLine{00320\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ padding\_diff;\ j++)}
+\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ \ \ \ \ output[i\ +\ j]\ =\ padding\_diff;}
+\DoxyCodeLine{00323\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00324\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespacenostr_a7b3cf922a571a696433d63e675ecaa38}\label{namespacenostr_a7b3cf922a571a696433d63e675ecaa38}} 
+\index{nostr@{nostr}!encryptedMessageBin@{encryptedMessageBin}}
+\index{encryptedMessageBin@{encryptedMessageBin}!nostr@{nostr}}
+\doxysubsubsection{\texorpdfstring{encryptedMessageBin}{encryptedMessageBin}}
+{\footnotesize\ttfamily byte$\ast$ nostr\+::encrypted\+Message\+Bin}
+
+
+
+Definition at line \mbox{\hyperlink{nostr_8cpp_source_l00008}{8}} of file \mbox{\hyperlink{nostr_8cpp_source}{nostr.\+cpp}}.
+
+\mbox{\Hypertarget{namespacenostr_ac528623a09925500b6b787d0ddc5c9c7}\label{namespacenostr_ac528623a09925500b6b787d0ddc5c9c7}} 
+\index{nostr@{nostr}!timer@{timer}}
+\index{timer@{timer}!nostr@{nostr}}
+\doxysubsubsection{\texorpdfstring{timer}{timer}}
+{\footnotesize\ttfamily unsigned long nostr\+::timer = 0}
+
+
+
+Definition at line \mbox{\hyperlink{nostr_8cpp_source_l00010}{10}} of file \mbox{\hyperlink{nostr_8cpp_source}{nostr.\+cpp}}.
+

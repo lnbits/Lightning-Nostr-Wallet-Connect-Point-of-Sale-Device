@@ -1,0 +1,12 @@
+<map id="src/dispcfg.h" name="src/dispcfg.h">
+<area shape="rect" id="node1" title=" " alt="" coords="370,5,466,31"/>
+<area shape="rect" id="node2" href="$display_8h.html" title=" " alt="" coords="371,79,464,105"/>
+<area shape="rect" id="node3" href="$app_8h.html" title=" " alt="" coords="380,153,455,178"/>
+<area shape="rect" id="node5" href="$display_8cpp.html" title=" " alt="" coords="5,226,113,252"/>
+<area shape="rect" id="node9" href="$ui_8cpp.html" title=" " alt="" coords="796,226,874,252"/>
+<area shape="rect" id="node4" href="$app_8cpp.html" title=" " alt="" coords="137,226,226,252"/>
+<area shape="rect" id="node6" href="$main_8cpp.html" title="NWC Powered Point of Sale Device &#45; Main Entry Point." alt="" coords="251,226,347,252"/>
+<area shape="rect" id="node7" href="$nwc_8cpp.html" title=" " alt="" coords="372,226,464,252"/>
+<area shape="rect" id="node8" href="$settings_8cpp.html" title=" " alt="" coords="488,226,603,252"/>
+<area shape="rect" id="node10" href="$wifi__manager_8cpp.html" title=" " alt="" coords="627,226,771,252"/>
+</map>

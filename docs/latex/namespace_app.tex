@@ -1,0 +1,1435 @@
+\hypertarget{namespace_app}{}\doxysection{App Namespace Reference}
+\label{namespace_app}\index{App@{App}}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespace_app_1_1_config}{Config}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef void($\ast$ \mbox{\hyperlink{namespace_app_adf3327a85deb264024d0f53e7ab3ff0c}{app\+\_\+event\+\_\+callback\+\_\+t}}) (const String \&event, const String \&data)
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{namespace_app_a3f1ec36c31118942672049df267b7612}{app\+\_\+state\+\_\+t}} \{ \mbox{\hyperlink{namespace_app_a3f1ec36c31118942672049df267b7612a930259ab20f9a04311c16640bb26add1}{APP\+\_\+\+STATE\+\_\+\+INITIALIZING}}
+, \mbox{\hyperlink{namespace_app_a3f1ec36c31118942672049df267b7612a55daefd944d49d6da558c973a8379201}{APP\+\_\+\+STATE\+\_\+\+READY}}
+, \mbox{\hyperlink{namespace_app_a3f1ec36c31118942672049df267b7612a6a26d4653e1840d18bb8288b50f622c3}{APP\+\_\+\+STATE\+\_\+\+ERROR}}
+, \mbox{\hyperlink{namespace_app_a3f1ec36c31118942672049df267b7612a4200bd638de59a9a73b819336e98c8a1}{APP\+\_\+\+STATE\+\_\+\+UPDATING}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespace_app_a36c71ca6134247ab51d1a7a2d0a02cd4}{init}} ()
+\item 
+void \mbox{\hyperlink{namespace_app_aa172d6e06d067c1653591cb381a666e9}{cleanup}} ()
+\item 
+void \mbox{\hyperlink{namespace_app_ae09dc71078b64c56c673b1ad1d25b5d1}{run}} ()
+\item 
+\mbox{\hyperlink{namespace_app_a3f1ec36c31118942672049df267b7612}{app\+\_\+state\+\_\+t}} \mbox{\hyperlink{namespace_app_a25186002dcf6373ba059741d47fc1514}{get\+State}} ()
+\item 
+void \mbox{\hyperlink{namespace_app_ac12729d606c8030bbeb7e32b51810f1a}{set\+State}} (\mbox{\hyperlink{namespace_app_a3f1ec36c31118942672049df267b7612}{app\+\_\+state\+\_\+t}} state)
+\item 
+String \mbox{\hyperlink{namespace_app_a22c8042a43eb38e54720382fedf1c31b}{get\+State\+String}} ()
+\item 
+void \mbox{\hyperlink{namespace_app_a7d55551c0ecee64d4385182df40da631}{handle\+Error}} (const String \&module, const String \&error)
+\item 
+void \mbox{\hyperlink{namespace_app_af8fb1a6528b1affa25083773726e4786}{clear\+Error}} ()
+\item 
+String \mbox{\hyperlink{namespace_app_a80c864880e5ca12c02093585ed0cf447}{get\+Last\+Error}} ()
+\item 
+void \mbox{\hyperlink{namespace_app_afb037eba2d5bcaebddb20eee584dc210}{notify\+Wi\+Fi\+Status\+Changed}} (bool connected)
+\item 
+void \mbox{\hyperlink{namespace_app_a76f7ef636cfd7f4429853af2f96b44e9}{notify\+NWCStatus\+Changed}} (bool connected)
+\item 
+void \mbox{\hyperlink{namespace_app_a8cba06ce488296b2939433e782c495d2}{notify\+Prices\+Updated}} ()
+\item 
+void \mbox{\hyperlink{namespace_app_aa9affbf3274d56cd4a55e4f2da119f62}{notify\+Invoice\+Created}} (const String \&invoice)
+\item 
+void \mbox{\hyperlink{namespace_app_a78b4623c59d84d6d49ea4bcef3e2e50d}{notify\+Payment\+Received}} ()
+\item 
+bool \mbox{\hyperlink{namespace_app_ac9b35bb4ea38c1da915e589ff5a34d39}{load\+Configuration}} ()
+\item 
+bool \mbox{\hyperlink{namespace_app_a8d662eaf81462543f2a05532ab9f9e36}{save\+Configuration}} ()
+\item 
+void \mbox{\hyperlink{namespace_app_aad3d214ab3bb9320fbfada4d1a34b202}{reset\+To\+Defaults}} ()
+\item 
+String \mbox{\hyperlink{namespace_app_adc6346b4d03b67d61ede883d3c44cd64}{get\+Version}} ()
+\item 
+String \mbox{\hyperlink{namespace_app_a326939b9c97408a27bb5ac2e62e50d0e}{get\+Build\+Info}} ()
+\item 
+void \mbox{\hyperlink{namespace_app_a8eff98ed4b5bce3fbe05f44c6be52c73}{print\+System\+Info}} ()
+\item 
+void \mbox{\hyperlink{namespace_app_acd1e936efc6f95c59a40a1855fec628f}{enter\+Sleep\+Mode}} ()
+\item 
+void \mbox{\hyperlink{namespace_app_ad479e4eced825606fa2bba2e58d0fe2e}{enter\+Light\+Sleep\+Mode}} ()
+\item 
+void \mbox{\hyperlink{namespace_app_a18e7954cdd3a1fac8e90a8201584d02b}{exit\+Light\+Sleep\+Mode}} ()
+\item 
+void \mbox{\hyperlink{namespace_app_add4f10ef1f893dee045cee7394aa964d}{exit\+Sleep\+Mode}} ()
+\item 
+bool \mbox{\hyperlink{namespace_app_a8c902b97afa2062bbd08efa469419324}{check\+Module\+Health}} ()
+\item 
+void \mbox{\hyperlink{namespace_app_a683e7e9d5f87752ba306ae8d4b3043c8}{report\+Module\+Status}} ()
+\item 
+void \mbox{\hyperlink{namespace_app_a097c52447c7be74b6f5a17b88087042f}{check\+For\+Updates}} ()
+\item 
+bool \mbox{\hyperlink{namespace_app_a90b22915a334056d893baf1c323f55b7}{is\+Update\+Available}} ()
+\item 
+void \mbox{\hyperlink{namespace_app_a1fe12b467c84861a1b948df26eb74ca7}{perform\+Update}} ()
+\item 
+void \mbox{\hyperlink{namespace_app_a70e0965d86f6b58c39348c8802e27591}{run\+Diagnostics}} ()
+\item 
+void \mbox{\hyperlink{namespace_app_aee9b615b8302567165e2e5ad826d6201}{generate\+Status\+Report}} ()
+\item 
+void \mbox{\hyperlink{namespace_app_a82c928935fb5b3bea9a951dd77a8f1f6}{set\+Event\+Callback}} (\mbox{\hyperlink{namespace_app_adf3327a85deb264024d0f53e7ab3ff0c}{app\+\_\+event\+\_\+callback\+\_\+t}} callback)
+\item 
+void \mbox{\hyperlink{namespace_app_aefca72a9059055affbcbf62e10eb9cc6}{fire\+Event}} (const String \&event, const String \&data)
+\item 
+void \mbox{\hyperlink{namespace_app_a78517f9e5f4f6892c4a1197e113f1cf0}{init\+Sleep\+Mode}} ()
+\item 
+void \mbox{\hyperlink{namespace_app_a9275aeb02dd780c3f348db22812d0af0}{cleanup\+Sleep\+Mode}} ()
+\item 
+void \mbox{\hyperlink{namespace_app_adfe353584321cab94c6491c32470d046}{reset\+Activity\+Timer}} ()
+\item 
+void \mbox{\hyperlink{namespace_app_ae7348f8ae44915c79695b95eaaf8e6f4}{sleep\+Check\+Callback}} (lv\+\_\+timer\+\_\+t $\ast$timer)
+\item 
+void \mbox{\hyperlink{namespace_app_a2ad2cb227fd9a9cb56cd6f0a157e2ba7}{set\+Sleep\+Enabled}} (bool enabled)
+\item 
+bool \mbox{\hyperlink{namespace_app_aacf00bbb11ff39ad6396bce703fece7a}{is\+Sleep\+Enabled}} ()
+\item 
+bool \mbox{\hyperlink{namespace_app_ac4ecbc30cf2ce9769c0dd6fab5e5a364}{is\+In\+Light\+Sleep}} ()
+\item 
+bool \mbox{\hyperlink{namespace_app_a0ba03eec3bb43b1375522bc618857789}{is\+Backlight\+Off}} ()
+\item 
+unsigned long \mbox{\hyperlink{namespace_app_ac67a97aaf8fc7a4f9cbaa5387f1eba9e}{get\+Inactive\+Time}} ()
+\item 
+unsigned long \mbox{\hyperlink{namespace_app_a4377e4c9c1c5fe0ca432f3cd209a038e}{get\+Light\+Sleep\+Timeout}} ()
+\item 
+unsigned long \mbox{\hyperlink{namespace_app_a7acecdd250d4af52cb8857ffa758b274}{get\+Deep\+Sleep\+Timeout}} ()
+\item 
+void \mbox{\hyperlink{namespace_app_afebab729ad90b87d5c556255298b5f8b}{handle\+Touch\+Wake}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{app_8h}{App.\+h}} -\/ Main Application Coordinator
+
+This header provides a unified interface to all application modules and coordinates initialization, cleanup, and inter-\/module communication for the \mbox{\hyperlink{namespace_n_w_c}{NWC}} Point of Sale device. 
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{namespace_app_adf3327a85deb264024d0f53e7ab3ff0c}\label{namespace_app_adf3327a85deb264024d0f53e7ab3ff0c}} 
+\index{App@{App}!app\_event\_callback\_t@{app\_event\_callback\_t}}
+\index{app\_event\_callback\_t@{app\_event\_callback\_t}!App@{App}}
+\doxysubsubsection{\texorpdfstring{app\_event\_callback\_t}{app\_event\_callback\_t}}
+{\footnotesize\ttfamily typedef void($\ast$ App\+::app\+\_\+event\+\_\+callback\+\_\+t) (const String \&event, const String \&data)}
+
+Event System 
+
+Definition at line \mbox{\hyperlink{app_8h_source_l00120}{120}} of file \mbox{\hyperlink{app_8h_source}{app.\+h}}.
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{namespace_app_a3f1ec36c31118942672049df267b7612}\label{namespace_app_a3f1ec36c31118942672049df267b7612}} 
+\index{App@{App}!app\_state\_t@{app\_state\_t}}
+\index{app\_state\_t@{app\_state\_t}!App@{App}}
+\doxysubsubsection{\texorpdfstring{app\_state\_t}{app\_state\_t}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{namespace_app_a3f1ec36c31118942672049df267b7612}{App\+::app\+\_\+state\+\_\+t}}}
+
+Application State Management \begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{APP\_STATE\_INITIALIZING@{APP\_STATE\_INITIALIZING}!App@{App}}\index{App@{App}!APP\_STATE\_INITIALIZING@{APP\_STATE\_INITIALIZING}}}\mbox{\Hypertarget{namespace_app_a3f1ec36c31118942672049df267b7612a930259ab20f9a04311c16640bb26add1}\label{namespace_app_a3f1ec36c31118942672049df267b7612a930259ab20f9a04311c16640bb26add1}} 
+APP\+\_\+\+STATE\+\_\+\+INITIALIZING&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{APP\_STATE\_READY@{APP\_STATE\_READY}!App@{App}}\index{App@{App}!APP\_STATE\_READY@{APP\_STATE\_READY}}}\mbox{\Hypertarget{namespace_app_a3f1ec36c31118942672049df267b7612a55daefd944d49d6da558c973a8379201}\label{namespace_app_a3f1ec36c31118942672049df267b7612a55daefd944d49d6da558c973a8379201}} 
+APP\+\_\+\+STATE\+\_\+\+READY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{APP\_STATE\_ERROR@{APP\_STATE\_ERROR}!App@{App}}\index{App@{App}!APP\_STATE\_ERROR@{APP\_STATE\_ERROR}}}\mbox{\Hypertarget{namespace_app_a3f1ec36c31118942672049df267b7612a6a26d4653e1840d18bb8288b50f622c3}\label{namespace_app_a3f1ec36c31118942672049df267b7612a6a26d4653e1840d18bb8288b50f622c3}} 
+APP\+\_\+\+STATE\+\_\+\+ERROR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{APP\_STATE\_UPDATING@{APP\_STATE\_UPDATING}!App@{App}}\index{App@{App}!APP\_STATE\_UPDATING@{APP\_STATE\_UPDATING}}}\mbox{\Hypertarget{namespace_app_a3f1ec36c31118942672049df267b7612a4200bd638de59a9a73b819336e98c8a1}\label{namespace_app_a3f1ec36c31118942672049df267b7612a4200bd638de59a9a73b819336e98c8a1}} 
+APP\+\_\+\+STATE\+\_\+\+UPDATING&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{app_8h_source_l00023}{23}} of file \mbox{\hyperlink{app_8h_source}{app.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_a3f1ec36c31118942672049df267b7612a930259ab20f9a04311c16640bb26add1}{APP\_STATE\_INITIALIZING}},}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_a3f1ec36c31118942672049df267b7612a55daefd944d49d6da558c973a8379201}{APP\_STATE\_READY}},}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_a3f1ec36c31118942672049df267b7612a6a26d4653e1840d18bb8288b50f622c3}{APP\_STATE\_ERROR}},}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_a3f1ec36c31118942672049df267b7612a4200bd638de59a9a73b819336e98c8a1}{APP\_STATE\_UPDATING}}}
+\DoxyCodeLine{00028\ \ \ \ \ \}\ app\_state\_t;}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespace_app_a097c52447c7be74b6f5a17b88087042f}\label{namespace_app_a097c52447c7be74b6f5a17b88087042f}} 
+\index{App@{App}!checkForUpdates@{checkForUpdates}}
+\index{checkForUpdates@{checkForUpdates}!App@{App}}
+\doxysubsubsection{\texorpdfstring{checkForUpdates()}{checkForUpdates()}}
+{\footnotesize\ttfamily void App\+::check\+For\+Updates (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Update Management 
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00501}{501}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00502\ \ \ \ \ \{}
+\DoxyCodeLine{00503\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Checking\ for\ updates..."{}});}
+\DoxyCodeLine{00504\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Implementation\ would\ check\ for\ firmware\ updates}}
+\DoxyCodeLine{00505\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_aefca72a9059055affbcbf62e10eb9cc6}{fireEvent}}(\textcolor{stringliteral}{"{}update\_check"{}},\ \textcolor{stringliteral}{"{}started"{}});}
+\DoxyCodeLine{00506\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_a8c902b97afa2062bbd08efa469419324}\label{namespace_app_a8c902b97afa2062bbd08efa469419324}} 
+\index{App@{App}!checkModuleHealth@{checkModuleHealth}}
+\index{checkModuleHealth@{checkModuleHealth}!App@{App}}
+\doxysubsubsection{\texorpdfstring{checkModuleHealth()}{checkModuleHealth()}}
+{\footnotesize\ttfamily bool App\+::check\+Module\+Health (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Module Health Monitoring 
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00454}{454}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00455\ \ \ \ \ \{}
+\DoxyCodeLine{00456\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ health\_ok\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00457\ }
+\DoxyCodeLine{00458\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ WiFi\ module\ health}}
+\DoxyCodeLine{00459\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{namespace_wi_fi_manager_aa6406a18b4523ef158247b902e770052}{WiFiManager::isConnected}}()\ \&\&\ \mbox{\hyperlink{namespace_wi_fi_manager_a1afb041d5ffe5293106eb38c9eb37690}{WiFiManager::getStatus}}()\ !=\ WL\_IDLE\_STATUS)}
+\DoxyCodeLine{00460\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00461\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}WiFi\ module\ health\ check\ failed"{}});}
+\DoxyCodeLine{00462\ \ \ \ \ \ \ \ \ \ \ \ \ health\_ok\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00463\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00464\ }
+\DoxyCodeLine{00465\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ NWC\ module\ health}}
+\DoxyCodeLine{00466\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespace_n_w_c_a15d4ed6dee9570b25a02a7fe34b9ece0}{NWC::isInitialized}}()\ \&\&\ !\mbox{\hyperlink{namespace_n_w_c_aa2e749abffc8f1f4995bb52e3a6e8f47}{NWC::isConnected}}())}
+\DoxyCodeLine{00467\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00468\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}NWC\ module\ health\ check\ warning\ -\/\ not\ connected"{}});}
+\DoxyCodeLine{00469\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ is\ a\ warning,\ not\ a\ failure}}
+\DoxyCodeLine{00470\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00471\ }
+\DoxyCodeLine{00472\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ UI\ module\ health}}
+\DoxyCodeLine{00473\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespace_u_i_a7e5dc627ead9b9c216342025ec188d66}{UI::getCurrentScreen}}()\ <\ 0)}
+\DoxyCodeLine{00474\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00475\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}UI\ module\ health\ check\ failed"{}});}
+\DoxyCodeLine{00476\ \ \ \ \ \ \ \ \ \ \ \ \ health\_ok\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00477\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00478\ }
+\DoxyCodeLine{00479\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ health\_ok;}
+\DoxyCodeLine{00480\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_aa172d6e06d067c1653591cb381a666e9}\label{namespace_app_aa172d6e06d067c1653591cb381a666e9}} 
+\index{App@{App}!cleanup@{cleanup}}
+\index{cleanup@{cleanup}!App@{App}}
+\doxysubsubsection{\texorpdfstring{cleanup()}{cleanup()}}
+{\footnotesize\ttfamily void App\+::cleanup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00085}{85}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00086\ \ \ \ \ \{}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}===\ Application\ cleanup\ starting\ ==="{}});}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Cleanup\ sleep\ management}}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_a9275aeb02dd780c3f348db22812d0af0}{cleanupSleepMode}}();}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Cleanup\ modules\ in\ reverse\ dependency\ order}}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_a441487b7105f0c9cc662578d3600a034}{NWC::cleanup}}();}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_u_i_a45e6a820c52945de0b31c1083648b8ca}{UI::cleanup}}();}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_wi_fi_manager_a65dac49e1bcceabd910231b2755d254d}{WiFiManager::cleanup}}();}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_settings_adfd716c322069bdb999ecb9e6fb06635}{Settings::cleanup}}();}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_display_a74136dce435d7a569c5fb00d5f7afbe6}{Display::cleanup}}();}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_ac12729d606c8030bbeb7e32b51810f1a}{setState}}(APP\_STATE\_INITIALIZING);}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}===\ Application\ cleanup\ completed\ ==="{}});}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_aefca72a9059055affbcbf62e10eb9cc6}{fireEvent}}(\textcolor{stringliteral}{"{}app\_cleanup"{}},\ \textcolor{stringliteral}{"{}completed"{}});}
+\DoxyCodeLine{00103\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_a9275aeb02dd780c3f348db22812d0af0}\label{namespace_app_a9275aeb02dd780c3f348db22812d0af0}} 
+\index{App@{App}!cleanupSleepMode@{cleanupSleepMode}}
+\index{cleanupSleepMode@{cleanupSleepMode}!App@{App}}
+\doxysubsubsection{\texorpdfstring{cleanupSleepMode()}{cleanupSleepMode()}}
+{\footnotesize\ttfamily void App\+::cleanup\+Sleep\+Mode (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00626}{626}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00627\ \ \ \ \ \{}
+\DoxyCodeLine{00628\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (sleep\_check\_timer)}
+\DoxyCodeLine{00629\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00630\ \ \ \ \ \ \ \ \ \ \ \ \ lv\_timer\_del(sleep\_check\_timer);}
+\DoxyCodeLine{00631\ \ \ \ \ \ \ \ \ \ \ \ \ sleep\_check\_timer\ =\ NULL;}
+\DoxyCodeLine{00632\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00633\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Sleep\ management\ cleaned\ up"{}});}
+\DoxyCodeLine{00634\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_af8fb1a6528b1affa25083773726e4786}\label{namespace_app_af8fb1a6528b1affa25083773726e4786}} 
+\index{App@{App}!clearError@{clearError}}
+\index{clearError@{clearError}!App@{App}}
+\doxysubsubsection{\texorpdfstring{clearError()}{clearError()}}
+{\footnotesize\ttfamily void App\+::clear\+Error (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00204}{204}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00205\ \ \ \ \ \{}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ last\_error\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (current\_state\ ==\ APP\_STATE\_ERROR)}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_ac12729d606c8030bbeb7e32b51810f1a}{setState}}(APP\_STATE\_READY);}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00211\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_ad479e4eced825606fa2bba2e58d0fe2e}\label{namespace_app_ad479e4eced825606fa2bba2e58d0fe2e}} 
+\index{App@{App}!enterLightSleepMode@{enterLightSleepMode}}
+\index{enterLightSleepMode@{enterLightSleepMode}!App@{App}}
+\doxysubsubsection{\texorpdfstring{enterLightSleepMode()}{enterLightSleepMode()}}
+{\footnotesize\ttfamily void App\+::enter\+Light\+Sleep\+Mode (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00380}{380}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00381\ \ \ \ \ \{}
+\DoxyCodeLine{00382\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}===\ Entering\ light\ sleep\ mode\ (backlight\ off)\ ==="{}});}
+\DoxyCodeLine{00383\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00384\ \ \ \ \ \ \ \ \ in\_light\_sleep\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00385\ \ \ \ \ \ \ \ \ backlight\_off\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00386\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00387\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Turn\ off\ display\ backlight}}
+\DoxyCodeLine{00388\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_display_aa8aef5688a630d912c6d9bd1c764c542}{Display::turnOffBacklight}}();}
+\DoxyCodeLine{00389\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00390\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Stop\ invoice\ lookup\ timer\ if\ no\ invoice\ is\ being\ processed}}
+\DoxyCodeLine{00391\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{namespace_u_i_a256c4320af439732def9402342903462}{UI::isInvoiceProcessing}}())\ \{}
+\DoxyCodeLine{00392\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Stopping\ invoice\ lookup\ timer\ for\ light\ sleep"{}});}
+\DoxyCodeLine{00393\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_a1dd636b9104cd24b5d2fbd91329a67cd}{NWC::stopInvoiceLookupTimer}}();}
+\DoxyCodeLine{00394\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_a9a72ecf2c1ad80aafcb1d1a79651d0aa}{NWC::stopInvoiceNotificationWatchdog}}();}
+\DoxyCodeLine{00395\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00396\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00397\ \ \ \ \ \ \ \ \ fireEvent(\textcolor{stringliteral}{"{}light\_sleep"{}},\ \textcolor{stringliteral}{"{}entered"{}});}
+\DoxyCodeLine{00398\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_acd1e936efc6f95c59a40a1855fec628f}\label{namespace_app_acd1e936efc6f95c59a40a1855fec628f}} 
+\index{App@{App}!enterSleepMode@{enterSleepMode}}
+\index{enterSleepMode@{enterSleepMode}!App@{App}}
+\doxysubsubsection{\texorpdfstring{enterSleepMode()}{enterSleepMode()}}
+{\footnotesize\ttfamily void App\+::enter\+Sleep\+Mode (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Power Management 
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00343}{343}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00344\ \ \ \ \ \{}
+\DoxyCodeLine{00345\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}===\ Entering\ deep\ sleep\ mode\ ==="{}});}
+\DoxyCodeLine{00346\ }
+\DoxyCodeLine{00347\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Disable\ sleep\ monitoring\ timer}}
+\DoxyCodeLine{00348\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (sleep\_check\_timer)}
+\DoxyCodeLine{00349\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ \ \ \ \ lv\_timer\_del(sleep\_check\_timer);}
+\DoxyCodeLine{00351\ \ \ \ \ \ \ \ \ \ \ \ \ sleep\_check\_timer\ =\ NULL;}
+\DoxyCodeLine{00352\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00353\ }
+\DoxyCodeLine{00354\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Close\ any\ active\ invoice\ overlays\ and\ stop\ timers}}
+\DoxyCodeLine{00355\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespace_u_i_a256c4320af439732def9402342903462}{UI::isInvoiceProcessing}}())}
+\DoxyCodeLine{00356\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00357\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_u_i_a7bbab39abe50d5133bb309f45ee37609}{UI::closeInvoiceOverlay}}();}
+\DoxyCodeLine{00358\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00359\ }
+\DoxyCodeLine{00360\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Stop\ all\ NWC\ timers\ and\ disconnect}}
+\DoxyCodeLine{00361\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_a1dd636b9104cd24b5d2fbd91329a67cd}{NWC::stopInvoiceLookupTimer}}();}
+\DoxyCodeLine{00362\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_a9a72ecf2c1ad80aafcb1d1a79651d0aa}{NWC::stopInvoiceNotificationWatchdog}}();}
+\DoxyCodeLine{00363\ }
+\DoxyCodeLine{00364\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Turn\ off\ display\ backlight\ for\ power\ saving}}
+\DoxyCodeLine{00365\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_display_aa8aef5688a630d912c6d9bd1c764c542}{Display::turnOffBacklight}}();}
+\DoxyCodeLine{00366\ }
+\DoxyCodeLine{00367\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Set\ Config::WAKE\_PIN\ as\ input\ with\ pulldown\ (to\ default\ LOW)}}
+\DoxyCodeLine{00368\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ pinMode(Config::WAKE\_PIN,\ INPUT);}}
+\DoxyCodeLine{00369\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ rtc\_gpio\_pulldown\_en(Config::WAKE\_PIN);}}
+\DoxyCodeLine{00370\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ rtc\_gpio\_pullup\_dis(Config::WAKE\_PIN);}}
+\DoxyCodeLine{00371\ }
+\DoxyCodeLine{00372\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ //\ Enable\ EXT1\ wakeup\ when\ GPIO12\ goes\ HIGH}}
+\DoxyCodeLine{00373\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ esp\_sleep\_enable\_ext1\_wakeup(1ULL\ <<\ Config::WAKE\_PIN,\ ESP\_EXT1\_WAKEUP\_ANY\_HIGH);}}
+\DoxyCodeLine{00374\ }
+\DoxyCodeLine{00375\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Serial.println("{}Going\ to\ deep\ sleep.\ Wake\ when\ "{}\ +\ String(Config::WAKE\_PIN)\ +\ "{}\ goes\ HIGH."{});}}
+\DoxyCodeLine{00376\ \ \ \ \ \ \ \ \ Serial.flush();}
+\DoxyCodeLine{00377\ \ \ \ \ \ \ \ \ esp\_deep\_sleep\_start();}
+\DoxyCodeLine{00378\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_a18e7954cdd3a1fac8e90a8201584d02b}\label{namespace_app_a18e7954cdd3a1fac8e90a8201584d02b}} 
+\index{App@{App}!exitLightSleepMode@{exitLightSleepMode}}
+\index{exitLightSleepMode@{exitLightSleepMode}!App@{App}}
+\doxysubsubsection{\texorpdfstring{exitLightSleepMode()}{exitLightSleepMode()}}
+{\footnotesize\ttfamily void App\+::exit\+Light\+Sleep\+Mode (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00400}{400}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00401\ \ \ \ \ \{}
+\DoxyCodeLine{00402\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}===\ Exiting\ light\ sleep\ mode\ ==="{}});}
+\DoxyCodeLine{00403\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00404\ \ \ \ \ \ \ \ \ in\_light\_sleep\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00405\ \ \ \ \ \ \ \ \ backlight\_off\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00406\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00407\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Turn\ display\ backlight\ back\ on}}
+\DoxyCodeLine{00408\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_display_a75d875ec473cbdd00bee7951951d81c0}{Display::turnOnBacklight}}();}
+\DoxyCodeLine{00409\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00410\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Reset\ activity\ timer}}
+\DoxyCodeLine{00411\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_adfe353584321cab94c6491c32470d046}{resetActivityTimer}}();}
+\DoxyCodeLine{00412\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00413\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_aefca72a9059055affbcbf62e10eb9cc6}{fireEvent}}(\textcolor{stringliteral}{"{}light\_sleep"{}},\ \textcolor{stringliteral}{"{}exited"{}});}
+\DoxyCodeLine{00414\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_add4f10ef1f893dee045cee7394aa964d}\label{namespace_app_add4f10ef1f893dee045cee7394aa964d}} 
+\index{App@{App}!exitSleepMode@{exitSleepMode}}
+\index{exitSleepMode@{exitSleepMode}!App@{App}}
+\doxysubsubsection{\texorpdfstring{exitSleepMode()}{exitSleepMode()}}
+{\footnotesize\ttfamily void App\+::exit\+Sleep\+Mode (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00416}{416}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00417\ \ \ \ \ \{}
+\DoxyCodeLine{00418\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}===\ Exiting\ sleep\ mode\ (wake\ up)\ ==="{}});}
+\DoxyCodeLine{00419\ }
+\DoxyCodeLine{00420\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Print\ wake\ up\ reason}}
+\DoxyCodeLine{00421\ \ \ \ \ \ \ \ \ esp\_sleep\_wakeup\_cause\_t\ wakeup\_reason\ =\ esp\_sleep\_get\_wakeup\_cause();}
+\DoxyCodeLine{00422\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (wakeup\_reason)}
+\DoxyCodeLine{00423\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00424\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ESP\_SLEEP\_WAKEUP\_EXT0:}
+\DoxyCodeLine{00425\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Wake\ up\ caused\ by\ external\ signal\ using\ RTC\_IO"{}});}
+\DoxyCodeLine{00426\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00427\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ESP\_SLEEP\_WAKEUP\_TOUCHPAD:}
+\DoxyCodeLine{00428\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Wake\ up\ caused\ by\ touchpad"{}});}
+\DoxyCodeLine{00429\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00430\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ESP\_SLEEP\_WAKEUP\_TIMER:}
+\DoxyCodeLine{00431\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Wake\ up\ caused\ by\ timer"{}});}
+\DoxyCodeLine{00432\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00433\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00434\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Wake\ up\ was\ not\ caused\ by\ deep\ sleep:\ "{}}\ +\ String(wakeup\_reason));}
+\DoxyCodeLine{00435\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00436\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00437\ }
+\DoxyCodeLine{00438\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Turn\ display\ backlight\ back\ on}}
+\DoxyCodeLine{00439\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_display_a75d875ec473cbdd00bee7951951d81c0}{Display::turnOnBacklight}}();}
+\DoxyCodeLine{00440\ \ \ \ \ \ \ \ \ backlight\_off\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00441\ }
+\DoxyCodeLine{00442\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Reset\ activity\ timer}}
+\DoxyCodeLine{00443\ \ \ \ \ \ \ \ \ resetActivityTimer();}
+\DoxyCodeLine{00444\ }
+\DoxyCodeLine{00445\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Restart\ sleep\ monitoring}}
+\DoxyCodeLine{00446\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (sleep\_enabled\ \&\&\ sleep\_check\_timer\ ==\ NULL)}
+\DoxyCodeLine{00447\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00448\ \ \ \ \ \ \ \ \ \ \ \ \ sleep\_check\_timer\ =\ lv\_timer\_create(sleepCheckCallback,\ Config::SLEEP\_CHECK\_INTERVAL,\ NULL);}
+\DoxyCodeLine{00449\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00450\ }
+\DoxyCodeLine{00451\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_aefca72a9059055affbcbf62e10eb9cc6}{fireEvent}}(\textcolor{stringliteral}{"{}sleep\_mode"{}},\ \textcolor{stringliteral}{"{}exited"{}});}
+\DoxyCodeLine{00452\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_aefca72a9059055affbcbf62e10eb9cc6}\label{namespace_app_aefca72a9059055affbcbf62e10eb9cc6}} 
+\index{App@{App}!fireEvent@{fireEvent}}
+\index{fireEvent@{fireEvent}!App@{App}}
+\doxysubsubsection{\texorpdfstring{fireEvent()}{fireEvent()}}
+{\footnotesize\ttfamily void App\+::fire\+Event (\begin{DoxyParamCaption}\item[{const String \&}]{event,  }\item[{const String \&}]{data }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00580}{580}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00581\ \ \ \ \ \{}
+\DoxyCodeLine{00582\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (event\_callback)}
+\DoxyCodeLine{00583\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00584\ \ \ \ \ \ \ \ \ \ \ \ \ event\_callback(event,\ data);}
+\DoxyCodeLine{00585\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00586\ }
+\DoxyCodeLine{00587\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Log\ event}}
+\DoxyCodeLine{00588\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}EVENT:\ "{}}\ +\ event\ +\ \textcolor{stringliteral}{"{}\ -\/\ "{}}\ +\ data);}
+\DoxyCodeLine{00589\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_aee9b615b8302567165e2e5ad826d6201}\label{namespace_app_aee9b615b8302567165e2e5ad826d6201}} 
+\index{App@{App}!generateStatusReport@{generateStatusReport}}
+\index{generateStatusReport@{generateStatusReport}!App@{App}}
+\doxysubsubsection{\texorpdfstring{generateStatusReport()}{generateStatusReport()}}
+{\footnotesize\ttfamily void App\+::generate\+Status\+Report (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00556}{556}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00557\ \ \ \ \ \{}
+\DoxyCodeLine{00558\ \ \ \ \ \ \ \ \ String\ report\ =\ \textcolor{stringliteral}{"{}Status\ Report\(\backslash\)\(\backslash\)n"{}};}
+\DoxyCodeLine{00559\ \ \ \ \ \ \ \ \ report\ +=\ \textcolor{stringliteral}{"{}=============\(\backslash\)\(\backslash\)n"{}};}
+\DoxyCodeLine{00560\ \ \ \ \ \ \ \ \ report\ +=\ \textcolor{stringliteral}{"{}Version:\ "{}}\ +\ \mbox{\hyperlink{namespace_app_adc6346b4d03b67d61ede883d3c44cd64}{getVersion}}()\ +\ \textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)n"{}};}
+\DoxyCodeLine{00561\ \ \ \ \ \ \ \ \ report\ +=\ \textcolor{stringliteral}{"{}State:\ "{}}\ +\ \mbox{\hyperlink{namespace_app_a22c8042a43eb38e54720382fedf1c31b}{getStateString}}()\ +\ \textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)n"{}};}
+\DoxyCodeLine{00562\ \ \ \ \ \ \ \ \ report\ +=\ \textcolor{stringliteral}{"{}WiFi:\ "{}}\ +\ String(\mbox{\hyperlink{namespace_wi_fi_manager_aa6406a18b4523ef158247b902e770052}{WiFiManager::isConnected}}()\ ?\ \textcolor{stringliteral}{"{}OK"{}}\ :\ \textcolor{stringliteral}{"{}FAIL"{}})\ +\ \textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)n"{}};}
+\DoxyCodeLine{00563\ \ \ \ \ \ \ \ \ report\ +=\ \textcolor{stringliteral}{"{}NWC:\ "{}}\ +\ String(\mbox{\hyperlink{namespace_n_w_c_aa2e749abffc8f1f4995bb52e3a6e8f47}{NWC::isConnected}}()\ ?\ \textcolor{stringliteral}{"{}OK"{}}\ :\ \textcolor{stringliteral}{"{}FAIL"{}})\ +\ \textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)n"{}};}
+\DoxyCodeLine{00564\ \ \ \ \ \ \ \ \ report\ +=\ \textcolor{stringliteral}{"{}Heap:\ "{}}\ +\ String(ESP.getFreeHeap())\ +\ \textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)n"{}};}
+\DoxyCodeLine{00565\ }
+\DoxyCodeLine{00566\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (last\_error.length()\ >\ 0)}
+\DoxyCodeLine{00567\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00568\ \ \ \ \ \ \ \ \ \ \ \ \ report\ +=\ \textcolor{stringliteral}{"{}Last\ Error:\ "{}}\ +\ last\_error\ +\ \textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)n"{}};}
+\DoxyCodeLine{00569\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00570\ }
+\DoxyCodeLine{00571\ \ \ \ \ \ \ \ \ Serial.println(report);}
+\DoxyCodeLine{00572\ \ \ \ \ \ \ \ \ fireEvent(\textcolor{stringliteral}{"{}status\_report"{}},\ report);}
+\DoxyCodeLine{00573\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_a326939b9c97408a27bb5ac2e62e50d0e}\label{namespace_app_a326939b9c97408a27bb5ac2e62e50d0e}} 
+\index{App@{App}!getBuildInfo@{getBuildInfo}}
+\index{getBuildInfo@{getBuildInfo}!App@{App}}
+\doxysubsubsection{\texorpdfstring{getBuildInfo()}{getBuildInfo()}}
+{\footnotesize\ttfamily String App\+::get\+Build\+Info (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00325}{325}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00326\ \ \ \ \ \{}
+\DoxyCodeLine{00327\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Config::BUILD\_DATE;}
+\DoxyCodeLine{00328\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_a7acecdd250d4af52cb8857ffa758b274}\label{namespace_app_a7acecdd250d4af52cb8857ffa758b274}} 
+\index{App@{App}!getDeepSleepTimeout@{getDeepSleepTimeout}}
+\index{getDeepSleepTimeout@{getDeepSleepTimeout}!App@{App}}
+\doxysubsubsection{\texorpdfstring{getDeepSleepTimeout()}{getDeepSleepTimeout()}}
+{\footnotesize\ttfamily unsigned long App\+::get\+Deep\+Sleep\+Timeout (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00733}{733}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00734\ \ \ \ \ \{}
+\DoxyCodeLine{00735\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ DEEP\_SLEEP\_TIMEOUT;}
+\DoxyCodeLine{00736\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_ac67a97aaf8fc7a4f9cbaa5387f1eba9e}\label{namespace_app_ac67a97aaf8fc7a4f9cbaa5387f1eba9e}} 
+\index{App@{App}!getInactiveTime@{getInactiveTime}}
+\index{getInactiveTime@{getInactiveTime}!App@{App}}
+\doxysubsubsection{\texorpdfstring{getInactiveTime()}{getInactiveTime()}}
+{\footnotesize\ttfamily unsigned long App\+::get\+Inactive\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00723}{723}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00724\ \ \ \ \ \{}
+\DoxyCodeLine{00725\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ millis()\ -\/\ last\_activity\_time;}
+\DoxyCodeLine{00726\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_a80c864880e5ca12c02093585ed0cf447}\label{namespace_app_a80c864880e5ca12c02093585ed0cf447}} 
+\index{App@{App}!getLastError@{getLastError}}
+\index{getLastError@{getLastError}!App@{App}}
+\doxysubsubsection{\texorpdfstring{getLastError()}{getLastError()}}
+{\footnotesize\ttfamily String App\+::get\+Last\+Error (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00213}{213}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00214\ \ \ \ \ \{}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ last\_error;}
+\DoxyCodeLine{00216\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_a4377e4c9c1c5fe0ca432f3cd209a038e}\label{namespace_app_a4377e4c9c1c5fe0ca432f3cd209a038e}} 
+\index{App@{App}!getLightSleepTimeout@{getLightSleepTimeout}}
+\index{getLightSleepTimeout@{getLightSleepTimeout}!App@{App}}
+\doxysubsubsection{\texorpdfstring{getLightSleepTimeout()}{getLightSleepTimeout()}}
+{\footnotesize\ttfamily unsigned long App\+::get\+Light\+Sleep\+Timeout (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00728}{728}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00729\ \ \ \ \ \{}
+\DoxyCodeLine{00730\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ LIGHT\_SLEEP\_TIMEOUT;}
+\DoxyCodeLine{00731\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_a25186002dcf6373ba059741d47fc1514}\label{namespace_app_a25186002dcf6373ba059741d47fc1514}} 
+\index{App@{App}!getState@{getState}}
+\index{getState@{getState}!App@{App}}
+\doxysubsubsection{\texorpdfstring{getState()}{getState()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespace_app_a3f1ec36c31118942672049df267b7612}{app\+\_\+state\+\_\+t}} App\+::get\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+State Management 
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00161}{161}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00162\ \ \ \ \ \{}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ current\_state;}
+\DoxyCodeLine{00164\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_a22c8042a43eb38e54720382fedf1c31b}\label{namespace_app_a22c8042a43eb38e54720382fedf1c31b}} 
+\index{App@{App}!getStateString@{getStateString}}
+\index{getStateString@{getStateString}!App@{App}}
+\doxysubsubsection{\texorpdfstring{getStateString()}{getStateString()}}
+{\footnotesize\ttfamily String App\+::get\+State\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00176}{176}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00177\ \ \ \ \ \{}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (current\_state)}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_app_a3f1ec36c31118942672049df267b7612a930259ab20f9a04311c16640bb26add1}{APP\_STATE\_INITIALIZING}}:}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Initializing"{}};}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_app_a3f1ec36c31118942672049df267b7612a55daefd944d49d6da558c973a8379201}{APP\_STATE\_READY}}:}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Ready"{}};}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_app_a3f1ec36c31118942672049df267b7612a6a26d4653e1840d18bb8288b50f622c3}{APP\_STATE\_ERROR}}:}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Error"{}};}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_app_a3f1ec36c31118942672049df267b7612a4200bd638de59a9a73b819336e98c8a1}{APP\_STATE\_UPDATING}}:}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Updating"{}};}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Unknown"{}};}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00191\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_adc6346b4d03b67d61ede883d3c44cd64}\label{namespace_app_adc6346b4d03b67d61ede883d3c44cd64}} 
+\index{App@{App}!getVersion@{getVersion}}
+\index{getVersion@{getVersion}!App@{App}}
+\doxysubsubsection{\texorpdfstring{getVersion()}{getVersion()}}
+{\footnotesize\ttfamily String App\+::get\+Version (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+System Information 
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00320}{320}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00321\ \ \ \ \ \{}
+\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Config::VERSION;}
+\DoxyCodeLine{00323\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_a7d55551c0ecee64d4385182df40da631}\label{namespace_app_a7d55551c0ecee64d4385182df40da631}} 
+\index{App@{App}!handleError@{handleError}}
+\index{handleError@{handleError}!App@{App}}
+\doxysubsubsection{\texorpdfstring{handleError()}{handleError()}}
+{\footnotesize\ttfamily void App\+::handle\+Error (\begin{DoxyParamCaption}\item[{const String \&}]{module,  }\item[{const String \&}]{error }\end{DoxyParamCaption})}
+
+Error Handling 
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00193}{193}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00194\ \ \ \ \ \{}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ last\_error\ =\ module\ +\ \textcolor{stringliteral}{"{}:\ "{}}\ +\ error;}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}ERROR\ -\/\ "{}}\ +\ last\_error);}
+\DoxyCodeLine{00197\ }
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Show\ error\ message\ to\ user}}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_u_i_af2b3e98a71f79e360d843dd0d33a6e62}{UI::showMessage}}(\textcolor{stringliteral}{"{}Error"{}},\ last\_error);}
+\DoxyCodeLine{00200\ }
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_aefca72a9059055affbcbf62e10eb9cc6}{fireEvent}}(\textcolor{stringliteral}{"{}error"{}},\ last\_error);}
+\DoxyCodeLine{00202\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_afebab729ad90b87d5c556255298b5f8b}\label{namespace_app_afebab729ad90b87d5c556255298b5f8b}} 
+\index{App@{App}!handleTouchWake@{handleTouchWake}}
+\index{handleTouchWake@{handleTouchWake}!App@{App}}
+\doxysubsubsection{\texorpdfstring{handleTouchWake()}{handleTouchWake()}}
+{\footnotesize\ttfamily void App\+::handle\+Touch\+Wake (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00739}{739}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00740\ \ \ \ \ \{}
+\DoxyCodeLine{00741\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (in\_light\_sleep\ ||\ backlight\_off)}
+\DoxyCodeLine{00742\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00743\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Touch\ detected\ -\/\ waking\ from\ light\ sleep"{}});}
+\DoxyCodeLine{00744\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_a18e7954cdd3a1fac8e90a8201584d02b}{exitLightSleepMode}}();}
+\DoxyCodeLine{00745\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00746\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_a36c71ca6134247ab51d1a7a2d0a02cd4}\label{namespace_app_a36c71ca6134247ab51d1a7a2d0a02cd4}} 
+\index{App@{App}!init@{init}}
+\index{init@{init}!App@{App}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void App\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Core Application Functions 
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00026}{26}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00027\ \ \ \ \ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}===\ NWC\ Point\ of\ Sale\ Device\ Initializing\ ==="{}});}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Version:\ "{}}\ +\ Config::VERSION);}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Build\ Date:\ "{}}\ +\ Config::BUILD\_DATE);}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_ac12729d606c8030bbeb7e32b51810f1a}{setState}}(APP\_STATE\_INITIALIZING);}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Initialize\ modules\ in\ dependency\ order}}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Initializing\ Display\ module..."{}});}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_display_aacbf91b9f8c57fc2cb892c45fd44e655}{Display::init}}();}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Initializing\ Settings\ module..."{}});}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_settings_ad47a8d3f696dcb0d38c1dc5088008885}{Settings::init}}();}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Initializing\ WiFi\ Manager\ module..."{}});}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_wi_fi_manager_a307a74b2278e5f1c3ac148944034ca75}{WiFiManager::init}}();}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Set\ up\ WiFi\ status\ callback}}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_wi_fi_manager_afbd1520be38dcf8df79b62059bc70113}{WiFiManager::setStatusCallback}}([](\textcolor{keywordtype}{bool}\ connected,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *status)}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \mbox{\hyperlink{namespace_app_afb037eba2d5bcaebddb20eee584dc210}{App::notifyWiFiStatusChanged}}(connected);\ \});}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Initializing\ UI\ module..."{}});}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_u_i_a2277decc2cba013de2fbb5a64fbc1543}{UI::init}}();}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Initializing\ NWC\ module..."{}});}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_a1c1d9172198a60da5d26688610968af8}{NWC::init}}();}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Set\ up\ NWC\ status\ callback}}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_aa67b7139a1355f5f43c75c014796dd80}{NWC::setStatusCallback}}([](\textcolor{keywordtype}{bool}\ connected,\ \textcolor{keyword}{const}\ String\ \&status)}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \mbox{\hyperlink{namespace_app_a76f7ef636cfd7f4429853af2f96b44e9}{App::notifyNWCStatusChanged}}(connected);\ \});}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Load\ the\ initial\ screen}}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_u_i_a7a0c6d0535a2e6dbc2c61c83a22dcfb0}{UI::loadScreen}}(\mbox{\hyperlink{namespace_u_i_a435547818ef562dcc97cb3b9c29f7d3ba13f125a42d838784783275ce32b6e277}{UI::SCREEN\_KEYPAD}});}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ WiFi\ is\ already\ connected\ and\ trigger\ NWC\ connection\ if\ needed}}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespace_wi_fi_manager_aa6406a18b4523ef158247b902e770052}{WiFiManager::isConnected}}())}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}WiFi\ already\ connected\ during\ initialization\ -\/\ connecting\ to\ NWC\ relay"{}});}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_afb037eba2d5bcaebddb20eee584dc210}{notifyWiFiStatusChanged}}(\textcolor{keyword}{true});}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Initialize\ sleep\ functionality}}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Initializing\ sleep\ management..."{}});}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_a78517f9e5f4f6892c4a1197e113f1cf0}{initSleepMode}}();}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_ac12729d606c8030bbeb7e32b51810f1a}{setState}}(APP\_STATE\_READY);}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}===\ Application\ initialized\ successfully\ ==="{}});}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_aefca72a9059055affbcbf62e10eb9cc6}{fireEvent}}(\textcolor{stringliteral}{"{}app\_initialized"{}},\ \textcolor{stringliteral}{"{}success"{}});}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ std::exception\ \&e)}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_ac12729d606c8030bbeb7e32b51810f1a}{setState}}(APP\_STATE\_ERROR);}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00083\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_a78517f9e5f4f6892c4a1197e113f1cf0}\label{namespace_app_a78517f9e5f4f6892c4a1197e113f1cf0}} 
+\index{App@{App}!initSleepMode@{initSleepMode}}
+\index{initSleepMode@{initSleepMode}!App@{App}}
+\doxysubsubsection{\texorpdfstring{initSleepMode()}{initSleepMode()}}
+{\footnotesize\ttfamily void App\+::init\+Sleep\+Mode (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Sleep Management 
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00593}{593}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00594\ \ \ \ \ \{}
+\DoxyCodeLine{00595\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Configure\ GPIO\ 12\ as\ input\ with\ pulldown\ for\ wake\ button}}
+\DoxyCodeLine{00596\ \ \ \ \ \ \ \ \ gpio\_config\_t\ io\_conf;}
+\DoxyCodeLine{00597\ \ \ \ \ \ \ \ \ io\_conf.intr\_type\ =\ GPIO\_INTR\_DISABLE;}
+\DoxyCodeLine{00598\ \ \ \ \ \ \ \ \ io\_conf.mode\ =\ GPIO\_MODE\_INPUT;}
+\DoxyCodeLine{00599\ \ \ \ \ \ \ \ \ io\_conf.pin\_bit\_mask\ =\ (1ULL\ <<\ Config::WAKE\_PIN);}
+\DoxyCodeLine{00600\ \ \ \ \ \ \ \ \ io\_conf.pull\_down\_en\ =\ GPIO\_PULLDOWN\_ENABLE;}
+\DoxyCodeLine{00601\ \ \ \ \ \ \ \ \ io\_conf.pull\_up\_en\ =\ GPIO\_PULLUP\_DISABLE;}
+\DoxyCodeLine{00602\ \ \ \ \ \ \ \ \ gpio\_config(\&io\_conf);}
+\DoxyCodeLine{00603\ }
+\DoxyCodeLine{00604\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Initialize\ activity\ timer}}
+\DoxyCodeLine{00605\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_adfe353584321cab94c6491c32470d046}{resetActivityTimer}}();}
+\DoxyCodeLine{00606\ }
+\DoxyCodeLine{00607\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Start\ sleep\ monitoring\ timer\ if\ enabled}}
+\DoxyCodeLine{00608\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (sleep\_enabled)}
+\DoxyCodeLine{00609\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00610\ \ \ \ \ \ \ \ \ \ \ \ \ sleep\_check\_timer\ =\ lv\_timer\_create(sleepCheckCallback,\ Config::SLEEP\_CHECK\_INTERVAL,\ NULL);}
+\DoxyCodeLine{00611\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00612\ }
+\DoxyCodeLine{00613\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ we're\ waking\ up\ from\ deep\ sleep}}
+\DoxyCodeLine{00614\ \ \ \ \ \ \ \ \ esp\_sleep\_wakeup\_cause\_t\ wakeup\_reason\ =\ esp\_sleep\_get\_wakeup\_cause();}
+\DoxyCodeLine{00615\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (wakeup\_reason\ !=\ ESP\_SLEEP\_WAKEUP\_UNDEFINED)}
+\DoxyCodeLine{00616\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00617\ \ \ \ \ \ \ \ \ \ \ \ \ exitSleepMode();\ \textcolor{comment}{//\ Handle\ wake\ up}}
+\DoxyCodeLine{00618\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00619\ }
+\DoxyCodeLine{00620\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Sleep\ management\ initialized"{}});}
+\DoxyCodeLine{00621\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Wake\ pin:\ GPIO\ "{}}\ +\ String(Config::WAKE\_PIN));}
+\DoxyCodeLine{00622\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Light\ sleep\ timeout:\ "{}}\ +\ String(LIGHT\_SLEEP\_TIMEOUT\ /\ 1000)\ +\ \textcolor{stringliteral}{"{}\ seconds"{}});}
+\DoxyCodeLine{00623\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Deep\ sleep\ timeout:\ "{}}\ +\ String(DEEP\_SLEEP\_TIMEOUT\ /\ 1000)\ +\ \textcolor{stringliteral}{"{}\ seconds"{}});}
+\DoxyCodeLine{00624\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_a0ba03eec3bb43b1375522bc618857789}\label{namespace_app_a0ba03eec3bb43b1375522bc618857789}} 
+\index{App@{App}!isBacklightOff@{isBacklightOff}}
+\index{isBacklightOff@{isBacklightOff}!App@{App}}
+\doxysubsubsection{\texorpdfstring{isBacklightOff()}{isBacklightOff()}}
+{\footnotesize\ttfamily bool App\+::is\+Backlight\+Off (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00718}{718}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00719\ \ \ \ \ \{}
+\DoxyCodeLine{00720\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ backlight\_off;}
+\DoxyCodeLine{00721\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_ac4ecbc30cf2ce9769c0dd6fab5e5a364}\label{namespace_app_ac4ecbc30cf2ce9769c0dd6fab5e5a364}} 
+\index{App@{App}!isInLightSleep@{isInLightSleep}}
+\index{isInLightSleep@{isInLightSleep}!App@{App}}
+\doxysubsubsection{\texorpdfstring{isInLightSleep()}{isInLightSleep()}}
+{\footnotesize\ttfamily bool App\+::is\+In\+Light\+Sleep (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00713}{713}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00714\ \ \ \ \ \{}
+\DoxyCodeLine{00715\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ in\_light\_sleep;}
+\DoxyCodeLine{00716\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_aacf00bbb11ff39ad6396bce703fece7a}\label{namespace_app_aacf00bbb11ff39ad6396bce703fece7a}} 
+\index{App@{App}!isSleepEnabled@{isSleepEnabled}}
+\index{isSleepEnabled@{isSleepEnabled}!App@{App}}
+\doxysubsubsection{\texorpdfstring{isSleepEnabled()}{isSleepEnabled()}}
+{\footnotesize\ttfamily bool App\+::is\+Sleep\+Enabled (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00708}{708}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00709\ \ \ \ \ \{}
+\DoxyCodeLine{00710\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ sleep\_enabled;}
+\DoxyCodeLine{00711\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_a90b22915a334056d893baf1c323f55b7}\label{namespace_app_a90b22915a334056d893baf1c323f55b7}} 
+\index{App@{App}!isUpdateAvailable@{isUpdateAvailable}}
+\index{isUpdateAvailable@{isUpdateAvailable}!App@{App}}
+\doxysubsubsection{\texorpdfstring{isUpdateAvailable()}{isUpdateAvailable()}}
+{\footnotesize\ttfamily bool App\+::is\+Update\+Available (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00508}{508}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00509\ \ \ \ \ \{}
+\DoxyCodeLine{00510\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Implementation\ would\ check\ if\ update\ is\ available}}
+\DoxyCodeLine{00511\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00512\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_ac9b35bb4ea38c1da915e589ff5a34d39}\label{namespace_app_ac9b35bb4ea38c1da915e589ff5a34d39}} 
+\index{App@{App}!loadConfiguration@{loadConfiguration}}
+\index{loadConfiguration@{loadConfiguration}!App@{App}}
+\doxysubsubsection{\texorpdfstring{loadConfiguration()}{loadConfiguration()}}
+{\footnotesize\ttfamily bool App\+::load\+Configuration (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Configuration Management 
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00291}{291}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00292\ \ \ \ \ \{}
+\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Loading\ application\ configuration..."{}});}
+\DoxyCodeLine{00294\ }
+\DoxyCodeLine{00295\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Configuration\ is\ loaded\ by\ individual\ modules}}
+\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ function\ could\ coordinate\ any\ cross-\/module\ configuration}}
+\DoxyCodeLine{00297\ }
+\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00299\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_aa9affbf3274d56cd4a55e4f2da119f62}\label{namespace_app_aa9affbf3274d56cd4a55e4f2da119f62}} 
+\index{App@{App}!notifyInvoiceCreated@{notifyInvoiceCreated}}
+\index{notifyInvoiceCreated@{notifyInvoiceCreated}!App@{App}}
+\doxysubsubsection{\texorpdfstring{notifyInvoiceCreated()}{notifyInvoiceCreated()}}
+{\footnotesize\ttfamily void App\+::notify\+Invoice\+Created (\begin{DoxyParamCaption}\item[{const String \&}]{invoice }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00275}{275}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00276\ \ \ \ \ \{}
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Invoice\ created:\ "{}}\ +\ invoice.substring(0,\ 20)\ +\ \textcolor{stringliteral}{"{}..."{}});}
+\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_a4e5666c5f59ca4d455e2148a3f06d329}{NWC::setCurrentInvoice}}(invoice);}
+\DoxyCodeLine{00279\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_u_i_a8e08086366be0567c206956439cf07d3}{UI::createInvoiceOverlay}}();}
+\DoxyCodeLine{00280\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_aefca72a9059055affbcbf62e10eb9cc6}{fireEvent}}(\textcolor{stringliteral}{"{}invoice\_created"{}},\ invoice);}
+\DoxyCodeLine{00281\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_a76f7ef636cfd7f4429853af2f96b44e9}\label{namespace_app_a76f7ef636cfd7f4429853af2f96b44e9}} 
+\index{App@{App}!notifyNWCStatusChanged@{notifyNWCStatusChanged}}
+\index{notifyNWCStatusChanged@{notifyNWCStatusChanged}!App@{App}}
+\doxysubsubsection{\texorpdfstring{notifyNWCStatusChanged()}{notifyNWCStatusChanged()}}
+{\footnotesize\ttfamily void App\+::notify\+NWCStatus\+Changed (\begin{DoxyParamCaption}\item[{bool}]{connected }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00253}{253}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00254\ \ \ \ \ \{}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ last\_nwc\_status\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00256\ }
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Prevent\ duplicate\ notifications}}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (last\_nwc\_status\ ==\ connected)}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ last\_nwc\_status\ =\ connected;}
+\DoxyCodeLine{00263\ }
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}NWC\ status\ changed:\ "{}}\ +\ String(connected\ ?\ \textcolor{stringliteral}{"{}Connected"{}}\ :\ \textcolor{stringliteral}{"{}Disconnected"{}}));}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_a28e8eb156bed73d6466b37fe3d81241d}{NWC::updateRelayStatusDisplay}}(connected);}
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ fireEvent(\textcolor{stringliteral}{"{}nwc\_status"{}},\ connected\ ?\ \textcolor{stringliteral}{"{}connected"{}}\ :\ \textcolor{stringliteral}{"{}disconnected"{}});}
+\DoxyCodeLine{00267\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_a78b4623c59d84d6d49ea4bcef3e2e50d}\label{namespace_app_a78b4623c59d84d6d49ea4bcef3e2e50d}} 
+\index{App@{App}!notifyPaymentReceived@{notifyPaymentReceived}}
+\index{notifyPaymentReceived@{notifyPaymentReceived}!App@{App}}
+\doxysubsubsection{\texorpdfstring{notifyPaymentReceived()}{notifyPaymentReceived()}}
+{\footnotesize\ttfamily void App\+::notify\+Payment\+Received (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00283}{283}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00284\ \ \ \ \ \{}
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Payment\ received!"{}});}
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_u_i_a7bbab39abe50d5133bb309f45ee37609}{UI::closeInvoiceOverlay}}();}
+\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_u_i_af2b3e98a71f79e360d843dd0d33a6e62}{UI::showMessage}}(\textcolor{stringliteral}{"{}Payment\ Received"{}},\ \textcolor{stringliteral}{"{}Transaction\ completed\ successfully!"{}});}
+\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_aefca72a9059055affbcbf62e10eb9cc6}{fireEvent}}(\textcolor{stringliteral}{"{}payment\_received"{}},\ \textcolor{stringliteral}{"{}success"{}});}
+\DoxyCodeLine{00289\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_a8cba06ce488296b2939433e782c495d2}\label{namespace_app_a8cba06ce488296b2939433e782c495d2}} 
+\index{App@{App}!notifyPricesUpdated@{notifyPricesUpdated}}
+\index{notifyPricesUpdated@{notifyPricesUpdated}!App@{App}}
+\doxysubsubsection{\texorpdfstring{notifyPricesUpdated()}{notifyPricesUpdated()}}
+{\footnotesize\ttfamily void App\+::notify\+Prices\+Updated (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00269}{269}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00270\ \ \ \ \ \{}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Bitcoin\ prices\ updated"{}});}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_aefca72a9059055affbcbf62e10eb9cc6}{fireEvent}}(\textcolor{stringliteral}{"{}prices\_updated"{}},\ \textcolor{stringliteral}{"{}success"{}});}
+\DoxyCodeLine{00273\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_afb037eba2d5bcaebddb20eee584dc210}\label{namespace_app_afb037eba2d5bcaebddb20eee584dc210}} 
+\index{App@{App}!notifyWiFiStatusChanged@{notifyWiFiStatusChanged}}
+\index{notifyWiFiStatusChanged@{notifyWiFiStatusChanged}!App@{App}}
+\doxysubsubsection{\texorpdfstring{notifyWiFiStatusChanged()}{notifyWiFiStatusChanged()}}
+{\footnotesize\ttfamily void App\+::notify\+Wi\+Fi\+Status\+Changed (\begin{DoxyParamCaption}\item[{bool}]{connected }\end{DoxyParamCaption})}
+
+Inter-\/\+Module Communication 
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00218}{218}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00219\ \ \ \ \ \{}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ last\_wifi\_status\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00221\ }
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Prevent\ duplicate\ notifications}}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (last\_wifi\_status\ ==\ connected)}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ last\_wifi\_status\ =\ connected;}
+\DoxyCodeLine{00228\ }
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}WiFi\ status\ changed:\ "{}}\ +\ String(connected\ ?\ \textcolor{stringliteral}{"{}Connected"{}}\ :\ \textcolor{stringliteral}{"{}Disconnected"{}}));}
+\DoxyCodeLine{00230\ }
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (connected)}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ WiFi\ connected\ -\/\ attempt\ NWC\ connection}}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{namespace_n_w_c_aa2e749abffc8f1f4995bb52e3a6e8f47}{NWC::isConnected}}())}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}WiFi\ connected,\ attempting\ NWC\ relay\ connection..."{}});}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_a72c06bdc692eac76bc21d4e73ce31349}{NWC::connectToRelay}}();}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00239\ }
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Fetch\ Bitcoin\ prices}}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_aef169814af2af3b5a32f4f0c30456385}{NWC::fetchBitcoinPrices}}();}
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ WiFi\ disconnected\ -\/\ notify\ NWC\ module}}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}WiFi\ disconnected,\ disconnecting\ NWC..."{}});}
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_a88a8c82c8be5fc4c9ef6fa6f35b8a581}{NWC::disconnect}}();}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00249\ }
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_aefca72a9059055affbcbf62e10eb9cc6}{fireEvent}}(\textcolor{stringliteral}{"{}wifi\_status"{}},\ connected\ ?\ \textcolor{stringliteral}{"{}connected"{}}\ :\ \textcolor{stringliteral}{"{}disconnected"{}});}
+\DoxyCodeLine{00251\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_a1fe12b467c84861a1b948df26eb74ca7}\label{namespace_app_a1fe12b467c84861a1b948df26eb74ca7}} 
+\index{App@{App}!performUpdate@{performUpdate}}
+\index{performUpdate@{performUpdate}!App@{App}}
+\doxysubsubsection{\texorpdfstring{performUpdate()}{performUpdate()}}
+{\footnotesize\ttfamily void App\+::perform\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00514}{514}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00515\ \ \ \ \ \{}
+\DoxyCodeLine{00516\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Performing\ update..."{}});}
+\DoxyCodeLine{00517\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_ac12729d606c8030bbeb7e32b51810f1a}{setState}}(APP\_STATE\_UPDATING);}
+\DoxyCodeLine{00518\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Implementation\ would\ perform\ firmware\ update}}
+\DoxyCodeLine{00519\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_aefca72a9059055affbcbf62e10eb9cc6}{fireEvent}}(\textcolor{stringliteral}{"{}update"{}},\ \textcolor{stringliteral}{"{}started"{}});}
+\DoxyCodeLine{00520\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_a8eff98ed4b5bce3fbe05f44c6be52c73}\label{namespace_app_a8eff98ed4b5bce3fbe05f44c6be52c73}} 
+\index{App@{App}!printSystemInfo@{printSystemInfo}}
+\index{printSystemInfo@{printSystemInfo}!App@{App}}
+\doxysubsubsection{\texorpdfstring{printSystemInfo()}{printSystemInfo()}}
+{\footnotesize\ttfamily void App\+::print\+System\+Info (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00330}{330}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00331\ \ \ \ \ \{}
+\DoxyCodeLine{00332\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}===\ System\ Information\ ==="{}});}
+\DoxyCodeLine{00333\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Version:\ "{}}\ +\ \mbox{\hyperlink{namespace_app_adc6346b4d03b67d61ede883d3c44cd64}{getVersion}}());}
+\DoxyCodeLine{00334\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Build\ Date:\ "{}}\ +\ \mbox{\hyperlink{namespace_app_a326939b9c97408a27bb5ac2e62e50d0e}{getBuildInfo}}());}
+\DoxyCodeLine{00335\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Free\ Heap:\ "{}}\ +\ String(ESP.getFreeHeap()));}
+\DoxyCodeLine{00336\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Chip\ Model:\ "{}}\ +\ String(ESP.getChipModel()));}
+\DoxyCodeLine{00337\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Chip\ Revision:\ "{}}\ +\ String(ESP.getChipRevision()));}
+\DoxyCodeLine{00338\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}CPU\ Frequency:\ "{}}\ +\ String(ESP.getCpuFreqMHz())\ +\ \textcolor{stringliteral}{"{}\ MHz"{}});}
+\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Flash\ Size:\ "{}}\ +\ String(ESP.getFlashChipSize()));}
+\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}=========================="{}});}
+\DoxyCodeLine{00341\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_a683e7e9d5f87752ba306ae8d4b3043c8}\label{namespace_app_a683e7e9d5f87752ba306ae8d4b3043c8}} 
+\index{App@{App}!reportModuleStatus@{reportModuleStatus}}
+\index{reportModuleStatus@{reportModuleStatus}!App@{App}}
+\doxysubsubsection{\texorpdfstring{reportModuleStatus()}{reportModuleStatus()}}
+{\footnotesize\ttfamily void App\+::report\+Module\+Status (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00482}{482}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00483\ \ \ \ \ \{}
+\DoxyCodeLine{00484\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}===\ Module\ Status\ Report\ ==="{}});}
+\DoxyCodeLine{00485\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}WiFi:\ "{}}\ +\ String(\mbox{\hyperlink{namespace_wi_fi_manager_aa6406a18b4523ef158247b902e770052}{WiFiManager::isConnected}}()\ ?\ \textcolor{stringliteral}{"{}Connected"{}}\ :\ \textcolor{stringliteral}{"{}Disconnected"{}}));}
+\DoxyCodeLine{00486\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespace_wi_fi_manager_aa6406a18b4523ef158247b902e770052}{WiFiManager::isConnected}}())}
+\DoxyCodeLine{00487\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00488\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}\ \ SSID:\ "{}}\ +\ \mbox{\hyperlink{namespace_wi_fi_manager_a0d7909fe5946dfd8e7024a61b0a9e048}{WiFiManager::getSSID}}());}
+\DoxyCodeLine{00489\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}\ \ IP:\ "{}}\ +\ \mbox{\hyperlink{namespace_wi_fi_manager_a87f19df53f67ea0a4cb59ef57c184524}{WiFiManager::getLocalIP}}());}
+\DoxyCodeLine{00490\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00491\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}NWC:\ "{}}\ +\ String(\mbox{\hyperlink{namespace_n_w_c_aa2e749abffc8f1f4995bb52e3a6e8f47}{NWC::isConnected}}()\ ?\ \textcolor{stringliteral}{"{}Connected"{}}\ :\ \textcolor{stringliteral}{"{}Disconnected"{}}));}
+\DoxyCodeLine{00492\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespace_n_w_c_aa2e749abffc8f1f4995bb52e3a6e8f47}{NWC::isConnected}}())}
+\DoxyCodeLine{00493\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00494\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}\ \ Relay:\ "{}}\ +\ \mbox{\hyperlink{namespace_n_w_c_abb2a09968c5b268eef33006b22a32c12}{NWC::getRelayUrl}}());}
+\DoxyCodeLine{00495\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00496\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Current\ Screen:\ "{}}\ +\ String(\mbox{\hyperlink{namespace_u_i_a7e5dc627ead9b9c216342025ec188d66}{UI::getCurrentScreen}}()));}
+\DoxyCodeLine{00497\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Free\ Heap:\ "{}}\ +\ String(ESP.getFreeHeap()));}
+\DoxyCodeLine{00498\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}============================"{}});}
+\DoxyCodeLine{00499\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_adfe353584321cab94c6491c32470d046}\label{namespace_app_adfe353584321cab94c6491c32470d046}} 
+\index{App@{App}!resetActivityTimer@{resetActivityTimer}}
+\index{resetActivityTimer@{resetActivityTimer}!App@{App}}
+\doxysubsubsection{\texorpdfstring{resetActivityTimer()}{resetActivityTimer()}}
+{\footnotesize\ttfamily void App\+::reset\+Activity\+Timer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00636}{636}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00637\ \ \ \ \ \{}
+\DoxyCodeLine{00638\ \ \ \ \ \ \ \ \ last\_activity\_time\ =\ millis();}
+\DoxyCodeLine{00639\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00640\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ we\ were\ in\ light\ sleep,\ exit\ it}}
+\DoxyCodeLine{00641\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (in\_light\_sleep)}
+\DoxyCodeLine{00642\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00643\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_a18e7954cdd3a1fac8e90a8201584d02b}{exitLightSleepMode}}();}
+\DoxyCodeLine{00644\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00645\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00646\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Activity\ timer\ reset"{}});}
+\DoxyCodeLine{00647\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_aad3d214ab3bb9320fbfada4d1a34b202}\label{namespace_app_aad3d214ab3bb9320fbfada4d1a34b202}} 
+\index{App@{App}!resetToDefaults@{resetToDefaults}}
+\index{resetToDefaults@{resetToDefaults}!App@{App}}
+\doxysubsubsection{\texorpdfstring{resetToDefaults()}{resetToDefaults()}}
+{\footnotesize\ttfamily void App\+::reset\+To\+Defaults (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00311}{311}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00312\ \ \ \ \ \{}
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Resetting\ to\ default\ configuration..."{}});}
+\DoxyCodeLine{00314\ }
+\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_settings_aa26da663d96a908585fb90c6444f975b}{Settings::resetToDefaults}}();}
+\DoxyCodeLine{00316\ }
+\DoxyCodeLine{00317\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_aefca72a9059055affbcbf62e10eb9cc6}{fireEvent}}(\textcolor{stringliteral}{"{}reset\_defaults"{}},\ \textcolor{stringliteral}{"{}completed"{}});}
+\DoxyCodeLine{00318\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_ae09dc71078b64c56c673b1ad1d25b5d1}\label{namespace_app_ae09dc71078b64c56c673b1ad1d25b5d1}} 
+\index{App@{App}!run@{run}}
+\index{run@{run}!App@{App}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily void App\+::run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00105}{105}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00106\ \ \ \ \ \{}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ first\_run\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (first\_run)\ \{}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}===\ App::run()\ started\ ==="{}});}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ first\_run\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ current\_time\ =\ millis();}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Process\ WiFi\ AP\ mode\ events\ (with\ error\ handling)}}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_wi_fi_manager_a4600374afc464e50c6516ed52df26b81}{WiFiManager::processLoop}}();}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (...)\ \{}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}ERROR:\ WiFiManager::processLoop()\ threw\ exception"{}});}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Process\ NWC\ WebSocket\ events\ (with\ error\ handling)}}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_a10d04b654063bcec6d1bcf528fb3a24d}{NWC::processLoop}}();}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (...)\ \{}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}ERROR:\ NWC::processLoop()\ threw\ exception"{}});}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Update\ NWC\ time\ synchronization\ (with\ error\ handling)}}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_acd1483629fef32437ab3d58cbfe11318}{NWC::updateTime}}();}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (...)\ \{}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}ERROR:\ NWC::updateTime()\ threw\ exception"{}});}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Periodic\ health\ checks}}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (current\_time\ -\/\ last\_health\_check\ >=\ Config::HEALTH\_CHECK\_INTERVAL)}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_a8c902b97afa2062bbd08efa469419324}{checkModuleHealth}}();}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ last\_health\_check\ =\ current\_time;}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Periodic\ status\ reports}}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (current\_time\ -\/\ last\_status\_report\ >=\ Config::STATUS\_REPORT\_INTERVAL)}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_a683e7e9d5f87752ba306ae8d4b3043c8}{reportModuleStatus}}();}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ last\_status\_report\ =\ current\_time;}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Handle\ reconnection\ attempts\ (with\ error\ handling)}}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_n_w_c_acaa1e327e2f86e4e3101cc552c8ed24c}{NWC::attemptReconnectionIfNeeded}}();}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (...)\ \{}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}ERROR:\ NWC::attemptReconnectionIfNeeded()\ threw\ exception"{}});}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Small\ delay\ to\ prevent\ watchdog\ triggers}}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ delay(1);}
+\DoxyCodeLine{00159\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_a70e0965d86f6b58c39348c8802e27591}\label{namespace_app_a70e0965d86f6b58c39348c8802e27591}} 
+\index{App@{App}!runDiagnostics@{runDiagnostics}}
+\index{runDiagnostics@{runDiagnostics}!App@{App}}
+\doxysubsubsection{\texorpdfstring{runDiagnostics()}{runDiagnostics()}}
+{\footnotesize\ttfamily void App\+::run\+Diagnostics (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Diagnostic Functions 
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00522}{522}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00523\ \ \ \ \ \{}
+\DoxyCodeLine{00524\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}===\ Running\ Diagnostics\ ==="{}});}
+\DoxyCodeLine{00525\ }
+\DoxyCodeLine{00526\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_a8eff98ed4b5bce3fbe05f44c6be52c73}{printSystemInfo}}();}
+\DoxyCodeLine{00527\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_a683e7e9d5f87752ba306ae8d4b3043c8}{reportModuleStatus}}();}
+\DoxyCodeLine{00528\ }
+\DoxyCodeLine{00529\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Test\ display}}
+\DoxyCodeLine{00530\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_u_i_af2b3e98a71f79e360d843dd0d33a6e62}{UI::showMessage}}(\textcolor{stringliteral}{"{}Diagnostics"{}},\ \textcolor{stringliteral}{"{}Display\ test\ -\/\ press\ any\ key"{}});}
+\DoxyCodeLine{00531\ }
+\DoxyCodeLine{00532\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Test\ WiFi\ scan}}
+\DoxyCodeLine{00533\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespace_wi_fi_manager_aa6406a18b4523ef158247b902e770052}{WiFiManager::isConnected}}())}
+\DoxyCodeLine{00534\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00535\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}WiFi\ diagnostic:\ PASS"{}});}
+\DoxyCodeLine{00536\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00537\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00538\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00539\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}WiFi\ diagnostic:\ FAIL\ -\/\ Not\ connected"{}});}
+\DoxyCodeLine{00540\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00541\ }
+\DoxyCodeLine{00542\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Test\ NWC\ connection}}
+\DoxyCodeLine{00543\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespace_n_w_c_aa2e749abffc8f1f4995bb52e3a6e8f47}{NWC::isConnected}}())}
+\DoxyCodeLine{00544\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00545\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}NWC\ diagnostic:\ PASS"{}});}
+\DoxyCodeLine{00546\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00547\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00548\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00549\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}NWC\ diagnostic:\ FAIL\ -\/\ Not\ connected"{}});}
+\DoxyCodeLine{00550\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00551\ }
+\DoxyCodeLine{00552\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}===\ Diagnostics\ Complete\ ==="{}});}
+\DoxyCodeLine{00553\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_aefca72a9059055affbcbf62e10eb9cc6}{fireEvent}}(\textcolor{stringliteral}{"{}diagnostics"{}},\ \textcolor{stringliteral}{"{}completed"{}});}
+\DoxyCodeLine{00554\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_a8d662eaf81462543f2a05532ab9f9e36}\label{namespace_app_a8d662eaf81462543f2a05532ab9f9e36}} 
+\index{App@{App}!saveConfiguration@{saveConfiguration}}
+\index{saveConfiguration@{saveConfiguration}!App@{App}}
+\doxysubsubsection{\texorpdfstring{saveConfiguration()}{saveConfiguration()}}
+{\footnotesize\ttfamily bool App\+::save\+Configuration (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00301}{301}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00302\ \ \ \ \ \{}
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Saving\ application\ configuration..."{}});}
+\DoxyCodeLine{00304\ }
+\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Configuration\ is\ saved\ by\ individual\ modules}}
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ function\ could\ coordinate\ any\ cross-\/module\ configuration}}
+\DoxyCodeLine{00307\ }
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00309\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_a82c928935fb5b3bea9a951dd77a8f1f6}\label{namespace_app_a82c928935fb5b3bea9a951dd77a8f1f6}} 
+\index{App@{App}!setEventCallback@{setEventCallback}}
+\index{setEventCallback@{setEventCallback}!App@{App}}
+\doxysubsubsection{\texorpdfstring{setEventCallback()}{setEventCallback()}}
+{\footnotesize\ttfamily void App\+::set\+Event\+Callback (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespace_app_adf3327a85deb264024d0f53e7ab3ff0c}{app\+\_\+event\+\_\+callback\+\_\+t}}}]{callback }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00575}{575}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00576\ \ \ \ \ \{}
+\DoxyCodeLine{00577\ \ \ \ \ \ \ \ \ event\_callback\ =\ callback;}
+\DoxyCodeLine{00578\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_a2ad2cb227fd9a9cb56cd6f0a157e2ba7}\label{namespace_app_a2ad2cb227fd9a9cb56cd6f0a157e2ba7}} 
+\index{App@{App}!setSleepEnabled@{setSleepEnabled}}
+\index{setSleepEnabled@{setSleepEnabled}!App@{App}}
+\doxysubsubsection{\texorpdfstring{setSleepEnabled()}{setSleepEnabled()}}
+{\footnotesize\ttfamily void App\+::set\+Sleep\+Enabled (\begin{DoxyParamCaption}\item[{bool}]{enabled }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00691}{691}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00692\ \ \ \ \ \{}
+\DoxyCodeLine{00693\ \ \ \ \ \ \ \ \ sleep\_enabled\ =\ enabled;}
+\DoxyCodeLine{00694\ }
+\DoxyCodeLine{00695\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (enabled\ \&\&\ sleep\_check\_timer\ ==\ NULL)}
+\DoxyCodeLine{00696\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00697\ \ \ \ \ \ \ \ \ \ \ \ \ sleep\_check\_timer\ =\ lv\_timer\_create(sleepCheckCallback,\ Config::SLEEP\_CHECK\_INTERVAL,\ NULL);}
+\DoxyCodeLine{00698\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Sleep\ mode\ enabled"{}});}
+\DoxyCodeLine{00699\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00700\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (!enabled\ \&\&\ sleep\_check\_timer\ !=\ NULL)}
+\DoxyCodeLine{00701\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00702\ \ \ \ \ \ \ \ \ \ \ \ \ lv\_timer\_del(sleep\_check\_timer);}
+\DoxyCodeLine{00703\ \ \ \ \ \ \ \ \ \ \ \ \ sleep\_check\_timer\ =\ NULL;}
+\DoxyCodeLine{00704\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Sleep\ mode\ disabled"{}});}
+\DoxyCodeLine{00705\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00706\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_ac12729d606c8030bbeb7e32b51810f1a}\label{namespace_app_ac12729d606c8030bbeb7e32b51810f1a}} 
+\index{App@{App}!setState@{setState}}
+\index{setState@{setState}!App@{App}}
+\doxysubsubsection{\texorpdfstring{setState()}{setState()}}
+{\footnotesize\ttfamily void App\+::set\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespace_app_a3f1ec36c31118942672049df267b7612}{app\+\_\+state\+\_\+t}}}]{state }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00166}{166}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00167\ \ \ \ \ \{}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (current\_state\ !=\ state)}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ current\_state\ =\ state;}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}App\ state\ changed\ to:\ "{}}\ +\ \mbox{\hyperlink{namespace_app_a22c8042a43eb38e54720382fedf1c31b}{getStateString}}());}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_aefca72a9059055affbcbf62e10eb9cc6}{fireEvent}}(\textcolor{stringliteral}{"{}state\_changed"{}},\ \mbox{\hyperlink{namespace_app_a22c8042a43eb38e54720382fedf1c31b}{getStateString}}());}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00174\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_app_ae7348f8ae44915c79695b95eaaf8e6f4}\label{namespace_app_ae7348f8ae44915c79695b95eaaf8e6f4}} 
+\index{App@{App}!sleepCheckCallback@{sleepCheckCallback}}
+\index{sleepCheckCallback@{sleepCheckCallback}!App@{App}}
+\doxysubsubsection{\texorpdfstring{sleepCheckCallback()}{sleepCheckCallback()}}
+{\footnotesize\ttfamily void App\+::sleep\+Check\+Callback (\begin{DoxyParamCaption}\item[{lv\+\_\+timer\+\_\+t $\ast$}]{timer }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{app_8cpp_source_l00649}{649}} of file \mbox{\hyperlink{app_8cpp_source}{app.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00650\ \ \ \ \ \{}
+\DoxyCodeLine{00651\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!sleep\_enabled)}
+\DoxyCodeLine{00652\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00653\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00654\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00655\ }
+\DoxyCodeLine{00656\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ current\_time\ =\ millis();}
+\DoxyCodeLine{00657\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ inactive\_time\ =\ current\_time\ -\/\ last\_activity\_time;}
+\DoxyCodeLine{00658\ }
+\DoxyCodeLine{00659\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Don't\ sleep\ if\ invoice\ processing\ is\ active}}
+\DoxyCodeLine{00660\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespace_u_i_a256c4320af439732def9402342903462}{UI::isInvoiceProcessing}}())}
+\DoxyCodeLine{00661\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00662\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00663\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00664\ }
+\DoxyCodeLine{00665\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Don't\ sleep\ if\ WiFi\ is\ not\ connected\ (may\ be\ in\ setup\ mode)}}
+\DoxyCodeLine{00666\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{namespace_wi_fi_manager_aa6406a18b4523ef158247b902e770052}{WiFiManager::isConnected}}())}
+\DoxyCodeLine{00667\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00668\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00669\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00670\ }
+\DoxyCodeLine{00671\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Only\ allow\ sleep\ from\ the\ keypad\ screen}}
+\DoxyCodeLine{00672\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespace_u_i_a7e5dc627ead9b9c216342025ec188d66}{UI::getCurrentScreen}}()\ !=\ \mbox{\hyperlink{namespace_u_i_a435547818ef562dcc97cb3b9c29f7d3ba13f125a42d838784783275ce32b6e277}{UI::SCREEN\_KEYPAD}})}
+\DoxyCodeLine{00673\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00674\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00675\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00676\ }
+\DoxyCodeLine{00677\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ for\ deep\ sleep\ timeout\ (2\ minutes)}}
+\DoxyCodeLine{00678\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (inactive\_time\ >=\ DEEP\_SLEEP\_TIMEOUT)}
+\DoxyCodeLine{00679\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00680\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Deep\ sleep\ timeout\ reached\ ("{}}\ +\ String(inactive\_time\ /\ 1000)\ +\ \textcolor{stringliteral}{"{}s),\ entering\ deep\ sleep"{}});}
+\DoxyCodeLine{00681\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_acd1e936efc6f95c59a40a1855fec628f}{enterSleepMode}}();}
+\DoxyCodeLine{00682\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00683\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ for\ light\ sleep\ timeout\ (10\ seconds)\ -\/\ only\ if\ not\ already\ in\ light\ sleep}}
+\DoxyCodeLine{00684\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (!in\_light\_sleep\ \&\&\ inactive\_time\ >=\ LIGHT\_SLEEP\_TIMEOUT)}
+\DoxyCodeLine{00685\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00686\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Light\ sleep\ timeout\ reached\ ("{}}\ +\ String(inactive\_time\ /\ 1000)\ +\ \textcolor{stringliteral}{"{}s),\ entering\ light\ sleep"{}});}
+\DoxyCodeLine{00687\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_ad479e4eced825606fa2bba2e58d0fe2e}{enterLightSleepMode}}();}
+\DoxyCodeLine{00688\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00689\ \ \ \ \ \}}
+
+\end{DoxyCode}

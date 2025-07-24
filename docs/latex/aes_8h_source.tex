@@ -1,0 +1,97 @@
+\hypertarget{aes_8h_source}{}\doxysection{aes.\+h}
+\label{aes_8h_source}\index{lib/aes/aes.h@{lib/aes/aes.h}}
+\mbox{\hyperlink{aes_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ \_AES\_H\_}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00002}00002\ \textcolor{preprocessor}{\#define\ \_AES\_H\_}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <stddef.h>}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00007}00007\ \textcolor{comment}{//\ \#define\ the\ macros\ below\ to\ 1/0\ to\ enable/disable\ the\ mode\ of\ operation.}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00008}00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00009}00009\ \textcolor{comment}{//\ CBC\ enables\ AES\ encryption\ in\ CBC-\/mode\ of\ operation.}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00010}00010\ \textcolor{comment}{//\ CTR\ enables\ encryption\ in\ counter-\/mode.}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00011}00011\ \textcolor{comment}{//\ ECB\ enables\ the\ basic\ ECB\ 16-\/byte\ block\ algorithm.\ All\ can\ be\ enabled\ simultaneously.}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00013}00013\ \textcolor{comment}{//\ The\ \#ifndef-\/guard\ allows\ it\ to\ be\ configured\ before\ \#include'ing\ or\ at\ compile\ time.}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00014}00014\ \textcolor{preprocessor}{\#ifndef\ CBC}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00015}\mbox{\hyperlink{aes_8h_a08835843c9d6a68371f350c015a83fd7}{00015}}\ \textcolor{preprocessor}{\ \ \#define\ CBC\ 1}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00016}00016\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00018}00018\ \textcolor{preprocessor}{\#ifndef\ ECB}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00019}\mbox{\hyperlink{aes_8h_ab80203aded373ef3e2695b0903b53471}{00019}}\ \textcolor{preprocessor}{\ \ \#define\ ECB\ 1}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00020}00020\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00022}00022\ \textcolor{preprocessor}{\#ifndef\ CTR}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00023}\mbox{\hyperlink{aes_8h_aa445a79fc0f7373036c72d198e51f19a}{00023}}\ \textcolor{preprocessor}{\ \ \#define\ CTR\ 1}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00024}00024\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00027}00027\ \textcolor{comment}{//\ \#define\ AES128\ 1}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00028}00028\ \textcolor{comment}{//\#define\ AES192\ 1}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00029}\mbox{\hyperlink{aes_8h_a7d4e8231c47a6565bb42b006d0bf3b18}{00029}}\ \textcolor{preprocessor}{\#define\ AES256\ 1}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00031}\mbox{\hyperlink{aes_8h_ada62b7b09dab0d7ef92c04364b16b5b5}{00031}}\ \textcolor{preprocessor}{\#define\ AES\_BLOCKLEN\ 16\ }\textcolor{comment}{//\ Block\ length\ in\ bytes\ -\/\ AES\ is\ 128b\ block\ only}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00033}00033\ \textcolor{preprocessor}{\#if\ defined(AES256)\ \&\&\ (AES256\ ==\ 1)}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00034}\mbox{\hyperlink{aes_8h_af37c01fbc1515e7a416c14025c8bf843}{00034}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ AES\_KEYLEN\ 32}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00035}\mbox{\hyperlink{aes_8h_a9aaae67ad3ff3be7071bb6938c76fc1b}{00035}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ AES\_keyExpSize\ 240}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00036}00036\ \textcolor{preprocessor}{\#elif\ defined(AES192)\ \&\&\ (AES192\ ==\ 1)}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00037}00037\ \textcolor{preprocessor}{\ \ \ \ \#define\ AES\_KEYLEN\ 24}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00038}00038\ \textcolor{preprocessor}{\ \ \ \ \#define\ AES\_keyExpSize\ 208}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00039}00039\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00040}00040\ \textcolor{preprocessor}{\ \ \ \ \#define\ AES\_KEYLEN\ 16\ \ \ }\textcolor{comment}{//\ Key\ length\ in\ bytes}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00041}00041\ \textcolor{preprocessor}{\ \ \ \ \#define\ AES\_keyExpSize\ 176}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00042}00042\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00044}\mbox{\hyperlink{struct_a_e_s__ctx}{00044}}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_a_e_s__ctx}{AES\_ctx}}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00045}00045\ \{}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00046}\mbox{\hyperlink{struct_a_e_s__ctx_aa475fe62fd5774891c7a42596f6d9c2e}{00046}}\ \ \ uint8\_t\ \mbox{\hyperlink{struct_a_e_s__ctx_aa475fe62fd5774891c7a42596f6d9c2e}{RoundKey}}[\mbox{\hyperlink{aes_8h_a9aaae67ad3ff3be7071bb6938c76fc1b}{AES\_keyExpSize}}];}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00047}00047\ \textcolor{preprocessor}{\#if\ (defined(CBC)\ \&\&\ (CBC\ ==\ 1))\ ||\ (defined(CTR)\ \&\&\ (CTR\ ==\ 1))}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00048}\mbox{\hyperlink{struct_a_e_s__ctx_a1fa4921f7eeaca82eb974899edcdef3a}{00048}}\ \ \ uint8\_t\ \mbox{\hyperlink{struct_a_e_s__ctx_a1fa4921f7eeaca82eb974899edcdef3a}{Iv}}[\mbox{\hyperlink{aes_8h_ada62b7b09dab0d7ef92c04364b16b5b5}{AES\_BLOCKLEN}}];}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00049}00049\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00050}00050\ \};}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00052}00052\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{aes_8h_af6103754d8f46cb642b0041973e4102e}{AES\_init\_ctx}}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{struct_a_e_s__ctx}{AES\_ctx}}*\ ctx,\ \textcolor{keyword}{const}\ uint8\_t*\ key);}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00053}00053\ \textcolor{preprocessor}{\#if\ (defined(CBC)\ \&\&\ (CBC\ ==\ 1))\ ||\ (defined(CTR)\ \&\&\ (CTR\ ==\ 1))}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00054}00054\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{aes_8h_a99d17d22ed909bd155007cdece29263a}{AES\_init\_ctx\_iv}}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{struct_a_e_s__ctx}{AES\_ctx}}*\ ctx,\ \textcolor{keyword}{const}\ uint8\_t*\ key,\ \textcolor{keyword}{const}\ uint8\_t*\ iv);}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00055}00055\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{aes_8h_afbdec54757622549b63838ea2fbc3cf6}{AES\_ctx\_set\_iv}}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{struct_a_e_s__ctx}{AES\_ctx}}*\ ctx,\ \textcolor{keyword}{const}\ uint8\_t*\ iv);}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00056}00056\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00058}00058\ \textcolor{preprocessor}{\#if\ defined(ECB)\ \&\&\ (ECB\ ==\ 1)}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00059}00059\ \textcolor{comment}{//\ buffer\ size\ is\ exactly\ AES\_BLOCKLEN\ bytes;\ }}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00060}00060\ \textcolor{comment}{//\ you\ need\ only\ AES\_init\_ctx\ as\ IV\ is\ not\ used\ in\ ECB\ }}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00061}00061\ \textcolor{comment}{//\ NB:\ ECB\ is\ considered\ insecure\ for\ most\ uses}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00062}00062\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{aes_8h_a233447aeecf56715c358c518acb908ed}{AES\_ECB\_encrypt}}(\textcolor{keyword}{const}\ \textcolor{keyword}{struct}\ \mbox{\hyperlink{struct_a_e_s__ctx}{AES\_ctx}}*\ ctx,\ uint8\_t*\ buf);}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00063}00063\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{aes_8h_aa82deb7667cd7b19bbe783d2990642ad}{AES\_ECB\_decrypt}}(\textcolor{keyword}{const}\ \textcolor{keyword}{struct}\ \mbox{\hyperlink{struct_a_e_s__ctx}{AES\_ctx}}*\ ctx,\ uint8\_t*\ buf);}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00065}00065\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ \#if\ defined(ECB)\ \&\&\ (ECB\ ==\ !)}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00068}00068\ \textcolor{preprocessor}{\#if\ defined(CBC)\ \&\&\ (CBC\ ==\ 1)}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00069}00069\ \textcolor{comment}{//\ buffer\ size\ MUST\ be\ mutile\ of\ AES\_BLOCKLEN;}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00070}00070\ \textcolor{comment}{//\ Suggest\ https://en.wikipedia.org/wiki/Padding\_(cryptography)\#PKCS7\ for\ padding\ scheme}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00071}00071\ \textcolor{comment}{//\ NOTES:\ you\ need\ to\ set\ IV\ in\ ctx\ via\ AES\_init\_ctx\_iv()\ or\ AES\_ctx\_set\_iv()}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00072}00072\ \textcolor{comment}{//\ \ \ \ \ \ \ \ no\ IV\ should\ ever\ be\ reused\ with\ the\ same\ key\ }}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00073}00073\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{aes_8h_a296bd30323044b07d69e0e3b5f676281}{AES\_CBC\_encrypt\_buffer}}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{struct_a_e_s__ctx}{AES\_ctx}}*\ ctx,\ uint8\_t*\ buf,\ \textcolor{keywordtype}{size\_t}\ length);}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00074}00074\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{aes_8h_a0672c442747b26b691202c493a08a104}{AES\_CBC\_decrypt\_buffer}}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{struct_a_e_s__ctx}{AES\_ctx}}*\ ctx,\ uint8\_t*\ buf,\ \textcolor{keywordtype}{size\_t}\ length);}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00076}00076\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ \#if\ defined(CBC)\ \&\&\ (CBC\ ==\ 1)}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00079}00079\ \textcolor{preprocessor}{\#if\ defined(CTR)\ \&\&\ (CTR\ ==\ 1)}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00081}00081\ \textcolor{comment}{//\ Same\ function\ for\ encrypting\ as\ for\ decrypting.\ }}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00082}00082\ \textcolor{comment}{//\ IV\ is\ incremented\ for\ every\ block,\ and\ used\ after\ encryption\ as\ XOR-\/compliment\ for\ output}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00083}00083\ \textcolor{comment}{//\ Suggesting\ https://en.wikipedia.org/wiki/Padding\_(cryptography)\#PKCS7\ for\ padding\ scheme}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00084}00084\ \textcolor{comment}{//\ NOTES:\ you\ need\ to\ set\ IV\ in\ ctx\ with\ AES\_init\_ctx\_iv()\ or\ AES\_ctx\_set\_iv()}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00085}00085\ \textcolor{comment}{//\ \ \ \ \ \ \ \ no\ IV\ should\ ever\ be\ reused\ with\ the\ same\ key\ }}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00086}00086\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{aes_8h_aa585f26e880ce9a112dc4d945721ff19}{AES\_CTR\_xcrypt\_buffer}}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{struct_a_e_s__ctx}{AES\_ctx}}*\ ctx,\ uint8\_t*\ buf,\ \textcolor{keywordtype}{size\_t}\ length);}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00088}00088\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ \#if\ defined(CTR)\ \&\&\ (CTR\ ==\ 1)}}
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{aes_8h_source_l00091}00091\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ \_AES\_H\_}}
+
+\end{DoxyCode}

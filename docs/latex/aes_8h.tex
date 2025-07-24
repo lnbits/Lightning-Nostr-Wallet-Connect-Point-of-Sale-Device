@@ -1,0 +1,312 @@
+\hypertarget{aes_8h}{}\doxysection{lib/aes/aes.h File Reference}
+\label{aes_8h}\index{lib/aes/aes.h@{lib/aes/aes.h}}
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+Include dependency graph for aes.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_a_e_s__ctx}{AES\+\_\+ctx}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{aes_8h_a08835843c9d6a68371f350c015a83fd7}{CBC}}~1
+\item 
+\#define \mbox{\hyperlink{aes_8h_ab80203aded373ef3e2695b0903b53471}{ECB}}~1
+\item 
+\#define \mbox{\hyperlink{aes_8h_aa445a79fc0f7373036c72d198e51f19a}{CTR}}~1
+\item 
+\#define \mbox{\hyperlink{aes_8h_a7d4e8231c47a6565bb42b006d0bf3b18}{AES256}}~1
+\item 
+\#define \mbox{\hyperlink{aes_8h_ada62b7b09dab0d7ef92c04364b16b5b5}{AES\+\_\+\+BLOCKLEN}}~16
+\item 
+\#define \mbox{\hyperlink{aes_8h_af37c01fbc1515e7a416c14025c8bf843}{AES\+\_\+\+KEYLEN}}~32
+\item 
+\#define \mbox{\hyperlink{aes_8h_a9aaae67ad3ff3be7071bb6938c76fc1b}{AES\+\_\+key\+Exp\+Size}}~240
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{aes_8h_af6103754d8f46cb642b0041973e4102e}{AES\+\_\+init\+\_\+ctx}} (struct \mbox{\hyperlink{struct_a_e_s__ctx}{AES\+\_\+ctx}} $\ast$ctx, const uint8\+\_\+t $\ast$key)
+\item 
+void \mbox{\hyperlink{aes_8h_a99d17d22ed909bd155007cdece29263a}{AES\+\_\+init\+\_\+ctx\+\_\+iv}} (struct \mbox{\hyperlink{struct_a_e_s__ctx}{AES\+\_\+ctx}} $\ast$ctx, const uint8\+\_\+t $\ast$key, const uint8\+\_\+t $\ast$iv)
+\item 
+void \mbox{\hyperlink{aes_8h_afbdec54757622549b63838ea2fbc3cf6}{AES\+\_\+ctx\+\_\+set\+\_\+iv}} (struct \mbox{\hyperlink{struct_a_e_s__ctx}{AES\+\_\+ctx}} $\ast$ctx, const uint8\+\_\+t $\ast$iv)
+\item 
+void \mbox{\hyperlink{aes_8h_a233447aeecf56715c358c518acb908ed}{AES\+\_\+\+ECB\+\_\+encrypt}} (const struct \mbox{\hyperlink{struct_a_e_s__ctx}{AES\+\_\+ctx}} $\ast$ctx, uint8\+\_\+t $\ast$buf)
+\item 
+void \mbox{\hyperlink{aes_8h_aa82deb7667cd7b19bbe783d2990642ad}{AES\+\_\+\+ECB\+\_\+decrypt}} (const struct \mbox{\hyperlink{struct_a_e_s__ctx}{AES\+\_\+ctx}} $\ast$ctx, uint8\+\_\+t $\ast$buf)
+\item 
+void \mbox{\hyperlink{aes_8h_a296bd30323044b07d69e0e3b5f676281}{AES\+\_\+\+CBC\+\_\+encrypt\+\_\+buffer}} (struct \mbox{\hyperlink{struct_a_e_s__ctx}{AES\+\_\+ctx}} $\ast$ctx, uint8\+\_\+t $\ast$buf, size\+\_\+t length)
+\item 
+void \mbox{\hyperlink{aes_8h_a0672c442747b26b691202c493a08a104}{AES\+\_\+\+CBC\+\_\+decrypt\+\_\+buffer}} (struct \mbox{\hyperlink{struct_a_e_s__ctx}{AES\+\_\+ctx}} $\ast$ctx, uint8\+\_\+t $\ast$buf, size\+\_\+t length)
+\item 
+void \mbox{\hyperlink{aes_8h_aa585f26e880ce9a112dc4d945721ff19}{AES\+\_\+\+CTR\+\_\+xcrypt\+\_\+buffer}} (struct \mbox{\hyperlink{struct_a_e_s__ctx}{AES\+\_\+ctx}} $\ast$ctx, uint8\+\_\+t $\ast$buf, size\+\_\+t length)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{aes_8h_a7d4e8231c47a6565bb42b006d0bf3b18}\label{aes_8h_a7d4e8231c47a6565bb42b006d0bf3b18}} 
+\index{aes.h@{aes.h}!AES256@{AES256}}
+\index{AES256@{AES256}!aes.h@{aes.h}}
+\doxysubsubsection{\texorpdfstring{AES256}{AES256}}
+{\footnotesize\ttfamily \#define AES256~1}
+
+
+
+Definition at line \mbox{\hyperlink{aes_8h_source_l00029}{29}} of file \mbox{\hyperlink{aes_8h_source}{aes.\+h}}.
+
+\mbox{\Hypertarget{aes_8h_ada62b7b09dab0d7ef92c04364b16b5b5}\label{aes_8h_ada62b7b09dab0d7ef92c04364b16b5b5}} 
+\index{aes.h@{aes.h}!AES\_BLOCKLEN@{AES\_BLOCKLEN}}
+\index{AES\_BLOCKLEN@{AES\_BLOCKLEN}!aes.h@{aes.h}}
+\doxysubsubsection{\texorpdfstring{AES\_BLOCKLEN}{AES\_BLOCKLEN}}
+{\footnotesize\ttfamily \#define AES\+\_\+\+BLOCKLEN~16}
+
+
+
+Definition at line \mbox{\hyperlink{aes_8h_source_l00031}{31}} of file \mbox{\hyperlink{aes_8h_source}{aes.\+h}}.
+
+\mbox{\Hypertarget{aes_8h_a9aaae67ad3ff3be7071bb6938c76fc1b}\label{aes_8h_a9aaae67ad3ff3be7071bb6938c76fc1b}} 
+\index{aes.h@{aes.h}!AES\_keyExpSize@{AES\_keyExpSize}}
+\index{AES\_keyExpSize@{AES\_keyExpSize}!aes.h@{aes.h}}
+\doxysubsubsection{\texorpdfstring{AES\_keyExpSize}{AES\_keyExpSize}}
+{\footnotesize\ttfamily \#define AES\+\_\+key\+Exp\+Size~240}
+
+
+
+Definition at line \mbox{\hyperlink{aes_8h_source_l00035}{35}} of file \mbox{\hyperlink{aes_8h_source}{aes.\+h}}.
+
+\mbox{\Hypertarget{aes_8h_af37c01fbc1515e7a416c14025c8bf843}\label{aes_8h_af37c01fbc1515e7a416c14025c8bf843}} 
+\index{aes.h@{aes.h}!AES\_KEYLEN@{AES\_KEYLEN}}
+\index{AES\_KEYLEN@{AES\_KEYLEN}!aes.h@{aes.h}}
+\doxysubsubsection{\texorpdfstring{AES\_KEYLEN}{AES\_KEYLEN}}
+{\footnotesize\ttfamily \#define AES\+\_\+\+KEYLEN~32}
+
+
+
+Definition at line \mbox{\hyperlink{aes_8h_source_l00034}{34}} of file \mbox{\hyperlink{aes_8h_source}{aes.\+h}}.
+
+\mbox{\Hypertarget{aes_8h_a08835843c9d6a68371f350c015a83fd7}\label{aes_8h_a08835843c9d6a68371f350c015a83fd7}} 
+\index{aes.h@{aes.h}!CBC@{CBC}}
+\index{CBC@{CBC}!aes.h@{aes.h}}
+\doxysubsubsection{\texorpdfstring{CBC}{CBC}}
+{\footnotesize\ttfamily \#define CBC~1}
+
+
+
+Definition at line \mbox{\hyperlink{aes_8h_source_l00015}{15}} of file \mbox{\hyperlink{aes_8h_source}{aes.\+h}}.
+
+\mbox{\Hypertarget{aes_8h_aa445a79fc0f7373036c72d198e51f19a}\label{aes_8h_aa445a79fc0f7373036c72d198e51f19a}} 
+\index{aes.h@{aes.h}!CTR@{CTR}}
+\index{CTR@{CTR}!aes.h@{aes.h}}
+\doxysubsubsection{\texorpdfstring{CTR}{CTR}}
+{\footnotesize\ttfamily \#define CTR~1}
+
+
+
+Definition at line \mbox{\hyperlink{aes_8h_source_l00023}{23}} of file \mbox{\hyperlink{aes_8h_source}{aes.\+h}}.
+
+\mbox{\Hypertarget{aes_8h_ab80203aded373ef3e2695b0903b53471}\label{aes_8h_ab80203aded373ef3e2695b0903b53471}} 
+\index{aes.h@{aes.h}!ECB@{ECB}}
+\index{ECB@{ECB}!aes.h@{aes.h}}
+\doxysubsubsection{\texorpdfstring{ECB}{ECB}}
+{\footnotesize\ttfamily \#define ECB~1}
+
+
+
+Definition at line \mbox{\hyperlink{aes_8h_source_l00019}{19}} of file \mbox{\hyperlink{aes_8h_source}{aes.\+h}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{aes_8h_a0672c442747b26b691202c493a08a104}\label{aes_8h_a0672c442747b26b691202c493a08a104}} 
+\index{aes.h@{aes.h}!AES\_CBC\_decrypt\_buffer@{AES\_CBC\_decrypt\_buffer}}
+\index{AES\_CBC\_decrypt\_buffer@{AES\_CBC\_decrypt\_buffer}!aes.h@{aes.h}}
+\doxysubsubsection{\texorpdfstring{AES\_CBC\_decrypt\_buffer()}{AES\_CBC\_decrypt\_buffer()}}
+{\footnotesize\ttfamily void AES\+\_\+\+CBC\+\_\+decrypt\+\_\+buffer (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_a_e_s__ctx}{AES\+\_\+ctx}} $\ast$}]{ctx,  }\item[{uint8\+\_\+t $\ast$}]{buf,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{aes_8cpp_source_l00516}{516}} of file \mbox{\hyperlink{aes_8cpp_source}{aes.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00517\ \{}
+\DoxyCodeLine{00518\ \ \ \textcolor{keywordtype}{size\_t}\ i;}
+\DoxyCodeLine{00519\ \ \ uint8\_t\ storeNextIv[\mbox{\hyperlink{aes_8h_ada62b7b09dab0d7ef92c04364b16b5b5}{AES\_BLOCKLEN}}];}
+\DoxyCodeLine{00520\ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ length;\ i\ +=\ \mbox{\hyperlink{aes_8h_ada62b7b09dab0d7ef92c04364b16b5b5}{AES\_BLOCKLEN}})}
+\DoxyCodeLine{00521\ \ \ \{}
+\DoxyCodeLine{00522\ \ \ \ \ memcpy(storeNextIv,\ buf,\ \mbox{\hyperlink{aes_8h_ada62b7b09dab0d7ef92c04364b16b5b5}{AES\_BLOCKLEN}});}
+\DoxyCodeLine{00523\ \ \ \ \ InvCipher((\mbox{\hyperlink{aes_8cpp_a35dbb26673d196810a7f6eac0ac632ec}{state\_t}}*)buf,\ ctx-\/>\mbox{\hyperlink{struct_a_e_s__ctx_aa475fe62fd5774891c7a42596f6d9c2e}{RoundKey}});}
+\DoxyCodeLine{00524\ \ \ \ \ XorWithIv(buf,\ ctx-\/>\mbox{\hyperlink{struct_a_e_s__ctx_a1fa4921f7eeaca82eb974899edcdef3a}{Iv}});}
+\DoxyCodeLine{00525\ \ \ \ \ memcpy(ctx-\/>\mbox{\hyperlink{struct_a_e_s__ctx_a1fa4921f7eeaca82eb974899edcdef3a}{Iv}},\ storeNextIv,\ \mbox{\hyperlink{aes_8h_ada62b7b09dab0d7ef92c04364b16b5b5}{AES\_BLOCKLEN}});}
+\DoxyCodeLine{00526\ \ \ \ \ buf\ +=\ \mbox{\hyperlink{aes_8h_ada62b7b09dab0d7ef92c04364b16b5b5}{AES\_BLOCKLEN}};}
+\DoxyCodeLine{00527\ \ \ \}}
+\DoxyCodeLine{00528\ }
+\DoxyCodeLine{00529\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{aes_8h_a296bd30323044b07d69e0e3b5f676281}\label{aes_8h_a296bd30323044b07d69e0e3b5f676281}} 
+\index{aes.h@{aes.h}!AES\_CBC\_encrypt\_buffer@{AES\_CBC\_encrypt\_buffer}}
+\index{AES\_CBC\_encrypt\_buffer@{AES\_CBC\_encrypt\_buffer}!aes.h@{aes.h}}
+\doxysubsubsection{\texorpdfstring{AES\_CBC\_encrypt\_buffer()}{AES\_CBC\_encrypt\_buffer()}}
+{\footnotesize\ttfamily void AES\+\_\+\+CBC\+\_\+encrypt\+\_\+buffer (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_a_e_s__ctx}{AES\+\_\+ctx}} $\ast$}]{ctx,  }\item[{uint8\+\_\+t $\ast$}]{buf,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{aes_8cpp_source_l00501}{501}} of file \mbox{\hyperlink{aes_8cpp_source}{aes.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00502\ \{}
+\DoxyCodeLine{00503\ \ \ \textcolor{keywordtype}{size\_t}\ i;}
+\DoxyCodeLine{00504\ \ \ uint8\_t\ *Iv\ =\ ctx-\/>\mbox{\hyperlink{struct_a_e_s__ctx_a1fa4921f7eeaca82eb974899edcdef3a}{Iv}};}
+\DoxyCodeLine{00505\ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ length;\ i\ +=\ \mbox{\hyperlink{aes_8h_ada62b7b09dab0d7ef92c04364b16b5b5}{AES\_BLOCKLEN}})}
+\DoxyCodeLine{00506\ \ \ \{}
+\DoxyCodeLine{00507\ \ \ \ \ XorWithIv(buf,\ Iv);}
+\DoxyCodeLine{00508\ \ \ \ \ Cipher((\mbox{\hyperlink{aes_8cpp_a35dbb26673d196810a7f6eac0ac632ec}{state\_t}}*)buf,\ ctx-\/>\mbox{\hyperlink{struct_a_e_s__ctx_aa475fe62fd5774891c7a42596f6d9c2e}{RoundKey}});}
+\DoxyCodeLine{00509\ \ \ \ \ Iv\ =\ buf;}
+\DoxyCodeLine{00510\ \ \ \ \ buf\ +=\ \mbox{\hyperlink{aes_8h_ada62b7b09dab0d7ef92c04364b16b5b5}{AES\_BLOCKLEN}};}
+\DoxyCodeLine{00511\ \ \ \}}
+\DoxyCodeLine{00512\ \ \ \textcolor{comment}{/*\ store\ Iv\ in\ ctx\ for\ next\ call\ */}}
+\DoxyCodeLine{00513\ \ \ memcpy(ctx-\/>\mbox{\hyperlink{struct_a_e_s__ctx_a1fa4921f7eeaca82eb974899edcdef3a}{Iv}},\ Iv,\ \mbox{\hyperlink{aes_8h_ada62b7b09dab0d7ef92c04364b16b5b5}{AES\_BLOCKLEN}});}
+\DoxyCodeLine{00514\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{aes_8h_aa585f26e880ce9a112dc4d945721ff19}\label{aes_8h_aa585f26e880ce9a112dc4d945721ff19}} 
+\index{aes.h@{aes.h}!AES\_CTR\_xcrypt\_buffer@{AES\_CTR\_xcrypt\_buffer}}
+\index{AES\_CTR\_xcrypt\_buffer@{AES\_CTR\_xcrypt\_buffer}!aes.h@{aes.h}}
+\doxysubsubsection{\texorpdfstring{AES\_CTR\_xcrypt\_buffer()}{AES\_CTR\_xcrypt\_buffer()}}
+{\footnotesize\ttfamily void AES\+\_\+\+CTR\+\_\+xcrypt\+\_\+buffer (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_a_e_s__ctx}{AES\+\_\+ctx}} $\ast$}]{ctx,  }\item[{uint8\+\_\+t $\ast$}]{buf,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{aes_8cpp_source_l00538}{538}} of file \mbox{\hyperlink{aes_8cpp_source}{aes.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00539\ \{}
+\DoxyCodeLine{00540\ \ \ uint8\_t\ buffer[\mbox{\hyperlink{aes_8h_ada62b7b09dab0d7ef92c04364b16b5b5}{AES\_BLOCKLEN}}];}
+\DoxyCodeLine{00541\ \ \ }
+\DoxyCodeLine{00542\ \ \ \textcolor{keywordtype}{size\_t}\ i;}
+\DoxyCodeLine{00543\ \ \ \textcolor{keywordtype}{int}\ bi;}
+\DoxyCodeLine{00544\ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0,\ bi\ =\ \mbox{\hyperlink{aes_8h_ada62b7b09dab0d7ef92c04364b16b5b5}{AES\_BLOCKLEN}};\ i\ <\ length;\ ++i,\ ++bi)}
+\DoxyCodeLine{00545\ \ \ \{}
+\DoxyCodeLine{00546\ \ \ \ \ \textcolor{keywordflow}{if}\ (bi\ ==\ \mbox{\hyperlink{aes_8h_ada62b7b09dab0d7ef92c04364b16b5b5}{AES\_BLOCKLEN}})\ \textcolor{comment}{/*\ we\ need\ to\ regen\ xor\ compliment\ in\ buffer\ */}}
+\DoxyCodeLine{00547\ \ \ \ \ \{}
+\DoxyCodeLine{00548\ \ \ \ \ \ \ }
+\DoxyCodeLine{00549\ \ \ \ \ \ \ memcpy(buffer,\ ctx-\/>\mbox{\hyperlink{struct_a_e_s__ctx_a1fa4921f7eeaca82eb974899edcdef3a}{Iv}},\ \mbox{\hyperlink{aes_8h_ada62b7b09dab0d7ef92c04364b16b5b5}{AES\_BLOCKLEN}});}
+\DoxyCodeLine{00550\ \ \ \ \ \ \ Cipher((\mbox{\hyperlink{aes_8cpp_a35dbb26673d196810a7f6eac0ac632ec}{state\_t}}*)buffer,ctx-\/>\mbox{\hyperlink{struct_a_e_s__ctx_aa475fe62fd5774891c7a42596f6d9c2e}{RoundKey}});}
+\DoxyCodeLine{00551\ }
+\DoxyCodeLine{00552\ \ \ \ \ \ \ \textcolor{comment}{/*\ Increment\ Iv\ and\ handle\ overflow\ */}}
+\DoxyCodeLine{00553\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (bi\ =\ (\mbox{\hyperlink{aes_8h_ada62b7b09dab0d7ef92c04364b16b5b5}{AES\_BLOCKLEN}}\ -\/\ 1);\ bi\ >=\ 0;\ -\/-\/bi)}
+\DoxyCodeLine{00554\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00555\ \ \ \ \ \textcolor{comment}{/*\ inc\ will\ overflow\ */}}
+\DoxyCodeLine{00556\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ctx-\/>\mbox{\hyperlink{struct_a_e_s__ctx_a1fa4921f7eeaca82eb974899edcdef3a}{Iv}}[bi]\ ==\ 255)}
+\DoxyCodeLine{00557\ \ \ \ \ \{}
+\DoxyCodeLine{00558\ \ \ \ \ \ \ \ \ \ \ ctx-\/>\mbox{\hyperlink{struct_a_e_s__ctx_a1fa4921f7eeaca82eb974899edcdef3a}{Iv}}[bi]\ =\ 0;}
+\DoxyCodeLine{00559\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00560\ \ \ \ \ \ \ \ \ \}\ }
+\DoxyCodeLine{00561\ \ \ \ \ \ \ \ \ ctx-\/>\mbox{\hyperlink{struct_a_e_s__ctx_a1fa4921f7eeaca82eb974899edcdef3a}{Iv}}[bi]\ +=\ 1;}
+\DoxyCodeLine{00562\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};\ \ \ }
+\DoxyCodeLine{00563\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00564\ \ \ \ \ \ \ bi\ =\ 0;}
+\DoxyCodeLine{00565\ \ \ \ \ \}}
+\DoxyCodeLine{00566\ }
+\DoxyCodeLine{00567\ \ \ \ \ buf[i]\ =\ (buf[i]\ \string^\ buffer[bi]);}
+\DoxyCodeLine{00568\ \ \ \}}
+\DoxyCodeLine{00569\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{aes_8h_afbdec54757622549b63838ea2fbc3cf6}\label{aes_8h_afbdec54757622549b63838ea2fbc3cf6}} 
+\index{aes.h@{aes.h}!AES\_ctx\_set\_iv@{AES\_ctx\_set\_iv}}
+\index{AES\_ctx\_set\_iv@{AES\_ctx\_set\_iv}!aes.h@{aes.h}}
+\doxysubsubsection{\texorpdfstring{AES\_ctx\_set\_iv()}{AES\_ctx\_set\_iv()}}
+{\footnotesize\ttfamily void AES\+\_\+ctx\+\_\+set\+\_\+iv (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_a_e_s__ctx}{AES\+\_\+ctx}} $\ast$}]{ctx,  }\item[{const uint8\+\_\+t $\ast$}]{iv }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{aes_8cpp_source_l00229}{229}} of file \mbox{\hyperlink{aes_8cpp_source}{aes.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00230\ \{}
+\DoxyCodeLine{00231\ \ \ memcpy\ (ctx-\/>\mbox{\hyperlink{struct_a_e_s__ctx_a1fa4921f7eeaca82eb974899edcdef3a}{Iv}},\ iv,\ \mbox{\hyperlink{aes_8h_ada62b7b09dab0d7ef92c04364b16b5b5}{AES\_BLOCKLEN}});}
+\DoxyCodeLine{00232\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{aes_8h_aa82deb7667cd7b19bbe783d2990642ad}\label{aes_8h_aa82deb7667cd7b19bbe783d2990642ad}} 
+\index{aes.h@{aes.h}!AES\_ECB\_decrypt@{AES\_ECB\_decrypt}}
+\index{AES\_ECB\_decrypt@{AES\_ECB\_decrypt}!aes.h@{aes.h}}
+\doxysubsubsection{\texorpdfstring{AES\_ECB\_decrypt()}{AES\_ECB\_decrypt()}}
+{\footnotesize\ttfamily void AES\+\_\+\+ECB\+\_\+decrypt (\begin{DoxyParamCaption}\item[{const struct \mbox{\hyperlink{struct_a_e_s__ctx}{AES\+\_\+ctx}} $\ast$}]{ctx,  }\item[{uint8\+\_\+t $\ast$}]{buf }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{aes_8cpp_source_l00476}{476}} of file \mbox{\hyperlink{aes_8cpp_source}{aes.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00477\ \{}
+\DoxyCodeLine{00478\ \ \ \textcolor{comment}{//\ The\ next\ function\ call\ decrypts\ the\ PlainText\ with\ the\ Key\ using\ AES\ algorithm.}}
+\DoxyCodeLine{00479\ \ \ InvCipher((\mbox{\hyperlink{aes_8cpp_a35dbb26673d196810a7f6eac0ac632ec}{state\_t}}*)buf,\ ctx-\/>\mbox{\hyperlink{struct_a_e_s__ctx_aa475fe62fd5774891c7a42596f6d9c2e}{RoundKey}});}
+\DoxyCodeLine{00480\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{aes_8h_a233447aeecf56715c358c518acb908ed}\label{aes_8h_a233447aeecf56715c358c518acb908ed}} 
+\index{aes.h@{aes.h}!AES\_ECB\_encrypt@{AES\_ECB\_encrypt}}
+\index{AES\_ECB\_encrypt@{AES\_ECB\_encrypt}!aes.h@{aes.h}}
+\doxysubsubsection{\texorpdfstring{AES\_ECB\_encrypt()}{AES\_ECB\_encrypt()}}
+{\footnotesize\ttfamily void AES\+\_\+\+ECB\+\_\+encrypt (\begin{DoxyParamCaption}\item[{const struct \mbox{\hyperlink{struct_a_e_s__ctx}{AES\+\_\+ctx}} $\ast$}]{ctx,  }\item[{uint8\+\_\+t $\ast$}]{buf }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{aes_8cpp_source_l00470}{470}} of file \mbox{\hyperlink{aes_8cpp_source}{aes.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00471\ \{}
+\DoxyCodeLine{00472\ \ \ \textcolor{comment}{//\ The\ next\ function\ call\ encrypts\ the\ PlainText\ with\ the\ Key\ using\ AES\ algorithm.}}
+\DoxyCodeLine{00473\ \ \ Cipher((\mbox{\hyperlink{aes_8cpp_a35dbb26673d196810a7f6eac0ac632ec}{state\_t}}*)buf,\ ctx-\/>\mbox{\hyperlink{struct_a_e_s__ctx_aa475fe62fd5774891c7a42596f6d9c2e}{RoundKey}});}
+\DoxyCodeLine{00474\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{aes_8h_af6103754d8f46cb642b0041973e4102e}\label{aes_8h_af6103754d8f46cb642b0041973e4102e}} 
+\index{aes.h@{aes.h}!AES\_init\_ctx@{AES\_init\_ctx}}
+\index{AES\_init\_ctx@{AES\_init\_ctx}!aes.h@{aes.h}}
+\doxysubsubsection{\texorpdfstring{AES\_init\_ctx()}{AES\_init\_ctx()}}
+{\footnotesize\ttfamily void AES\+\_\+init\+\_\+ctx (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_a_e_s__ctx}{AES\+\_\+ctx}} $\ast$}]{ctx,  }\item[{const uint8\+\_\+t $\ast$}]{key }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{aes_8cpp_source_l00219}{219}} of file \mbox{\hyperlink{aes_8cpp_source}{aes.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00220\ \{}
+\DoxyCodeLine{00221\ \ \ KeyExpansion(ctx-\/>\mbox{\hyperlink{struct_a_e_s__ctx_aa475fe62fd5774891c7a42596f6d9c2e}{RoundKey}},\ key);}
+\DoxyCodeLine{00222\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{aes_8h_a99d17d22ed909bd155007cdece29263a}\label{aes_8h_a99d17d22ed909bd155007cdece29263a}} 
+\index{aes.h@{aes.h}!AES\_init\_ctx\_iv@{AES\_init\_ctx\_iv}}
+\index{AES\_init\_ctx\_iv@{AES\_init\_ctx\_iv}!aes.h@{aes.h}}
+\doxysubsubsection{\texorpdfstring{AES\_init\_ctx\_iv()}{AES\_init\_ctx\_iv()}}
+{\footnotesize\ttfamily void AES\+\_\+init\+\_\+ctx\+\_\+iv (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_a_e_s__ctx}{AES\+\_\+ctx}} $\ast$}]{ctx,  }\item[{const uint8\+\_\+t $\ast$}]{key,  }\item[{const uint8\+\_\+t $\ast$}]{iv }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{aes_8cpp_source_l00224}{224}} of file \mbox{\hyperlink{aes_8cpp_source}{aes.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00225\ \{}
+\DoxyCodeLine{00226\ \ \ KeyExpansion(ctx-\/>\mbox{\hyperlink{struct_a_e_s__ctx_aa475fe62fd5774891c7a42596f6d9c2e}{RoundKey}},\ key);}
+\DoxyCodeLine{00227\ \ \ memcpy\ (ctx-\/>\mbox{\hyperlink{struct_a_e_s__ctx_a1fa4921f7eeaca82eb974899edcdef3a}{Iv}},\ iv,\ \mbox{\hyperlink{aes_8h_ada62b7b09dab0d7ef92c04364b16b5b5}{AES\_BLOCKLEN}});}
+\DoxyCodeLine{00228\ \}}
+
+\end{DoxyCode}

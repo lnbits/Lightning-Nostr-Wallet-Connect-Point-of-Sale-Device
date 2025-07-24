@@ -1,0 +1,62 @@
+\hypertarget{_a_x_s15231_b__touch_8h_source}{}\doxysection{AXS15231\+B\+\_\+touch.\+h}
+\label{_a_x_s15231_b__touch_8h_source}\index{src/AXS15231B\_touch.h@{src/AXS15231B\_touch.h}}
+\mbox{\hyperlink{_a_x_s15231_b__touch_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ AXS15231B\_Touch\_H}}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00002}00002\ \textcolor{preprocessor}{\#define\ AXS15231B\_Touch\_H}}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <Arduino.h>}}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <Wire.h>}}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00007}\mbox{\hyperlink{class_a_x_s15231_b___touch}{00007}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_a_x_s15231_b___touch}{AXS15231B\_Touch}}\ \{}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00008}00008\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00009}\mbox{\hyperlink{class_a_x_s15231_b___touch_a3996ecda376db6f67b10962675d4d534}{00009}}\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{class_a_x_s15231_b___touch_aee338043b4c50102ed1d2936136bd3b2}{scl}},\ \mbox{\hyperlink{class_a_x_s15231_b___touch_ac5051bc618e15591bd86c98e84f6d08d}{sda}},\ \mbox{\hyperlink{class_a_x_s15231_b___touch_af696edd976611915972531ddcf5be336}{int\_pin}},\ \mbox{\hyperlink{class_a_x_s15231_b___touch_a3996ecda376db6f67b10962675d4d534}{addr}},\ \mbox{\hyperlink{class_a_x_s15231_b___touch_a76ff9fc8f6376fdb8fa91cadd56c0249}{rotation}};}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00010}\mbox{\hyperlink{class_a_x_s15231_b___touch_a24fc3d3360a6bee60180c4966d84e3c6}{00010}}\ \ \ \ \ \mbox{\hyperlink{class_a_x_s15231_b___touch_a24fc3d3360a6bee60180c4966d84e3c6}{AXS15231B\_Touch}}(uint8\_t\ \mbox{\hyperlink{class_a_x_s15231_b___touch_aee338043b4c50102ed1d2936136bd3b2}{scl}},\ uint8\_t\ \mbox{\hyperlink{class_a_x_s15231_b___touch_ac5051bc618e15591bd86c98e84f6d08d}{sda}},\ uint8\_t\ \mbox{\hyperlink{class_a_x_s15231_b___touch_af696edd976611915972531ddcf5be336}{int\_pin}},\ uint8\_t\ \mbox{\hyperlink{class_a_x_s15231_b___touch_a3996ecda376db6f67b10962675d4d534}{addr}},\ uint8\_t\ \mbox{\hyperlink{class_a_x_s15231_b___touch_a76ff9fc8f6376fdb8fa91cadd56c0249}{rotation}})\ \{}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00011}00011\ \ \ \ \ \ \ \ \ this-\/>scl\ =\ \mbox{\hyperlink{class_a_x_s15231_b___touch_aee338043b4c50102ed1d2936136bd3b2}{scl}};}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00012}00012\ \ \ \ \ \ \ \ \ this-\/>sda\ =\ \mbox{\hyperlink{class_a_x_s15231_b___touch_ac5051bc618e15591bd86c98e84f6d08d}{sda}};}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00013}00013\ \ \ \ \ \ \ \ \ this-\/>int\_pin\ =\ \mbox{\hyperlink{class_a_x_s15231_b___touch_af696edd976611915972531ddcf5be336}{int\_pin}};}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00014}00014\ \ \ \ \ \ \ \ \ this-\/>addr\ =\ \mbox{\hyperlink{class_a_x_s15231_b___touch_a3996ecda376db6f67b10962675d4d534}{addr}};}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00015}00015\ \ \ \ \ \ \ \ \ this-\/>rotation\ =\ \mbox{\hyperlink{class_a_x_s15231_b___touch_a76ff9fc8f6376fdb8fa91cadd56c0249}{rotation}};}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00016}00016\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00017}00017\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_a_x_s15231_b___touch_af21a70509a9e97ff91767e8ca19c8586}{begin}}();}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00018}00018\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_a_x_s15231_b___touch_a96f053e30928d0fd8046a281a5cdaefb}{touched}}();}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00019}00019\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_a_x_s15231_b___touch_a1540ae5d55bebd47dc3f6e6104f83d74}{setRotation}}(uint8\_t);}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00020}00020\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_a_x_s15231_b___touch_a986f12df1baa1ade792189af93c08086}{readData}}(uint16\_t\ *,\ uint16\_t\ *);}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00021}00021\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_a_x_s15231_b___touch_a7185bee1c9f8ef1f1cb3ddcdc8c094b7}{enOffsetCorrection}}(\textcolor{keywordtype}{bool});}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00022}00022\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_a_x_s15231_b___touch_a5f7d916f1c81254768c73c84d19ab1f6}{setOffsets}}(uint16\_t,\ uint16\_t,\ uint16\_t,\ uint16\_t,\ uint16\_t,\ uint16\_t);}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00024}00024\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00025}\mbox{\hyperlink{class_a_x_s15231_b___touch_ac6a9df5f443fd8311eeda954b488ed01}{00025}}\ \ \ \ \ \textcolor{keyword}{volatile}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_a_x_s15231_b___touch_ac6a9df5f443fd8311eeda954b488ed01}{touch\_int}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00026}\mbox{\hyperlink{class_a_x_s15231_b___touch_adae37f166595f7e34364e74b773fcad5}{00026}}\ \ \ \ \ \textcolor{keyword}{volatile}\ uint32\_t\ \mbox{\hyperlink{class_a_x_s15231_b___touch_adae37f166595f7e34364e74b773fcad5}{isr\_count}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00028}00028\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00029}00029\ \ \ \ \ \textcolor{keywordtype}{bool}\ en\_offset\_correction\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00030}00030\ \ \ \ \ uint16\_t\ point\_X\ =\ 0,\ point\_Y\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00031}00031\ \ \ \ \ uint16\_t\ x\_real\_min,\ x\_real\_max,\ y\_real\_min,\ y\_real\_max;}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00032}00032\ \ \ \ \ uint16\_t\ x\_ideal\_max,\ y\_ideal\_max;}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00034}00034\ \ \ \ \ \textcolor{keywordtype}{bool}\ update();}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00035}00035\ \ \ \ \ \textcolor{keywordtype}{void}\ correctOffset(uint16\_t\ *,\ uint16\_t\ *);}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00036}00036\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ isrTouched();}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00037}00037\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_a_x_s15231_b___touch}{AXS15231B\_Touch}}*\ instance;}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00038}00038\ \};}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00041}\mbox{\hyperlink{_a_x_s15231_b__touch_8h_afbda2c41c8f2adb5e4d2754b703c1edb}{00041}}\ \textcolor{preprocessor}{\#define\ AXS\_GET\_GESTURE\_TYPE(buf)\ \ (buf[0])}}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00042}\mbox{\hyperlink{_a_x_s15231_b__touch_8h_a05d793d6784e8204c7980ee292a0c1af}{00042}}\ \textcolor{preprocessor}{\#define\ AXS\_GET\_FINGER\_NUMBER(buf)\ (buf[1])}}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00043}\mbox{\hyperlink{_a_x_s15231_b__touch_8h_a803559cf29e4d5689387b69c973b73ff}{00043}}\ \textcolor{preprocessor}{\#define\ AXS\_GET\_EVENT(buf)\ \ \ \ \ \ \ \ \ ((buf[2]\ >>\ 0)\ \&\ 0x03)}}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00044}\mbox{\hyperlink{_a_x_s15231_b__touch_8h_a72eb0c96b5abb7eab79ece6e2a5301e8}{00044}}\ \textcolor{preprocessor}{\#define\ AXS\_GET\_POINT\_X(buf)\ \ \ \ \ \ \ (((uint16\_t)(buf[2]\ \&\ 0x0F)\ <<8)\ +\ (uint16\_t)buf[3])}}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00045}\mbox{\hyperlink{_a_x_s15231_b__touch_8h_a4673abbf8d3c77e2393ed979541d3ba2}{00045}}\ \textcolor{preprocessor}{\#define\ AXS\_GET\_POINT\_Y(buf)\ \ \ \ \ \ \ (((uint16\_t)(buf[4]\ \&\ 0x0F)\ <<8)\ +\ (uint16\_t)buf[5])}}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00047}00047\ \textcolor{preprocessor}{\#ifndef\ ISR\_PREFIX}}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00048}00048\ \textcolor{preprocessor}{\ \ \#if\ defined(ESP8266)}}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00049}00049\ \textcolor{preprocessor}{\ \ \ \ \#define\ ISR\_PREFIX\ ICACHE\_RAM\_ATTR}}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00050}00050\ \textcolor{preprocessor}{\ \ \#elif\ defined(ESP32)}}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00051}00051\ \textcolor{preprocessor}{\ \ \ \ \#define\ ISR\_PREFIX\ IRAM\_ATTR}}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00052}00052\ \textcolor{preprocessor}{\ \ \#else}}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00053}\mbox{\hyperlink{_a_x_s15231_b__touch_8h_ab88889208ad180d9427b0f8b1e3f2cd0}{00053}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ ISR\_PREFIX}}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00054}00054\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00055}00055\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_a_x_s15231_b__touch_8h_source_l00056}00056\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

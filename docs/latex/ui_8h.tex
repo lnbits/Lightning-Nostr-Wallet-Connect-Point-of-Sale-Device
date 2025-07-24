@@ -1,0 +1,150 @@
+\hypertarget{ui_8h}{}\doxysection{src/ui.h File Reference}
+\label{ui_8h}\index{src/ui.h@{src/ui.h}}
+{\ttfamily \#include $<$Arduino.\+h$>$}\newline
+{\ttfamily \#include $<$lvgl.\+h$>$}\newline
+Include dependency graph for ui.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespace_u_i}{UI}}
+\item 
+namespace \mbox{\hyperlink{namespace_u_i_1_1_colors}{UI\+::\+Colors}}
+\item 
+namespace \mbox{\hyperlink{namespace_u_i_1_1_fonts}{UI\+::\+Fonts}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{namespace_u_i_a435547818ef562dcc97cb3b9c29f7d3b}{UI\+::screen\+\_\+state\+\_\+t}} \{ \newline
+\mbox{\hyperlink{namespace_u_i_a435547818ef562dcc97cb3b9c29f7d3ba13f125a42d838784783275ce32b6e277}{UI\+::\+SCREEN\+\_\+\+KEYPAD}}
+, \mbox{\hyperlink{namespace_u_i_a435547818ef562dcc97cb3b9c29f7d3bacedff97c3d308d48dda23b4505422956}{UI\+::\+SCREEN\+\_\+\+SETTINGS}}
+, \mbox{\hyperlink{namespace_u_i_a435547818ef562dcc97cb3b9c29f7d3baad174f3034de428254af0b3ae43aa6bd}{UI\+::\+SCREEN\+\_\+\+WIFI}}
+, \mbox{\hyperlink{namespace_u_i_a435547818ef562dcc97cb3b9c29f7d3ba159efe446c8b73c670063c4ac8f23438}{UI\+::\+SCREEN\+\_\+\+WIFI\+\_\+\+PASSWORD}}
+, \newline
+\mbox{\hyperlink{namespace_u_i_a435547818ef562dcc97cb3b9c29f7d3ba8040ceaff82c35389ff9f70b26a24fb6}{UI\+::\+SCREEN\+\_\+\+SETTINGS\+\_\+\+SUB}}
+, \mbox{\hyperlink{namespace_u_i_a435547818ef562dcc97cb3b9c29f7d3ba2c5ae0d95658f0ee0dbcda3ce44c5c3f}{UI\+::\+SCREEN\+\_\+\+INFO}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespace_u_i_a2277decc2cba013de2fbb5a64fbc1543}{UI\+::init}} ()
+\item 
+void \mbox{\hyperlink{namespace_u_i_a45e6a820c52945de0b31c1083648b8ca}{UI\+::cleanup}} ()
+\item 
+void \mbox{\hyperlink{namespace_u_i_a2d8ca1ecf0a566260451af9087f396f3}{UI\+::create\+Keypad\+Screen}} ()
+\item 
+void \mbox{\hyperlink{namespace_u_i_a1a65423af3051eca667c6210a4fd4e3b}{UI\+::create\+Settings\+Screen}} ()
+\item 
+void \mbox{\hyperlink{namespace_u_i_a92289f2675af6be72bb29192132034af}{UI\+::create\+Wi\+Fi\+Screen}} ()
+\item 
+void \mbox{\hyperlink{namespace_u_i_a36f4040a760beb9e230eb961d5fd807c}{UI\+::create\+Wi\+Fi\+Password\+Screen}} (const char $\ast$ssid)
+\item 
+void \mbox{\hyperlink{namespace_u_i_a1499c7a73752b49dd566b24986711662}{UI\+::create\+Settings\+Sub\+Screen}} ()
+\item 
+void \mbox{\hyperlink{namespace_u_i_a0456717e201a90171fc290495fe2a48d}{UI\+::create\+Info\+Screen}} ()
+\item 
+void \mbox{\hyperlink{namespace_u_i_a7a0c6d0535a2e6dbc2c61c83a22dcfb0}{UI\+::load\+Screen}} (\mbox{\hyperlink{group___screen_states_gac99fecebca9e3a20e926681fe9e5beb9}{screen\+\_\+state\+\_\+t}} screen)
+\item 
+void \mbox{\hyperlink{namespace_u_i_a7b5471425bfe6a966057aa4e72537a56}{UI\+::cleanup\+Global\+Pointers}} ()
+\item 
+void \mbox{\hyperlink{namespace_u_i_a8e08086366be0567c206956439cf07d3}{UI\+::create\+Invoice\+Overlay}} ()
+\item 
+void \mbox{\hyperlink{namespace_u_i_a7bbab39abe50d5133bb309f45ee37609}{UI\+::close\+Invoice\+Overlay}} ()
+\item 
+void \mbox{\hyperlink{namespace_u_i_a69ebc6c2a7039e77b2a0c8e3b4d2235d}{UI\+::update\+Invoice\+Display}} (const String \&invoice, int amount\+\_\+sats)
+\item 
+void \mbox{\hyperlink{namespace_u_i_a85a9c95d4c743ddadfb3d0e8a4833482}{UI\+::show\+Payment\+Received}} ()
+\item 
+bool \mbox{\hyperlink{namespace_u_i_a256c4320af439732def9402342903462}{UI\+::is\+Invoice\+Processing}} ()
+\item 
+void \mbox{\hyperlink{namespace_u_i_a1d571a531143f16935470cfaab3d22c0}{UI\+::set\+Invoice\+Processing}} (bool processing)
+\item 
+void \mbox{\hyperlink{namespace_u_i_af2b3e98a71f79e360d843dd0d33a6e62}{UI\+::show\+Message}} (String title, String message)
+\item 
+lv\+\_\+obj\+\_\+t $\ast$ \mbox{\hyperlink{namespace_u_i_a801e2a6c76b5ebd8c0897b374bb01cb0}{UI\+::get\+Display\+Label}} ()
+\item 
+lv\+\_\+obj\+\_\+t $\ast$ \mbox{\hyperlink{namespace_u_i_a216aede75a73d0d490526e326aaa6c02}{UI\+::get\+Wi\+Fi\+List}} ()
+\item 
+lv\+\_\+obj\+\_\+t $\ast$ \mbox{\hyperlink{namespace_u_i_a4818b91137e99345d92ec869bd01c0b0}{UI\+::get\+QRCanvas}} ()
+\item 
+lv\+\_\+obj\+\_\+t $\ast$ \mbox{\hyperlink{namespace_u_i_ac9299fb81be88e44c1a7cd5e19db5413}{UI\+::get\+Invoice\+Label}} ()
+\item 
+lv\+\_\+obj\+\_\+t $\ast$ \mbox{\hyperlink{namespace_u_i_a68428dcbd48587cb1e1e8af2e5b5ba26}{UI\+::get\+Invoice\+Spinner}} ()
+\item 
+lv\+\_\+obj\+\_\+t $\ast$ \mbox{\hyperlink{namespace_u_i_a29f0a77919ea9a241d5151c2c4d457dc}{UI\+::get\+Main\+Wi\+Fi\+Status\+Label}} ()
+\item 
+void \mbox{\hyperlink{namespace_u_i_af8ee282f90f6d9af58c1d9ad1a609b48}{UI\+::set\+Display\+Label}} (lv\+\_\+obj\+\_\+t $\ast$label)
+\item 
+void \mbox{\hyperlink{namespace_u_i_af0211975ea2fca629b7155fba91e6cce}{UI\+::set\+Wi\+Fi\+List}} (lv\+\_\+obj\+\_\+t $\ast$list)
+\item 
+void \mbox{\hyperlink{namespace_u_i_aecdcea33bd82a4fc0aa1b1f3fbf7df9d}{UI\+::set\+QRCanvas}} (lv\+\_\+obj\+\_\+t $\ast$canvas)
+\item 
+void \mbox{\hyperlink{namespace_u_i_a1ffb583ee83459709f08dbcfbd14eb26}{UI\+::set\+Invoice\+Label}} (lv\+\_\+obj\+\_\+t $\ast$label)
+\item 
+void \mbox{\hyperlink{namespace_u_i_abc4b773c175c7d3545483f69f7489712}{UI\+::set\+Invoice\+Spinner}} (lv\+\_\+obj\+\_\+t $\ast$spinner)
+\item 
+void \mbox{\hyperlink{namespace_u_i_a85f5b5bcbf60a8f9232c53b2af8eb5a7}{UI\+::set\+Main\+Wi\+Fi\+Status\+Label}} (lv\+\_\+obj\+\_\+t $\ast$label)
+\item 
+void \mbox{\hyperlink{namespace_u_i_ad401ada10ac0476ee072b7ed911b8146}{UI\+::keypad\+Event\+Handler}} (lv\+\_\+event\+\_\+t $\ast$e)
+\item 
+void \mbox{\hyperlink{namespace_u_i_af1e32e971414329c3c506e41855317a6}{UI\+::navigation\+Event\+Handler}} (lv\+\_\+event\+\_\+t $\ast$e)
+\item 
+void \mbox{\hyperlink{namespace_u_i_ac299369e02ef88cc5b8ab49d575189c5}{UI\+::settings\+Save\+Event\+Handler}} (lv\+\_\+event\+\_\+t $\ast$e)
+\item 
+void \mbox{\hyperlink{namespace_u_i_a16bfecd6138d00f450bc5c8e1bde1bef}{UI\+::settings\+Back\+Event\+Handler}} (lv\+\_\+event\+\_\+t $\ast$e)
+\item 
+void \mbox{\hyperlink{namespace_u_i_ac310b5f5952d7f5091868999fdbb3bfb}{UI\+::currency\+Dropdown\+Event\+Handler}} (lv\+\_\+event\+\_\+t $\ast$e)
+\item 
+void \mbox{\hyperlink{namespace_u_i_a81fa6a4db9aafd1fb789d2ee7cde2c5c}{UI\+::shop\+Name\+KBEvent\+Handler}} (lv\+\_\+event\+\_\+t $\ast$e)
+\item 
+void \mbox{\hyperlink{namespace_u_i_a88f110e483de181123f3620e44775cba}{UI\+::ap\+Password\+KBEvent\+Handler}} (lv\+\_\+event\+\_\+t $\ast$e)
+\item 
+void \mbox{\hyperlink{namespace_u_i_a3a951a6d2b5d532d8321705ae237a2db}{UI\+::invoice\+Close\+Button\+Event\+Handler}} (lv\+\_\+event\+\_\+t $\ast$e)
+\item 
+void \mbox{\hyperlink{namespace_u_i_a8fdc8946d85d7e8cbe4d339e1e268f5d}{UI\+::reboot\+Device\+Event\+Handler}} (lv\+\_\+event\+\_\+t $\ast$e)
+\item 
+void \mbox{\hyperlink{namespace_u_i_a230e829eccc0f61ab056f024c9ed0212}{UI\+::update\+Amount\+Display}} (const String \&amount)
+\item 
+void \mbox{\hyperlink{namespace_u_i_a85d758c0282e4c9e9031eaedc95db532}{UI\+::update\+Status\+Display}} (const String \&status)
+\item 
+void \mbox{\hyperlink{namespace_u_i_a9f8700b22f3cf1eb451e8a2b5cc4985a}{UI\+::show\+Loading\+Spinner}} (bool show)
+\item 
+void \mbox{\hyperlink{namespace_u_i_a5b4ed56a4755e396af5d6c827cba06d6}{UI\+::update\+Shop\+Name\+Display}} ()
+\item 
+void \mbox{\hyperlink{namespace_u_i_ae20486f26830f5a8d6312a32e1a5dfec}{UI\+::update\+Currency\+Display}} ()
+\item 
+void \mbox{\hyperlink{namespace_u_i_a4e3bb2b3151c48de6d865b4eab54f5e3}{UI\+::update\+APPassword\+Display}} ()
+\item 
+\mbox{\hyperlink{group___screen_states_gac99fecebca9e3a20e926681fe9e5beb9}{screen\+\_\+state\+\_\+t}} \mbox{\hyperlink{namespace_u_i_a7e5dc627ead9b9c216342025ec188d66}{UI\+::get\+Current\+Screen}} ()
+\item 
+bool \mbox{\hyperlink{namespace_u_i_a8ae46f670e76f7abcdc406083175a0ee}{UI\+::is\+Overlay\+Active}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const uint32\+\_\+t \mbox{\hyperlink{namespace_u_i_1_1_colors_a159637a2d15bba6a0d54c87809f2ccbd}{UI\+::\+Colors\+::\+PRIMARY}} = 0x2196\+F3
+\item 
+const uint32\+\_\+t \mbox{\hyperlink{namespace_u_i_1_1_colors_a2cd5f020d6dffae2d37bae6e1df3c0d2}{UI\+::\+Colors\+::\+SUCCESS}} = 0x4\+CAF50
+\item 
+const uint32\+\_\+t \mbox{\hyperlink{namespace_u_i_1_1_colors_ae06d47d58f5c016dfbe99759e46ce1fb}{UI\+::\+Colors\+::\+WARNING}} = 0x\+FF9800
+\item 
+const uint32\+\_\+t \mbox{\hyperlink{namespace_u_i_1_1_colors_a2b46770a32ed67b16986889f5387b80e}{UI\+::\+Colors\+::\+ERROR}} = 0x\+F44336
+\item 
+const uint32\+\_\+t \mbox{\hyperlink{namespace_u_i_1_1_colors_a2f693754fc47c8c6b6a4c194a88265e9}{UI\+::\+Colors\+::\+INFO}} = 0x607\+D8B
+\item 
+const uint32\+\_\+t \mbox{\hyperlink{namespace_u_i_1_1_colors_af5ade310da1c2729584778e5c6bf53e7}{UI\+::\+Colors\+::\+BACKGROUND}} = 0x000000
+\item 
+const uint32\+\_\+t \mbox{\hyperlink{namespace_u_i_1_1_colors_a755bebc7132be5423f8fb574d39eb974}{UI\+::\+Colors\+::\+TEXT}} = 0x\+FFFFFF
+\item 
+const lv\+\_\+font\+\_\+t $\ast$ \mbox{\hyperlink{namespace_u_i_1_1_fonts_a42d14289602b95819a5ba854c18770e4}{UI\+::\+Fonts\+::\+FONT\+\_\+\+DEFAULT}} = \&lv\+\_\+font\+\_\+montserrat\+\_\+14
+\item 
+const lv\+\_\+font\+\_\+t $\ast$ \mbox{\hyperlink{namespace_u_i_1_1_fonts_a432bb306b9a6c87d5458ee69392c9665}{UI\+::\+Fonts\+::\+FONT\+\_\+\+LARGE}} = \&lv\+\_\+font\+\_\+montserrat\+\_\+16
+\item 
+const lv\+\_\+font\+\_\+t $\ast$ \mbox{\hyperlink{namespace_u_i_1_1_fonts_aa08eb4925f6c3b47f5021153d5ff81b6}{UI\+::\+Fonts\+::\+FONT\+\_\+\+XLARGE}} = \&lv\+\_\+font\+\_\+montserrat\+\_\+24
+\item 
+const lv\+\_\+font\+\_\+t $\ast$ \mbox{\hyperlink{namespace_u_i_1_1_fonts_a8feba15808ef694bfc6d65f2424e80d1}{UI\+::\+Fonts\+::\+FONT\+\_\+\+SMALL}} = \&lv\+\_\+font\+\_\+montserrat\+\_\+12
+\end{DoxyCompactItemize}

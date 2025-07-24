@@ -1,0 +1,606 @@
+\hypertarget{lv__conf_8h_source}{}\doxysection{lv\+\_\+conf.\+h}
+\label{lv__conf_8h_source}\index{src/lv\_conf.h@{src/lv\_conf.h}}
+\mbox{\hyperlink{lv__conf_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00006}00006\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00007}00007\ \textcolor{comment}{\ *\ Copy\ this\ file\ as\ `lv\_conf.h`}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00008}00008\ \textcolor{comment}{\ *\ 1.\ simply\ next\ to\ the\ `lvgl`\ folder}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00009}00009\ \textcolor{comment}{\ *\ 2.\ or\ any\ other\ places\ and}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00010}00010\ \textcolor{comment}{\ *\ \ \ \ -\/\ define\ `LV\_CONF\_INCLUDE\_SIMPLE`}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00011}00011\ \textcolor{comment}{\ *\ \ \ \ -\/\ add\ the\ path\ as\ include\ path}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00012}00012\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00014}00014\ \textcolor{comment}{/*\ clang-\/format\ off\ */}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00015}00015\ \textcolor{preprocessor}{\#if\ 1\ }\textcolor{comment}{/*Set\ it\ to\ "{}1"{}\ to\ enable\ content*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00017}00017\ \textcolor{preprocessor}{\#ifndef\ LV\_CONF\_H}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00018}00018\ \textcolor{preprocessor}{\#define\ LV\_CONF\_H}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00020}00020\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00022}00022\ \textcolor{comment}{/*====================}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00023}00023\ \textcolor{comment}{\ \ \ COLOR\ SETTINGS}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00024}00024\ \textcolor{comment}{\ *====================*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00026}00026\ \textcolor{comment}{/*Color\ depth:\ 1\ (1\ byte\ per\ pixel),\ 8\ (RGB332),\ 16\ (RGB565),\ 32\ (ARGB8888)*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00027}\mbox{\hyperlink{lv__conf_8h_a8db46bcd21c9edad6759737cd1b034d7}{00027}}\ \textcolor{preprocessor}{\#define\ LV\_COLOR\_DEPTH\ 16}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00029}00029\ \textcolor{comment}{/*Swap\ the\ 2\ bytes\ of\ RGB565\ color.\ Useful\ if\ the\ display\ has\ an\ 8-\/bit\ interface\ (e.g.\ SPI)*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00030}\mbox{\hyperlink{lv__conf_8h_a322a97e9b4376aa58b0158c50171b9f8}{00030}}\ \textcolor{preprocessor}{\#define\ LV\_COLOR\_16\_SWAP\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00032}00032\ \textcolor{comment}{/*Enable\ more\ complex\ drawing\ routines\ to\ manage\ screens\ transparency.}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00033}00033\ \textcolor{comment}{\ *Can\ be\ used\ if\ the\ UI\ is\ above\ another\ layer,\ e.g.\ an\ OSD\ menu\ or\ video\ player.}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00034}00034\ \textcolor{comment}{\ *Requires\ `LV\_COLOR\_DEPTH\ =\ 32`\ colors\ and\ the\ screen's\ `bg\_opa`\ should\ be\ set\ to\ non\ LV\_OPA\_COVER\ value*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00035}\mbox{\hyperlink{lv__conf_8h_a6a01dc5b48fd8b6cc603d445db70e5be}{00035}}\ \textcolor{preprocessor}{\#define\ LV\_COLOR\_SCREEN\_TRANSP\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00037}00037\ \textcolor{comment}{/*\ Adjust\ color\ mix\ functions\ rounding.\ GPUs\ might\ calculate\ color\ mix\ (blending)\ differently.}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00038}00038\ \textcolor{comment}{\ *\ 0:\ round\ down,\ 64:\ round\ up\ from\ x.75,\ 128:\ round\ up\ from\ half,\ 192:\ round\ up\ from\ x.25,\ 254:\ round\ up\ */}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00039}\mbox{\hyperlink{lv__conf_8h_a6adbc139a12c84b72ca9b4d7e66c3aa6}{00039}}\ \textcolor{preprocessor}{\#define\ LV\_COLOR\_MIX\_ROUND\_OFS\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00041}00041\ \textcolor{comment}{/*Images\ pixels\ with\ this\ color\ will\ not\ be\ drawn\ if\ they\ are\ chroma\ keyed)*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00042}\mbox{\hyperlink{lv__conf_8h_a36213d7982c1770f2a9d38ce76b90615}{00042}}\ \textcolor{preprocessor}{\#define\ LV\_COLOR\_CHROMA\_KEY\ lv\_color\_hex(0x00ff00)\ \ \ \ \ \ \ \ \ }\textcolor{comment}{/*pure\ green*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00044}00044\ \textcolor{comment}{/*=========================}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00045}00045\ \textcolor{comment}{\ \ \ MEMORY\ SETTINGS}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00046}00046\ \textcolor{comment}{\ *=========================*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00048}00048\ \textcolor{comment}{/*1:\ use\ custom\ malloc/free,\ 0:\ use\ the\ built-\/in\ `lv\_mem\_alloc()`\ and\ `lv\_mem\_free()`*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00049}\mbox{\hyperlink{lv__conf_8h_a77bde977fddc70ca0fd99775170e2294}{00049}}\ \textcolor{preprocessor}{\#define\ LV\_MEM\_CUSTOM\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00050}00050\ \textcolor{preprocessor}{\#if\ LV\_MEM\_CUSTOM\ ==\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00051}00051\ \textcolor{comment}{/*Size\ of\ the\ memory\ available\ for\ `lv\_mem\_alloc()`\ in\ bytes\ (>=\ 2kB)*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00052}\mbox{\hyperlink{lv__conf_8h_aeff108006de09a570aac88c106497ed6}{00052}}\ \textcolor{preprocessor}{\#\ \ define\ LV\_MEM\_SIZE\ (32U\ *\ 1024U)\ \ \ \ \ \ \ \ \ \ }\textcolor{comment}{/*[bytes]*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00054}00054\ \textcolor{comment}{/*Set\ an\ address\ for\ the\ memory\ pool\ instead\ of\ allocating\ it\ as\ a\ normal\ array.\ Can\ be\ in\ external\ SRAM\ too.*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00055}\mbox{\hyperlink{lv__conf_8h_aec056337ffb77039252d2b7b68be14da}{00055}}\ \textcolor{preprocessor}{\#\ \ define\ LV\_MEM\_ADR\ 0\ \ \ \ \ }\textcolor{comment}{/*0:\ unused*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00056}00056\ \textcolor{comment}{/*Instead\ of\ an\ address\ give\ a\ memory\ allocator\ that\ will\ be\ called\ to\ get\ a\ memory\ pool\ for\ LVGL.\ E.g.\ my\_malloc*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00057}00057\ \textcolor{preprocessor}{\#if\ LV\_MEM\_ADR\ ==\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00058}00058\ \textcolor{comment}{//\#define\ LV\_MEM\_POOL\_INCLUDE\ your\_alloc\_library\ \ /*\ Uncomment\ if\ using\ an\ external\ allocator*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00059}00059\ \textcolor{comment}{//\#define\ LV\_MEM\_POOL\_ALLOC\ \ \ your\_alloc\ \ \ \ \ \ \ \ \ \ /*\ Uncomment\ if\ using\ an\ external\ allocator*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00060}00060\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00062}00062\ \textcolor{preprocessor}{\#else\ \ \ \ \ \ \ }\textcolor{comment}{/*LV\_MEM\_CUSTOM*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00063}00063\ \textcolor{preprocessor}{\#\ \ define\ LV\_MEM\_CUSTOM\_INCLUDE\ <stdlib.h>\ \ \ }\textcolor{comment}{/*Header\ for\ the\ dynamic\ memory\ function*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00064}00064\ \textcolor{preprocessor}{\#\ \ define\ LV\_MEM\_CUSTOM\_ALLOC\ \ \ malloc}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00065}00065\ \textcolor{preprocessor}{\#\ \ define\ LV\_MEM\_CUSTOM\_FREE\ \ \ \ free}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00066}00066\ \textcolor{preprocessor}{\#\ \ define\ LV\_MEM\_CUSTOM\_REALLOC\ realloc}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00067}00067\ \textcolor{preprocessor}{\#endif\ \ \ \ \ }\textcolor{comment}{/*LV\_MEM\_CUSTOM*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00069}00069\ \textcolor{comment}{/*Number\ of\ the\ intermediate\ memory\ buffer\ used\ during\ rendering\ and\ other\ internal\ processing\ mechanisms.}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00070}00070\ \textcolor{comment}{\ *You\ will\ see\ an\ error\ log\ message\ if\ there\ wasn't\ enough\ buffers.\ */}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00071}\mbox{\hyperlink{lv__conf_8h_ab71316814968e822f096725e1f62e174}{00071}}\ \textcolor{preprocessor}{\#define\ LV\_MEM\_BUF\_MAX\_NUM\ 16}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00073}00073\ \textcolor{comment}{/*Use\ the\ standard\ `memcpy`\ and\ `memset`\ instead\ of\ LVGL's\ own\ functions.\ (Might\ or\ might\ not\ be\ faster).*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00074}\mbox{\hyperlink{lv__conf_8h_a72bd97dd74e0066347ca12fc457e661d}{00074}}\ \textcolor{preprocessor}{\#define\ LV\_MEMCPY\_MEMSET\_STD\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00076}00076\ \textcolor{comment}{/*====================}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00077}00077\ \textcolor{comment}{\ \ \ HAL\ SETTINGS}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00078}00078\ \textcolor{comment}{\ *====================*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00080}00080\ \textcolor{comment}{/*Default\ display\ refresh\ period.\ LVG\ will\ redraw\ changed\ areas\ with\ this\ period\ time*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00081}\mbox{\hyperlink{lv__conf_8h_abe9b8c041b46f280bade20b602168844}{00081}}\ \textcolor{preprocessor}{\#define\ LV\_DISP\_DEF\_REFR\_PERIOD\ 10\ \ \ \ \ \ }\textcolor{comment}{/*[ms]*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00083}00083\ \textcolor{comment}{/*Input\ device\ read\ period\ in\ milliseconds*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00084}\mbox{\hyperlink{lv__conf_8h_a45d4adceb8fcf32eea0c68b91fd9e9ce}{00084}}\ \textcolor{preprocessor}{\#define\ LV\_INDEV\_DEF\_READ\_PERIOD\ 1\ \ \ \ \ }\textcolor{comment}{/*[ms]\ -\/\ faster\ for\ better\ touch\ response*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00086}00086\ \textcolor{comment}{/*Use\ a\ custom\ tick\ source\ that\ tells\ the\ elapsed\ time\ in\ milliseconds.}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00087}00087\ \textcolor{comment}{\ *It\ removes\ the\ need\ to\ manually\ update\ the\ tick\ with\ `lv\_tick\_inc()`)*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00088}\mbox{\hyperlink{lv__conf_8h_a244b19e028c500d10572872fa00dd995}{00088}}\ \textcolor{preprocessor}{\#define\ LV\_TICK\_CUSTOM\ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00089}00089\ \textcolor{preprocessor}{\#if\ LV\_TICK\_CUSTOM}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00090}\mbox{\hyperlink{lv__conf_8h_ac187cce8443f66c7c451794679354804}{00090}}\ \textcolor{preprocessor}{\#define\ LV\_TICK\_CUSTOM\_INCLUDE\ "{}Arduino.h"{}}\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*Header\ for\ the\ system\ time\ function*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00091}\mbox{\hyperlink{lv__conf_8h_aa9c7c9bcaf7b3edf752664c8438ee3d6}{00091}}\ \textcolor{preprocessor}{\#define\ LV\_TICK\_CUSTOM\_SYS\_TIME\_EXPR\ (millis())\ \ \ \ }\textcolor{comment}{/*Expression\ evaluating\ to\ current\ system\ time\ in\ ms*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00092}00092\ \textcolor{preprocessor}{\#endif\ \ \ }\textcolor{comment}{/*LV\_TICK\_CUSTOM*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00094}00094\ \textcolor{comment}{/*Default\ Dot\ Per\ Inch.\ Used\ to\ initialize\ default\ sizes\ such\ as\ widgets\ sized,\ style\ paddings.}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00095}00095\ \textcolor{comment}{\ *(Not\ so\ important,\ you\ can\ adjust\ it\ to\ modify\ default\ sizes\ and\ spaces)*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00096}\mbox{\hyperlink{lv__conf_8h_aadf0386c6d60d0c07153b38654f6b6d3}{00096}}\ \textcolor{preprocessor}{\#define\ LV\_DPI\_DEF\ 130\ \ \ \ \ }\textcolor{comment}{/*[px/inch]*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00098}00098\ \textcolor{comment}{/*=======================}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00099}00099\ \textcolor{comment}{\ *\ FEATURE\ CONFIGURATION}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00100}00100\ \textcolor{comment}{\ *=======================*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00102}00102\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00103}00103\ \textcolor{comment}{\ *\ Drawing}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00104}00104\ \textcolor{comment}{\ *-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00106}00106\ \textcolor{comment}{/*Enable\ complex\ draw\ engine.}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00107}00107\ \textcolor{comment}{\ *Required\ to\ draw\ shadow,\ gradient,\ rounded\ corners,\ circles,\ arc,\ skew\ lines,\ image\ transformations\ or\ any\ masks*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00108}\mbox{\hyperlink{lv__conf_8h_aabbb65481bcb6ea39af12dce67b78987}{00108}}\ \textcolor{preprocessor}{\#define\ LV\_DRAW\_COMPLEX\ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00109}00109\ \textcolor{preprocessor}{\#if\ LV\_DRAW\_COMPLEX\ !=\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00110}00110\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00111}00111\ \textcolor{comment}{/*Allow\ buffering\ some\ shadow\ calculation.}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00112}00112\ \textcolor{comment}{\ *LV\_SHADOW\_CACHE\_SIZE\ is\ the\ max.\ shadow\ size\ to\ buffer,\ where\ shadow\ size\ is\ `shadow\_width\ +\ radius`}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00113}00113\ \textcolor{comment}{\ *Caching\ has\ LV\_SHADOW\_CACHE\_SIZE\string^2\ RAM\ cost*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00114}\mbox{\hyperlink{lv__conf_8h_a9f9678b8918ba4e858e3dbce95a39eb5}{00114}}\ \textcolor{preprocessor}{\#define\ LV\_SHADOW\_CACHE\_SIZE\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00115}00115\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00116}00116\ \textcolor{comment}{/*\ Set\ number\ of\ maximally\ cached\ circle\ data.}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00117}00117\ \textcolor{comment}{\ *\ The\ circumference\ of\ 1/4\ circle\ are\ saved\ for\ anti-\/aliasing}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00118}00118\ \textcolor{comment}{\ *\ radius\ *\ 4\ bytes\ are\ used\ per\ circle\ (the\ most\ often\ used\ radiuses\ are\ saved)}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00119}00119\ \textcolor{comment}{\ *\ 0:\ to\ disable\ caching\ */}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00120}\mbox{\hyperlink{lv__conf_8h_a227d1a4f28f04468604a9f5bd6198851}{00120}}\ \textcolor{preprocessor}{\#define\ LV\_CIRCLE\_CACHE\_SIZE\ 4}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00122}00122\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*LV\_DRAW\_COMPLEX*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00124}00124\ \textcolor{comment}{/*Default\ image\ cache\ size.\ Image\ caching\ keeps\ the\ images\ opened.}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00125}00125\ \textcolor{comment}{\ *If\ only\ the\ built-\/in\ image\ formats\ are\ used\ there\ is\ no\ real\ advantage\ of\ caching.\ (I.e.\ if\ no\ new\ image\ decoder\ is\ added)}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00126}00126\ \textcolor{comment}{\ *With\ complex\ image\ decoders\ (e.g.\ PNG\ or\ JPG)\ caching\ can\ save\ the\ continuous\ open/decode\ of\ images.}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00127}00127\ \textcolor{comment}{\ *However\ the\ opened\ images\ might\ consume\ additional\ RAM.}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00128}00128\ \textcolor{comment}{\ *0:\ to\ disable\ caching*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00129}\mbox{\hyperlink{lv__conf_8h_ae599fa8c2a484d7a27e64257af0307af}{00129}}\ \textcolor{preprocessor}{\#define\ LV\_IMG\_CACHE\_DEF\_SIZE\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00130}00130\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00131}00131\ \textcolor{comment}{/*Maximum\ buffer\ size\ to\ allocate\ for\ rotation.\ Only\ used\ if\ software\ rotation\ is\ enabled\ in\ the\ display\ driver.*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00132}\mbox{\hyperlink{lv__conf_8h_a69fcc904e7175b349baaeffdec2f951a}{00132}}\ \textcolor{preprocessor}{\#define\ LV\_DISP\_ROT\_MAX\_BUF\ (10*1024)}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00133}00133\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00134}00134\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00135}00135\ \textcolor{comment}{\ *\ GPU}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00136}00136\ \textcolor{comment}{\ *-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00137}\mbox{\hyperlink{lv__conf_8h_aa3e247fb2ac9e821def819aa0f522793}{00137}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_GPU\_ESP32\_DMA2D\ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00138}00138\ \textcolor{comment}{/*Use\ STM32's\ DMA2D\ (aka\ Chrom\ Art)\ GPU*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00139}\mbox{\hyperlink{lv__conf_8h_ae82ec72d48383f7ea5c0635cde734115}{00139}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_GPU\_STM32\_DMA2D\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00140}00140\ \textcolor{preprocessor}{\#if\ LV\_USE\_GPU\_STM32\_DMA2D}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00141}00141\ \textcolor{comment}{/*Must\ be\ defined\ to\ include\ path\ of\ CMSIS\ header\ of\ target\ processor}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00142}00142\ \textcolor{comment}{e.g.\ "{}stm32f769xx.h"{}\ or\ "{}stm32f429xx.h"{}*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00143}00143\ \textcolor{preprocessor}{\#define\ LV\_GPU\_DMA2D\_CMSIS\_INCLUDE}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00144}00144\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00145}00145\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00146}00146\ \textcolor{comment}{/*Use\ NXP's\ PXP\ GPU\ iMX\ RTxxx\ platforms*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00147}\mbox{\hyperlink{lv__conf_8h_a8144f58325bda4bd72d89115ec1a8c20}{00147}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_GPU\_NXP\_PXP\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00148}00148\ \textcolor{preprocessor}{\#if\ LV\_USE\_GPU\_NXP\_PXP}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00149}00149\ \textcolor{comment}{/*1:\ Add\ default\ bare\ metal\ and\ FreeRTOS\ interrupt\ handling\ routines\ for\ PXP\ (lv\_gpu\_nxp\_pxp\_osa.c)}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00150}00150\ \textcolor{comment}{\ *\ \ \ and\ call\ lv\_gpu\_nxp\_pxp\_init()\ automatically\ during\ lv\_init().\ Note\ that\ symbol\ SDK\_OS\_FREE\_RTOS}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00151}00151\ \textcolor{comment}{\ *\ \ \ has\ to\ be\ defined\ in\ order\ to\ use\ FreeRTOS\ OSA,\ otherwise\ bare-\/metal\ implementation\ is\ selected.}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00152}00152\ \textcolor{comment}{\ *0:\ lv\_gpu\_nxp\_pxp\_init()\ has\ to\ be\ called\ manually\ before\ lv\_init()}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00153}00153\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00154}00154\ \textcolor{preprocessor}{\#define\ LV\_USE\_GPU\_NXP\_PXP\_AUTO\_INIT\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00155}00155\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00156}00156\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00157}00157\ \textcolor{comment}{/*Use\ NXP's\ VG-\/Lite\ GPU\ iMX\ RTxxx\ platforms*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00158}\mbox{\hyperlink{lv__conf_8h_ab4e370c59df0309f3972eefdb6b4627a}{00158}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_GPU\_NXP\_VG\_LITE\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00159}00159\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00160}00160\ \textcolor{comment}{/*Use\ exnternal\ renderer*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00161}\mbox{\hyperlink{lv__conf_8h_abfefb25d4dcab1e2bfb8e785127ca168}{00161}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_EXTERNAL\_RENDERER\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00162}00162\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00163}00163\ \textcolor{comment}{/*Use\ SDL\ renderer\ API.\ Requires\ LV\_USE\_EXTERNAL\_RENDERER*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00164}\mbox{\hyperlink{lv__conf_8h_a028f56151f846d3d6fb50042ea1ad2b4}{00164}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_GPU\_SDL\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00165}00165\ \textcolor{preprocessor}{\#if\ LV\_USE\_GPU\_SDL}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00166}00166\ \textcolor{preprocessor}{\#\ \ define\ LV\_GPU\_SDL\_INCLUDE\_PATH\ <SDL2/SDL.h>}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00167}00167\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00168}00168\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00169}00169\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00170}00170\ \textcolor{comment}{\ *\ Logging}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00171}00171\ \textcolor{comment}{\ *-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00172}00172\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00173}00173\ \textcolor{comment}{/*Enable\ the\ log\ module*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00174}\mbox{\hyperlink{lv__conf_8h_ad17238861ec699b517a2fbe273d3013c}{00174}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_LOG\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00175}00175\ \textcolor{preprocessor}{\#if\ LV\_USE\_LOG}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00176}00176\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00177}00177\ \textcolor{comment}{/*How\ important\ log\ should\ be\ added:}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00178}00178\ \textcolor{comment}{\ *LV\_LOG\_LEVEL\_TRACE\ \ \ \ \ \ \ A\ lot\ of\ logs\ to\ give\ detailed\ information}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00179}00179\ \textcolor{comment}{\ *LV\_LOG\_LEVEL\_INFO\ \ \ \ \ \ \ \ Log\ important\ events}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00180}00180\ \textcolor{comment}{\ *LV\_LOG\_LEVEL\_WARN\ \ \ \ \ \ \ \ Log\ if\ something\ unwanted\ happened\ but\ didn't\ cause\ a\ problem}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00181}00181\ \textcolor{comment}{\ *LV\_LOG\_LEVEL\_ERROR\ \ \ \ \ \ \ Only\ critical\ issue,\ when\ the\ system\ may\ fail}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00182}00182\ \textcolor{comment}{\ *LV\_LOG\_LEVEL\_USER\ \ \ \ \ \ \ \ Only\ logs\ added\ by\ the\ user}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00183}00183\ \textcolor{comment}{\ *LV\_LOG\_LEVEL\_NONE\ \ \ \ \ \ \ \ Do\ not\ log\ anything*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00184}00184\ \textcolor{preprocessor}{\#\ \ define\ LV\_LOG\_LEVEL\ LV\_LOG\_LEVEL\_WARN}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00185}00185\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00186}00186\ \textcolor{comment}{/*1:\ Print\ the\ log\ with\ 'printf';}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00187}00187\ \textcolor{comment}{\ *0:\ User\ need\ to\ register\ a\ callback\ with\ `lv\_log\_register\_print\_cb()`*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00188}00188\ \textcolor{preprocessor}{\#\ \ define\ LV\_LOG\_PRINTF\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00189}00189\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00190}00190\ \textcolor{comment}{/*Enable/disable\ LV\_LOG\_TRACE\ in\ modules\ that\ produces\ a\ huge\ number\ of\ logs*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00191}00191\ \textcolor{preprocessor}{\#\ \ define\ LV\_LOG\_TRACE\_MEM\ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00192}00192\ \textcolor{preprocessor}{\#\ \ define\ LV\_LOG\_TRACE\_TIMER\ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00193}00193\ \textcolor{preprocessor}{\#\ \ define\ LV\_LOG\_TRACE\_INDEV\ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00194}00194\ \textcolor{preprocessor}{\#\ \ define\ LV\_LOG\_TRACE\_DISP\_REFR\ \ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00195}00195\ \textcolor{preprocessor}{\#\ \ define\ LV\_LOG\_TRACE\_EVENT\ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00196}00196\ \textcolor{preprocessor}{\#\ \ define\ LV\_LOG\_TRACE\_OBJ\_CREATE\ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00197}00197\ \textcolor{preprocessor}{\#\ \ define\ LV\_LOG\_TRACE\_LAYOUT\ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00198}00198\ \textcolor{preprocessor}{\#\ \ define\ LV\_LOG\_TRACE\_ANIM\ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00199}00199\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00200}00200\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{/*LV\_USE\_LOG*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00201}00201\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00202}00202\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00203}00203\ \textcolor{comment}{\ *\ Asserts}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00204}00204\ \textcolor{comment}{\ *-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00205}00205\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00206}00206\ \textcolor{comment}{/*Enable\ asserts\ if\ an\ operation\ is\ failed\ or\ an\ invalid\ data\ is\ found.}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00207}00207\ \textcolor{comment}{\ *If\ LV\_USE\_LOG\ is\ enabled\ an\ error\ message\ will\ be\ printed\ on\ failure*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00208}\mbox{\hyperlink{lv__conf_8h_ab14234eece8b83b0d0e7544755745ad4}{00208}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_ASSERT\_NULL\ \ \ \ \ \ \ \ \ \ 1\ \ \ }\textcolor{comment}{/*Check\ if\ the\ parameter\ is\ NULL.\ (Very\ fast,\ recommended)*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00209}\mbox{\hyperlink{lv__conf_8h_adad1a43a39f56bf9afa9f32d343c4ed3}{00209}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_ASSERT\_MALLOC\ \ \ \ \ \ \ \ 1\ \ \ }\textcolor{comment}{/*Checks\ is\ the\ memory\ is\ successfully\ allocated\ or\ no.\ (Very\ fast,\ recommended)*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00210}\mbox{\hyperlink{lv__conf_8h_af77aa39cb4b804ad354e6844b9fc7630}{00210}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_ASSERT\_STYLE\ \ \ \ \ \ \ \ \ 0\ \ \ }\textcolor{comment}{/*Check\ if\ the\ styles\ are\ properly\ initialized.\ (Very\ fast,\ recommended)*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00211}\mbox{\hyperlink{lv__conf_8h_ac419ddcc173be3a3b65ec4291710d729}{00211}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_ASSERT\_MEM\_INTEGRITY\ 0\ \ \ }\textcolor{comment}{/*Check\ the\ integrity\ of\ `lv\_mem`\ after\ critical\ operations.\ (Slow)*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00212}\mbox{\hyperlink{lv__conf_8h_a8bee920414c882f1af0a9ccafc19d683}{00212}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_ASSERT\_OBJ\ \ \ \ \ \ \ \ \ \ \ 0\ \ \ }\textcolor{comment}{/*Check\ the\ object's\ type\ and\ existence\ (e.g.\ not\ deleted).\ (Slow)*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00213}00213\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00214}00214\ \textcolor{comment}{/*Add\ a\ custom\ handler\ when\ assert\ happens\ e.g.\ to\ restart\ the\ MCU*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00215}\mbox{\hyperlink{lv__conf_8h_aa4d75719785838a72b61c58e920fc8f8}{00215}}\ \textcolor{preprocessor}{\#define\ LV\_ASSERT\_HANDLER\_INCLUDE\ <stdint.h>}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00216}\mbox{\hyperlink{lv__conf_8h_a7f89929bee5e1d1f3047b6fc57723602}{00216}}\ \textcolor{preprocessor}{\#define\ LV\_ASSERT\_HANDLER\ while(1);\ \ \ }\textcolor{comment}{/*Halt\ by\ default*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00217}00217\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00218}00218\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00219}00219\ \textcolor{comment}{\ *\ Others}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00220}00220\ \textcolor{comment}{\ *-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00221}00221\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00222}00222\ \textcolor{comment}{/*1:\ Show\ CPU\ usage\ and\ FPS\ count\ in\ the\ right\ bottom\ corner*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00223}\mbox{\hyperlink{lv__conf_8h_a83a5f331fbf9c993ee61f2e0e2fdcc59}{00223}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_PERF\_MONITOR\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00224}00224\ \textcolor{preprocessor}{\#if\ LV\_USE\_PERF\_MONITOR}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00225}00225\ \textcolor{preprocessor}{\#define\ LV\_USE\_PERF\_MONITOR\_POS\ LV\_ALIGN\_BOTTOM\_RIGHT}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00226}00226\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00227}00227\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00228}00228\ \textcolor{comment}{/*1:\ Show\ the\ used\ memory\ and\ the\ memory\ fragmentation\ in\ the\ left\ bottom\ corner}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00229}00229\ \textcolor{comment}{\ *\ Requires\ LV\_MEM\_CUSTOM\ =\ 0*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00230}\mbox{\hyperlink{lv__conf_8h_aed77b5db413b3852f5ad654f04f1250a}{00230}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_MEM\_MONITOR\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00231}00231\ \textcolor{preprocessor}{\#if\ LV\_USE\_PERF\_MONITOR}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00232}00232\ \textcolor{preprocessor}{\#define\ LV\_USE\_MEM\_MONITOR\_POS\ LV\_ALIGN\_BOTTOM\_LEFT}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00233}00233\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00234}00234\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00235}00235\ \textcolor{comment}{/*1:\ Draw\ random\ colored\ rectangles\ over\ the\ redrawn\ areas*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00236}\mbox{\hyperlink{lv__conf_8h_ad81f9a063608ab0027ab59025ed35cdb}{00236}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_REFR\_DEBUG\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00237}00237\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00238}00238\ \textcolor{comment}{/*Change\ the\ built\ in\ (v)snprintf\ functions*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00239}\mbox{\hyperlink{lv__conf_8h_a387af6dfdb6458d8ae466356e08de1cd}{00239}}\ \textcolor{preprocessor}{\#define\ LV\_SPRINTF\_CUSTOM\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00240}00240\ \textcolor{preprocessor}{\#if\ LV\_SPRINTF\_CUSTOM}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00241}00241\ \textcolor{preprocessor}{\#\ \ define\ LV\_SPRINTF\_INCLUDE\ <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00242}00242\ \textcolor{preprocessor}{\#\ \ define\ lv\_snprintf\ \ snprintf}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00243}00243\ \textcolor{preprocessor}{\#\ \ define\ lv\_vsnprintf\ vsnprintf}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00244}00244\ \textcolor{preprocessor}{\#else\ \ \ }\textcolor{comment}{/*LV\_SPRINTF\_CUSTOM*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00245}\mbox{\hyperlink{lv__conf_8h_a9041c1ed46ad9dcf688bef5832a010d3}{00245}}\ \textcolor{preprocessor}{\#\ \ define\ LV\_SPRINTF\_USE\_FLOAT\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00246}00246\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{/*LV\_SPRINTF\_CUSTOM*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00247}00247\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00248}\mbox{\hyperlink{lv__conf_8h_ad120fea2f0f56822803cc70d1731f84e}{00248}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_USER\_DATA\ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00249}00249\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00250}00250\ \textcolor{comment}{/*Garbage\ Collector\ settings}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00251}00251\ \textcolor{comment}{\ *Used\ if\ lvgl\ is\ bound\ to\ higher\ level\ language\ and\ the\ memory\ is\ managed\ by\ that\ language*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00252}\mbox{\hyperlink{lv__conf_8h_a8856846f46d7020d3d8092dbf569d274}{00252}}\ \textcolor{preprocessor}{\#define\ LV\_ENABLE\_GC\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00253}00253\ \textcolor{preprocessor}{\#if\ LV\_ENABLE\_GC\ !=\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00254}00254\ \textcolor{preprocessor}{\#\ \ define\ LV\_GC\_INCLUDE\ "{}gc.h"{}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*Include\ Garbage\ Collector\ related\ things*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00255}00255\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*LV\_ENABLE\_GC*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00256}00256\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00257}00257\ \textcolor{comment}{/*=====================}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00258}00258\ \textcolor{comment}{\ *\ \ COMPILER\ SETTINGS}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00259}00259\ \textcolor{comment}{\ *====================*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00260}00260\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00261}00261\ \textcolor{comment}{/*For\ big\ endian\ systems\ set\ to\ 1*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00262}\mbox{\hyperlink{lv__conf_8h_ae7d23c710abd0533067f78bbf6ec3519}{00262}}\ \textcolor{preprocessor}{\#define\ LV\_BIG\_ENDIAN\_SYSTEM\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00263}00263\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00264}00264\ \textcolor{comment}{/*Define\ a\ custom\ attribute\ to\ `lv\_tick\_inc`\ function*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00265}\mbox{\hyperlink{lv__conf_8h_a969183113f0383dfc9f6febfeb265559}{00265}}\ \textcolor{preprocessor}{\#define\ LV\_ATTRIBUTE\_TICK\_INC}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00266}00266\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00267}00267\ \textcolor{comment}{/*Define\ a\ custom\ attribute\ to\ `lv\_timer\_handler`\ function*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00268}\mbox{\hyperlink{lv__conf_8h_a65a000fa97141d8340aab1813d0966d2}{00268}}\ \textcolor{preprocessor}{\#define\ LV\_ATTRIBUTE\_TIMER\_HANDLER}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00269}00269\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00270}00270\ \textcolor{comment}{/*Define\ a\ custom\ attribute\ to\ `lv\_disp\_flush\_ready`\ function*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00271}\mbox{\hyperlink{lv__conf_8h_a8516a98c991b133415b00656518d956d}{00271}}\ \textcolor{preprocessor}{\#define\ LV\_ATTRIBUTE\_FLUSH\_READY}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00272}00272\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00273}00273\ \textcolor{comment}{/*Required\ alignment\ size\ for\ buffers*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00274}\mbox{\hyperlink{lv__conf_8h_aedaa5ae2f1d085f553c3b0bcc25aa592}{00274}}\ \textcolor{preprocessor}{\#define\ LV\_ATTRIBUTE\_MEM\_ALIGN\_SIZE\ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00275}00275\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00276}00276\ \textcolor{comment}{/*Will\ be\ added\ where\ memories\ needs\ to\ be\ aligned\ (with\ -\/Os\ data\ might\ not\ be\ aligned\ to\ boundary\ by\ default).}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00277}00277\ \textcolor{comment}{\ *\ E.g.\ \_\_attribute\_\_((aligned(4)))*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00278}\mbox{\hyperlink{lv__conf_8h_a6b77dcb22fcdc624952dc307331e5db6}{00278}}\ \textcolor{preprocessor}{\#define\ LV\_ATTRIBUTE\_MEM\_ALIGN}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00279}00279\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00280}00280\ \textcolor{comment}{/*Attribute\ to\ mark\ large\ constant\ arrays\ for\ example\ font's\ bitmaps*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00281}\mbox{\hyperlink{lv__conf_8h_a9aa1f88eb217d43ff6f619e58b866d52}{00281}}\ \textcolor{preprocessor}{\#define\ LV\_ATTRIBUTE\_LARGE\_CONST}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00282}00282\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00283}00283\ \textcolor{comment}{/*Complier\ prefix\ for\ a\ big\ array\ declaration\ in\ RAM*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00284}\mbox{\hyperlink{lv__conf_8h_ab56b8e8d4a404896f5a1af7369978f2c}{00284}}\ \textcolor{preprocessor}{\#define\ LV\_ATTRIBUTE\_LARGE\_RAM\_ARRAY}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00285}00285\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00286}00286\ \textcolor{comment}{/*Place\ performance\ critical\ functions\ into\ a\ faster\ memory\ (e.g\ RAM)*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00287}\mbox{\hyperlink{lv__conf_8h_a61048d2055ebf90e7cb2c67c3d453b78}{00287}}\ \textcolor{preprocessor}{\#define\ LV\_ATTRIBUTE\_FAST\_MEM}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00288}00288\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00289}00289\ \textcolor{comment}{/*Prefix\ variables\ that\ are\ used\ in\ GPU\ accelerated\ operations,\ often\ these\ need\ to\ be\ placed\ in\ RAM\ sections\ that\ are\ DMA\ accessible*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00290}\mbox{\hyperlink{lv__conf_8h_ad75bbb40b927ad7efa7231d3625672b1}{00290}}\ \textcolor{preprocessor}{\#define\ LV\_ATTRIBUTE\_DMA}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00291}00291\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00292}00292\ \textcolor{comment}{/*Export\ integer\ constant\ to\ binding.\ This\ macro\ is\ used\ with\ constants\ in\ the\ form\ of\ LV\_<CONST>\ that}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00293}00293\ \textcolor{comment}{\ *should\ also\ appear\ on\ LVGL\ binding\ API\ such\ as\ Micropython.*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00294}\mbox{\hyperlink{lv__conf_8h_ad9dbfeb90679a5db213a80f3e8d61b28}{00294}}\ \textcolor{preprocessor}{\#define\ LV\_EXPORT\_CONST\_INT(int\_value)\ struct\ \_silence\_gcc\_warning\ }\textcolor{comment}{/*The\ default\ value\ just\ prevents\ GCC\ warning*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00295}00295\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00296}00296\ \textcolor{comment}{/*Extend\ the\ default\ -\/32k..32k\ coordinate\ range\ to\ -\/4M..4M\ by\ using\ int32\_t\ for\ coordinates\ instead\ of\ int16\_t*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00297}\mbox{\hyperlink{lv__conf_8h_ab08a0881df87b2bdbab392455bf2847c}{00297}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_LARGE\_COORD\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00298}00298\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00299}00299\ \textcolor{comment}{/*==================}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00300}00300\ \textcolor{comment}{\ *\ \ \ FONT\ USAGE}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00301}00301\ \textcolor{comment}{\ *===================*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00302}00302\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00303}00303\ \textcolor{comment}{/*Montserrat\ fonts\ with\ ASCII\ range\ and\ some\ symbols\ using\ bpp\ =\ 4}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00304}00304\ \textcolor{comment}{\ *https://fonts.google.com/specimen/Montserrat*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00305}\mbox{\hyperlink{lv__conf_8h_ac97836d54b3ffcde135728ec6f8ad344}{00305}}\ \textcolor{preprocessor}{\#define\ LV\_FONT\_MONTSERRAT\_8\ \ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00306}\mbox{\hyperlink{lv__conf_8h_a7c7302f07131fdae323615a905345e25}{00306}}\ \textcolor{preprocessor}{\#define\ LV\_FONT\_MONTSERRAT\_10\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00307}\mbox{\hyperlink{lv__conf_8h_a3bbe5045ec263fad01d7104de7fc77be}{00307}}\ \textcolor{preprocessor}{\#define\ LV\_FONT\_MONTSERRAT\_12\ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00308}\mbox{\hyperlink{lv__conf_8h_a79cdb1f92e25cf5e3f611ef4ce07e9c2}{00308}}\ \textcolor{preprocessor}{\#define\ LV\_FONT\_MONTSERRAT\_14\ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00309}\mbox{\hyperlink{lv__conf_8h_ac8f7334df9da9e301fa91c64d62b5b8e}{00309}}\ \textcolor{preprocessor}{\#define\ LV\_FONT\_MONTSERRAT\_16\ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00310}\mbox{\hyperlink{lv__conf_8h_a8f2ef0967e43802ac36522885e1dd3f1}{00310}}\ \textcolor{preprocessor}{\#define\ LV\_FONT\_MONTSERRAT\_18\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00311}\mbox{\hyperlink{lv__conf_8h_af03109d8293eb9e7e99b3675821f8963}{00311}}\ \textcolor{preprocessor}{\#define\ LV\_FONT\_MONTSERRAT\_20\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00312}\mbox{\hyperlink{lv__conf_8h_a590c2f28e800a40bca99dcca6959e852}{00312}}\ \textcolor{preprocessor}{\#define\ LV\_FONT\_MONTSERRAT\_22\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00313}\mbox{\hyperlink{lv__conf_8h_a920553c1d0f77482f14f1ef331683bfe}{00313}}\ \textcolor{preprocessor}{\#define\ LV\_FONT\_MONTSERRAT\_24\ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00314}\mbox{\hyperlink{lv__conf_8h_a50d897f0ef6c94eecd4bafbf4e9f963b}{00314}}\ \textcolor{preprocessor}{\#define\ LV\_FONT\_MONTSERRAT\_26\ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00315}\mbox{\hyperlink{lv__conf_8h_adb83bd553b8db5973d467ef827b39b8b}{00315}}\ \textcolor{preprocessor}{\#define\ LV\_FONT\_MONTSERRAT\_28\ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00316}\mbox{\hyperlink{lv__conf_8h_a8c8c22728c19a7a2a87ed0933e5c478d}{00316}}\ \textcolor{preprocessor}{\#define\ LV\_FONT\_MONTSERRAT\_30\ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00317}\mbox{\hyperlink{lv__conf_8h_a70fbf2c6aab7f00a1886dca923816277}{00317}}\ \textcolor{preprocessor}{\#define\ LV\_FONT\_MONTSERRAT\_32\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00318}\mbox{\hyperlink{lv__conf_8h_a2b13fb8eabe8f3fe6e8a53fea19bfe65}{00318}}\ \textcolor{preprocessor}{\#define\ LV\_FONT\_MONTSERRAT\_34\ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00319}\mbox{\hyperlink{lv__conf_8h_a85335a289fcb352ae39e143ec16c5141}{00319}}\ \textcolor{preprocessor}{\#define\ LV\_FONT\_MONTSERRAT\_36\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00320}\mbox{\hyperlink{lv__conf_8h_a5a776d733e6b4eb5803527620e9c7fbf}{00320}}\ \textcolor{preprocessor}{\#define\ LV\_FONT\_MONTSERRAT\_38\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00321}\mbox{\hyperlink{lv__conf_8h_a06993754cf3f9f91c856ed23a49cfafd}{00321}}\ \textcolor{preprocessor}{\#define\ LV\_FONT\_MONTSERRAT\_40\ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00322}\mbox{\hyperlink{lv__conf_8h_ae6edcf67fb721fba90b6cb8676c45801}{00322}}\ \textcolor{preprocessor}{\#define\ LV\_FONT\_MONTSERRAT\_42\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00323}\mbox{\hyperlink{lv__conf_8h_afdd89cb1aa0f3bc5dce3c08945794373}{00323}}\ \textcolor{preprocessor}{\#define\ LV\_FONT\_MONTSERRAT\_44\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00324}\mbox{\hyperlink{lv__conf_8h_ac9995d7ccf72ee0ae188df9197629905}{00324}}\ \textcolor{preprocessor}{\#define\ LV\_FONT\_MONTSERRAT\_46\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00325}\mbox{\hyperlink{lv__conf_8h_aedabba4da43252235fe602e42cd28832}{00325}}\ \textcolor{preprocessor}{\#define\ LV\_FONT\_MONTSERRAT\_48\ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00326}00326\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00327}00327\ \textcolor{comment}{/*Demonstrate\ special\ features*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00328}\mbox{\hyperlink{lv__conf_8h_ab48b61ab3fcde457751de0a80916924d}{00328}}\ \textcolor{preprocessor}{\#define\ LV\_FONT\_MONTSERRAT\_12\_SUBPX\ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00329}\mbox{\hyperlink{lv__conf_8h_a78e521af972a5d6250bfdf070070d0be}{00329}}\ \textcolor{preprocessor}{\#define\ LV\_FONT\_MONTSERRAT\_28\_COMPRESSED\ 0\ \ }\textcolor{comment}{/*bpp\ =\ 3*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00330}\mbox{\hyperlink{lv__conf_8h_a57fb7429ce2d050ea22f388f815fda39}{00330}}\ \textcolor{preprocessor}{\#define\ LV\_FONT\_DEJAVU\_16\_PERSIAN\_HEBREW\ 0\ \ }\textcolor{comment}{/*Hebrew,\ Arabic,\ Perisan\ letters\ and\ all\ their\ forms*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00331}\mbox{\hyperlink{lv__conf_8h_ad908503bbbe1309d22a515c0246f58e6}{00331}}\ \textcolor{preprocessor}{\#define\ LV\_FONT\_SIMSUN\_16\_CJK\ \ \ \ \ \ \ \ \ \ \ \ 0\ \ }\textcolor{comment}{/*1000\ most\ common\ CJK\ radicals*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00332}00332\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00333}00333\ \textcolor{comment}{/*Pixel\ perfect\ monospace\ fonts*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00334}\mbox{\hyperlink{lv__conf_8h_abe7d25051479ced2e1da63ee2c62fc73}{00334}}\ \textcolor{preprocessor}{\#define\ LV\_FONT\_UNSCII\_8\ \ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00335}\mbox{\hyperlink{lv__conf_8h_a22fad1081f26a80b5faebde92d6afffd}{00335}}\ \textcolor{preprocessor}{\#define\ LV\_FONT\_UNSCII\_16\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00336}00336\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00337}00337\ \textcolor{comment}{/*Optionally\ declare\ custom\ fonts\ here.}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00338}00338\ \textcolor{comment}{\ *You\ can\ use\ these\ fonts\ as\ default\ font\ too\ and\ they\ will\ be\ available\ globally.}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00339}00339\ \textcolor{comment}{\ *E.g.\ \#define\ LV\_FONT\_CUSTOM\_DECLARE\ \ \ LV\_FONT\_DECLARE(my\_font\_1)\ LV\_FONT\_DECLARE(my\_font\_2)*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00340}\mbox{\hyperlink{lv__conf_8h_a01312bddc4d0daed11c944c11a107277}{00340}}\ \textcolor{preprocessor}{\#define\ LV\_FONT\_CUSTOM\_DECLARE}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00341}00341\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00342}00342\ \textcolor{comment}{/*Always\ set\ a\ default\ font*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00343}\mbox{\hyperlink{lv__conf_8h_a09b9a62c2b0986bedd3e720286631dd5}{00343}}\ \textcolor{preprocessor}{\#define\ LV\_FONT\_DEFAULT\ \&lv\_font\_montserrat\_14}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00344}00344\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00345}00345\ \textcolor{comment}{/*Enable\ handling\ large\ font\ and/or\ fonts\ with\ a\ lot\ of\ characters.}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00346}00346\ \textcolor{comment}{\ *The\ limit\ depends\ on\ the\ font\ size,\ font\ face\ and\ bpp.}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00347}00347\ \textcolor{comment}{\ *Compiler\ error\ will\ be\ triggered\ if\ a\ font\ needs\ it.*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00348}\mbox{\hyperlink{lv__conf_8h_a7da5b8d6a59bc17c499efdd6dbba98a6}{00348}}\ \textcolor{preprocessor}{\#define\ LV\_FONT\_FMT\_TXT\_LARGE\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00349}00349\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00350}00350\ \textcolor{comment}{/*Enables/disables\ support\ for\ compressed\ fonts.*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00351}\mbox{\hyperlink{lv__conf_8h_ace88335920c0faeeddc032d04538bcb6}{00351}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_FONT\_COMPRESSED\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00352}00352\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00353}00353\ \textcolor{comment}{/*Enable\ subpixel\ rendering*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00354}\mbox{\hyperlink{lv__conf_8h_af1ed71a18d1863db6b45f62e8b8fe9df}{00354}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_FONT\_SUBPX\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00355}00355\ \textcolor{preprocessor}{\#if\ LV\_USE\_FONT\_SUBPX}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00356}00356\ \textcolor{comment}{/*Set\ the\ pixel\ order\ of\ the\ display.\ Physical\ order\ of\ RGB\ channels.\ Doesn't\ matter\ with\ "{}normal"{}\ fonts.*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00357}00357\ \textcolor{preprocessor}{\#define\ LV\_FONT\_SUBPX\_BGR\ 0\ \ }\textcolor{comment}{/*0:\ RGB;\ 1:BGR\ order*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00358}00358\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00359}00359\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00360}00360\ \textcolor{comment}{/*=================}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00361}00361\ \textcolor{comment}{\ *\ \ TEXT\ SETTINGS}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00362}00362\ \textcolor{comment}{\ *=================*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00363}00363\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00370}\mbox{\hyperlink{lv__conf_8h_a20802408d2bb785991b9e3e88929010d}{00370}}\ \textcolor{preprocessor}{\#define\ LV\_TXT\_ENC\ LV\_TXT\_ENC\_UTF8}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00371}00371\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00372}00372\ \ \textcolor{comment}{/*Can\ break\ (wrap)\ texts\ on\ these\ chars*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00373}\mbox{\hyperlink{lv__conf_8h_a39568ba761e0c4ce5af64132e036a7e4}{00373}}\ \textcolor{preprocessor}{\#define\ LV\_TXT\_BREAK\_CHARS\ "{}\ ,.;:-\/\_"{}}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00374}00374\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00375}00375\ \textcolor{comment}{/*If\ a\ word\ is\ at\ least\ this\ long,\ will\ break\ wherever\ "{}prettiest"{}}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00376}00376\ \textcolor{comment}{\ *To\ disable,\ set\ to\ a\ value\ <=\ 0*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00377}\mbox{\hyperlink{lv__conf_8h_a1729c565c0dbc3edf0dac9e235c4ff7b}{00377}}\ \textcolor{preprocessor}{\#define\ LV\_TXT\_LINE\_BREAK\_LONG\_LEN\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00378}00378\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00379}00379\ \textcolor{comment}{/*Minimum\ number\ of\ characters\ in\ a\ long\ word\ to\ put\ on\ a\ line\ before\ a\ break.}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00380}00380\ \textcolor{comment}{\ *Depends\ on\ LV\_TXT\_LINE\_BREAK\_LONG\_LEN.*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00381}\mbox{\hyperlink{lv__conf_8h_adecf949b46a435275d65fb8757583896}{00381}}\ \textcolor{preprocessor}{\#define\ LV\_TXT\_LINE\_BREAK\_LONG\_PRE\_MIN\_LEN\ 3}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00382}00382\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00383}00383\ \textcolor{comment}{/*Minimum\ number\ of\ characters\ in\ a\ long\ word\ to\ put\ on\ a\ line\ after\ a\ break.}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00384}00384\ \textcolor{comment}{\ *Depends\ on\ LV\_TXT\_LINE\_BREAK\_LONG\_LEN.*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00385}\mbox{\hyperlink{lv__conf_8h_a2615f17521a9785307be8890b13c7ac7}{00385}}\ \textcolor{preprocessor}{\#define\ LV\_TXT\_LINE\_BREAK\_LONG\_POST\_MIN\_LEN\ 3}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00386}00386\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00387}00387\ \textcolor{comment}{/*The\ control\ character\ to\ use\ for\ signalling\ text\ recoloring.*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00388}\mbox{\hyperlink{lv__conf_8h_aba8ec1367cc2659baa285f32979caa31}{00388}}\ \textcolor{preprocessor}{\#define\ LV\_TXT\_COLOR\_CMD\ "{}\#"{}}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00389}00389\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00390}00390\ \textcolor{comment}{/*Support\ bidirectional\ texts.\ Allows\ mixing\ Left-\/to-\/Right\ and\ Right-\/to-\/Left\ texts.}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00391}00391\ \textcolor{comment}{\ *The\ direction\ will\ be\ processed\ according\ to\ the\ Unicode\ Bidirectional\ Algorithm:}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00392}00392\ \textcolor{comment}{\ *https://www.w3.org/International/articles/inline-\/bidi-\/markup/uba-\/basics*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00393}\mbox{\hyperlink{lv__conf_8h_a9201ca34504ccc2d501f3cca6956988a}{00393}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_BIDI\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00394}00394\ \textcolor{preprocessor}{\#if\ LV\_USE\_BIDI}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00395}00395\ \textcolor{comment}{/*Set\ the\ default\ direction.\ Supported\ values:}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00396}00396\ \textcolor{comment}{\ *`LV\_BASE\_DIR\_LTR`\ Left-\/to-\/Right}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00397}00397\ \textcolor{comment}{\ *`LV\_BASE\_DIR\_RTL`\ Right-\/to-\/Left}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00398}00398\ \textcolor{comment}{\ *`LV\_BASE\_DIR\_AUTO`\ detect\ texts\ base\ direction*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00399}00399\ \textcolor{preprocessor}{\#define\ LV\_BIDI\_BASE\_DIR\_DEF\ LV\_BASE\_DIR\_AUTO}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00400}00400\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00401}00401\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00402}00402\ \textcolor{comment}{/*Enable\ Arabic/Persian\ processing}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00403}00403\ \textcolor{comment}{\ *In\ these\ languages\ characters\ should\ be\ replaced\ with\ an\ other\ form\ based\ on\ their\ position\ in\ the\ text*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00404}\mbox{\hyperlink{lv__conf_8h_a86eda207f8f75d498e607926ccff3705}{00404}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_ARABIC\_PERSIAN\_CHARS\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00405}00405\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00406}00406\ \textcolor{comment}{/*==================}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00407}00407\ \textcolor{comment}{\ *\ \ WIDGET\ USAGE}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00408}00408\ \textcolor{comment}{\ *================*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00409}00409\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00410}00410\ \textcolor{comment}{/*Documentation\ of\ the\ widgets:\ https://docs.lvgl.io/latest/en/html/widgets/index.html*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00411}00411\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00412}\mbox{\hyperlink{lv__conf_8h_a077a980d0a6c98343e9d0119e53ba3ec}{00412}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_ARC\ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00413}00413\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00414}\mbox{\hyperlink{lv__conf_8h_a8824deedebff7e531880394989f38b1d}{00414}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_ANIMIMG\ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00415}00415\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00416}\mbox{\hyperlink{lv__conf_8h_aa3cddebb0e6559c6eca86662e472a9e6}{00416}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_BAR\ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00417}00417\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00418}\mbox{\hyperlink{lv__conf_8h_a041a9669e14abc51174c7234417ea2d3}{00418}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_BTN\ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00419}00419\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00420}\mbox{\hyperlink{lv__conf_8h_a3504f218d9f668eb8c0cce486f213aad}{00420}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_BTNMATRIX\ \ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00421}00421\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00422}\mbox{\hyperlink{lv__conf_8h_ab02853b975e34a047f63ff88a3e31fea}{00422}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_CANVAS\ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00423}00423\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00424}\mbox{\hyperlink{lv__conf_8h_abf668da3cf6e16017fffe3e066cb403d}{00424}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_CHECKBOX\ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00425}00425\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00426}\mbox{\hyperlink{lv__conf_8h_ad2a8b470876550081e27645a7b02cc51}{00426}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_DROPDOWN\ \ \ 1\ \ \ }\textcolor{comment}{/*Requires:\ lv\_label*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00427}00427\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00428}\mbox{\hyperlink{lv__conf_8h_a5de90ae1a1b0eeab5cb41e132eb188e5}{00428}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_IMG\ \ \ \ \ \ \ \ 1\ \ \ }\textcolor{comment}{/*Requires:\ lv\_label*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00429}00429\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00430}\mbox{\hyperlink{lv__conf_8h_adc097de303b9ea9dabe8ff4e70c615a6}{00430}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_LABEL\ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00431}00431\ \textcolor{preprocessor}{\#if\ LV\_USE\_LABEL}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00432}\mbox{\hyperlink{lv__conf_8h_a94bfe0b9bb740ed5443241d418b64600}{00432}}\ \textcolor{preprocessor}{\#\ \ define\ LV\_LABEL\_TEXT\_SELECTION\ 1\ }\textcolor{comment}{/*Enable\ selecting\ text\ of\ the\ label*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00433}\mbox{\hyperlink{lv__conf_8h_a5c49073d980131304fa76635eee15f3a}{00433}}\ \textcolor{preprocessor}{\#\ \ define\ LV\_LABEL\_LONG\_TXT\_HINT\ 1\ \ }\textcolor{comment}{/*Store\ some\ extra\ info\ in\ labels\ to\ speed\ up\ drawing\ of\ very\ long\ texts*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00434}00434\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00435}00435\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00436}\mbox{\hyperlink{lv__conf_8h_af4690072288635b42fbf0c8829943518}{00436}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_LINE\ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00437}00437\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00438}\mbox{\hyperlink{lv__conf_8h_a612924ae19721e7d06c7a1640ce2097b}{00438}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_ROLLER\ \ \ \ \ 1\ \ \ }\textcolor{comment}{/*Requires:\ lv\_label*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00439}00439\ \textcolor{preprocessor}{\#if\ LV\_USE\_ROLLER}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00440}\mbox{\hyperlink{lv__conf_8h_a62b8fa6dc4a862726f49e9fd67ac033a}{00440}}\ \textcolor{preprocessor}{\#\ \ define\ LV\_ROLLER\_INF\_PAGES\ 7\ }\textcolor{comment}{/*Number\ of\ extra\ "{}pages"{}\ when\ the\ roller\ is\ infinite*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00441}00441\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00442}00442\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00443}\mbox{\hyperlink{lv__conf_8h_ab7c0f42cd62f7dd90c760143cee4fde4}{00443}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_SLIDER\ \ \ \ \ 1\ \ \ }\textcolor{comment}{/*Requires:\ lv\_bar*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00444}00444\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00445}\mbox{\hyperlink{lv__conf_8h_a4b4e6966f929a46dae36f62fcb4ad7c5}{00445}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_SWITCH\ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00446}00446\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00447}\mbox{\hyperlink{lv__conf_8h_a362c4684dabb55191514509aba33748e}{00447}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_TEXTAREA\ \ \ 1\ \ \ }\textcolor{comment}{/*Requires:\ lv\_label*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00448}00448\ \textcolor{preprocessor}{\#if\ LV\_USE\_TEXTAREA\ !=\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00449}\mbox{\hyperlink{lv__conf_8h_afc3a0018a49cfca52d6cac503a638ec2}{00449}}\ \textcolor{preprocessor}{\#\ \ define\ LV\_TEXTAREA\_DEF\_PWD\_SHOW\_TIME\ 1500\ \ \ \ }\textcolor{comment}{/*ms*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00450}00450\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00451}00451\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00452}\mbox{\hyperlink{lv__conf_8h_a6100a01be7889f316d1bf5fb8935e05b}{00452}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_TABLE\ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00453}00453\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00454}00454\ \textcolor{comment}{/*==================}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00455}00455\ \textcolor{comment}{\ *\ EXTRA\ COMPONENTS}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00456}00456\ \textcolor{comment}{\ *==================*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00457}00457\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00458}00458\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00459}00459\ \textcolor{comment}{\ *\ Widgets}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00460}00460\ \textcolor{comment}{\ *-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00461}\mbox{\hyperlink{lv__conf_8h_af1c66cdbd8c681b4cd05d92d70573c12}{00461}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_CALENDAR\ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00462}00462\ \textcolor{preprocessor}{\#if\ LV\_USE\_CALENDAR}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00463}\mbox{\hyperlink{lv__conf_8h_a31372b5fbbb9d41a4abf919871a3b1f7}{00463}}\ \textcolor{preprocessor}{\#\ define\ LV\_CALENDAR\_WEEK\_STARTS\_MONDAY\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00464}00464\ \textcolor{preprocessor}{\#\ if\ LV\_CALENDAR\_WEEK\_STARTS\_MONDAY}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00465}00465\ \textcolor{preprocessor}{\#\ \ define\ LV\_CALENDAR\_DEFAULT\_DAY\_NAMES\ \{"{}Mo"{}},\ "{}Tu"{},\ "{}We"{},\ "{}Th"{},\ "{}Fr"{},\ "{}Sa"{},\ "{}Su"{}\}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00466}00466\ \textcolor{preprocessor}{\#\ else}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00467}\mbox{\hyperlink{lv__conf_8h_a57fc582b9fb470c530f83ea34cf38699}{00467}}\ \textcolor{preprocessor}{\#\ \ define\ LV\_CALENDAR\_DEFAULT\_DAY\_NAMES\ \{"{}Su"{}},\ "{}Mo"{},\ "{}Tu"{},\ "{}We"{},\ "{}Th"{},\ "{}Fr"{},\ "{}Sa"{}\}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00468}00468\ \textcolor{preprocessor}{\#\ endif}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00469}00469\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00470}\mbox{\hyperlink{lv__conf_8h_a7ae75473346ea90ec1fe0c3b9ca439eb}{00470}}\ \textcolor{preprocessor}{\#\ define\ LV\_CALENDAR\_DEFAULT\_MONTH\_NAMES\ \{"{}January"{}},\ "{}February"{},\ "{}March"{},\ \ "{}April"{},\ "{}May"{},\ \ "{}June"{},\ "{}July"{},\ "{}August"{},\ "{}September"{},\ "{}October"{},\ "{}November"{},\ "{}December"{}\}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00471}\mbox{\hyperlink{lv__conf_8h_aff60f490268a56128446e6b55e2bd066}{00471}}\ \textcolor{preprocessor}{\#\ define\ LV\_USE\_CALENDAR\_HEADER\_ARROW\ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00472}\mbox{\hyperlink{lv__conf_8h_a62c2ca18acb18afb9ef86aee41cda195}{00472}}\ \textcolor{preprocessor}{\#\ define\ LV\_USE\_CALENDAR\_HEADER\_DROPDOWN\ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00473}00473\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{/*LV\_USE\_CALENDAR*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00474}00474\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00475}\mbox{\hyperlink{lv__conf_8h_a1cc9dc77067d9105818faab203522300}{00475}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_CHART\ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00476}00476\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00477}\mbox{\hyperlink{lv__conf_8h_a7f3d331f0395707d213669dd20c1b107}{00477}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_COLORWHEEL\ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00478}00478\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00479}\mbox{\hyperlink{lv__conf_8h_a712d2807b13c1dc495d060ffa82114e1}{00479}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_IMGBTN\ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00480}00480\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00481}\mbox{\hyperlink{lv__conf_8h_a64d1725353f5ab3e1fb2fe6c4329c46f}{00481}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_KEYBOARD\ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00482}00482\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00483}\mbox{\hyperlink{lv__conf_8h_a8f1b3daead5fdab89b96c6b53c1ec12e}{00483}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_LED\ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00484}00484\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00485}\mbox{\hyperlink{lv__conf_8h_a2d446163f0c6a19032a776e3d0c558da}{00485}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_LIST\ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00486}00486\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00487}\mbox{\hyperlink{lv__conf_8h_a1e485e6fc2a1b99548fd399b00054fdf}{00487}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_METER\ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00488}00488\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00489}\mbox{\hyperlink{lv__conf_8h_ab0d2f4f61aa8674a34c8e41b8d47d8aa}{00489}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_MSGBOX\ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00490}00490\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00491}\mbox{\hyperlink{lv__conf_8h_afb7291443c61a1c56c1f8ee1fad58856}{00491}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_SPINBOX\ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00492}00492\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00493}\mbox{\hyperlink{lv__conf_8h_a4d893a8d05d91416cfb0e94139f9975f}{00493}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_SPINNER\ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00494}00494\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00495}\mbox{\hyperlink{lv__conf_8h_a93727577a2845780880149217a435bac}{00495}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_TABVIEW\ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00496}00496\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00497}\mbox{\hyperlink{lv__conf_8h_ae722bef533e6c7319fced268cfd6f712}{00497}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_TILEVIEW\ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00498}00498\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00499}\mbox{\hyperlink{lv__conf_8h_ab0b3e246f4129a4679c2f50749002ba1}{00499}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_WIN\ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00500}00500\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00501}\mbox{\hyperlink{lv__conf_8h_a1d6045ad00b8d5db61819fa511312871}{00501}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_SPAN\ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00502}00502\ \textcolor{preprocessor}{\#if\ LV\_USE\_SPAN}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00503}00503\ \textcolor{comment}{/*A\ line\ text\ can\ contain\ maximum\ num\ of\ span\ descriptor\ */}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00504}\mbox{\hyperlink{lv__conf_8h_ae7db45d2104e7680574837e31ed5d4b9}{00504}}\ \textcolor{preprocessor}{\#\ \ define\ LV\_SPAN\_SNIPPET\_STACK\_SIZE\ 64}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00505}00505\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00506}00506\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00507}00507\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00508}00508\ \textcolor{comment}{\ *\ Themes}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00509}00509\ \textcolor{comment}{\ *-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00510}00510\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00511}00511\ \textcolor{comment}{/*A\ simple,\ impressive\ and\ very\ complete\ theme*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00512}\mbox{\hyperlink{lv__conf_8h_a1df57ee8809abc5d8c24bc95ea6293b7}{00512}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_THEME\_DEFAULT\ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00513}00513\ \textcolor{preprocessor}{\#if\ LV\_USE\_THEME\_DEFAULT}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00514}00514\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00515}00515\ \textcolor{comment}{/*0:\ Light\ mode;\ 1:\ Dark\ mode*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00516}\mbox{\hyperlink{lv__conf_8h_aa147e121ac57e0766fe646ab8fbfdd43}{00516}}\ \textcolor{preprocessor}{\#\ define\ LV\_THEME\_DEFAULT\_DARK\ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00517}00517\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00518}00518\ \textcolor{comment}{/*1:\ Enable\ grow\ on\ press*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00519}\mbox{\hyperlink{lv__conf_8h_a607a867077d452888aca389b99a37613}{00519}}\ \textcolor{preprocessor}{\#\ define\ LV\_THEME\_DEFAULT\_GROW\ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00520}00520\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00521}00521\ \textcolor{comment}{/*Default\ transition\ time\ in\ [ms]*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00522}\mbox{\hyperlink{lv__conf_8h_a4cf6d2bbdde57ce13d52d38aa5eac1fa}{00522}}\ \textcolor{preprocessor}{\#\ define\ LV\_THEME\_DEFAULT\_TRANSITION\_TIME\ 80}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00523}00523\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*LV\_USE\_THEME\_DEFAULT*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00524}00524\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00525}00525\ \textcolor{comment}{/*A\ very\ simple\ theme\ that\ is\ a\ good\ starting\ point\ for\ a\ custom\ theme*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00526}\mbox{\hyperlink{lv__conf_8h_a98e05a1aa53e40f159c79b19d1c7f6b4}{00526}}\ \textcolor{preprocessor}{\ \#define\ LV\_USE\_THEME\_BASIC\ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00527}00527\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00528}00528\ \textcolor{comment}{/*A\ theme\ designed\ for\ monochrome\ displays*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00529}\mbox{\hyperlink{lv__conf_8h_a27648a176c28e6adbcf6225d8ef79e56}{00529}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_THEME\_MONO\ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00530}00530\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00531}00531\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00532}00532\ \textcolor{comment}{\ *\ Layouts}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00533}00533\ \textcolor{comment}{\ *-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00534}00534\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00535}00535\ \textcolor{comment}{/*A\ layout\ similar\ to\ Flexbox\ in\ CSS.*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00536}\mbox{\hyperlink{lv__conf_8h_aed5e4669c5b03deae5e87c421f756cc0}{00536}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_FLEX\ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00537}00537\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00538}00538\ \textcolor{comment}{/*A\ layout\ similar\ to\ Grid\ in\ CSS.*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00539}\mbox{\hyperlink{lv__conf_8h_a448130ebbbaf9352f91c9161bed49862}{00539}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_GRID\ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00540}00540\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00541}00541\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00542}00542\ \textcolor{comment}{\ *\ 3rd\ party\ libraries}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00543}00543\ \textcolor{comment}{\ *-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00544}00544\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00545}00545\ \textcolor{comment}{/*File\ system\ interfaces\ for\ common\ APIs}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00546}00546\ \textcolor{comment}{\ *To\ enable\ set\ a\ driver\ letter\ for\ that\ API*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00547}\mbox{\hyperlink{lv__conf_8h_ad229a30c5f679f8e608a491f098dec24}{00547}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_FS\_STDIO\ '\(\backslash\)0'\ \ \ \ \ \ \ \ }\textcolor{comment}{/*Uses\ fopen,\ fread,\ etc*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00548}00548\ \textcolor{comment}{//\#define\ LV\_FS\_STDIO\_PATH\ "{}/home/john/"{}\ \ \ \ /*Set\ the\ working\ directory.\ If\ commented\ it\ will\ be\ "{}./"{}\ */}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00549}00549\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00550}\mbox{\hyperlink{lv__conf_8h_a60d22fc87afad0fd00fbb38a76889cfb}{00550}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_FS\_POSIX\ '\(\backslash\)0'\ \ \ \ \ \ \ \ }\textcolor{comment}{/*Uses\ open,\ read,\ etc*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00551}00551\ \textcolor{comment}{//\#define\ LV\_FS\_POSIX\_PATH\ "{}/home/john/"{}\ \ \ \ /*Set\ the\ working\ directory.\ If\ commented\ it\ will\ be\ "{}./"{}\ */}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00552}00552\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00553}\mbox{\hyperlink{lv__conf_8h_a83ade6ab62190bcf5adf2301bd56f01e}{00553}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_FS\_WIN32\ '\(\backslash\)0'\ \ \ \ \ \ \ \ }\textcolor{comment}{/*Uses\ CreateFile,\ ReadFile,\ etc*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00554}00554\ \textcolor{comment}{//\#define\ LV\_FS\_WIN32\_PATH\ "{}C:\(\backslash\)\(\backslash\)Users\(\backslash\)\(\backslash\)john\(\backslash\)\(\backslash\)"{}\ \ \ \ /*Set\ the\ working\ directory.\ If\ commented\ it\ will\ be\ "{}.\(\backslash\)\(\backslash\)"{}\ */}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00555}00555\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00556}\mbox{\hyperlink{lv__conf_8h_aaf74151144e3f9249f77a7092d64a2ab}{00556}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_FS\_FATFS\ '\(\backslash\)0'\ \ \ \ \ \ \ \ }\textcolor{comment}{/*Uses\ f\_open,\ f\_read,\ etc*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00557}00557\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00558}00558\ \textcolor{comment}{/*PNG\ decoder\ library*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00559}\mbox{\hyperlink{lv__conf_8h_aa5ab5053c7c516c234f3af8cec87efac}{00559}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_PNG\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00560}00560\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00561}00561\ \textcolor{comment}{/*BMP\ decoder\ library*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00562}\mbox{\hyperlink{lv__conf_8h_aa204c68978c64a659c43618f9113fef8}{00562}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_BMP\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00563}00563\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00564}00564\ \textcolor{comment}{/*\ JPG\ +\ split\ JPG\ decoder\ library.}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00565}00565\ \textcolor{comment}{\ *\ Split\ JPG\ is\ a\ custom\ format\ optimized\ for\ embedded\ systems.\ */}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00566}\mbox{\hyperlink{lv__conf_8h_a1a7272048f176c8b87966194933cc2bd}{00566}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_SJPG\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00567}00567\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00568}00568\ \textcolor{comment}{/*GIF\ decoder\ library*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00569}\mbox{\hyperlink{lv__conf_8h_a40257e0390c96f7e9c604f6fef4f996c}{00569}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_GIF\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00570}00570\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00571}00571\ \textcolor{comment}{/*QR\ code\ library*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00572}\mbox{\hyperlink{lv__conf_8h_a23ad1b5ec39c469c9dda0cb4b8e3e858}{00572}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_QRCODE\ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00573}00573\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00574}00574\ \textcolor{comment}{/*FreeType\ library*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00575}\mbox{\hyperlink{lv__conf_8h_add2c97b28774c04c288091b589cf50c6}{00575}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_FREETYPE\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00576}00576\ \textcolor{preprocessor}{\#if\ LV\_USE\_FREETYPE}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00577}00577\ \textcolor{comment}{/*Memory\ used\ by\ FreeType\ to\ cache\ characters\ [bytes]\ (-\/1:\ no\ caching)*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00578}00578\ \textcolor{preprocessor}{\#\ define\ LV\_FREETYPE\_CACHE\_SIZE\ (16\ *\ 1024)}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00579}00579\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00580}00580\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00581}00581\ \textcolor{comment}{/*Rlottie\ library*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00582}\mbox{\hyperlink{lv__conf_8h_af9a8b2a5334032d5e4e01fb32592a274}{00582}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_RLOTTIE\ 0}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00583}00583\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00584}00584\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00585}00585\ \textcolor{comment}{\ *\ Others}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00586}00586\ \textcolor{comment}{\ *-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00587}00587\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00588}00588\ \textcolor{comment}{/*1:\ Enable\ API\ to\ take\ snapshot\ for\ object*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00589}\mbox{\hyperlink{lv__conf_8h_a44cc4d61a2c09eb55907a3e56e4829f3}{00589}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_SNAPSHOT\ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00590}00590\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00591}00591\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00592}00592\ \textcolor{comment}{/*==================}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00593}00593\ \textcolor{comment}{*\ EXAMPLES}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00594}00594\ \textcolor{comment}{*==================*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00595}00595\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00596}00596\ \textcolor{comment}{/*Enable\ the\ examples\ to\ be\ built\ with\ the\ library*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00597}\mbox{\hyperlink{lv__conf_8h_a0e9851d66108d2d705713308ae332bb9}{00597}}\ \textcolor{preprocessor}{\#define\ LV\_BUILD\_EXAMPLES\ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00598}00598\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00599}00599\ \textcolor{comment}{/*Use\ a\ custom\ font\ to\ define\ new\ symbols\ */}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00600}\mbox{\hyperlink{lv__conf_8h_abe5ddd0574b1cd3c60ba4e17f27f36af}{00600}}\ \textcolor{preprocessor}{\#define\ LV\_USE\_FONT\_SYMBOLS\ 1}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00601}00601\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00602}00602\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00603}00603\ \textcolor{comment}{\ *\ OTHERS}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00604}00604\ \textcolor{comment}{\ *-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00605}00605\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00606}00606\ \textcolor{comment}{/*-\/-\/END\ OF\ LV\_CONF\_H-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00607}00607\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00608}00608\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*LV\_CONF\_H*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00609}00609\ }
+\DoxyCodeLine{\Hypertarget{lv__conf_8h_source_l00610}00610\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*End\ of\ "{}Content\ enable"{}*/}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

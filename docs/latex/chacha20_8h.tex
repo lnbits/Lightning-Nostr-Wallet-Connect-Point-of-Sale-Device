@@ -1,0 +1,199 @@
+\hypertarget{chacha20_8h}{}\doxysection{lib/nostr/nip44/chacha20.h File Reference}
+\label{chacha20_8h}\index{lib/nostr/nip44/chacha20.h@{lib/nostr/nip44/chacha20.h}}
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+Include dependency graph for chacha20.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structchacha20__ctx}{chacha20\+\_\+ctx}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{chacha20_8h_a268a65c9476c0ac2ea6c5262e13ce207}{chacha20\+\_\+init\+\_\+ctx}} (struct \mbox{\hyperlink{structchacha20__ctx}{chacha20\+\_\+ctx}} $\ast$ctx, const uint8\+\_\+t key\mbox{[}32\mbox{]}, const uint8\+\_\+t nonce\mbox{[}12\mbox{]})
+\item 
+void \mbox{\hyperlink{chacha20_8h_a1bd1114af5778b45f328ac106c96d84a}{chacha20\+\_\+block}} (struct \mbox{\hyperlink{structchacha20__ctx}{chacha20\+\_\+ctx}} $\ast$ctx)
+\item 
+void \mbox{\hyperlink{chacha20_8h_ae2b236dc071d0ce2940ce0593d03b09f}{chacha20\+\_\+encrypt}} (struct \mbox{\hyperlink{structchacha20__ctx}{chacha20\+\_\+ctx}} $\ast$ctx, uint8\+\_\+t $\ast$output, const uint8\+\_\+t $\ast$input, size\+\_\+t length)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{chacha20_8h_a1bd1114af5778b45f328ac106c96d84a}\label{chacha20_8h_a1bd1114af5778b45f328ac106c96d84a}} 
+\index{chacha20.h@{chacha20.h}!chacha20\_block@{chacha20\_block}}
+\index{chacha20\_block@{chacha20\_block}!chacha20.h@{chacha20.h}}
+\doxysubsubsection{\texorpdfstring{chacha20\_block()}{chacha20\_block()}}
+{\footnotesize\ttfamily void chacha20\+\_\+block (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structchacha20__ctx}{chacha20\+\_\+ctx}} $\ast$}]{ctx }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{chacha20_8cpp_source_l00050}{50}} of file \mbox{\hyperlink{chacha20_8cpp_source}{chacha20.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00051\ \ \ \ \ uint32\_t\ x[16];}
+\DoxyCodeLine{00052\ \ \ \ \ memcpy(x,\ ctx-\/>\mbox{\hyperlink{structchacha20__ctx_aa5a0a216c6ec152c1d45bb80963ad674}{state}},\ \textcolor{keyword}{sizeof}(x));}
+\DoxyCodeLine{00053\ \ \ \ \ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{comment}{//\ Perform\ ChaCha20\ rounds}}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 10;\ i++)\ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Column\ rounds}}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{chacha20_8cpp_aae524f06f43cef9dde57fb1cecc75d4a}{QUARTERROUND}}(x[0],\ x[4],\ x[8],\ x[12])}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{chacha20_8cpp_aae524f06f43cef9dde57fb1cecc75d4a}{QUARTERROUND}}(x[1],\ x[5],\ x[9],\ x[13])}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{chacha20_8cpp_aae524f06f43cef9dde57fb1cecc75d4a}{QUARTERROUND}}(x[2],\ x[6],\ x[10],\ x[14])}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{chacha20_8cpp_aae524f06f43cef9dde57fb1cecc75d4a}{QUARTERROUND}}(x[3],\ x[7],\ x[11],\ x[15])}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Diagonal\ rounds}}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{chacha20_8cpp_aae524f06f43cef9dde57fb1cecc75d4a}{QUARTERROUND}}(x[0],\ x[5],\ x[10],\ x[15])}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{chacha20_8cpp_aae524f06f43cef9dde57fb1cecc75d4a}{QUARTERROUND}}(x[1],\ x[6],\ x[11],\ x[12])}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{chacha20_8cpp_aae524f06f43cef9dde57fb1cecc75d4a}{QUARTERROUND}}(x[2],\ x[7],\ x[8],\ x[13])}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{chacha20_8cpp_aae524f06f43cef9dde57fb1cecc75d4a}{QUARTERROUND}}(x[3],\ x[4],\ x[9],\ x[14])}
+\DoxyCodeLine{00066\ \ \ \ \ \}}
+\DoxyCodeLine{00067\ \ \ \ \ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{comment}{//\ Add\ input\ state\ to\ the\ result}}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 16;\ i++)\ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ uint32\_t\ v\ =\ x[i]\ +\ ctx-\/>\mbox{\hyperlink{structchacha20__ctx_aa5a0a216c6ec152c1d45bb80963ad674}{state}}[i];}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ ctx-\/>\mbox{\hyperlink{structchacha20__ctx_a4f044e2de49c909885be4b11120d0682}{buffer}}[4*i\ +\ 0]\ =\ v\ \&\ 0xff;}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ ctx-\/>\mbox{\hyperlink{structchacha20__ctx_a4f044e2de49c909885be4b11120d0682}{buffer}}[4*i\ +\ 1]\ =\ (v\ >>\ 8)\ \&\ 0xff;}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ ctx-\/>\mbox{\hyperlink{structchacha20__ctx_a4f044e2de49c909885be4b11120d0682}{buffer}}[4*i\ +\ 2]\ =\ (v\ >>\ 16)\ \&\ 0xff;}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ ctx-\/>\mbox{\hyperlink{structchacha20__ctx_a4f044e2de49c909885be4b11120d0682}{buffer}}[4*i\ +\ 3]\ =\ (v\ >>\ 24)\ \&\ 0xff;}
+\DoxyCodeLine{00075\ \ \ \ \ \}}
+\DoxyCodeLine{00076\ \ \ \ \ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{comment}{//\ Reset\ buffer\ usage}}
+\DoxyCodeLine{00078\ \ \ \ \ ctx-\/>\mbox{\hyperlink{structchacha20__ctx_a6f4041cbba8b07077459aace885d30a4}{buffer\_used}}\ =\ 0;}
+\DoxyCodeLine{00079\ \ \ \ \ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{comment}{//\ Increment\ counter\ with\ overflow\ check}}
+\DoxyCodeLine{00081\ \ \ \ \ ctx-\/>\mbox{\hyperlink{structchacha20__ctx_aa5a0a216c6ec152c1d45bb80963ad674}{state}}[12]++;}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordflow}{if}\ (ctx-\/>\mbox{\hyperlink{structchacha20__ctx_aa5a0a216c6ec152c1d45bb80963ad674}{state}}[12]\ ==\ 0)\ \{}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Counter\ wrapped,\ increment\ next\ word}}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ ctx-\/>\mbox{\hyperlink{structchacha20__ctx_aa5a0a216c6ec152c1d45bb80963ad674}{state}}[13]++;}
+\DoxyCodeLine{00085\ \ \ \ \ \}}
+\DoxyCodeLine{00086\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{chacha20_8h_ae2b236dc071d0ce2940ce0593d03b09f}\label{chacha20_8h_ae2b236dc071d0ce2940ce0593d03b09f}} 
+\index{chacha20.h@{chacha20.h}!chacha20\_encrypt@{chacha20\_encrypt}}
+\index{chacha20\_encrypt@{chacha20\_encrypt}!chacha20.h@{chacha20.h}}
+\doxysubsubsection{\texorpdfstring{chacha20\_encrypt()}{chacha20\_encrypt()}}
+{\footnotesize\ttfamily void chacha20\+\_\+encrypt (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structchacha20__ctx}{chacha20\+\_\+ctx}} $\ast$}]{ctx,  }\item[{uint8\+\_\+t $\ast$}]{output,  }\item[{const uint8\+\_\+t $\ast$}]{input,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{chacha20_8cpp_source_l00088}{88}} of file \mbox{\hyperlink{chacha20_8cpp_source}{chacha20.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordflow}{if}\ (!output\ ||\ !input\ ||\ length\ ==\ 0)\ \{}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}ChaCha20:\ Invalid\ parameters"{}});}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00092\ \ \ \ \ \}}
+\DoxyCodeLine{00093\ \ \ \ \ }
+\DoxyCodeLine{00094\ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}ChaCha20\ processing\ length:\ "{}}\ +\ String(length));}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ total\_processed\ =\ 0;}
+\DoxyCodeLine{00096\ \ \ \ \ }
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{comment}{//\ Log\ first\ few\ bytes\ of\ input}}
+\DoxyCodeLine{00098\ \ \ \ \ String\ inputHex;}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ std::min(length,\ (\textcolor{keywordtype}{size\_t})16);\ i++)\ \{}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ hex[3];}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ snprintf(hex,\ \textcolor{keyword}{sizeof}(hex),\ \textcolor{stringliteral}{"{}\%02x"{}},\ input[i]);}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ inputHex\ +=\ hex;}
+\DoxyCodeLine{00103\ \ \ \ \ \}}
+\DoxyCodeLine{00104\ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}First\ bytes\ of\ input:\ "{}}\ +\ inputHex);}
+\DoxyCodeLine{00105\ \ \ \ \ }
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keywordflow}{while}\ (length\ >\ 0)\ \{}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Generate\ new\ block\ if\ needed}}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ctx-\/>\mbox{\hyperlink{structchacha20__ctx_a6f4041cbba8b07077459aace885d30a4}{buffer\_used}}\ >=\ 64)\ \{}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}Generating\ new\ block\ at\ offset:\ "{}}\ +\ String(total\_processed));}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{chacha20_8cpp_a1bd1114af5778b45f328ac106c96d84a}{chacha20\_block}}(ctx);}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Calculate\ how\ many\ bytes\ we\ can\ process\ from\ current\ block}}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ available\ =\ 64\ -\/\ ctx-\/>\mbox{\hyperlink{structchacha20__ctx_a6f4041cbba8b07077459aace885d30a4}{buffer\_used}};}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ use\ =\ length\ >\ available\ ?\ available\ :\ length;}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}Processing\ block\ of\ size:\ "{}}\ +\ String(use)\ +\ }
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ at\ offset:\ "{}}\ +\ String(total\_processed)\ +\ }
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ buffer\_used:\ "{}}\ +\ String(ctx-\/>\mbox{\hyperlink{structchacha20__ctx_a6f4041cbba8b07077459aace885d30a4}{buffer\_used}})\ +}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ remaining:\ "{}}\ +\ String(length));}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ XOR\ the\ input\ with\ the\ keystream}}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ use;\ i++)\ \{}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ output[total\_processed\ +\ i]\ =\ input[total\_processed\ +\ i]\ \string^\ }
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ctx-\/>\mbox{\hyperlink{structchacha20__ctx_a4f044e2de49c909885be4b11120d0682}{buffer}}[ctx-\/>\mbox{\hyperlink{structchacha20__ctx_a6f4041cbba8b07077459aace885d30a4}{buffer\_used}}\ +\ i];}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Log\ a\ few\ bytes\ of\ output\ after\ each\ block}}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (total\_processed\ <\ 16)\ \{}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ String\ outputHex;}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t}\ i\ =\ total\_processed;\ i\ <\ std::min(total\_processed\ +\ use,\ (\textcolor{keywordtype}{size\_t})16);\ i++)\ \{}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ hex[3];}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ snprintf(hex,\ \textcolor{keyword}{sizeof}(hex),\ \textcolor{stringliteral}{"{}\%02x"{}},\ output[i]);}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ outputHex\ +=\ hex;}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}Output\ bytes\ at\ "{}}\ +\ String(total\_processed)\ +\ \textcolor{stringliteral}{"{}:\ "{}}\ +\ outputHex);}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ ctx-\/>\mbox{\hyperlink{structchacha20__ctx_a6f4041cbba8b07077459aace885d30a4}{buffer\_used}}\ +=\ use;}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ length\ -\/=\ use;}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ total\_processed\ +=\ use;}
+\DoxyCodeLine{00142\ \ \ \ \ \}}
+\DoxyCodeLine{00143\ \ \ \ \ }
+\DoxyCodeLine{00144\ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}ChaCha20\ completed,\ total\ processed:\ "{}}\ +\ String(total\_processed));}
+\DoxyCodeLine{00145\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{chacha20_8h_a268a65c9476c0ac2ea6c5262e13ce207}\label{chacha20_8h_a268a65c9476c0ac2ea6c5262e13ce207}} 
+\index{chacha20.h@{chacha20.h}!chacha20\_init\_ctx@{chacha20\_init\_ctx}}
+\index{chacha20\_init\_ctx@{chacha20\_init\_ctx}!chacha20.h@{chacha20.h}}
+\doxysubsubsection{\texorpdfstring{chacha20\_init\_ctx()}{chacha20\_init\_ctx()}}
+{\footnotesize\ttfamily void chacha20\+\_\+init\+\_\+ctx (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structchacha20__ctx}{chacha20\+\_\+ctx}} $\ast$}]{ctx,  }\item[{const uint8\+\_\+t}]{key\mbox{[}32\mbox{]},  }\item[{const uint8\+\_\+t}]{nonce\mbox{[}12\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{chacha20_8cpp_source_l00012}{12}} of file \mbox{\hyperlink{chacha20_8cpp_source}{chacha20.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{comment}{//\ Initialize\ context}}
+\DoxyCodeLine{00014\ \ \ \ \ memset(ctx,\ 0,\ \textcolor{keyword}{sizeof}(*ctx));}
+\DoxyCodeLine{00015\ \ \ \ \ }
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{comment}{//\ Constants\ -\/\ "{}expand\ 32-\/byte\ k"{}}}
+\DoxyCodeLine{00017\ \ \ \ \ ctx-\/>\mbox{\hyperlink{structchacha20__ctx_aa5a0a216c6ec152c1d45bb80963ad674}{state}}[0]\ =\ 0x61707865;}
+\DoxyCodeLine{00018\ \ \ \ \ ctx-\/>\mbox{\hyperlink{structchacha20__ctx_aa5a0a216c6ec152c1d45bb80963ad674}{state}}[1]\ =\ 0x3320646e;}
+\DoxyCodeLine{00019\ \ \ \ \ ctx-\/>\mbox{\hyperlink{structchacha20__ctx_aa5a0a216c6ec152c1d45bb80963ad674}{state}}[2]\ =\ 0x79622d32;}
+\DoxyCodeLine{00020\ \ \ \ \ ctx-\/>\mbox{\hyperlink{structchacha20__ctx_aa5a0a216c6ec152c1d45bb80963ad674}{state}}[3]\ =\ 0x6b206574;}
+\DoxyCodeLine{00021\ \ \ \ \ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{comment}{//\ Key}}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 8;\ i++)\ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ ctx-\/>\mbox{\hyperlink{structchacha20__ctx_aa5a0a216c6ec152c1d45bb80963ad674}{state}}[4\ +\ i]\ =\ ((uint32\_t)key[4*i\ +\ 0]\ <<\ 0)\ |}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint32\_t)key[4*i\ +\ 1]\ <<\ 8)\ |}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint32\_t)key[4*i\ +\ 2]\ <<\ 16)\ |}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint32\_t)key[4*i\ +\ 3]\ <<\ 24);}
+\DoxyCodeLine{00028\ \ \ \ \ \}}
+\DoxyCodeLine{00029\ \ \ \ \ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{comment}{//\ Counter\ (starts\ at\ 0)}}
+\DoxyCodeLine{00031\ \ \ \ \ ctx-\/>\mbox{\hyperlink{structchacha20__ctx_aa5a0a216c6ec152c1d45bb80963ad674}{state}}[12]\ =\ 0;}
+\DoxyCodeLine{00032\ \ \ \ \ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{comment}{//\ Nonce}}
+\DoxyCodeLine{00034\ \ \ \ \ ctx-\/>\mbox{\hyperlink{structchacha20__ctx_aa5a0a216c6ec152c1d45bb80963ad674}{state}}[13]\ =\ ((uint32\_t)nonce[0]\ <<\ 0)\ |}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint32\_t)nonce[1]\ <<\ 8)\ |}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint32\_t)nonce[2]\ <<\ 16)\ |}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint32\_t)nonce[3]\ <<\ 24);}
+\DoxyCodeLine{00038\ \ \ \ \ ctx-\/>\mbox{\hyperlink{structchacha20__ctx_aa5a0a216c6ec152c1d45bb80963ad674}{state}}[14]\ =\ ((uint32\_t)nonce[4]\ <<\ 0)\ |}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint32\_t)nonce[5]\ <<\ 8)\ |}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint32\_t)nonce[6]\ <<\ 16)\ |}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint32\_t)nonce[7]\ <<\ 24);}
+\DoxyCodeLine{00042\ \ \ \ \ ctx-\/>\mbox{\hyperlink{structchacha20__ctx_aa5a0a216c6ec152c1d45bb80963ad674}{state}}[15]\ =\ ((uint32\_t)nonce[8]\ <<\ 0)\ |}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint32\_t)nonce[9]\ <<\ 8)\ |}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint32\_t)nonce[10]\ <<\ 16)\ |}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint32\_t)nonce[11]\ <<\ 24);}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00047\ \ \ \ \ ctx-\/>\mbox{\hyperlink{structchacha20__ctx_a6f4041cbba8b07077459aace885d30a4}{buffer\_used}}\ =\ 64;\ \textcolor{comment}{//\ Force\ new\ block\ generation\ on\ first\ use}}
+\DoxyCodeLine{00048\ \}}
+
+\end{DoxyCode}

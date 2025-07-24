@@ -1,0 +1,80 @@
+\hypertarget{display_8h}{}\doxysection{src/display.h File Reference}
+\label{display_8h}\index{src/display.h@{src/display.h}}
+{\ttfamily \#include $<$Arduino.\+h$>$}\newline
+{\ttfamily \#include $<$Arduino\+\_\+\+GFX\+\_\+\+Library.\+h$>$}\newline
+{\ttfamily \#include $<$lvgl.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}pincfg.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dispcfg.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}AXS15231\+B\+\_\+touch.\+h\char`\"{}}\newline
+Include dependency graph for display.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespace_display}{Display}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{display_8h_a83af0cb652728913ff58da7133c692ea}{TFT\+\_\+\+WIDTH}}~\mbox{\hyperlink{dispcfg_8h_a7e76b7900a303c107f31414b2e231edb}{TFT\+\_\+res\+\_\+W}}
+\item 
+\#define \mbox{\hyperlink{display_8h_a1c2d2e1cd167f90b809c3450fd6f3434}{TFT\+\_\+\+HEIGHT}}~\mbox{\hyperlink{dispcfg_8h_a3ed892b03a04858b1d132412428d5c97}{TFT\+\_\+res\+\_\+H}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespace_display_aacbf91b9f8c57fc2cb892c45fd44e655}{Display\+::init}} ()
+\item 
+void \mbox{\hyperlink{namespace_display_a74136dce435d7a569c5fb00d5f7afbe6}{Display\+::cleanup}} ()
+\item 
+void \mbox{\hyperlink{namespace_display_a5edb1eb6aad9305091ed3479edc983d6}{Display\+::set\+Rotation}} (int rotation)
+\item 
+void \mbox{\hyperlink{namespace_display_a77664f233d6b5e98be33985eed783600}{Display\+::set\+Backlight\+Brightness}} (uint8\+\_\+t brightness)
+\item 
+void \mbox{\hyperlink{namespace_display_aa8aef5688a630d912c6d9bd1c764c542}{Display\+::turn\+Off\+Backlight}} ()
+\item 
+void \mbox{\hyperlink{namespace_display_a75d875ec473cbdd00bee7951951d81c0}{Display\+::turn\+On\+Backlight}} ()
+\item 
+void \mbox{\hyperlink{namespace_display_a78f08fa1900213ef37200b256396765c}{Display\+::display\+Flush}} (lv\+\_\+disp\+\_\+drv\+\_\+t $\ast$disp, const lv\+\_\+area\+\_\+t $\ast$area, lv\+\_\+color\+\_\+t $\ast$color\+\_\+p)
+\item 
+void \mbox{\hyperlink{namespace_display_a3d51aeecf9902984e423412bbe757155}{Display\+::touchpad\+Read}} (lv\+\_\+indev\+\_\+drv\+\_\+t $\ast$indev\+\_\+driver, lv\+\_\+indev\+\_\+data\+\_\+t $\ast$data)
+\item 
+void \mbox{\hyperlink{namespace_display_add3c94239d228504e67b3720541065cc}{Display\+::display\+QRCode}} (const String \&invoice)
+\item 
+void \mbox{\hyperlink{namespace_display_ace6d523c48cf82aef610774be829b85b}{Display\+::display\+Invoice\+Text\+Fallback}} (const String \&invoice)
+\item 
+void \mbox{\hyperlink{namespace_display_ac8bef7d31e6dd87afcbcac8477f4c5c9}{Display\+::setup\+LVGL}} ()
+\item 
+Arduino\+\_\+\+GFX \& \mbox{\hyperlink{namespace_display_a18c2dedb3287a8213f6a7d8ce61de740}{Display\+::get\+GFX}} ()
+\item 
+lv\+\_\+obj\+\_\+t $\ast$ \mbox{\hyperlink{namespace_display_acb0d0237a8d03c78c35bad1248d26eeb}{Display\+::get\+QRCanvas}} ()
+\item 
+void \mbox{\hyperlink{namespace_display_a265f5a3b090df04fb0b928b84a2d7e17}{Display\+::set\+QRCanvas}} (lv\+\_\+obj\+\_\+t $\ast$canvas)
+\item 
+void \mbox{\hyperlink{namespace_display_a0c478a57b622918a8499d369db409f85}{Display\+::get\+Last\+Touch}} (int32\+\_\+t \&x, int32\+\_\+t \&y)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{display_8h_a1c2d2e1cd167f90b809c3450fd6f3434}\label{display_8h_a1c2d2e1cd167f90b809c3450fd6f3434}} 
+\index{display.h@{display.h}!TFT\_HEIGHT@{TFT\_HEIGHT}}
+\index{TFT\_HEIGHT@{TFT\_HEIGHT}!display.h@{display.h}}
+\doxysubsubsection{\texorpdfstring{TFT\_HEIGHT}{TFT\_HEIGHT}}
+{\footnotesize\ttfamily \#define TFT\+\_\+\+HEIGHT~\mbox{\hyperlink{dispcfg_8h_a3ed892b03a04858b1d132412428d5c97}{TFT\+\_\+res\+\_\+H}}}
+
+
+
+Definition at line \mbox{\hyperlink{display_8h_source_l00012}{12}} of file \mbox{\hyperlink{display_8h_source}{display.\+h}}.
+
+\mbox{\Hypertarget{display_8h_a83af0cb652728913ff58da7133c692ea}\label{display_8h_a83af0cb652728913ff58da7133c692ea}} 
+\index{display.h@{display.h}!TFT\_WIDTH@{TFT\_WIDTH}}
+\index{TFT\_WIDTH@{TFT\_WIDTH}!display.h@{display.h}}
+\doxysubsubsection{\texorpdfstring{TFT\_WIDTH}{TFT\_WIDTH}}
+{\footnotesize\ttfamily \#define TFT\+\_\+\+WIDTH~\mbox{\hyperlink{dispcfg_8h_a7e76b7900a303c107f31414b2e231edb}{TFT\+\_\+res\+\_\+W}}}
+
+
+
+Definition at line \mbox{\hyperlink{display_8h_source_l00011}{11}} of file \mbox{\hyperlink{display_8h_source}{display.\+h}}.
+

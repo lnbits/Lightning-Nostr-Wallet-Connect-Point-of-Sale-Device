@@ -1,0 +1,49 @@
+\hypertarget{config_8h}{}\doxysection{src/config.h File Reference}
+\label{config_8h}\index{src/config.h@{src/config.h}}
+
+
+System Configuration Constants and Definitions.  
+
+
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+Include dependency graph for config.\+h\+:
+% FIG 0
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{group___display_config_gaf1316af7f6e1dc59f4efc2cfcc5e261a}{LGFX\+\_\+\+AUTODETECT}}
+\item 
+\#define \mbox{\hyperlink{group___display_config_ga8971619bda1a23f66d5a31f72adef7cc}{LGFX\+\_\+\+USE\+\_\+\+V1}}
+\item 
+\#define \mbox{\hyperlink{group___wi_fi_config_gaa35fe6214675371a92764fd32ea4cf95}{WIFI\+\_\+\+PREFERENCES\+\_\+\+NAMESPACE}}~\char`\"{}wifi-\/creds\char`\"{}
+\begin{DoxyCompactList}\small\item\em Preferences namespace for Wi\+Fi credentials. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group___wi_fi_config_ga6ffa13160b37e4dc2079bef4f8dc6097}{WIFI\+\_\+\+SSID\+\_\+\+KEY}}~\char`\"{}ssid\char`\"{}
+\begin{DoxyCompactList}\small\item\em Preferences key for Wi\+Fi SSID. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group___wi_fi_config_gad1e169b75330531bca68d7dda210a046}{WIFI\+\_\+\+PASSWORD\+\_\+\+KEY}}~\char`\"{}password\char`\"{}
+\begin{DoxyCompactList}\small\item\em Preferences key for Wi\+Fi password. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group___wi_fi_config_ga9e764176799ab1864f4e70ecb4f65639}{WIFI\+\_\+\+CONNECTION\+\_\+\+TIMEOUT}}~30
+\begin{DoxyCompactList}\small\item\em Wi\+Fi connection timeout in attempts (each 500ms) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{group___screen_states_gac99fecebca9e3a20e926681fe9e5beb9}{screen\+\_\+state\+\_\+t}} \{ \mbox{\hyperlink{group___screen_states_ggac99fecebca9e3a20e926681fe9e5beb9ae8d89f634ab11edcbc6c096ecf24b2eb}{SCREEN\+\_\+\+KEYPAD}}
+, \mbox{\hyperlink{group___screen_states_ggac99fecebca9e3a20e926681fe9e5beb9a6fcb85d9f038bd440753c164469342dc}{SCREEN\+\_\+\+SETTINGS}}
+, \mbox{\hyperlink{group___screen_states_ggac99fecebca9e3a20e926681fe9e5beb9a083d3d7ecdfde519d158bc403d674246}{SCREEN\+\_\+\+WIFI}}
+, \mbox{\hyperlink{group___screen_states_ggac99fecebca9e3a20e926681fe9e5beb9a3a06b4f52c2ee6478012c7e1677609ee}{SCREEN\+\_\+\+WIFI\+\_\+\+PASSWORD}}
+ \}
+\begin{DoxyCompactList}\small\item\em Screen state enumeration. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+System Configuration Constants and Definitions. 
+
+Contains all system-\/wide configuration constants, including\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{namespace_display}{Display}} and graphics settings for WT32-\/\+SC01
+\item Wi\+Fi connection parameters and timeouts
+\item LVGL buffer configurations
+\item Screen state definitions 
+\end{DoxyItemize}
+
+Definition in file \mbox{\hyperlink{config_8h_source}{config.\+h}}.
+

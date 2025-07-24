@@ -1,0 +1,613 @@
+\hypertarget{namespace_display}{}\doxysection{Display Namespace Reference}
+\label{namespace_display}\index{Display@{Display}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespace_display_aacbf91b9f8c57fc2cb892c45fd44e655}{init}} ()
+\item 
+void \mbox{\hyperlink{namespace_display_a74136dce435d7a569c5fb00d5f7afbe6}{cleanup}} ()
+\item 
+void \mbox{\hyperlink{namespace_display_a5edb1eb6aad9305091ed3479edc983d6}{set\+Rotation}} (int rotation)
+\item 
+void \mbox{\hyperlink{namespace_display_ac8bef7d31e6dd87afcbcac8477f4c5c9}{setup\+LVGL}} ()
+\item 
+void \mbox{\hyperlink{namespace_display_a78f08fa1900213ef37200b256396765c}{display\+Flush}} (lv\+\_\+disp\+\_\+drv\+\_\+t $\ast$disp, const lv\+\_\+area\+\_\+t $\ast$area, lv\+\_\+color\+\_\+t $\ast$color\+\_\+p)
+\item 
+void \mbox{\hyperlink{namespace_display_a3d51aeecf9902984e423412bbe757155}{touchpad\+Read}} (lv\+\_\+indev\+\_\+drv\+\_\+t $\ast$indev\+\_\+driver, lv\+\_\+indev\+\_\+data\+\_\+t $\ast$data)
+\item 
+void \mbox{\hyperlink{namespace_display_add3c94239d228504e67b3720541065cc}{display\+QRCode}} (const String \&invoice)
+\item 
+void \mbox{\hyperlink{namespace_display_ace6d523c48cf82aef610774be829b85b}{display\+Invoice\+Text\+Fallback}} (const String \&invoice)
+\item 
+Arduino\+\_\+\+GFX \& \mbox{\hyperlink{namespace_display_a18c2dedb3287a8213f6a7d8ce61de740}{get\+GFX}} ()
+\item 
+lv\+\_\+obj\+\_\+t $\ast$ \mbox{\hyperlink{namespace_display_acb0d0237a8d03c78c35bad1248d26eeb}{get\+QRCanvas}} ()
+\item 
+void \mbox{\hyperlink{namespace_display_a265f5a3b090df04fb0b928b84a2d7e17}{set\+QRCanvas}} (lv\+\_\+obj\+\_\+t $\ast$canvas)
+\item 
+void \mbox{\hyperlink{namespace_display_a0c478a57b622918a8499d369db409f85}{get\+Last\+Touch}} (int32\+\_\+t \&x, int32\+\_\+t \&y)
+\item 
+void \mbox{\hyperlink{namespace_display_a77664f233d6b5e98be33985eed783600}{set\+Backlight\+Brightness}} (uint8\+\_\+t brightness)
+\item 
+void \mbox{\hyperlink{namespace_display_aa8aef5688a630d912c6d9bd1c764c542}{turn\+Off\+Backlight}} ()
+\item 
+void \mbox{\hyperlink{namespace_display_a75d875ec473cbdd00bee7951951d81c0}{turn\+On\+Backlight}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+Arduino\+\_\+\+Data\+Bus $\ast$ \mbox{\hyperlink{namespace_display_a73886cb9320187c094593787bd00d01c}{bus}} = nullptr
+\item 
+Arduino\+\_\+\+GFX $\ast$ \mbox{\hyperlink{namespace_display_a07404a97983810db305db509cbf74a9a}{g}} = nullptr
+\item 
+Arduino\+\_\+\+Canvas $\ast$ \mbox{\hyperlink{namespace_display_a6c60868b4fdb5a872686070ea0607be3}{gfx}} = nullptr
+\item 
+\mbox{\hyperlink{class_a_x_s15231_b___touch}{AXS15231\+B\+\_\+\+Touch}} \mbox{\hyperlink{namespace_display_a0c9cc8a26de50584375ead7c4553f30b}{touch}} (\mbox{\hyperlink{pincfg_8h_aadfd1e71ec456dc27c0b939972b57425}{Touch\+\_\+\+SCL}}, \mbox{\hyperlink{pincfg_8h_a2aa469c181d9c18e7f810f7c2505732e}{Touch\+\_\+\+SDA}}, \mbox{\hyperlink{pincfg_8h_a5a0375f1cc3ad48d5b72844acf697f1e}{Touch\+\_\+\+INT}}, \mbox{\hyperlink{pincfg_8h_a47174ce4cf77383332568190e90e7e2e}{Touch\+\_\+\+ADDR}}, \mbox{\hyperlink{dispcfg_8h_a966806ff3abf821022944c7aa191f997}{TFT\+\_\+rot}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespace_display_a74136dce435d7a569c5fb00d5f7afbe6}\label{namespace_display_a74136dce435d7a569c5fb00d5f7afbe6}} 
+\index{Display@{Display}!cleanup@{cleanup}}
+\index{cleanup@{cleanup}!Display@{Display}}
+\doxysubsubsection{\texorpdfstring{cleanup()}{cleanup()}}
+{\footnotesize\ttfamily void Display\+::cleanup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{display_8cpp_source_l00092}{92}} of file \mbox{\hyperlink{display_8cpp_source}{display.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Clean\ up\ LVGL\ objects}}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (qr\_canvas\ \&\&\ lv\_obj\_is\_valid(qr\_canvas))\ \{}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ lv\_obj\_del(qr\_canvas);}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ qr\_canvas\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Clean\ up\ display\ buffer}}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (buf1\ !=\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ heap\_caps\_free(buf1);}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ buf1\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (buf2\ !=\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ heap\_caps\_free(buf2);}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ buf2\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Touch\ cleanup\ handled\ automatically\ (stack\ object)}}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (gfx\ !=\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ \mbox{\hyperlink{namespace_display_a6c60868b4fdb5a872686070ea0607be3}{gfx}};}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_display_a6c60868b4fdb5a872686070ea0607be3}{gfx}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (g\ !=\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ \mbox{\hyperlink{namespace_display_a07404a97983810db305db509cbf74a9a}{g}};}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_display_a07404a97983810db305db509cbf74a9a}{g}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (bus\ !=\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ \mbox{\hyperlink{namespace_display_a73886cb9320187c094593787bd00d01c}{bus}};}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_display_a73886cb9320187c094593787bd00d01c}{bus}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Display\ module\ cleaned\ up"{}});}
+\DoxyCodeLine{00124\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_display_a78f08fa1900213ef37200b256396765c}\label{namespace_display_a78f08fa1900213ef37200b256396765c}} 
+\index{Display@{Display}!displayFlush@{displayFlush}}
+\index{displayFlush@{displayFlush}!Display@{Display}}
+\doxysubsubsection{\texorpdfstring{displayFlush()}{displayFlush()}}
+{\footnotesize\ttfamily void Display\+::display\+Flush (\begin{DoxyParamCaption}\item[{lv\+\_\+disp\+\_\+drv\+\_\+t $\ast$}]{disp,  }\item[{const lv\+\_\+area\+\_\+t $\ast$}]{area,  }\item[{lv\+\_\+color\+\_\+t $\ast$}]{color\+\_\+p }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{display_8cpp_source_l00181}{181}} of file \mbox{\hyperlink{display_8cpp_source}{display.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ uint32\_t\ w\ =\ lv\_area\_get\_width(area);}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ uint32\_t\ h\ =\ lv\_area\_get\_height(area);}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_display_a6c60868b4fdb5a872686070ea0607be3}{gfx}}-\/>draw16bitRGBBitmap(area-\/>x1,\ area-\/>y1,\ (uint16\_t\ *)color\_p,\ w,\ h);}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_display_a6c60868b4fdb5a872686070ea0607be3}{gfx}}-\/>flush();}
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ lv\_disp\_flush\_ready(disp);}
+\DoxyCodeLine{00189\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_display_ace6d523c48cf82aef610774be829b85b}\label{namespace_display_ace6d523c48cf82aef610774be829b85b}} 
+\index{Display@{Display}!displayInvoiceTextFallback@{displayInvoiceTextFallback}}
+\index{displayInvoiceTextFallback@{displayInvoiceTextFallback}!Display@{Display}}
+\doxysubsubsection{\texorpdfstring{displayInvoiceTextFallback()}{displayInvoiceTextFallback()}}
+{\footnotesize\ttfamily void Display\+::display\+Invoice\+Text\+Fallback (\begin{DoxyParamCaption}\item[{const String \&}]{invoice }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{display_8cpp_source_l00286}{286}} of file \mbox{\hyperlink{display_8cpp_source}{display.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ lv\_obj\_t*\ label\ =\ \mbox{\hyperlink{namespace_u_i_ac9299fb81be88e44c1a7cd5e19db5413}{UI::getInvoiceLabel}}();}
+\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (label\ ==\ \textcolor{keyword}{nullptr}\ ||\ !lv\_obj\_is\_valid(label))\ \{}
+\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Enhanced\ display\ for\ long\ invoices\ that\ can't\ be\ QR\ encoded}}
+\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ String\ displayText;}
+\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (invoice.length()\ >\ 300)\ \{}
+\DoxyCodeLine{00295\ \ \ \ \ \ \ \ \ \ \ \ \ displayText\ =\ \textcolor{stringliteral}{"{}⚡\ LIGHTNING\ INVOICE\ ⚡\(\backslash\)n"{}};}
+\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ \ \ \ \ displayText\ +=\ String(invoice.length())\ +\ \textcolor{stringliteral}{"{}\ characters\(\backslash\)n\(\backslash\)n"{}};}
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ \ \ \ \ displayText\ +=\ \textcolor{stringliteral}{"{}FULL\ INVOICE:\(\backslash\)n"{}};}
+\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ \ \ \ \ displayText\ +=\ invoice;}
+\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \ \ \ \ displayText\ +=\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n📱\ PAYMENT\ OPTIONS:\(\backslash\)n"{}};}
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \ \ \ \ displayText\ +=\ \textcolor{stringliteral}{"{}•\ Copy\ invoice\ text\(\backslash\)n"{}};}
+\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ \ \ \ \ displayText\ +=\ \textcolor{stringliteral}{"{}•\ Use\ NFC/Bluetooth\(\backslash\)n"{}};\ }
+\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ \ \ \ \ displayText\ +=\ \textcolor{stringliteral}{"{}•\ Manual\ wallet\ paste\(\backslash\)n\(\backslash\)n"{}};}
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ \ \ \ \ displayText\ +=\ \textcolor{stringliteral}{"{}⚠️\ Too\ long\ for\ QR\ display"{}};}
+\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ \ \ \ \ displayText\ =\ \textcolor{stringliteral}{"{}⚡\ Lightning\ Invoice:\(\backslash\)n\(\backslash\)n"{}};}
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ \ \ \ \ displayText\ +=\ invoice;}
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ \ \ \ \ displayText\ +=\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n📱\ Scan\ with\ Lightning\ wallet"{}};}
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ lv\_label\_set\_text(label,\ displayText.c\_str());}
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ lv\_label\_set\_long\_mode(label,\ LV\_LABEL\_LONG\_SCROLL\_CIRCULAR);}
+\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ lv\_obj\_set\_width(label,\ 280);}
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00314\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Hide\ spinner}}
+\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ lv\_obj\_t*\ spinner\ =\ \mbox{\hyperlink{namespace_u_i_a68428dcbd48587cb1e1e8af2e5b5ba26}{UI::getInvoiceSpinner}}();}
+\DoxyCodeLine{00316\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (spinner\ !=\ \textcolor{keyword}{nullptr}\ \&\&\ lv\_obj\_is\_valid(spinner))\ \{}
+\DoxyCodeLine{00317\ \ \ \ \ \ \ \ \ \ \ \ \ lv\_obj\_add\_flag(spinner,\ LV\_OBJ\_FLAG\_HIDDEN);}
+\DoxyCodeLine{00318\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00319\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00320\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Hide\ QR\ canvas\ since\ we're\ not\ using\ it}}
+\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (qr\_canvas\ !=\ \textcolor{keyword}{nullptr}\ \&\&\ lv\_obj\_is\_valid(qr\_canvas))\ \{}
+\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ \ \ \ \ lv\_obj\_add\_flag(qr\_canvas,\ LV\_OBJ\_FLAG\_HIDDEN);}
+\DoxyCodeLine{00323\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00324\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00325\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Text\ fallback\ display\ configured\ for\ long\ invoice"{}});}
+\DoxyCodeLine{00326\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_display_add3c94239d228504e67b3720541065cc}\label{namespace_display_add3c94239d228504e67b3720541065cc}} 
+\index{Display@{Display}!displayQRCode@{displayQRCode}}
+\index{displayQRCode@{displayQRCode}!Display@{Display}}
+\doxysubsubsection{\texorpdfstring{displayQRCode()}{displayQRCode()}}
+{\footnotesize\ttfamily void Display\+::display\+QRCode (\begin{DoxyParamCaption}\item[{const String \&}]{invoice }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{display_8cpp_source_l00224}{224}} of file \mbox{\hyperlink{display_8cpp_source}{display.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}===\ Display::displayQRCode\ starting\ ==="{}});}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Free\ heap:\ "{}}\ +\ String(ESP.getFreeHeap()));}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Invoice\ length:\ "{}}\ +\ String(invoice.length()));}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (qr\_canvas\ ==\ \textcolor{keyword}{nullptr}\ ||\ !lv\_obj\_is\_valid(qr\_canvas))\ \{}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}ERROR:\ QR\ canvas\ not\ available"{}});}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_display_ace6d523c48cf82aef610774be829b85b}{displayInvoiceTextFallback}}(invoice);}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Safety\ check\ -\/\ ensure\ invoice\ is\ not\ empty}}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (invoice.length()\ ==\ 0)\ \{}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}ERROR:\ Empty\ invoice\ string"{}});}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \ \ \ \ displayInvoiceTextFallback(invoice);}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Calculate\ QR\ code\ size\ -\/\ LVGL\ handles\ sizing\ automatically}}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ uint16\_t\ qr\_size\ =\ 280;\ \textcolor{comment}{//\ QR\ pixel\ size}}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ Serial.printf(\textcolor{stringliteral}{"{}Creating\ LVGL\ QR\ code\ with\ size\ \%dx\%d\ for\ \%d\ character\ invoice\(\backslash\)n"{}},\ }
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ qr\_size,\ qr\_size,\ invoice.length());}
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Create\ LVGL\ QR\ code\ object\ with\ all\ parameters}}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ lv\_obj\_t*\ qr\ =\ lv\_qrcode\_create(qr\_canvas,\ qr\_size,\ lv\_color\_black(),\ lv\_color\_white());}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (qr\ ==\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}ERROR:\ Failed\ to\ create\ LVGL\ QR\ code\ object"{}});}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_display_ace6d523c48cf82aef610774be829b85b}{displayInvoiceTextFallback}}(invoice);}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Set\ QR\ code\ data\ -\/\ LVGL\ handles\ all\ the\ complexity}}
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ lv\_res\_t\ result\ =\ lv\_qrcode\_update(qr,\ invoice.c\_str(),\ invoice.length());}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (result\ !=\ LV\_RES\_OK)\ \{}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.printf(\textcolor{stringliteral}{"{}ERROR:\ Failed\ to\ update\ QR\ code\ data,\ result:\ \%d\(\backslash\)n"{}},\ result);}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \ \ \ \ lv\_obj\_del(qr);}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_display_ace6d523c48cf82aef610774be829b85b}{displayInvoiceTextFallback}}(invoice);}
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Center\ the\ QR\ code\ in\ the\ canvas}}
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ lv\_obj\_center(qr);}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Hide\ spinner\ and\ text\ label\ since\ we\ have\ QR\ code}}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ lv\_obj\_t*\ spinner\ =\ \mbox{\hyperlink{namespace_u_i_a68428dcbd48587cb1e1e8af2e5b5ba26}{UI::getInvoiceSpinner}}();}
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (spinner\ !=\ \textcolor{keyword}{nullptr}\ \&\&\ lv\_obj\_is\_valid(spinner))\ \{}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \ \ \ \ lv\_obj\_add\_flag(spinner,\ LV\_OBJ\_FLAG\_HIDDEN);}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ lv\_obj\_t*\ label\ =\ \mbox{\hyperlink{namespace_u_i_ac9299fb81be88e44c1a7cd5e19db5413}{UI::getInvoiceLabel}}();}
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (label\ !=\ \textcolor{keyword}{nullptr}\ \&\&\ lv\_obj\_is\_valid(label))\ \{}
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ \ \ \ \ lv\_obj\_add\_flag(label,\ LV\_OBJ\_FLAG\_HIDDEN);}
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00279\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Show\ QR\ canvas}}
+\DoxyCodeLine{00280\ \ \ \ \ \ \ \ \ lv\_obj\_clear\_flag(qr\_canvas,\ LV\_OBJ\_FLAG\_HIDDEN);}
+\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}QR\ code\ successfully\ created\ and\ displayed\ using\ LVGL"{}});}
+\DoxyCodeLine{00283\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_display_a18c2dedb3287a8213f6a7d8ce61de740}\label{namespace_display_a18c2dedb3287a8213f6a7d8ce61de740}} 
+\index{Display@{Display}!getGFX@{getGFX}}
+\index{getGFX@{getGFX}!Display@{Display}}
+\doxysubsubsection{\texorpdfstring{getGFX()}{getGFX()}}
+{\footnotesize\ttfamily Arduino\+\_\+\+GFX \& Display\+::get\+GFX (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{display_8cpp_source_l00329}{329}} of file \mbox{\hyperlink{display_8cpp_source}{display.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00329\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00330\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\mbox{\hyperlink{namespace_display_a6c60868b4fdb5a872686070ea0607be3}{gfx}};}
+\DoxyCodeLine{00331\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_display_a0c478a57b622918a8499d369db409f85}\label{namespace_display_a0c478a57b622918a8499d369db409f85}} 
+\index{Display@{Display}!getLastTouch@{getLastTouch}}
+\index{getLastTouch@{getLastTouch}!Display@{Display}}
+\doxysubsubsection{\texorpdfstring{getLastTouch()}{getLastTouch()}}
+{\footnotesize\ttfamily void Display\+::get\+Last\+Touch (\begin{DoxyParamCaption}\item[{int32\+\_\+t \&}]{x,  }\item[{int32\+\_\+t \&}]{y }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{display_8cpp_source_l00341}{341}} of file \mbox{\hyperlink{display_8cpp_source}{display.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00342\ \ \ \ \ \ \ \ \ x\ =\ last\_x;}
+\DoxyCodeLine{00343\ \ \ \ \ \ \ \ \ y\ =\ last\_y;}
+\DoxyCodeLine{00344\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_display_acb0d0237a8d03c78c35bad1248d26eeb}\label{namespace_display_acb0d0237a8d03c78c35bad1248d26eeb}} 
+\index{Display@{Display}!getQRCanvas@{getQRCanvas}}
+\index{getQRCanvas@{getQRCanvas}!Display@{Display}}
+\doxysubsubsection{\texorpdfstring{getQRCanvas()}{getQRCanvas()}}
+{\footnotesize\ttfamily lv\+\_\+obj\+\_\+t $\ast$ Display\+::get\+QRCanvas (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{display_8cpp_source_l00333}{333}} of file \mbox{\hyperlink{display_8cpp_source}{display.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00333\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00334\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ qr\_canvas;}
+\DoxyCodeLine{00335\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_display_aacbf91b9f8c57fc2cb892c45fd44e655}\label{namespace_display_aacbf91b9f8c57fc2cb892c45fd44e655}} 
+\index{Display@{Display}!init@{init}}
+\index{init@{init}!Display@{Display}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void Display\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{display_8cpp_source_l00031}{31}} of file \mbox{\hyperlink{display_8cpp_source}{display.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}===\ Initializing\ ArduinoGFX\ display\ ==="{}});}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Initialize\ ArduinoGFX\ display}}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Creating\ bus..."{}});}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_display_a73886cb9320187c094593787bd00d01c}{bus}}\ =\ \textcolor{keyword}{new}\ Arduino\_ESP32QSPI(\mbox{\hyperlink{pincfg_8h_a5f4d46ae101b77df78010c506601c87c}{TFT\_CS}},\ \mbox{\hyperlink{pincfg_8h_ad71e70999bd20c255b8f3f2ce89722d9}{TFT\_SCK}},\ \mbox{\hyperlink{pincfg_8h_a0ce0d651c46fde5cbaf7801404dabe91}{TFT\_SDA0}},\ \mbox{\hyperlink{pincfg_8h_a320010aba9dff9b68b8bc9ed50fe5dba}{TFT\_SDA1}},\ \mbox{\hyperlink{pincfg_8h_a01714c1a1a5f15730e6c48a81abeee6d}{TFT\_SDA2}},\ \mbox{\hyperlink{pincfg_8h_a86ad39a86a6a24439da28f19c47dc6f4}{TFT\_SDA3}});}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Creating\ display..."{}});}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_display_a07404a97983810db305db509cbf74a9a}{g}}\ =\ \textcolor{keyword}{new}\ Arduino\_AXS15231B(bus,\ GFX\_NOT\_DEFINED,\ 0,\ \textcolor{keyword}{false},\ \mbox{\hyperlink{dispcfg_8h_a7e76b7900a303c107f31414b2e231edb}{TFT\_res\_W}},\ \mbox{\hyperlink{dispcfg_8h_a3ed892b03a04858b1d132412428d5c97}{TFT\_res\_H}});}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Creating\ canvas..."{}});}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_display_a6c60868b4fdb5a872686070ea0607be3}{gfx}}\ =\ \textcolor{keyword}{new}\ Arduino\_Canvas(\mbox{\hyperlink{dispcfg_8h_a7e76b7900a303c107f31414b2e231edb}{TFT\_res\_W}},\ \mbox{\hyperlink{dispcfg_8h_a3ed892b03a04858b1d132412428d5c97}{TFT\_res\_H}},\ g,\ 0,\ 0,\ \mbox{\hyperlink{dispcfg_8h_a966806ff3abf821022944c7aa191f997}{TFT\_rot}});}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Starting\ display..."{}});}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{namespace_display_a6c60868b4fdb5a872686070ea0607be3}{gfx}}-\/>begin(40000000UL))\ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}ERROR:\ Failed\ to\ initialize\ display!"{}});}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Display\ initialized\ successfully"{}});}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Turn\ on\ backlight\ first}}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Turning\ on\ backlight..."{}});}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ pinMode(\mbox{\hyperlink{pincfg_8h_a541b5fc642dbcc81f373d4b866c88f80}{TFT\_BL}},\ OUTPUT);}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ digitalWrite(\mbox{\hyperlink{pincfg_8h_a541b5fc642dbcc81f373d4b866c88f80}{TFT\_BL}},\ HIGH);}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Clear\ display}}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Clearing\ display..."{}});}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ gfx-\/>fillScreen(BLACK);}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ gfx-\/>flush();}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Display\ cleared"{}});}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Basic\ touch\ initialization\ only}}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}===\ TOUCH\ INITIALIZATION\ ==="{}});}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Initialize\ touch\ controller}}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Initializing\ touch\ controller..."{}});}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.printf(\textcolor{stringliteral}{"{}Touch\ pins\ -\/\ SDA:\%d,\ SCL:\%d,\ INT:\%d,\ ADDR:0x\%02X\(\backslash\)n"{}},\ \mbox{\hyperlink{pincfg_8h_a2aa469c181d9c18e7f810f7c2505732e}{Touch\_SDA}},\ \mbox{\hyperlink{pincfg_8h_aadfd1e71ec456dc27c0b939972b57425}{Touch\_SCL}},\ \mbox{\hyperlink{pincfg_8h_a5a0375f1cc3ad48d5b72844acf697f1e}{Touch\_INT}},\ \mbox{\hyperlink{pincfg_8h_a47174ce4cf77383332568190e90e7e2e}{Touch\_ADDR}});}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!touch.\mbox{\hyperlink{class_a_x_s15231_b___touch_af21a70509a9e97ff91767e8ca19c8586}{begin}}())\ \{}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}ERROR:\ Failed\ to\ initialize\ touch\ controller!"{}});}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Continue\ anyway\ for\ debugging}}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Touch\ controller\ initialized\ successfully"{}});}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Configure\ touch\ calibration}}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_display_a0c9cc8a26de50584375ead7c4553f30b}{touch}}.\mbox{\hyperlink{class_a_x_s15231_b___touch_a7185bee1c9f8ef1f1cb3ddcdc8c094b7}{enOffsetCorrection}}(\textcolor{keyword}{true});}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_display_a0c9cc8a26de50584375ead7c4553f30b}{touch}}.\mbox{\hyperlink{class_a_x_s15231_b___touch_a5f7d916f1c81254768c73c84d19ab1f6}{setOffsets}}(\mbox{\hyperlink{dispcfg_8h_ab02852ca4298c30325151b824f672482}{Touch\_X\_min}},\ \mbox{\hyperlink{dispcfg_8h_a583b55e2ca8bb7f5659ba4c88a69c114}{Touch\_X\_max}},\ \mbox{\hyperlink{dispcfg_8h_a7e76b7900a303c107f31414b2e231edb}{TFT\_res\_W}}-\/1,\ \mbox{\hyperlink{dispcfg_8h_a1d8fe9a018aa50b9683f4413d255c534}{Touch\_Y\_min}},\ \mbox{\hyperlink{dispcfg_8h_a36ccd5c68c4d57b6639e489cd390a02d}{Touch\_Y\_max}},\ \mbox{\hyperlink{dispcfg_8h_a3ed892b03a04858b1d132412428d5c97}{TFT\_res\_H}}-\/1);}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Touch\ calibration\ configured"{}});}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Initialize\ LVGL}}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Initializing\ LVGL..."{}});}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ lv\_init();}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}LVGL\ initialized,\ setting\ up\ display\ driver..."{}});}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_display_ac8bef7d31e6dd87afcbcac8477f4c5c9}{setupLVGL}}();}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}===\ ArduinoGFX\ display\ initialization\ complete\ ==="{}});}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (...)\ \{}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}EXCEPTION\ during\ display\ initialization!"{}});}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00090\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_display_a77664f233d6b5e98be33985eed783600}\label{namespace_display_a77664f233d6b5e98be33985eed783600}} 
+\index{Display@{Display}!setBacklightBrightness@{setBacklightBrightness}}
+\index{setBacklightBrightness@{setBacklightBrightness}!Display@{Display}}
+\doxysubsubsection{\texorpdfstring{setBacklightBrightness()}{setBacklightBrightness()}}
+{\footnotesize\ttfamily void Display\+::set\+Backlight\+Brightness (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{brightness }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{display_8cpp_source_l00347}{347}} of file \mbox{\hyperlink{display_8cpp_source}{display.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00347\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00348\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ ArduinoGFX\ doesn't\ have\ built-\/in\ brightness\ control}}
+\DoxyCodeLine{00349\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Use\ PWM\ on\ backlight\ pin\ for\ brightness\ control}}
+\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ analogWrite(\mbox{\hyperlink{pincfg_8h_a541b5fc642dbcc81f373d4b866c88f80}{TFT\_BL}},\ brightness);}
+\DoxyCodeLine{00351\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_display_a265f5a3b090df04fb0b928b84a2d7e17}\label{namespace_display_a265f5a3b090df04fb0b928b84a2d7e17}} 
+\index{Display@{Display}!setQRCanvas@{setQRCanvas}}
+\index{setQRCanvas@{setQRCanvas}!Display@{Display}}
+\doxysubsubsection{\texorpdfstring{setQRCanvas()}{setQRCanvas()}}
+{\footnotesize\ttfamily void Display\+::set\+QRCanvas (\begin{DoxyParamCaption}\item[{lv\+\_\+obj\+\_\+t $\ast$}]{canvas }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{display_8cpp_source_l00337}{337}} of file \mbox{\hyperlink{display_8cpp_source}{display.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00337\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00338\ \ \ \ \ \ \ \ \ qr\_canvas\ =\ canvas;}
+\DoxyCodeLine{00339\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_display_a5edb1eb6aad9305091ed3479edc983d6}\label{namespace_display_a5edb1eb6aad9305091ed3479edc983d6}} 
+\index{Display@{Display}!setRotation@{setRotation}}
+\index{setRotation@{setRotation}!Display@{Display}}
+\doxysubsubsection{\texorpdfstring{setRotation()}{setRotation()}}
+{\footnotesize\ttfamily void Display\+::set\+Rotation (\begin{DoxyParamCaption}\item[{int}]{rotation }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{display_8cpp_source_l00126}{126}} of file \mbox{\hyperlink{display_8cpp_source}{display.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ ArduinoGFX\ rotation\ is\ set\ during\ Canvas\ creation}}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ For\ runtime\ rotation\ changes,\ would\ need\ to\ recreate\ canvas}}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ Serial.printf(\textcolor{stringliteral}{"{}Rotation\ set\ to:\ \%d\(\backslash\)n"{}},\ rotation);}
+\DoxyCodeLine{00130\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_display_ac8bef7d31e6dd87afcbcac8477f4c5c9}\label{namespace_display_ac8bef7d31e6dd87afcbcac8477f4c5c9}} 
+\index{Display@{Display}!setupLVGL@{setupLVGL}}
+\index{setupLVGL@{setupLVGL}!Display@{Display}}
+\doxysubsubsection{\texorpdfstring{setupLVGL()}{setupLVGL()}}
+{\footnotesize\ttfamily void Display\+::setup\+LVGL (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{display_8cpp_source_l00132}{132}} of file \mbox{\hyperlink{display_8cpp_source}{display.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Increase\ buffer\ size\ for\ smoother\ rendering}}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ uint32\_t\ bufSize\ =\ screenWidth\ *\ screenHeight\ /\ 5;}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ buf1\ =\ (lv\_color\_t*)heap\_caps\_malloc(bufSize\ *\ \textcolor{keyword}{sizeof}(lv\_color\_t),\ MALLOC\_CAP\_INTERNAL\ |\ MALLOC\_CAP\_8BIT);}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ buf2\ =\ (lv\_color\_t*)heap\_caps\_malloc(bufSize\ *\ \textcolor{keyword}{sizeof}(lv\_color\_t),\ MALLOC\_CAP\_INTERNAL\ |\ MALLOC\_CAP\_8BIT);}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!buf1\ ||\ !buf2)\ \{}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}ERROR:\ Failed\ to\ allocate\ LVGL\ display\ buffer!"{}});}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Setup\ buffer\ to\ use\ for\ display}}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ lv\_disp\_draw\_buf\_init(\&draw\_buf,\ buf1,\ buf2,\ bufSize);}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Setup\ \&\ Initialize\ the\ display\ device\ driver}}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ lv\_disp\_drv\_t\ disp\_drv;}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ lv\_disp\_drv\_init(\&disp\_drv);}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ disp\_drv.hor\_res\ =\ screenWidth;}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ disp\_drv.ver\_res\ =\ screenHeight;}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ disp\_drv.flush\_cb\ =\ displayFlush;}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ disp\_drv.draw\_buf\ =\ \&draw\_buf;}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ lv\_disp\_drv\_register(\&disp\_drv);}
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Setup\ \&\ Initialize\ the\ input\ device\ driver}}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ lv\_indev\_drv\_t\ indev\_drv;}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ lv\_indev\_drv\_init(\&indev\_drv);}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ indev\_drv.type\ =\ LV\_INDEV\_TYPE\_POINTER;}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ indev\_drv.read\_cb\ =\ touchpadRead;}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Set\ input\ device\ polling\ period\ (default\ might\ be\ too\ slow\ or\ disabled)}}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ indev\_drv.read\_timer\ =\ NULL;\ \textcolor{comment}{//\ Let\ LVGL\ create\ its\ own\ timer}}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ lv\_indev\_t\ *indev\ =\ lv\_indev\_drv\_register(\&indev\_drv);}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (indev)\ \{}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}LVGL\ input\ device\ registered\ successfully"{}});}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.printf(\textcolor{stringliteral}{"{}Input\ device\ pointer:\ \%p\(\backslash\)n"{}},\ indev);}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Ensure\ the\ input\ device\ is\ set\ as\ the\ active\ one}}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \ \ \ \ lv\_indev\_set\_group(indev,\ lv\_group\_get\_default());}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Input\ device\ linked\ to\ default\ group"{}});}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}ERROR:\ Failed\ to\ register\ LVGL\ input\ device!"{}});}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}LVGL\ initialized\ with\ ArduinoGFX\ backend"{}});}
+\DoxyCodeLine{00178\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_display_a3d51aeecf9902984e423412bbe757155}\label{namespace_display_a3d51aeecf9902984e423412bbe757155}} 
+\index{Display@{Display}!touchpadRead@{touchpadRead}}
+\index{touchpadRead@{touchpadRead}!Display@{Display}}
+\doxysubsubsection{\texorpdfstring{touchpadRead()}{touchpadRead()}}
+{\footnotesize\ttfamily void Display\+::touchpad\+Read (\begin{DoxyParamCaption}\item[{lv\+\_\+indev\+\_\+drv\+\_\+t $\ast$}]{indev\+\_\+driver,  }\item[{lv\+\_\+indev\+\_\+data\+\_\+t $\ast$}]{data }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{display_8cpp_source_l00192}{192}} of file \mbox{\hyperlink{display_8cpp_source}{display.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ last\_touch\_state\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ uint16\_t\ touchX,\ touchY;}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ currently\_touched\ =\ \mbox{\hyperlink{namespace_display_a0c9cc8a26de50584375ead7c4553f30b}{touch}}.\mbox{\hyperlink{class_a_x_s15231_b___touch_a96f053e30928d0fd8046a281a5cdaefb}{touched}}();}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (currently\_touched)\ \{}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Read\ touched\ point\ from\ touch\ module}}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_display_a0c9cc8a26de50584375ead7c4553f30b}{touch}}.\mbox{\hyperlink{class_a_x_s15231_b___touch_a986f12df1baa1ade792189af93c08086}{readData}}(\&touchX,\ \&touchY);}
+\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Set\ the\ coordinates\ (LVGL\ will\ handle\ object\ detection\ and\ events\ automatically)}}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \ \ \ \ data-\/>point.x\ =\ touchX;}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \ \ \ \ data-\/>point.y\ =\ touchY;}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \ \ \ \ data-\/>state\ =\ LV\_INDEV\_STATE\_PRESSED;}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \ \ \ \ last\_x\ =\ touchX;}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \ \ \ \ last\_y\ =\ touchY;}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ //\ Simple\ debug\ output\ for\ new\ touches}}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ if\ (!last\_touch\_state)\ \{}}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ Serial.printf("{}Touch:\ X=\%d,\ Y=\%d\(\backslash\)n"{},\ touchX,\ touchY);}}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Handle\ touch\ wake\ from\ light\ sleep}}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_app_afebab729ad90b87d5c556255298b5f8b}{App::handleTouchWake}}();}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \ \ \ \ data-\/>state\ =\ LV\_INDEV\_STATE\_RELEASED;}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ last\_touch\_state\ =\ currently\_touched;}
+\DoxyCodeLine{00221\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_display_aa8aef5688a630d912c6d9bd1c764c542}\label{namespace_display_aa8aef5688a630d912c6d9bd1c764c542}} 
+\index{Display@{Display}!turnOffBacklight@{turnOffBacklight}}
+\index{turnOffBacklight@{turnOffBacklight}!Display@{Display}}
+\doxysubsubsection{\texorpdfstring{turnOffBacklight()}{turnOffBacklight()}}
+{\footnotesize\ttfamily void Display\+::turn\+Off\+Backlight (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{display_8cpp_source_l00353}{353}} of file \mbox{\hyperlink{display_8cpp_source}{display.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00353\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00354\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Turning\ off\ display\ backlight"{}});}
+\DoxyCodeLine{00355\ \ \ \ \ \ \ \ \ digitalWrite(\mbox{\hyperlink{pincfg_8h_a541b5fc642dbcc81f373d4b866c88f80}{TFT\_BL}},\ LOW);}
+\DoxyCodeLine{00356\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_display_a75d875ec473cbdd00bee7951951d81c0}\label{namespace_display_a75d875ec473cbdd00bee7951951d81c0}} 
+\index{Display@{Display}!turnOnBacklight@{turnOnBacklight}}
+\index{turnOnBacklight@{turnOnBacklight}!Display@{Display}}
+\doxysubsubsection{\texorpdfstring{turnOnBacklight()}{turnOnBacklight()}}
+{\footnotesize\ttfamily void Display\+::turn\+On\+Backlight (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{display_8cpp_source_l00358}{358}} of file \mbox{\hyperlink{display_8cpp_source}{display.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00358\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00359\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Turning\ on\ display\ backlight"{}});}
+\DoxyCodeLine{00360\ \ \ \ \ \ \ \ \ digitalWrite(\mbox{\hyperlink{pincfg_8h_a541b5fc642dbcc81f373d4b866c88f80}{TFT\_BL}},\ HIGH);}
+\DoxyCodeLine{00361\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespace_display_a73886cb9320187c094593787bd00d01c}\label{namespace_display_a73886cb9320187c094593787bd00d01c}} 
+\index{Display@{Display}!bus@{bus}}
+\index{bus@{bus}!Display@{Display}}
+\doxysubsubsection{\texorpdfstring{bus}{bus}}
+{\footnotesize\ttfamily Arduino\+\_\+\+Data\+Bus $\ast$ Display\+::bus = nullptr}
+
+
+
+Definition at line \mbox{\hyperlink{display_8cpp_source_l00013}{13}} of file \mbox{\hyperlink{display_8cpp_source}{display.\+cpp}}.
+
+\mbox{\Hypertarget{namespace_display_a07404a97983810db305db509cbf74a9a}\label{namespace_display_a07404a97983810db305db509cbf74a9a}} 
+\index{Display@{Display}!g@{g}}
+\index{g@{g}!Display@{Display}}
+\doxysubsubsection{\texorpdfstring{g}{g}}
+{\footnotesize\ttfamily Arduino\+\_\+\+GFX $\ast$ Display\+::g = nullptr}
+
+
+
+Definition at line \mbox{\hyperlink{display_8cpp_source_l00014}{14}} of file \mbox{\hyperlink{display_8cpp_source}{display.\+cpp}}.
+
+\mbox{\Hypertarget{namespace_display_a6c60868b4fdb5a872686070ea0607be3}\label{namespace_display_a6c60868b4fdb5a872686070ea0607be3}} 
+\index{Display@{Display}!gfx@{gfx}}
+\index{gfx@{gfx}!Display@{Display}}
+\doxysubsubsection{\texorpdfstring{gfx}{gfx}}
+{\footnotesize\ttfamily Arduino\+\_\+\+Canvas $\ast$ Display\+::gfx = nullptr}
+
+
+
+Definition at line \mbox{\hyperlink{display_8cpp_source_l00015}{15}} of file \mbox{\hyperlink{display_8cpp_source}{display.\+cpp}}.
+
+\mbox{\Hypertarget{namespace_display_a0c9cc8a26de50584375ead7c4553f30b}\label{namespace_display_a0c9cc8a26de50584375ead7c4553f30b}} 
+\index{Display@{Display}!touch@{touch}}
+\index{touch@{touch}!Display@{Display}}
+\doxysubsubsection{\texorpdfstring{touch}{touch}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_a_x_s15231_b___touch}{AXS15231\+B\+\_\+\+Touch}} Display\+::touch (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pincfg_8h_aadfd1e71ec456dc27c0b939972b57425}{Touch\+\_\+\+SCL}}}]{,  }\item[{\mbox{\hyperlink{pincfg_8h_a2aa469c181d9c18e7f810f7c2505732e}{Touch\+\_\+\+SDA}}}]{,  }\item[{\mbox{\hyperlink{pincfg_8h_a5a0375f1cc3ad48d5b72844acf697f1e}{Touch\+\_\+\+INT}}}]{,  }\item[{\mbox{\hyperlink{pincfg_8h_a47174ce4cf77383332568190e90e7e2e}{Touch\+\_\+\+ADDR}}}]{,  }\item[{\mbox{\hyperlink{dispcfg_8h_a966806ff3abf821022944c7aa191f997}{TFT\+\_\+rot}}}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{display_8h_source_l00019}{19}} of file \mbox{\hyperlink{display_8h_source}{display.\+h}}.
+

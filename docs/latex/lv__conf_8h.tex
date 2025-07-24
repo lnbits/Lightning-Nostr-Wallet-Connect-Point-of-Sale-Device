@@ -1,0 +1,1906 @@
+\hypertarget{lv__conf_8h}{}\doxysection{src/lv\+\_\+conf.h File Reference}
+\label{lv__conf_8h}\index{src/lv\_conf.h@{src/lv\_conf.h}}
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+Include dependency graph for lv\+\_\+conf.\+h\+:
+% FIG 0
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a8db46bcd21c9edad6759737cd1b034d7}{LV\+\_\+\+COLOR\+\_\+\+DEPTH}}~16
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a322a97e9b4376aa58b0158c50171b9f8}{LV\+\_\+\+COLOR\+\_\+16\+\_\+\+SWAP}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a6a01dc5b48fd8b6cc603d445db70e5be}{LV\+\_\+\+COLOR\+\_\+\+SCREEN\+\_\+\+TRANSP}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a6adbc139a12c84b72ca9b4d7e66c3aa6}{LV\+\_\+\+COLOR\+\_\+\+MIX\+\_\+\+ROUND\+\_\+\+OFS}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a36213d7982c1770f2a9d38ce76b90615}{LV\+\_\+\+COLOR\+\_\+\+CHROMA\+\_\+\+KEY}}~lv\+\_\+color\+\_\+hex(0x00ff00)         /$\ast$pure green$\ast$/
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a77bde977fddc70ca0fd99775170e2294}{LV\+\_\+\+MEM\+\_\+\+CUSTOM}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_aeff108006de09a570aac88c106497ed6}{LV\+\_\+\+MEM\+\_\+\+SIZE}}~(32U $\ast$ 1024U)          /$\ast$\mbox{[}bytes\mbox{]}$\ast$/
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_aec056337ffb77039252d2b7b68be14da}{LV\+\_\+\+MEM\+\_\+\+ADR}}~0     /$\ast$0\+: unused$\ast$/
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_ab71316814968e822f096725e1f62e174}{LV\+\_\+\+MEM\+\_\+\+BUF\+\_\+\+MAX\+\_\+\+NUM}}~16
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a72bd97dd74e0066347ca12fc457e661d}{LV\+\_\+\+MEMCPY\+\_\+\+MEMSET\+\_\+\+STD}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_abe9b8c041b46f280bade20b602168844}{LV\+\_\+\+DISP\+\_\+\+DEF\+\_\+\+REFR\+\_\+\+PERIOD}}~10      /$\ast$\mbox{[}ms\mbox{]}$\ast$/
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a45d4adceb8fcf32eea0c68b91fd9e9ce}{LV\+\_\+\+INDEV\+\_\+\+DEF\+\_\+\+READ\+\_\+\+PERIOD}}~1     /$\ast$\mbox{[}ms\mbox{]} -\/ faster for better touch response$\ast$/
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a244b19e028c500d10572872fa00dd995}{LV\+\_\+\+TICK\+\_\+\+CUSTOM}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_ac187cce8443f66c7c451794679354804}{LV\+\_\+\+TICK\+\_\+\+CUSTOM\+\_\+\+INCLUDE}}~\char`\"{}Arduino.\+h\char`\"{}         /$\ast$Header for the system time function$\ast$/
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_aa9c7c9bcaf7b3edf752664c8438ee3d6}{LV\+\_\+\+TICK\+\_\+\+CUSTOM\+\_\+\+SYS\+\_\+\+TIME\+\_\+\+EXPR}}~(millis())    /$\ast$Expression evaluating to current system time in ms$\ast$/
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_aadf0386c6d60d0c07153b38654f6b6d3}{LV\+\_\+\+DPI\+\_\+\+DEF}}~130     /$\ast$\mbox{[}px/inch\mbox{]}$\ast$/
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_aabbb65481bcb6ea39af12dce67b78987}{LV\+\_\+\+DRAW\+\_\+\+COMPLEX}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a9f9678b8918ba4e858e3dbce95a39eb5}{LV\+\_\+\+SHADOW\+\_\+\+CACHE\+\_\+\+SIZE}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a227d1a4f28f04468604a9f5bd6198851}{LV\+\_\+\+CIRCLE\+\_\+\+CACHE\+\_\+\+SIZE}}~4
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_ae599fa8c2a484d7a27e64257af0307af}{LV\+\_\+\+IMG\+\_\+\+CACHE\+\_\+\+DEF\+\_\+\+SIZE}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a69fcc904e7175b349baaeffdec2f951a}{LV\+\_\+\+DISP\+\_\+\+ROT\+\_\+\+MAX\+\_\+\+BUF}}~(10$\ast$1024)
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_aa3e247fb2ac9e821def819aa0f522793}{LV\+\_\+\+USE\+\_\+\+GPU\+\_\+\+ESP32\+\_\+\+DMA2D}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_ae82ec72d48383f7ea5c0635cde734115}{LV\+\_\+\+USE\+\_\+\+GPU\+\_\+\+STM32\+\_\+\+DMA2D}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a8144f58325bda4bd72d89115ec1a8c20}{LV\+\_\+\+USE\+\_\+\+GPU\+\_\+\+NXP\+\_\+\+PXP}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_ab4e370c59df0309f3972eefdb6b4627a}{LV\+\_\+\+USE\+\_\+\+GPU\+\_\+\+NXP\+\_\+\+VG\+\_\+\+LITE}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_abfefb25d4dcab1e2bfb8e785127ca168}{LV\+\_\+\+USE\+\_\+\+EXTERNAL\+\_\+\+RENDERER}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a028f56151f846d3d6fb50042ea1ad2b4}{LV\+\_\+\+USE\+\_\+\+GPU\+\_\+\+SDL}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_ad17238861ec699b517a2fbe273d3013c}{LV\+\_\+\+USE\+\_\+\+LOG}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_ab14234eece8b83b0d0e7544755745ad4}{LV\+\_\+\+USE\+\_\+\+ASSERT\+\_\+\+NULL}}~1   /$\ast$Check if the parameter is NULL. (Very fast, recommended)$\ast$/
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_adad1a43a39f56bf9afa9f32d343c4ed3}{LV\+\_\+\+USE\+\_\+\+ASSERT\+\_\+\+MALLOC}}~1   /$\ast$Checks is the memory is successfully allocated or no. (Very fast, recommended)$\ast$/
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_af77aa39cb4b804ad354e6844b9fc7630}{LV\+\_\+\+USE\+\_\+\+ASSERT\+\_\+\+STYLE}}~0   /$\ast$Check if the styles are properly initialized. (Very fast, recommended)$\ast$/
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_ac419ddcc173be3a3b65ec4291710d729}{LV\+\_\+\+USE\+\_\+\+ASSERT\+\_\+\+MEM\+\_\+\+INTEGRITY}}~0   /$\ast$Check the integrity of \`{}lv\+\_\+mem\`{} after critical operations. (Slow)$\ast$/
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a8bee920414c882f1af0a9ccafc19d683}{LV\+\_\+\+USE\+\_\+\+ASSERT\+\_\+\+OBJ}}~0   /$\ast$Check the object\textquotesingle{}s type and existence (e.\+g. not deleted). (Slow)$\ast$/
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_aa4d75719785838a72b61c58e920fc8f8}{LV\+\_\+\+ASSERT\+\_\+\+HANDLER\+\_\+\+INCLUDE}}~$<$stdint.\+h$>$
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a7f89929bee5e1d1f3047b6fc57723602}{LV\+\_\+\+ASSERT\+\_\+\+HANDLER}}~while(1);   /$\ast$Halt by default$\ast$/
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a83a5f331fbf9c993ee61f2e0e2fdcc59}{LV\+\_\+\+USE\+\_\+\+PERF\+\_\+\+MONITOR}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_aed77b5db413b3852f5ad654f04f1250a}{LV\+\_\+\+USE\+\_\+\+MEM\+\_\+\+MONITOR}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_ad81f9a063608ab0027ab59025ed35cdb}{LV\+\_\+\+USE\+\_\+\+REFR\+\_\+\+DEBUG}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a387af6dfdb6458d8ae466356e08de1cd}{LV\+\_\+\+SPRINTF\+\_\+\+CUSTOM}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a9041c1ed46ad9dcf688bef5832a010d3}{LV\+\_\+\+SPRINTF\+\_\+\+USE\+\_\+\+FLOAT}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_ad120fea2f0f56822803cc70d1731f84e}{LV\+\_\+\+USE\+\_\+\+USER\+\_\+\+DATA}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a8856846f46d7020d3d8092dbf569d274}{LV\+\_\+\+ENABLE\+\_\+\+GC}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_ae7d23c710abd0533067f78bbf6ec3519}{LV\+\_\+\+BIG\+\_\+\+ENDIAN\+\_\+\+SYSTEM}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a969183113f0383dfc9f6febfeb265559}{LV\+\_\+\+ATTRIBUTE\+\_\+\+TICK\+\_\+\+INC}}
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a65a000fa97141d8340aab1813d0966d2}{LV\+\_\+\+ATTRIBUTE\+\_\+\+TIMER\+\_\+\+HANDLER}}
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a8516a98c991b133415b00656518d956d}{LV\+\_\+\+ATTRIBUTE\+\_\+\+FLUSH\+\_\+\+READY}}
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_aedaa5ae2f1d085f553c3b0bcc25aa592}{LV\+\_\+\+ATTRIBUTE\+\_\+\+MEM\+\_\+\+ALIGN\+\_\+\+SIZE}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a6b77dcb22fcdc624952dc307331e5db6}{LV\+\_\+\+ATTRIBUTE\+\_\+\+MEM\+\_\+\+ALIGN}}
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a9aa1f88eb217d43ff6f619e58b866d52}{LV\+\_\+\+ATTRIBUTE\+\_\+\+LARGE\+\_\+\+CONST}}
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_ab56b8e8d4a404896f5a1af7369978f2c}{LV\+\_\+\+ATTRIBUTE\+\_\+\+LARGE\+\_\+\+RAM\+\_\+\+ARRAY}}
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a61048d2055ebf90e7cb2c67c3d453b78}{LV\+\_\+\+ATTRIBUTE\+\_\+\+FAST\+\_\+\+MEM}}
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_ad75bbb40b927ad7efa7231d3625672b1}{LV\+\_\+\+ATTRIBUTE\+\_\+\+DMA}}
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_ad9dbfeb90679a5db213a80f3e8d61b28}{LV\+\_\+\+EXPORT\+\_\+\+CONST\+\_\+\+INT}}(int\+\_\+value)~struct \+\_\+silence\+\_\+gcc\+\_\+warning /$\ast$The default value just prevents GCC warning$\ast$/
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_ab08a0881df87b2bdbab392455bf2847c}{LV\+\_\+\+USE\+\_\+\+LARGE\+\_\+\+COORD}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_ac97836d54b3ffcde135728ec6f8ad344}{LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+8}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a7c7302f07131fdae323615a905345e25}{LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+10}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a3bbe5045ec263fad01d7104de7fc77be}{LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+12}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a79cdb1f92e25cf5e3f611ef4ce07e9c2}{LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+14}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_ac8f7334df9da9e301fa91c64d62b5b8e}{LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+16}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a8f2ef0967e43802ac36522885e1dd3f1}{LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+18}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_af03109d8293eb9e7e99b3675821f8963}{LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+20}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a590c2f28e800a40bca99dcca6959e852}{LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+22}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a920553c1d0f77482f14f1ef331683bfe}{LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+24}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a50d897f0ef6c94eecd4bafbf4e9f963b}{LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+26}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_adb83bd553b8db5973d467ef827b39b8b}{LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+28}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a8c8c22728c19a7a2a87ed0933e5c478d}{LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+30}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a70fbf2c6aab7f00a1886dca923816277}{LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+32}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a2b13fb8eabe8f3fe6e8a53fea19bfe65}{LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+34}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a85335a289fcb352ae39e143ec16c5141}{LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+36}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a5a776d733e6b4eb5803527620e9c7fbf}{LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+38}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a06993754cf3f9f91c856ed23a49cfafd}{LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+40}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_ae6edcf67fb721fba90b6cb8676c45801}{LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+42}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_afdd89cb1aa0f3bc5dce3c08945794373}{LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+44}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_ac9995d7ccf72ee0ae188df9197629905}{LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+46}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_aedabba4da43252235fe602e42cd28832}{LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+48}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_ab48b61ab3fcde457751de0a80916924d}{LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+12\+\_\+\+SUBPX}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a78e521af972a5d6250bfdf070070d0be}{LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+28\+\_\+\+COMPRESSED}}~0  /$\ast$bpp = 3$\ast$/
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a57fb7429ce2d050ea22f388f815fda39}{LV\+\_\+\+FONT\+\_\+\+DEJAVU\+\_\+16\+\_\+\+PERSIAN\+\_\+\+HEBREW}}~0  /$\ast$Hebrew, Arabic, Perisan letters and all their forms$\ast$/
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_ad908503bbbe1309d22a515c0246f58e6}{LV\+\_\+\+FONT\+\_\+\+SIMSUN\+\_\+16\+\_\+\+CJK}}~0  /$\ast$1000 most common CJK radicals$\ast$/
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_abe7d25051479ced2e1da63ee2c62fc73}{LV\+\_\+\+FONT\+\_\+\+UNSCII\+\_\+8}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a22fad1081f26a80b5faebde92d6afffd}{LV\+\_\+\+FONT\+\_\+\+UNSCII\+\_\+16}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a01312bddc4d0daed11c944c11a107277}{LV\+\_\+\+FONT\+\_\+\+CUSTOM\+\_\+\+DECLARE}}
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a09b9a62c2b0986bedd3e720286631dd5}{LV\+\_\+\+FONT\+\_\+\+DEFAULT}}~\&lv\+\_\+font\+\_\+montserrat\+\_\+14
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a7da5b8d6a59bc17c499efdd6dbba98a6}{LV\+\_\+\+FONT\+\_\+\+FMT\+\_\+\+TXT\+\_\+\+LARGE}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_ace88335920c0faeeddc032d04538bcb6}{LV\+\_\+\+USE\+\_\+\+FONT\+\_\+\+COMPRESSED}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_af1ed71a18d1863db6b45f62e8b8fe9df}{LV\+\_\+\+USE\+\_\+\+FONT\+\_\+\+SUBPX}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a20802408d2bb785991b9e3e88929010d}{LV\+\_\+\+TXT\+\_\+\+ENC}}~LV\+\_\+\+TXT\+\_\+\+ENC\+\_\+\+UTF8
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a39568ba761e0c4ce5af64132e036a7e4}{LV\+\_\+\+TXT\+\_\+\+BREAK\+\_\+\+CHARS}}~\char`\"{} ,.;\+:-\/\+\_\+\char`\"{}
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a1729c565c0dbc3edf0dac9e235c4ff7b}{LV\+\_\+\+TXT\+\_\+\+LINE\+\_\+\+BREAK\+\_\+\+LONG\+\_\+\+LEN}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_adecf949b46a435275d65fb8757583896}{LV\+\_\+\+TXT\+\_\+\+LINE\+\_\+\+BREAK\+\_\+\+LONG\+\_\+\+PRE\+\_\+\+MIN\+\_\+\+LEN}}~3
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a2615f17521a9785307be8890b13c7ac7}{LV\+\_\+\+TXT\+\_\+\+LINE\+\_\+\+BREAK\+\_\+\+LONG\+\_\+\+POST\+\_\+\+MIN\+\_\+\+LEN}}~3
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_aba8ec1367cc2659baa285f32979caa31}{LV\+\_\+\+TXT\+\_\+\+COLOR\+\_\+\+CMD}}~\char`\"{}\#\char`\"{}
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a9201ca34504ccc2d501f3cca6956988a}{LV\+\_\+\+USE\+\_\+\+BIDI}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a86eda207f8f75d498e607926ccff3705}{LV\+\_\+\+USE\+\_\+\+ARABIC\+\_\+\+PERSIAN\+\_\+\+CHARS}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a077a980d0a6c98343e9d0119e53ba3ec}{LV\+\_\+\+USE\+\_\+\+ARC}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a8824deedebff7e531880394989f38b1d}{LV\+\_\+\+USE\+\_\+\+ANIMIMG}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_aa3cddebb0e6559c6eca86662e472a9e6}{LV\+\_\+\+USE\+\_\+\+BAR}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a041a9669e14abc51174c7234417ea2d3}{LV\+\_\+\+USE\+\_\+\+BTN}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a3504f218d9f668eb8c0cce486f213aad}{LV\+\_\+\+USE\+\_\+\+BTNMATRIX}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_ab02853b975e34a047f63ff88a3e31fea}{LV\+\_\+\+USE\+\_\+\+CANVAS}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_abf668da3cf6e16017fffe3e066cb403d}{LV\+\_\+\+USE\+\_\+\+CHECKBOX}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_ad2a8b470876550081e27645a7b02cc51}{LV\+\_\+\+USE\+\_\+\+DROPDOWN}}~1   /$\ast$Requires\+: lv\+\_\+label$\ast$/
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a5de90ae1a1b0eeab5cb41e132eb188e5}{LV\+\_\+\+USE\+\_\+\+IMG}}~1   /$\ast$Requires\+: lv\+\_\+label$\ast$/
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_adc097de303b9ea9dabe8ff4e70c615a6}{LV\+\_\+\+USE\+\_\+\+LABEL}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a94bfe0b9bb740ed5443241d418b64600}{LV\+\_\+\+LABEL\+\_\+\+TEXT\+\_\+\+SELECTION}}~1 /$\ast$Enable selecting text of the label$\ast$/
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a5c49073d980131304fa76635eee15f3a}{LV\+\_\+\+LABEL\+\_\+\+LONG\+\_\+\+TXT\+\_\+\+HINT}}~1  /$\ast$Store some extra info in labels to speed up drawing of very long texts$\ast$/
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_af4690072288635b42fbf0c8829943518}{LV\+\_\+\+USE\+\_\+\+LINE}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a612924ae19721e7d06c7a1640ce2097b}{LV\+\_\+\+USE\+\_\+\+ROLLER}}~1   /$\ast$Requires\+: lv\+\_\+label$\ast$/
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a62b8fa6dc4a862726f49e9fd67ac033a}{LV\+\_\+\+ROLLER\+\_\+\+INF\+\_\+\+PAGES}}~7 /$\ast$Number of extra \char`\"{}pages\char`\"{} when the roller is infinite$\ast$/
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_ab7c0f42cd62f7dd90c760143cee4fde4}{LV\+\_\+\+USE\+\_\+\+SLIDER}}~1   /$\ast$Requires\+: lv\+\_\+bar$\ast$/
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a4b4e6966f929a46dae36f62fcb4ad7c5}{LV\+\_\+\+USE\+\_\+\+SWITCH}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a362c4684dabb55191514509aba33748e}{LV\+\_\+\+USE\+\_\+\+TEXTAREA}}~1   /$\ast$Requires\+: lv\+\_\+label$\ast$/
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_afc3a0018a49cfca52d6cac503a638ec2}{LV\+\_\+\+TEXTAREA\+\_\+\+DEF\+\_\+\+PWD\+\_\+\+SHOW\+\_\+\+TIME}}~1500    /$\ast$ms$\ast$/
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a6100a01be7889f316d1bf5fb8935e05b}{LV\+\_\+\+USE\+\_\+\+TABLE}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_af1c66cdbd8c681b4cd05d92d70573c12}{LV\+\_\+\+USE\+\_\+\+CALENDAR}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a31372b5fbbb9d41a4abf919871a3b1f7}{LV\+\_\+\+CALENDAR\+\_\+\+WEEK\+\_\+\+STARTS\+\_\+\+MONDAY}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a57fc582b9fb470c530f83ea34cf38699}{LV\+\_\+\+CALENDAR\+\_\+\+DEFAULT\+\_\+\+DAY\+\_\+\+NAMES}}~\{\char`\"{}Su\char`\"{}, \char`\"{}Mo\char`\"{}, \char`\"{}Tu\char`\"{}, \char`\"{}We\char`\"{}, \char`\"{}Th\char`\"{}, \char`\"{}Fr\char`\"{}, \char`\"{}Sa\char`\"{}\}
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a7ae75473346ea90ec1fe0c3b9ca439eb}{LV\+\_\+\+CALENDAR\+\_\+\+DEFAULT\+\_\+\+MONTH\+\_\+\+NAMES}}~\{\char`\"{}January\char`\"{}, \char`\"{}February\char`\"{}, \char`\"{}March\char`\"{},  \char`\"{}April\char`\"{}, \char`\"{}May\char`\"{},  \char`\"{}June\char`\"{}, \char`\"{}July\char`\"{}, \char`\"{}August\char`\"{}, \char`\"{}September\char`\"{}, \char`\"{}October\char`\"{}, \char`\"{}November\char`\"{}, \char`\"{}December\char`\"{}\}
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_aff60f490268a56128446e6b55e2bd066}{LV\+\_\+\+USE\+\_\+\+CALENDAR\+\_\+\+HEADER\+\_\+\+ARROW}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a62c2ca18acb18afb9ef86aee41cda195}{LV\+\_\+\+USE\+\_\+\+CALENDAR\+\_\+\+HEADER\+\_\+\+DROPDOWN}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a1cc9dc77067d9105818faab203522300}{LV\+\_\+\+USE\+\_\+\+CHART}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a7f3d331f0395707d213669dd20c1b107}{LV\+\_\+\+USE\+\_\+\+COLORWHEEL}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a712d2807b13c1dc495d060ffa82114e1}{LV\+\_\+\+USE\+\_\+\+IMGBTN}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a64d1725353f5ab3e1fb2fe6c4329c46f}{LV\+\_\+\+USE\+\_\+\+KEYBOARD}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a8f1b3daead5fdab89b96c6b53c1ec12e}{LV\+\_\+\+USE\+\_\+\+LED}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a2d446163f0c6a19032a776e3d0c558da}{LV\+\_\+\+USE\+\_\+\+LIST}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a1e485e6fc2a1b99548fd399b00054fdf}{LV\+\_\+\+USE\+\_\+\+METER}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_ab0d2f4f61aa8674a34c8e41b8d47d8aa}{LV\+\_\+\+USE\+\_\+\+MSGBOX}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_afb7291443c61a1c56c1f8ee1fad58856}{LV\+\_\+\+USE\+\_\+\+SPINBOX}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a4d893a8d05d91416cfb0e94139f9975f}{LV\+\_\+\+USE\+\_\+\+SPINNER}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a93727577a2845780880149217a435bac}{LV\+\_\+\+USE\+\_\+\+TABVIEW}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_ae722bef533e6c7319fced268cfd6f712}{LV\+\_\+\+USE\+\_\+\+TILEVIEW}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_ab0b3e246f4129a4679c2f50749002ba1}{LV\+\_\+\+USE\+\_\+\+WIN}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a1d6045ad00b8d5db61819fa511312871}{LV\+\_\+\+USE\+\_\+\+SPAN}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_ae7db45d2104e7680574837e31ed5d4b9}{LV\+\_\+\+SPAN\+\_\+\+SNIPPET\+\_\+\+STACK\+\_\+\+SIZE}}~64
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a1df57ee8809abc5d8c24bc95ea6293b7}{LV\+\_\+\+USE\+\_\+\+THEME\+\_\+\+DEFAULT}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_aa147e121ac57e0766fe646ab8fbfdd43}{LV\+\_\+\+THEME\+\_\+\+DEFAULT\+\_\+\+DARK}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a607a867077d452888aca389b99a37613}{LV\+\_\+\+THEME\+\_\+\+DEFAULT\+\_\+\+GROW}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a4cf6d2bbdde57ce13d52d38aa5eac1fa}{LV\+\_\+\+THEME\+\_\+\+DEFAULT\+\_\+\+TRANSITION\+\_\+\+TIME}}~80
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a98e05a1aa53e40f159c79b19d1c7f6b4}{LV\+\_\+\+USE\+\_\+\+THEME\+\_\+\+BASIC}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a27648a176c28e6adbcf6225d8ef79e56}{LV\+\_\+\+USE\+\_\+\+THEME\+\_\+\+MONO}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_aed5e4669c5b03deae5e87c421f756cc0}{LV\+\_\+\+USE\+\_\+\+FLEX}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a448130ebbbaf9352f91c9161bed49862}{LV\+\_\+\+USE\+\_\+\+GRID}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_ad229a30c5f679f8e608a491f098dec24}{LV\+\_\+\+USE\+\_\+\+FS\+\_\+\+STDIO}}~\textquotesingle{}\textbackslash{}0\textquotesingle{}        /$\ast$Uses fopen, fread, etc$\ast$/
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a60d22fc87afad0fd00fbb38a76889cfb}{LV\+\_\+\+USE\+\_\+\+FS\+\_\+\+POSIX}}~\textquotesingle{}\textbackslash{}0\textquotesingle{}        /$\ast$Uses open, read, etc$\ast$/
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a83ade6ab62190bcf5adf2301bd56f01e}{LV\+\_\+\+USE\+\_\+\+FS\+\_\+\+WIN32}}~\textquotesingle{}\textbackslash{}0\textquotesingle{}        /$\ast$Uses Create\+File, Read\+File, etc$\ast$/
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_aaf74151144e3f9249f77a7092d64a2ab}{LV\+\_\+\+USE\+\_\+\+FS\+\_\+\+FATFS}}~\textquotesingle{}\textbackslash{}0\textquotesingle{}        /$\ast$Uses f\+\_\+open, f\+\_\+read, etc$\ast$/
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_aa5ab5053c7c516c234f3af8cec87efac}{LV\+\_\+\+USE\+\_\+\+PNG}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_aa204c68978c64a659c43618f9113fef8}{LV\+\_\+\+USE\+\_\+\+BMP}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a1a7272048f176c8b87966194933cc2bd}{LV\+\_\+\+USE\+\_\+\+SJPG}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a40257e0390c96f7e9c604f6fef4f996c}{LV\+\_\+\+USE\+\_\+\+GIF}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a23ad1b5ec39c469c9dda0cb4b8e3e858}{LV\+\_\+\+USE\+\_\+\+QRCODE}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_add2c97b28774c04c288091b589cf50c6}{LV\+\_\+\+USE\+\_\+\+FREETYPE}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_af9a8b2a5334032d5e4e01fb32592a274}{LV\+\_\+\+USE\+\_\+\+RLOTTIE}}~0
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a44cc4d61a2c09eb55907a3e56e4829f3}{LV\+\_\+\+USE\+\_\+\+SNAPSHOT}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_a0e9851d66108d2d705713308ae332bb9}{LV\+\_\+\+BUILD\+\_\+\+EXAMPLES}}~1
+\item 
+\#define \mbox{\hyperlink{lv__conf_8h_abe5ddd0574b1cd3c60ba4e17f27f36af}{LV\+\_\+\+USE\+\_\+\+FONT\+\_\+\+SYMBOLS}}~1
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Configuration file for v8.\+1.\+0 
+
+Definition in file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{lv__conf_8h_a7f89929bee5e1d1f3047b6fc57723602}\label{lv__conf_8h_a7f89929bee5e1d1f3047b6fc57723602}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_ASSERT\_HANDLER@{LV\_ASSERT\_HANDLER}}
+\index{LV\_ASSERT\_HANDLER@{LV\_ASSERT\_HANDLER}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_ASSERT\_HANDLER}{LV\_ASSERT\_HANDLER}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+ASSERT\+\_\+\+HANDLER~while(1);   /$\ast$Halt by default$\ast$/}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00216}{216}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_aa4d75719785838a72b61c58e920fc8f8}\label{lv__conf_8h_aa4d75719785838a72b61c58e920fc8f8}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_ASSERT\_HANDLER\_INCLUDE@{LV\_ASSERT\_HANDLER\_INCLUDE}}
+\index{LV\_ASSERT\_HANDLER\_INCLUDE@{LV\_ASSERT\_HANDLER\_INCLUDE}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_ASSERT\_HANDLER\_INCLUDE}{LV\_ASSERT\_HANDLER\_INCLUDE}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+ASSERT\+\_\+\+HANDLER\+\_\+\+INCLUDE~$<$stdint.\+h$>$}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00215}{215}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_ad75bbb40b927ad7efa7231d3625672b1}\label{lv__conf_8h_ad75bbb40b927ad7efa7231d3625672b1}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_ATTRIBUTE\_DMA@{LV\_ATTRIBUTE\_DMA}}
+\index{LV\_ATTRIBUTE\_DMA@{LV\_ATTRIBUTE\_DMA}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_ATTRIBUTE\_DMA}{LV\_ATTRIBUTE\_DMA}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+ATTRIBUTE\+\_\+\+DMA}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00290}{290}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a61048d2055ebf90e7cb2c67c3d453b78}\label{lv__conf_8h_a61048d2055ebf90e7cb2c67c3d453b78}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_ATTRIBUTE\_FAST\_MEM@{LV\_ATTRIBUTE\_FAST\_MEM}}
+\index{LV\_ATTRIBUTE\_FAST\_MEM@{LV\_ATTRIBUTE\_FAST\_MEM}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_ATTRIBUTE\_FAST\_MEM}{LV\_ATTRIBUTE\_FAST\_MEM}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+ATTRIBUTE\+\_\+\+FAST\+\_\+\+MEM}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00287}{287}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a8516a98c991b133415b00656518d956d}\label{lv__conf_8h_a8516a98c991b133415b00656518d956d}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_ATTRIBUTE\_FLUSH\_READY@{LV\_ATTRIBUTE\_FLUSH\_READY}}
+\index{LV\_ATTRIBUTE\_FLUSH\_READY@{LV\_ATTRIBUTE\_FLUSH\_READY}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_ATTRIBUTE\_FLUSH\_READY}{LV\_ATTRIBUTE\_FLUSH\_READY}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+ATTRIBUTE\+\_\+\+FLUSH\+\_\+\+READY}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00271}{271}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a9aa1f88eb217d43ff6f619e58b866d52}\label{lv__conf_8h_a9aa1f88eb217d43ff6f619e58b866d52}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_ATTRIBUTE\_LARGE\_CONST@{LV\_ATTRIBUTE\_LARGE\_CONST}}
+\index{LV\_ATTRIBUTE\_LARGE\_CONST@{LV\_ATTRIBUTE\_LARGE\_CONST}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_ATTRIBUTE\_LARGE\_CONST}{LV\_ATTRIBUTE\_LARGE\_CONST}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+ATTRIBUTE\+\_\+\+LARGE\+\_\+\+CONST}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00281}{281}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_ab56b8e8d4a404896f5a1af7369978f2c}\label{lv__conf_8h_ab56b8e8d4a404896f5a1af7369978f2c}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_ATTRIBUTE\_LARGE\_RAM\_ARRAY@{LV\_ATTRIBUTE\_LARGE\_RAM\_ARRAY}}
+\index{LV\_ATTRIBUTE\_LARGE\_RAM\_ARRAY@{LV\_ATTRIBUTE\_LARGE\_RAM\_ARRAY}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_ATTRIBUTE\_LARGE\_RAM\_ARRAY}{LV\_ATTRIBUTE\_LARGE\_RAM\_ARRAY}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+ATTRIBUTE\+\_\+\+LARGE\+\_\+\+RAM\+\_\+\+ARRAY}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00284}{284}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a6b77dcb22fcdc624952dc307331e5db6}\label{lv__conf_8h_a6b77dcb22fcdc624952dc307331e5db6}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_ATTRIBUTE\_MEM\_ALIGN@{LV\_ATTRIBUTE\_MEM\_ALIGN}}
+\index{LV\_ATTRIBUTE\_MEM\_ALIGN@{LV\_ATTRIBUTE\_MEM\_ALIGN}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_ATTRIBUTE\_MEM\_ALIGN}{LV\_ATTRIBUTE\_MEM\_ALIGN}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+ATTRIBUTE\+\_\+\+MEM\+\_\+\+ALIGN}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00278}{278}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_aedaa5ae2f1d085f553c3b0bcc25aa592}\label{lv__conf_8h_aedaa5ae2f1d085f553c3b0bcc25aa592}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_ATTRIBUTE\_MEM\_ALIGN\_SIZE@{LV\_ATTRIBUTE\_MEM\_ALIGN\_SIZE}}
+\index{LV\_ATTRIBUTE\_MEM\_ALIGN\_SIZE@{LV\_ATTRIBUTE\_MEM\_ALIGN\_SIZE}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_ATTRIBUTE\_MEM\_ALIGN\_SIZE}{LV\_ATTRIBUTE\_MEM\_ALIGN\_SIZE}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+ATTRIBUTE\+\_\+\+MEM\+\_\+\+ALIGN\+\_\+\+SIZE~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00274}{274}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a969183113f0383dfc9f6febfeb265559}\label{lv__conf_8h_a969183113f0383dfc9f6febfeb265559}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_ATTRIBUTE\_TICK\_INC@{LV\_ATTRIBUTE\_TICK\_INC}}
+\index{LV\_ATTRIBUTE\_TICK\_INC@{LV\_ATTRIBUTE\_TICK\_INC}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_ATTRIBUTE\_TICK\_INC}{LV\_ATTRIBUTE\_TICK\_INC}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+ATTRIBUTE\+\_\+\+TICK\+\_\+\+INC}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00265}{265}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a65a000fa97141d8340aab1813d0966d2}\label{lv__conf_8h_a65a000fa97141d8340aab1813d0966d2}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_ATTRIBUTE\_TIMER\_HANDLER@{LV\_ATTRIBUTE\_TIMER\_HANDLER}}
+\index{LV\_ATTRIBUTE\_TIMER\_HANDLER@{LV\_ATTRIBUTE\_TIMER\_HANDLER}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_ATTRIBUTE\_TIMER\_HANDLER}{LV\_ATTRIBUTE\_TIMER\_HANDLER}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+ATTRIBUTE\+\_\+\+TIMER\+\_\+\+HANDLER}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00268}{268}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_ae7d23c710abd0533067f78bbf6ec3519}\label{lv__conf_8h_ae7d23c710abd0533067f78bbf6ec3519}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_BIG\_ENDIAN\_SYSTEM@{LV\_BIG\_ENDIAN\_SYSTEM}}
+\index{LV\_BIG\_ENDIAN\_SYSTEM@{LV\_BIG\_ENDIAN\_SYSTEM}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_BIG\_ENDIAN\_SYSTEM}{LV\_BIG\_ENDIAN\_SYSTEM}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+BIG\+\_\+\+ENDIAN\+\_\+\+SYSTEM~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00262}{262}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a0e9851d66108d2d705713308ae332bb9}\label{lv__conf_8h_a0e9851d66108d2d705713308ae332bb9}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_BUILD\_EXAMPLES@{LV\_BUILD\_EXAMPLES}}
+\index{LV\_BUILD\_EXAMPLES@{LV\_BUILD\_EXAMPLES}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_BUILD\_EXAMPLES}{LV\_BUILD\_EXAMPLES}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+BUILD\+\_\+\+EXAMPLES~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00597}{597}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a57fc582b9fb470c530f83ea34cf38699}\label{lv__conf_8h_a57fc582b9fb470c530f83ea34cf38699}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_CALENDAR\_DEFAULT\_DAY\_NAMES@{LV\_CALENDAR\_DEFAULT\_DAY\_NAMES}}
+\index{LV\_CALENDAR\_DEFAULT\_DAY\_NAMES@{LV\_CALENDAR\_DEFAULT\_DAY\_NAMES}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_CALENDAR\_DEFAULT\_DAY\_NAMES}{LV\_CALENDAR\_DEFAULT\_DAY\_NAMES}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+CALENDAR\+\_\+\+DEFAULT\+\_\+\+DAY\+\_\+\+NAMES~\{\char`\"{}Su\char`\"{}, \char`\"{}Mo\char`\"{}, \char`\"{}Tu\char`\"{}, \char`\"{}We\char`\"{}, \char`\"{}Th\char`\"{}, \char`\"{}Fr\char`\"{}, \char`\"{}Sa\char`\"{}\}}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00467}{467}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a7ae75473346ea90ec1fe0c3b9ca439eb}\label{lv__conf_8h_a7ae75473346ea90ec1fe0c3b9ca439eb}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_CALENDAR\_DEFAULT\_MONTH\_NAMES@{LV\_CALENDAR\_DEFAULT\_MONTH\_NAMES}}
+\index{LV\_CALENDAR\_DEFAULT\_MONTH\_NAMES@{LV\_CALENDAR\_DEFAULT\_MONTH\_NAMES}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_CALENDAR\_DEFAULT\_MONTH\_NAMES}{LV\_CALENDAR\_DEFAULT\_MONTH\_NAMES}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+CALENDAR\+\_\+\+DEFAULT\+\_\+\+MONTH\+\_\+\+NAMES~\{\char`\"{}January\char`\"{}, \char`\"{}February\char`\"{}, \char`\"{}March\char`\"{},  \char`\"{}April\char`\"{}, \char`\"{}May\char`\"{},  \char`\"{}June\char`\"{}, \char`\"{}July\char`\"{}, \char`\"{}August\char`\"{}, \char`\"{}September\char`\"{}, \char`\"{}October\char`\"{}, \char`\"{}November\char`\"{}, \char`\"{}December\char`\"{}\}}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00470}{470}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a31372b5fbbb9d41a4abf919871a3b1f7}\label{lv__conf_8h_a31372b5fbbb9d41a4abf919871a3b1f7}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_CALENDAR\_WEEK\_STARTS\_MONDAY@{LV\_CALENDAR\_WEEK\_STARTS\_MONDAY}}
+\index{LV\_CALENDAR\_WEEK\_STARTS\_MONDAY@{LV\_CALENDAR\_WEEK\_STARTS\_MONDAY}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_CALENDAR\_WEEK\_STARTS\_MONDAY}{LV\_CALENDAR\_WEEK\_STARTS\_MONDAY}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+CALENDAR\+\_\+\+WEEK\+\_\+\+STARTS\+\_\+\+MONDAY~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00463}{463}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a227d1a4f28f04468604a9f5bd6198851}\label{lv__conf_8h_a227d1a4f28f04468604a9f5bd6198851}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_CIRCLE\_CACHE\_SIZE@{LV\_CIRCLE\_CACHE\_SIZE}}
+\index{LV\_CIRCLE\_CACHE\_SIZE@{LV\_CIRCLE\_CACHE\_SIZE}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_CIRCLE\_CACHE\_SIZE}{LV\_CIRCLE\_CACHE\_SIZE}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+CIRCLE\+\_\+\+CACHE\+\_\+\+SIZE~4}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00120}{120}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a322a97e9b4376aa58b0158c50171b9f8}\label{lv__conf_8h_a322a97e9b4376aa58b0158c50171b9f8}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_COLOR\_16\_SWAP@{LV\_COLOR\_16\_SWAP}}
+\index{LV\_COLOR\_16\_SWAP@{LV\_COLOR\_16\_SWAP}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_COLOR\_16\_SWAP}{LV\_COLOR\_16\_SWAP}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+COLOR\+\_\+16\+\_\+\+SWAP~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00030}{30}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a36213d7982c1770f2a9d38ce76b90615}\label{lv__conf_8h_a36213d7982c1770f2a9d38ce76b90615}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_COLOR\_CHROMA\_KEY@{LV\_COLOR\_CHROMA\_KEY}}
+\index{LV\_COLOR\_CHROMA\_KEY@{LV\_COLOR\_CHROMA\_KEY}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_COLOR\_CHROMA\_KEY}{LV\_COLOR\_CHROMA\_KEY}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+COLOR\+\_\+\+CHROMA\+\_\+\+KEY~lv\+\_\+color\+\_\+hex(0x00ff00)         /$\ast$pure green$\ast$/}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00042}{42}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a8db46bcd21c9edad6759737cd1b034d7}\label{lv__conf_8h_a8db46bcd21c9edad6759737cd1b034d7}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_COLOR\_DEPTH@{LV\_COLOR\_DEPTH}}
+\index{LV\_COLOR\_DEPTH@{LV\_COLOR\_DEPTH}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_COLOR\_DEPTH}{LV\_COLOR\_DEPTH}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+COLOR\+\_\+\+DEPTH~16}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00027}{27}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a6adbc139a12c84b72ca9b4d7e66c3aa6}\label{lv__conf_8h_a6adbc139a12c84b72ca9b4d7e66c3aa6}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_COLOR\_MIX\_ROUND\_OFS@{LV\_COLOR\_MIX\_ROUND\_OFS}}
+\index{LV\_COLOR\_MIX\_ROUND\_OFS@{LV\_COLOR\_MIX\_ROUND\_OFS}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_COLOR\_MIX\_ROUND\_OFS}{LV\_COLOR\_MIX\_ROUND\_OFS}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+COLOR\+\_\+\+MIX\+\_\+\+ROUND\+\_\+\+OFS~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00039}{39}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a6a01dc5b48fd8b6cc603d445db70e5be}\label{lv__conf_8h_a6a01dc5b48fd8b6cc603d445db70e5be}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_COLOR\_SCREEN\_TRANSP@{LV\_COLOR\_SCREEN\_TRANSP}}
+\index{LV\_COLOR\_SCREEN\_TRANSP@{LV\_COLOR\_SCREEN\_TRANSP}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_COLOR\_SCREEN\_TRANSP}{LV\_COLOR\_SCREEN\_TRANSP}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+COLOR\+\_\+\+SCREEN\+\_\+\+TRANSP~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00035}{35}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_abe9b8c041b46f280bade20b602168844}\label{lv__conf_8h_abe9b8c041b46f280bade20b602168844}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_DISP\_DEF\_REFR\_PERIOD@{LV\_DISP\_DEF\_REFR\_PERIOD}}
+\index{LV\_DISP\_DEF\_REFR\_PERIOD@{LV\_DISP\_DEF\_REFR\_PERIOD}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_DISP\_DEF\_REFR\_PERIOD}{LV\_DISP\_DEF\_REFR\_PERIOD}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+DISP\+\_\+\+DEF\+\_\+\+REFR\+\_\+\+PERIOD~10      /$\ast$\mbox{[}ms\mbox{]}$\ast$/}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00081}{81}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a69fcc904e7175b349baaeffdec2f951a}\label{lv__conf_8h_a69fcc904e7175b349baaeffdec2f951a}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_DISP\_ROT\_MAX\_BUF@{LV\_DISP\_ROT\_MAX\_BUF}}
+\index{LV\_DISP\_ROT\_MAX\_BUF@{LV\_DISP\_ROT\_MAX\_BUF}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_DISP\_ROT\_MAX\_BUF}{LV\_DISP\_ROT\_MAX\_BUF}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+DISP\+\_\+\+ROT\+\_\+\+MAX\+\_\+\+BUF~(10$\ast$1024)}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00132}{132}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_aadf0386c6d60d0c07153b38654f6b6d3}\label{lv__conf_8h_aadf0386c6d60d0c07153b38654f6b6d3}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_DPI\_DEF@{LV\_DPI\_DEF}}
+\index{LV\_DPI\_DEF@{LV\_DPI\_DEF}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_DPI\_DEF}{LV\_DPI\_DEF}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+DPI\+\_\+\+DEF~130     /$\ast$\mbox{[}px/inch\mbox{]}$\ast$/}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00096}{96}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_aabbb65481bcb6ea39af12dce67b78987}\label{lv__conf_8h_aabbb65481bcb6ea39af12dce67b78987}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_DRAW\_COMPLEX@{LV\_DRAW\_COMPLEX}}
+\index{LV\_DRAW\_COMPLEX@{LV\_DRAW\_COMPLEX}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_DRAW\_COMPLEX}{LV\_DRAW\_COMPLEX}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+DRAW\+\_\+\+COMPLEX~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00108}{108}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a8856846f46d7020d3d8092dbf569d274}\label{lv__conf_8h_a8856846f46d7020d3d8092dbf569d274}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_ENABLE\_GC@{LV\_ENABLE\_GC}}
+\index{LV\_ENABLE\_GC@{LV\_ENABLE\_GC}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_ENABLE\_GC}{LV\_ENABLE\_GC}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+ENABLE\+\_\+\+GC~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00252}{252}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_ad9dbfeb90679a5db213a80f3e8d61b28}\label{lv__conf_8h_ad9dbfeb90679a5db213a80f3e8d61b28}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_EXPORT\_CONST\_INT@{LV\_EXPORT\_CONST\_INT}}
+\index{LV\_EXPORT\_CONST\_INT@{LV\_EXPORT\_CONST\_INT}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_EXPORT\_CONST\_INT}{LV\_EXPORT\_CONST\_INT}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+EXPORT\+\_\+\+CONST\+\_\+\+INT(\begin{DoxyParamCaption}\item[{}]{int\+\_\+value }\end{DoxyParamCaption})~struct \+\_\+silence\+\_\+gcc\+\_\+warning /$\ast$The default value just prevents GCC warning$\ast$/}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00294}{294}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a01312bddc4d0daed11c944c11a107277}\label{lv__conf_8h_a01312bddc4d0daed11c944c11a107277}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_FONT\_CUSTOM\_DECLARE@{LV\_FONT\_CUSTOM\_DECLARE}}
+\index{LV\_FONT\_CUSTOM\_DECLARE@{LV\_FONT\_CUSTOM\_DECLARE}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_FONT\_CUSTOM\_DECLARE}{LV\_FONT\_CUSTOM\_DECLARE}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+FONT\+\_\+\+CUSTOM\+\_\+\+DECLARE}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00340}{340}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a09b9a62c2b0986bedd3e720286631dd5}\label{lv__conf_8h_a09b9a62c2b0986bedd3e720286631dd5}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_FONT\_DEFAULT@{LV\_FONT\_DEFAULT}}
+\index{LV\_FONT\_DEFAULT@{LV\_FONT\_DEFAULT}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_FONT\_DEFAULT}{LV\_FONT\_DEFAULT}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+FONT\+\_\+\+DEFAULT~\&lv\+\_\+font\+\_\+montserrat\+\_\+14}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00343}{343}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a57fb7429ce2d050ea22f388f815fda39}\label{lv__conf_8h_a57fb7429ce2d050ea22f388f815fda39}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_FONT\_DEJAVU\_16\_PERSIAN\_HEBREW@{LV\_FONT\_DEJAVU\_16\_PERSIAN\_HEBREW}}
+\index{LV\_FONT\_DEJAVU\_16\_PERSIAN\_HEBREW@{LV\_FONT\_DEJAVU\_16\_PERSIAN\_HEBREW}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_FONT\_DEJAVU\_16\_PERSIAN\_HEBREW}{LV\_FONT\_DEJAVU\_16\_PERSIAN\_HEBREW}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+FONT\+\_\+\+DEJAVU\+\_\+16\+\_\+\+PERSIAN\+\_\+\+HEBREW~0  /$\ast$Hebrew, Arabic, Perisan letters and all their forms$\ast$/}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00330}{330}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a7da5b8d6a59bc17c499efdd6dbba98a6}\label{lv__conf_8h_a7da5b8d6a59bc17c499efdd6dbba98a6}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_FONT\_FMT\_TXT\_LARGE@{LV\_FONT\_FMT\_TXT\_LARGE}}
+\index{LV\_FONT\_FMT\_TXT\_LARGE@{LV\_FONT\_FMT\_TXT\_LARGE}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_FONT\_FMT\_TXT\_LARGE}{LV\_FONT\_FMT\_TXT\_LARGE}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+FONT\+\_\+\+FMT\+\_\+\+TXT\+\_\+\+LARGE~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00348}{348}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a7c7302f07131fdae323615a905345e25}\label{lv__conf_8h_a7c7302f07131fdae323615a905345e25}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_FONT\_MONTSERRAT\_10@{LV\_FONT\_MONTSERRAT\_10}}
+\index{LV\_FONT\_MONTSERRAT\_10@{LV\_FONT\_MONTSERRAT\_10}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_FONT\_MONTSERRAT\_10}{LV\_FONT\_MONTSERRAT\_10}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+10~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00306}{306}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a3bbe5045ec263fad01d7104de7fc77be}\label{lv__conf_8h_a3bbe5045ec263fad01d7104de7fc77be}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_FONT\_MONTSERRAT\_12@{LV\_FONT\_MONTSERRAT\_12}}
+\index{LV\_FONT\_MONTSERRAT\_12@{LV\_FONT\_MONTSERRAT\_12}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_FONT\_MONTSERRAT\_12}{LV\_FONT\_MONTSERRAT\_12}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+12~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00307}{307}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_ab48b61ab3fcde457751de0a80916924d}\label{lv__conf_8h_ab48b61ab3fcde457751de0a80916924d}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_FONT\_MONTSERRAT\_12\_SUBPX@{LV\_FONT\_MONTSERRAT\_12\_SUBPX}}
+\index{LV\_FONT\_MONTSERRAT\_12\_SUBPX@{LV\_FONT\_MONTSERRAT\_12\_SUBPX}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_FONT\_MONTSERRAT\_12\_SUBPX}{LV\_FONT\_MONTSERRAT\_12\_SUBPX}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+12\+\_\+\+SUBPX~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00328}{328}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a79cdb1f92e25cf5e3f611ef4ce07e9c2}\label{lv__conf_8h_a79cdb1f92e25cf5e3f611ef4ce07e9c2}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_FONT\_MONTSERRAT\_14@{LV\_FONT\_MONTSERRAT\_14}}
+\index{LV\_FONT\_MONTSERRAT\_14@{LV\_FONT\_MONTSERRAT\_14}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_FONT\_MONTSERRAT\_14}{LV\_FONT\_MONTSERRAT\_14}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+14~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00308}{308}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_ac8f7334df9da9e301fa91c64d62b5b8e}\label{lv__conf_8h_ac8f7334df9da9e301fa91c64d62b5b8e}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_FONT\_MONTSERRAT\_16@{LV\_FONT\_MONTSERRAT\_16}}
+\index{LV\_FONT\_MONTSERRAT\_16@{LV\_FONT\_MONTSERRAT\_16}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_FONT\_MONTSERRAT\_16}{LV\_FONT\_MONTSERRAT\_16}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+16~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00309}{309}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a8f2ef0967e43802ac36522885e1dd3f1}\label{lv__conf_8h_a8f2ef0967e43802ac36522885e1dd3f1}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_FONT\_MONTSERRAT\_18@{LV\_FONT\_MONTSERRAT\_18}}
+\index{LV\_FONT\_MONTSERRAT\_18@{LV\_FONT\_MONTSERRAT\_18}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_FONT\_MONTSERRAT\_18}{LV\_FONT\_MONTSERRAT\_18}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+18~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00310}{310}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_af03109d8293eb9e7e99b3675821f8963}\label{lv__conf_8h_af03109d8293eb9e7e99b3675821f8963}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_FONT\_MONTSERRAT\_20@{LV\_FONT\_MONTSERRAT\_20}}
+\index{LV\_FONT\_MONTSERRAT\_20@{LV\_FONT\_MONTSERRAT\_20}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_FONT\_MONTSERRAT\_20}{LV\_FONT\_MONTSERRAT\_20}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+20~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00311}{311}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a590c2f28e800a40bca99dcca6959e852}\label{lv__conf_8h_a590c2f28e800a40bca99dcca6959e852}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_FONT\_MONTSERRAT\_22@{LV\_FONT\_MONTSERRAT\_22}}
+\index{LV\_FONT\_MONTSERRAT\_22@{LV\_FONT\_MONTSERRAT\_22}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_FONT\_MONTSERRAT\_22}{LV\_FONT\_MONTSERRAT\_22}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+22~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00312}{312}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a920553c1d0f77482f14f1ef331683bfe}\label{lv__conf_8h_a920553c1d0f77482f14f1ef331683bfe}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_FONT\_MONTSERRAT\_24@{LV\_FONT\_MONTSERRAT\_24}}
+\index{LV\_FONT\_MONTSERRAT\_24@{LV\_FONT\_MONTSERRAT\_24}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_FONT\_MONTSERRAT\_24}{LV\_FONT\_MONTSERRAT\_24}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+24~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00313}{313}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a50d897f0ef6c94eecd4bafbf4e9f963b}\label{lv__conf_8h_a50d897f0ef6c94eecd4bafbf4e9f963b}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_FONT\_MONTSERRAT\_26@{LV\_FONT\_MONTSERRAT\_26}}
+\index{LV\_FONT\_MONTSERRAT\_26@{LV\_FONT\_MONTSERRAT\_26}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_FONT\_MONTSERRAT\_26}{LV\_FONT\_MONTSERRAT\_26}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+26~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00314}{314}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_adb83bd553b8db5973d467ef827b39b8b}\label{lv__conf_8h_adb83bd553b8db5973d467ef827b39b8b}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_FONT\_MONTSERRAT\_28@{LV\_FONT\_MONTSERRAT\_28}}
+\index{LV\_FONT\_MONTSERRAT\_28@{LV\_FONT\_MONTSERRAT\_28}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_FONT\_MONTSERRAT\_28}{LV\_FONT\_MONTSERRAT\_28}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+28~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00315}{315}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a78e521af972a5d6250bfdf070070d0be}\label{lv__conf_8h_a78e521af972a5d6250bfdf070070d0be}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_FONT\_MONTSERRAT\_28\_COMPRESSED@{LV\_FONT\_MONTSERRAT\_28\_COMPRESSED}}
+\index{LV\_FONT\_MONTSERRAT\_28\_COMPRESSED@{LV\_FONT\_MONTSERRAT\_28\_COMPRESSED}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_FONT\_MONTSERRAT\_28\_COMPRESSED}{LV\_FONT\_MONTSERRAT\_28\_COMPRESSED}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+28\+\_\+\+COMPRESSED~0  /$\ast$bpp = 3$\ast$/}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00329}{329}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a8c8c22728c19a7a2a87ed0933e5c478d}\label{lv__conf_8h_a8c8c22728c19a7a2a87ed0933e5c478d}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_FONT\_MONTSERRAT\_30@{LV\_FONT\_MONTSERRAT\_30}}
+\index{LV\_FONT\_MONTSERRAT\_30@{LV\_FONT\_MONTSERRAT\_30}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_FONT\_MONTSERRAT\_30}{LV\_FONT\_MONTSERRAT\_30}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+30~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00316}{316}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a70fbf2c6aab7f00a1886dca923816277}\label{lv__conf_8h_a70fbf2c6aab7f00a1886dca923816277}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_FONT\_MONTSERRAT\_32@{LV\_FONT\_MONTSERRAT\_32}}
+\index{LV\_FONT\_MONTSERRAT\_32@{LV\_FONT\_MONTSERRAT\_32}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_FONT\_MONTSERRAT\_32}{LV\_FONT\_MONTSERRAT\_32}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+32~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00317}{317}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a2b13fb8eabe8f3fe6e8a53fea19bfe65}\label{lv__conf_8h_a2b13fb8eabe8f3fe6e8a53fea19bfe65}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_FONT\_MONTSERRAT\_34@{LV\_FONT\_MONTSERRAT\_34}}
+\index{LV\_FONT\_MONTSERRAT\_34@{LV\_FONT\_MONTSERRAT\_34}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_FONT\_MONTSERRAT\_34}{LV\_FONT\_MONTSERRAT\_34}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+34~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00318}{318}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a85335a289fcb352ae39e143ec16c5141}\label{lv__conf_8h_a85335a289fcb352ae39e143ec16c5141}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_FONT\_MONTSERRAT\_36@{LV\_FONT\_MONTSERRAT\_36}}
+\index{LV\_FONT\_MONTSERRAT\_36@{LV\_FONT\_MONTSERRAT\_36}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_FONT\_MONTSERRAT\_36}{LV\_FONT\_MONTSERRAT\_36}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+36~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00319}{319}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a5a776d733e6b4eb5803527620e9c7fbf}\label{lv__conf_8h_a5a776d733e6b4eb5803527620e9c7fbf}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_FONT\_MONTSERRAT\_38@{LV\_FONT\_MONTSERRAT\_38}}
+\index{LV\_FONT\_MONTSERRAT\_38@{LV\_FONT\_MONTSERRAT\_38}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_FONT\_MONTSERRAT\_38}{LV\_FONT\_MONTSERRAT\_38}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+38~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00320}{320}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a06993754cf3f9f91c856ed23a49cfafd}\label{lv__conf_8h_a06993754cf3f9f91c856ed23a49cfafd}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_FONT\_MONTSERRAT\_40@{LV\_FONT\_MONTSERRAT\_40}}
+\index{LV\_FONT\_MONTSERRAT\_40@{LV\_FONT\_MONTSERRAT\_40}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_FONT\_MONTSERRAT\_40}{LV\_FONT\_MONTSERRAT\_40}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+40~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00321}{321}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_ae6edcf67fb721fba90b6cb8676c45801}\label{lv__conf_8h_ae6edcf67fb721fba90b6cb8676c45801}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_FONT\_MONTSERRAT\_42@{LV\_FONT\_MONTSERRAT\_42}}
+\index{LV\_FONT\_MONTSERRAT\_42@{LV\_FONT\_MONTSERRAT\_42}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_FONT\_MONTSERRAT\_42}{LV\_FONT\_MONTSERRAT\_42}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+42~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00322}{322}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_afdd89cb1aa0f3bc5dce3c08945794373}\label{lv__conf_8h_afdd89cb1aa0f3bc5dce3c08945794373}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_FONT\_MONTSERRAT\_44@{LV\_FONT\_MONTSERRAT\_44}}
+\index{LV\_FONT\_MONTSERRAT\_44@{LV\_FONT\_MONTSERRAT\_44}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_FONT\_MONTSERRAT\_44}{LV\_FONT\_MONTSERRAT\_44}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+44~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00323}{323}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_ac9995d7ccf72ee0ae188df9197629905}\label{lv__conf_8h_ac9995d7ccf72ee0ae188df9197629905}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_FONT\_MONTSERRAT\_46@{LV\_FONT\_MONTSERRAT\_46}}
+\index{LV\_FONT\_MONTSERRAT\_46@{LV\_FONT\_MONTSERRAT\_46}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_FONT\_MONTSERRAT\_46}{LV\_FONT\_MONTSERRAT\_46}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+46~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00324}{324}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_aedabba4da43252235fe602e42cd28832}\label{lv__conf_8h_aedabba4da43252235fe602e42cd28832}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_FONT\_MONTSERRAT\_48@{LV\_FONT\_MONTSERRAT\_48}}
+\index{LV\_FONT\_MONTSERRAT\_48@{LV\_FONT\_MONTSERRAT\_48}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_FONT\_MONTSERRAT\_48}{LV\_FONT\_MONTSERRAT\_48}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+48~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00325}{325}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_ac97836d54b3ffcde135728ec6f8ad344}\label{lv__conf_8h_ac97836d54b3ffcde135728ec6f8ad344}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_FONT\_MONTSERRAT\_8@{LV\_FONT\_MONTSERRAT\_8}}
+\index{LV\_FONT\_MONTSERRAT\_8@{LV\_FONT\_MONTSERRAT\_8}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_FONT\_MONTSERRAT\_8}{LV\_FONT\_MONTSERRAT\_8}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+FONT\+\_\+\+MONTSERRAT\+\_\+8~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00305}{305}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_ad908503bbbe1309d22a515c0246f58e6}\label{lv__conf_8h_ad908503bbbe1309d22a515c0246f58e6}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_FONT\_SIMSUN\_16\_CJK@{LV\_FONT\_SIMSUN\_16\_CJK}}
+\index{LV\_FONT\_SIMSUN\_16\_CJK@{LV\_FONT\_SIMSUN\_16\_CJK}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_FONT\_SIMSUN\_16\_CJK}{LV\_FONT\_SIMSUN\_16\_CJK}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+FONT\+\_\+\+SIMSUN\+\_\+16\+\_\+\+CJK~0  /$\ast$1000 most common CJK radicals$\ast$/}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00331}{331}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a22fad1081f26a80b5faebde92d6afffd}\label{lv__conf_8h_a22fad1081f26a80b5faebde92d6afffd}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_FONT\_UNSCII\_16@{LV\_FONT\_UNSCII\_16}}
+\index{LV\_FONT\_UNSCII\_16@{LV\_FONT\_UNSCII\_16}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_FONT\_UNSCII\_16}{LV\_FONT\_UNSCII\_16}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+FONT\+\_\+\+UNSCII\+\_\+16~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00335}{335}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_abe7d25051479ced2e1da63ee2c62fc73}\label{lv__conf_8h_abe7d25051479ced2e1da63ee2c62fc73}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_FONT\_UNSCII\_8@{LV\_FONT\_UNSCII\_8}}
+\index{LV\_FONT\_UNSCII\_8@{LV\_FONT\_UNSCII\_8}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_FONT\_UNSCII\_8}{LV\_FONT\_UNSCII\_8}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+FONT\+\_\+\+UNSCII\+\_\+8~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00334}{334}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_ae599fa8c2a484d7a27e64257af0307af}\label{lv__conf_8h_ae599fa8c2a484d7a27e64257af0307af}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_IMG\_CACHE\_DEF\_SIZE@{LV\_IMG\_CACHE\_DEF\_SIZE}}
+\index{LV\_IMG\_CACHE\_DEF\_SIZE@{LV\_IMG\_CACHE\_DEF\_SIZE}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_IMG\_CACHE\_DEF\_SIZE}{LV\_IMG\_CACHE\_DEF\_SIZE}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+IMG\+\_\+\+CACHE\+\_\+\+DEF\+\_\+\+SIZE~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00129}{129}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a45d4adceb8fcf32eea0c68b91fd9e9ce}\label{lv__conf_8h_a45d4adceb8fcf32eea0c68b91fd9e9ce}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_INDEV\_DEF\_READ\_PERIOD@{LV\_INDEV\_DEF\_READ\_PERIOD}}
+\index{LV\_INDEV\_DEF\_READ\_PERIOD@{LV\_INDEV\_DEF\_READ\_PERIOD}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_INDEV\_DEF\_READ\_PERIOD}{LV\_INDEV\_DEF\_READ\_PERIOD}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+INDEV\+\_\+\+DEF\+\_\+\+READ\+\_\+\+PERIOD~1     /$\ast$\mbox{[}ms\mbox{]} -\/ faster for better touch response$\ast$/}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00084}{84}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a5c49073d980131304fa76635eee15f3a}\label{lv__conf_8h_a5c49073d980131304fa76635eee15f3a}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_LABEL\_LONG\_TXT\_HINT@{LV\_LABEL\_LONG\_TXT\_HINT}}
+\index{LV\_LABEL\_LONG\_TXT\_HINT@{LV\_LABEL\_LONG\_TXT\_HINT}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_LABEL\_LONG\_TXT\_HINT}{LV\_LABEL\_LONG\_TXT\_HINT}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+LABEL\+\_\+\+LONG\+\_\+\+TXT\+\_\+\+HINT~1  /$\ast$Store some extra info in labels to speed up drawing of very long texts$\ast$/}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00433}{433}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a94bfe0b9bb740ed5443241d418b64600}\label{lv__conf_8h_a94bfe0b9bb740ed5443241d418b64600}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_LABEL\_TEXT\_SELECTION@{LV\_LABEL\_TEXT\_SELECTION}}
+\index{LV\_LABEL\_TEXT\_SELECTION@{LV\_LABEL\_TEXT\_SELECTION}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_LABEL\_TEXT\_SELECTION}{LV\_LABEL\_TEXT\_SELECTION}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+LABEL\+\_\+\+TEXT\+\_\+\+SELECTION~1 /$\ast$Enable selecting text of the label$\ast$/}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00432}{432}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_aec056337ffb77039252d2b7b68be14da}\label{lv__conf_8h_aec056337ffb77039252d2b7b68be14da}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_MEM\_ADR@{LV\_MEM\_ADR}}
+\index{LV\_MEM\_ADR@{LV\_MEM\_ADR}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_MEM\_ADR}{LV\_MEM\_ADR}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+MEM\+\_\+\+ADR~0     /$\ast$0\+: unused$\ast$/}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00055}{55}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_ab71316814968e822f096725e1f62e174}\label{lv__conf_8h_ab71316814968e822f096725e1f62e174}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_MEM\_BUF\_MAX\_NUM@{LV\_MEM\_BUF\_MAX\_NUM}}
+\index{LV\_MEM\_BUF\_MAX\_NUM@{LV\_MEM\_BUF\_MAX\_NUM}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_MEM\_BUF\_MAX\_NUM}{LV\_MEM\_BUF\_MAX\_NUM}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+MEM\+\_\+\+BUF\+\_\+\+MAX\+\_\+\+NUM~16}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00071}{71}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a77bde977fddc70ca0fd99775170e2294}\label{lv__conf_8h_a77bde977fddc70ca0fd99775170e2294}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_MEM\_CUSTOM@{LV\_MEM\_CUSTOM}}
+\index{LV\_MEM\_CUSTOM@{LV\_MEM\_CUSTOM}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_MEM\_CUSTOM}{LV\_MEM\_CUSTOM}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+MEM\+\_\+\+CUSTOM~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00049}{49}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_aeff108006de09a570aac88c106497ed6}\label{lv__conf_8h_aeff108006de09a570aac88c106497ed6}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_MEM\_SIZE@{LV\_MEM\_SIZE}}
+\index{LV\_MEM\_SIZE@{LV\_MEM\_SIZE}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_MEM\_SIZE}{LV\_MEM\_SIZE}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+MEM\+\_\+\+SIZE~(32U $\ast$ 1024U)          /$\ast$\mbox{[}bytes\mbox{]}$\ast$/}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00052}{52}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a72bd97dd74e0066347ca12fc457e661d}\label{lv__conf_8h_a72bd97dd74e0066347ca12fc457e661d}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_MEMCPY\_MEMSET\_STD@{LV\_MEMCPY\_MEMSET\_STD}}
+\index{LV\_MEMCPY\_MEMSET\_STD@{LV\_MEMCPY\_MEMSET\_STD}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_MEMCPY\_MEMSET\_STD}{LV\_MEMCPY\_MEMSET\_STD}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+MEMCPY\+\_\+\+MEMSET\+\_\+\+STD~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00074}{74}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a62b8fa6dc4a862726f49e9fd67ac033a}\label{lv__conf_8h_a62b8fa6dc4a862726f49e9fd67ac033a}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_ROLLER\_INF\_PAGES@{LV\_ROLLER\_INF\_PAGES}}
+\index{LV\_ROLLER\_INF\_PAGES@{LV\_ROLLER\_INF\_PAGES}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_ROLLER\_INF\_PAGES}{LV\_ROLLER\_INF\_PAGES}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+ROLLER\+\_\+\+INF\+\_\+\+PAGES~7 /$\ast$Number of extra \char`\"{}pages\char`\"{} when the roller is infinite$\ast$/}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00440}{440}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a9f9678b8918ba4e858e3dbce95a39eb5}\label{lv__conf_8h_a9f9678b8918ba4e858e3dbce95a39eb5}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_SHADOW\_CACHE\_SIZE@{LV\_SHADOW\_CACHE\_SIZE}}
+\index{LV\_SHADOW\_CACHE\_SIZE@{LV\_SHADOW\_CACHE\_SIZE}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_SHADOW\_CACHE\_SIZE}{LV\_SHADOW\_CACHE\_SIZE}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+SHADOW\+\_\+\+CACHE\+\_\+\+SIZE~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00114}{114}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_ae7db45d2104e7680574837e31ed5d4b9}\label{lv__conf_8h_ae7db45d2104e7680574837e31ed5d4b9}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_SPAN\_SNIPPET\_STACK\_SIZE@{LV\_SPAN\_SNIPPET\_STACK\_SIZE}}
+\index{LV\_SPAN\_SNIPPET\_STACK\_SIZE@{LV\_SPAN\_SNIPPET\_STACK\_SIZE}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_SPAN\_SNIPPET\_STACK\_SIZE}{LV\_SPAN\_SNIPPET\_STACK\_SIZE}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+SPAN\+\_\+\+SNIPPET\+\_\+\+STACK\+\_\+\+SIZE~64}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00504}{504}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a387af6dfdb6458d8ae466356e08de1cd}\label{lv__conf_8h_a387af6dfdb6458d8ae466356e08de1cd}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_SPRINTF\_CUSTOM@{LV\_SPRINTF\_CUSTOM}}
+\index{LV\_SPRINTF\_CUSTOM@{LV\_SPRINTF\_CUSTOM}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_SPRINTF\_CUSTOM}{LV\_SPRINTF\_CUSTOM}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+SPRINTF\+\_\+\+CUSTOM~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00239}{239}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a9041c1ed46ad9dcf688bef5832a010d3}\label{lv__conf_8h_a9041c1ed46ad9dcf688bef5832a010d3}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_SPRINTF\_USE\_FLOAT@{LV\_SPRINTF\_USE\_FLOAT}}
+\index{LV\_SPRINTF\_USE\_FLOAT@{LV\_SPRINTF\_USE\_FLOAT}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_SPRINTF\_USE\_FLOAT}{LV\_SPRINTF\_USE\_FLOAT}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+SPRINTF\+\_\+\+USE\+\_\+\+FLOAT~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00245}{245}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_afc3a0018a49cfca52d6cac503a638ec2}\label{lv__conf_8h_afc3a0018a49cfca52d6cac503a638ec2}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_TEXTAREA\_DEF\_PWD\_SHOW\_TIME@{LV\_TEXTAREA\_DEF\_PWD\_SHOW\_TIME}}
+\index{LV\_TEXTAREA\_DEF\_PWD\_SHOW\_TIME@{LV\_TEXTAREA\_DEF\_PWD\_SHOW\_TIME}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_TEXTAREA\_DEF\_PWD\_SHOW\_TIME}{LV\_TEXTAREA\_DEF\_PWD\_SHOW\_TIME}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+TEXTAREA\+\_\+\+DEF\+\_\+\+PWD\+\_\+\+SHOW\+\_\+\+TIME~1500    /$\ast$ms$\ast$/}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00449}{449}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_aa147e121ac57e0766fe646ab8fbfdd43}\label{lv__conf_8h_aa147e121ac57e0766fe646ab8fbfdd43}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_THEME\_DEFAULT\_DARK@{LV\_THEME\_DEFAULT\_DARK}}
+\index{LV\_THEME\_DEFAULT\_DARK@{LV\_THEME\_DEFAULT\_DARK}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_THEME\_DEFAULT\_DARK}{LV\_THEME\_DEFAULT\_DARK}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+THEME\+\_\+\+DEFAULT\+\_\+\+DARK~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00516}{516}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a607a867077d452888aca389b99a37613}\label{lv__conf_8h_a607a867077d452888aca389b99a37613}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_THEME\_DEFAULT\_GROW@{LV\_THEME\_DEFAULT\_GROW}}
+\index{LV\_THEME\_DEFAULT\_GROW@{LV\_THEME\_DEFAULT\_GROW}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_THEME\_DEFAULT\_GROW}{LV\_THEME\_DEFAULT\_GROW}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+THEME\+\_\+\+DEFAULT\+\_\+\+GROW~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00519}{519}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a4cf6d2bbdde57ce13d52d38aa5eac1fa}\label{lv__conf_8h_a4cf6d2bbdde57ce13d52d38aa5eac1fa}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_THEME\_DEFAULT\_TRANSITION\_TIME@{LV\_THEME\_DEFAULT\_TRANSITION\_TIME}}
+\index{LV\_THEME\_DEFAULT\_TRANSITION\_TIME@{LV\_THEME\_DEFAULT\_TRANSITION\_TIME}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_THEME\_DEFAULT\_TRANSITION\_TIME}{LV\_THEME\_DEFAULT\_TRANSITION\_TIME}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+THEME\+\_\+\+DEFAULT\+\_\+\+TRANSITION\+\_\+\+TIME~80}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00522}{522}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a244b19e028c500d10572872fa00dd995}\label{lv__conf_8h_a244b19e028c500d10572872fa00dd995}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_TICK\_CUSTOM@{LV\_TICK\_CUSTOM}}
+\index{LV\_TICK\_CUSTOM@{LV\_TICK\_CUSTOM}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_TICK\_CUSTOM}{LV\_TICK\_CUSTOM}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+TICK\+\_\+\+CUSTOM~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00088}{88}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_ac187cce8443f66c7c451794679354804}\label{lv__conf_8h_ac187cce8443f66c7c451794679354804}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_TICK\_CUSTOM\_INCLUDE@{LV\_TICK\_CUSTOM\_INCLUDE}}
+\index{LV\_TICK\_CUSTOM\_INCLUDE@{LV\_TICK\_CUSTOM\_INCLUDE}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_TICK\_CUSTOM\_INCLUDE}{LV\_TICK\_CUSTOM\_INCLUDE}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+TICK\+\_\+\+CUSTOM\+\_\+\+INCLUDE~\char`\"{}Arduino.\+h\char`\"{}         /$\ast$Header for the system time function$\ast$/}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00090}{90}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_aa9c7c9bcaf7b3edf752664c8438ee3d6}\label{lv__conf_8h_aa9c7c9bcaf7b3edf752664c8438ee3d6}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_TICK\_CUSTOM\_SYS\_TIME\_EXPR@{LV\_TICK\_CUSTOM\_SYS\_TIME\_EXPR}}
+\index{LV\_TICK\_CUSTOM\_SYS\_TIME\_EXPR@{LV\_TICK\_CUSTOM\_SYS\_TIME\_EXPR}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_TICK\_CUSTOM\_SYS\_TIME\_EXPR}{LV\_TICK\_CUSTOM\_SYS\_TIME\_EXPR}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+TICK\+\_\+\+CUSTOM\+\_\+\+SYS\+\_\+\+TIME\+\_\+\+EXPR~(millis())    /$\ast$Expression evaluating to current system time in ms$\ast$/}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00091}{91}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a39568ba761e0c4ce5af64132e036a7e4}\label{lv__conf_8h_a39568ba761e0c4ce5af64132e036a7e4}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_TXT\_BREAK\_CHARS@{LV\_TXT\_BREAK\_CHARS}}
+\index{LV\_TXT\_BREAK\_CHARS@{LV\_TXT\_BREAK\_CHARS}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_TXT\_BREAK\_CHARS}{LV\_TXT\_BREAK\_CHARS}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+TXT\+\_\+\+BREAK\+\_\+\+CHARS~\char`\"{} ,.;\+:-\/\+\_\+\char`\"{}}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00373}{373}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_aba8ec1367cc2659baa285f32979caa31}\label{lv__conf_8h_aba8ec1367cc2659baa285f32979caa31}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_TXT\_COLOR\_CMD@{LV\_TXT\_COLOR\_CMD}}
+\index{LV\_TXT\_COLOR\_CMD@{LV\_TXT\_COLOR\_CMD}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_TXT\_COLOR\_CMD}{LV\_TXT\_COLOR\_CMD}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+TXT\+\_\+\+COLOR\+\_\+\+CMD~\char`\"{}\#\char`\"{}}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00388}{388}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a20802408d2bb785991b9e3e88929010d}\label{lv__conf_8h_a20802408d2bb785991b9e3e88929010d}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_TXT\_ENC@{LV\_TXT\_ENC}}
+\index{LV\_TXT\_ENC@{LV\_TXT\_ENC}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_TXT\_ENC}{LV\_TXT\_ENC}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+TXT\+\_\+\+ENC~LV\+\_\+\+TXT\+\_\+\+ENC\+\_\+\+UTF8}
+
+Select a character encoding for strings. Your IDE or editor should have the same character encoding
+\begin{DoxyItemize}
+\item LV\+\_\+\+TXT\+\_\+\+ENC\+\_\+\+UTF8
+\item LV\+\_\+\+TXT\+\_\+\+ENC\+\_\+\+ASCII 
+\end{DoxyItemize}
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00370}{370}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a1729c565c0dbc3edf0dac9e235c4ff7b}\label{lv__conf_8h_a1729c565c0dbc3edf0dac9e235c4ff7b}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_TXT\_LINE\_BREAK\_LONG\_LEN@{LV\_TXT\_LINE\_BREAK\_LONG\_LEN}}
+\index{LV\_TXT\_LINE\_BREAK\_LONG\_LEN@{LV\_TXT\_LINE\_BREAK\_LONG\_LEN}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_TXT\_LINE\_BREAK\_LONG\_LEN}{LV\_TXT\_LINE\_BREAK\_LONG\_LEN}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+TXT\+\_\+\+LINE\+\_\+\+BREAK\+\_\+\+LONG\+\_\+\+LEN~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00377}{377}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a2615f17521a9785307be8890b13c7ac7}\label{lv__conf_8h_a2615f17521a9785307be8890b13c7ac7}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_TXT\_LINE\_BREAK\_LONG\_POST\_MIN\_LEN@{LV\_TXT\_LINE\_BREAK\_LONG\_POST\_MIN\_LEN}}
+\index{LV\_TXT\_LINE\_BREAK\_LONG\_POST\_MIN\_LEN@{LV\_TXT\_LINE\_BREAK\_LONG\_POST\_MIN\_LEN}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_TXT\_LINE\_BREAK\_LONG\_POST\_MIN\_LEN}{LV\_TXT\_LINE\_BREAK\_LONG\_POST\_MIN\_LEN}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+TXT\+\_\+\+LINE\+\_\+\+BREAK\+\_\+\+LONG\+\_\+\+POST\+\_\+\+MIN\+\_\+\+LEN~3}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00385}{385}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_adecf949b46a435275d65fb8757583896}\label{lv__conf_8h_adecf949b46a435275d65fb8757583896}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_TXT\_LINE\_BREAK\_LONG\_PRE\_MIN\_LEN@{LV\_TXT\_LINE\_BREAK\_LONG\_PRE\_MIN\_LEN}}
+\index{LV\_TXT\_LINE\_BREAK\_LONG\_PRE\_MIN\_LEN@{LV\_TXT\_LINE\_BREAK\_LONG\_PRE\_MIN\_LEN}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_TXT\_LINE\_BREAK\_LONG\_PRE\_MIN\_LEN}{LV\_TXT\_LINE\_BREAK\_LONG\_PRE\_MIN\_LEN}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+TXT\+\_\+\+LINE\+\_\+\+BREAK\+\_\+\+LONG\+\_\+\+PRE\+\_\+\+MIN\+\_\+\+LEN~3}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00381}{381}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a8824deedebff7e531880394989f38b1d}\label{lv__conf_8h_a8824deedebff7e531880394989f38b1d}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_ANIMIMG@{LV\_USE\_ANIMIMG}}
+\index{LV\_USE\_ANIMIMG@{LV\_USE\_ANIMIMG}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_ANIMIMG}{LV\_USE\_ANIMIMG}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+ANIMIMG~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00414}{414}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a86eda207f8f75d498e607926ccff3705}\label{lv__conf_8h_a86eda207f8f75d498e607926ccff3705}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_ARABIC\_PERSIAN\_CHARS@{LV\_USE\_ARABIC\_PERSIAN\_CHARS}}
+\index{LV\_USE\_ARABIC\_PERSIAN\_CHARS@{LV\_USE\_ARABIC\_PERSIAN\_CHARS}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_ARABIC\_PERSIAN\_CHARS}{LV\_USE\_ARABIC\_PERSIAN\_CHARS}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+ARABIC\+\_\+\+PERSIAN\+\_\+\+CHARS~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00404}{404}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a077a980d0a6c98343e9d0119e53ba3ec}\label{lv__conf_8h_a077a980d0a6c98343e9d0119e53ba3ec}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_ARC@{LV\_USE\_ARC}}
+\index{LV\_USE\_ARC@{LV\_USE\_ARC}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_ARC}{LV\_USE\_ARC}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+ARC~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00412}{412}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_adad1a43a39f56bf9afa9f32d343c4ed3}\label{lv__conf_8h_adad1a43a39f56bf9afa9f32d343c4ed3}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_ASSERT\_MALLOC@{LV\_USE\_ASSERT\_MALLOC}}
+\index{LV\_USE\_ASSERT\_MALLOC@{LV\_USE\_ASSERT\_MALLOC}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_ASSERT\_MALLOC}{LV\_USE\_ASSERT\_MALLOC}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+ASSERT\+\_\+\+MALLOC~1   /$\ast$Checks is the memory is successfully allocated or no. (Very fast, recommended)$\ast$/}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00209}{209}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_ac419ddcc173be3a3b65ec4291710d729}\label{lv__conf_8h_ac419ddcc173be3a3b65ec4291710d729}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_ASSERT\_MEM\_INTEGRITY@{LV\_USE\_ASSERT\_MEM\_INTEGRITY}}
+\index{LV\_USE\_ASSERT\_MEM\_INTEGRITY@{LV\_USE\_ASSERT\_MEM\_INTEGRITY}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_ASSERT\_MEM\_INTEGRITY}{LV\_USE\_ASSERT\_MEM\_INTEGRITY}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+ASSERT\+\_\+\+MEM\+\_\+\+INTEGRITY~0   /$\ast$Check the integrity of \`{}lv\+\_\+mem\`{} after critical operations. (Slow)$\ast$/}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00211}{211}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_ab14234eece8b83b0d0e7544755745ad4}\label{lv__conf_8h_ab14234eece8b83b0d0e7544755745ad4}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_ASSERT\_NULL@{LV\_USE\_ASSERT\_NULL}}
+\index{LV\_USE\_ASSERT\_NULL@{LV\_USE\_ASSERT\_NULL}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_ASSERT\_NULL}{LV\_USE\_ASSERT\_NULL}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+ASSERT\+\_\+\+NULL~1   /$\ast$Check if the parameter is NULL. (Very fast, recommended)$\ast$/}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00208}{208}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a8bee920414c882f1af0a9ccafc19d683}\label{lv__conf_8h_a8bee920414c882f1af0a9ccafc19d683}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_ASSERT\_OBJ@{LV\_USE\_ASSERT\_OBJ}}
+\index{LV\_USE\_ASSERT\_OBJ@{LV\_USE\_ASSERT\_OBJ}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_ASSERT\_OBJ}{LV\_USE\_ASSERT\_OBJ}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+ASSERT\+\_\+\+OBJ~0   /$\ast$Check the object\textquotesingle{}s type and existence (e.\+g. not deleted). (Slow)$\ast$/}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00212}{212}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_af77aa39cb4b804ad354e6844b9fc7630}\label{lv__conf_8h_af77aa39cb4b804ad354e6844b9fc7630}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_ASSERT\_STYLE@{LV\_USE\_ASSERT\_STYLE}}
+\index{LV\_USE\_ASSERT\_STYLE@{LV\_USE\_ASSERT\_STYLE}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_ASSERT\_STYLE}{LV\_USE\_ASSERT\_STYLE}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+ASSERT\+\_\+\+STYLE~0   /$\ast$Check if the styles are properly initialized. (Very fast, recommended)$\ast$/}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00210}{210}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_aa3cddebb0e6559c6eca86662e472a9e6}\label{lv__conf_8h_aa3cddebb0e6559c6eca86662e472a9e6}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_BAR@{LV\_USE\_BAR}}
+\index{LV\_USE\_BAR@{LV\_USE\_BAR}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_BAR}{LV\_USE\_BAR}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+BAR~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00416}{416}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a9201ca34504ccc2d501f3cca6956988a}\label{lv__conf_8h_a9201ca34504ccc2d501f3cca6956988a}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_BIDI@{LV\_USE\_BIDI}}
+\index{LV\_USE\_BIDI@{LV\_USE\_BIDI}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_BIDI}{LV\_USE\_BIDI}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+BIDI~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00393}{393}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_aa204c68978c64a659c43618f9113fef8}\label{lv__conf_8h_aa204c68978c64a659c43618f9113fef8}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_BMP@{LV\_USE\_BMP}}
+\index{LV\_USE\_BMP@{LV\_USE\_BMP}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_BMP}{LV\_USE\_BMP}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+BMP~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00562}{562}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a041a9669e14abc51174c7234417ea2d3}\label{lv__conf_8h_a041a9669e14abc51174c7234417ea2d3}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_BTN@{LV\_USE\_BTN}}
+\index{LV\_USE\_BTN@{LV\_USE\_BTN}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_BTN}{LV\_USE\_BTN}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+BTN~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00418}{418}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a3504f218d9f668eb8c0cce486f213aad}\label{lv__conf_8h_a3504f218d9f668eb8c0cce486f213aad}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_BTNMATRIX@{LV\_USE\_BTNMATRIX}}
+\index{LV\_USE\_BTNMATRIX@{LV\_USE\_BTNMATRIX}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_BTNMATRIX}{LV\_USE\_BTNMATRIX}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+BTNMATRIX~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00420}{420}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_af1c66cdbd8c681b4cd05d92d70573c12}\label{lv__conf_8h_af1c66cdbd8c681b4cd05d92d70573c12}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_CALENDAR@{LV\_USE\_CALENDAR}}
+\index{LV\_USE\_CALENDAR@{LV\_USE\_CALENDAR}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_CALENDAR}{LV\_USE\_CALENDAR}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+CALENDAR~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00461}{461}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_aff60f490268a56128446e6b55e2bd066}\label{lv__conf_8h_aff60f490268a56128446e6b55e2bd066}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_CALENDAR\_HEADER\_ARROW@{LV\_USE\_CALENDAR\_HEADER\_ARROW}}
+\index{LV\_USE\_CALENDAR\_HEADER\_ARROW@{LV\_USE\_CALENDAR\_HEADER\_ARROW}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_CALENDAR\_HEADER\_ARROW}{LV\_USE\_CALENDAR\_HEADER\_ARROW}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+CALENDAR\+\_\+\+HEADER\+\_\+\+ARROW~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00471}{471}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a62c2ca18acb18afb9ef86aee41cda195}\label{lv__conf_8h_a62c2ca18acb18afb9ef86aee41cda195}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_CALENDAR\_HEADER\_DROPDOWN@{LV\_USE\_CALENDAR\_HEADER\_DROPDOWN}}
+\index{LV\_USE\_CALENDAR\_HEADER\_DROPDOWN@{LV\_USE\_CALENDAR\_HEADER\_DROPDOWN}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_CALENDAR\_HEADER\_DROPDOWN}{LV\_USE\_CALENDAR\_HEADER\_DROPDOWN}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+CALENDAR\+\_\+\+HEADER\+\_\+\+DROPDOWN~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00472}{472}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_ab02853b975e34a047f63ff88a3e31fea}\label{lv__conf_8h_ab02853b975e34a047f63ff88a3e31fea}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_CANVAS@{LV\_USE\_CANVAS}}
+\index{LV\_USE\_CANVAS@{LV\_USE\_CANVAS}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_CANVAS}{LV\_USE\_CANVAS}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+CANVAS~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00422}{422}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a1cc9dc77067d9105818faab203522300}\label{lv__conf_8h_a1cc9dc77067d9105818faab203522300}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_CHART@{LV\_USE\_CHART}}
+\index{LV\_USE\_CHART@{LV\_USE\_CHART}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_CHART}{LV\_USE\_CHART}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+CHART~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00475}{475}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_abf668da3cf6e16017fffe3e066cb403d}\label{lv__conf_8h_abf668da3cf6e16017fffe3e066cb403d}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_CHECKBOX@{LV\_USE\_CHECKBOX}}
+\index{LV\_USE\_CHECKBOX@{LV\_USE\_CHECKBOX}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_CHECKBOX}{LV\_USE\_CHECKBOX}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+CHECKBOX~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00424}{424}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a7f3d331f0395707d213669dd20c1b107}\label{lv__conf_8h_a7f3d331f0395707d213669dd20c1b107}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_COLORWHEEL@{LV\_USE\_COLORWHEEL}}
+\index{LV\_USE\_COLORWHEEL@{LV\_USE\_COLORWHEEL}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_COLORWHEEL}{LV\_USE\_COLORWHEEL}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+COLORWHEEL~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00477}{477}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_ad2a8b470876550081e27645a7b02cc51}\label{lv__conf_8h_ad2a8b470876550081e27645a7b02cc51}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_DROPDOWN@{LV\_USE\_DROPDOWN}}
+\index{LV\_USE\_DROPDOWN@{LV\_USE\_DROPDOWN}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_DROPDOWN}{LV\_USE\_DROPDOWN}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+DROPDOWN~1   /$\ast$Requires\+: lv\+\_\+label$\ast$/}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00426}{426}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_abfefb25d4dcab1e2bfb8e785127ca168}\label{lv__conf_8h_abfefb25d4dcab1e2bfb8e785127ca168}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_EXTERNAL\_RENDERER@{LV\_USE\_EXTERNAL\_RENDERER}}
+\index{LV\_USE\_EXTERNAL\_RENDERER@{LV\_USE\_EXTERNAL\_RENDERER}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_EXTERNAL\_RENDERER}{LV\_USE\_EXTERNAL\_RENDERER}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+EXTERNAL\+\_\+\+RENDERER~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00161}{161}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_aed5e4669c5b03deae5e87c421f756cc0}\label{lv__conf_8h_aed5e4669c5b03deae5e87c421f756cc0}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_FLEX@{LV\_USE\_FLEX}}
+\index{LV\_USE\_FLEX@{LV\_USE\_FLEX}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_FLEX}{LV\_USE\_FLEX}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+FLEX~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00536}{536}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_ace88335920c0faeeddc032d04538bcb6}\label{lv__conf_8h_ace88335920c0faeeddc032d04538bcb6}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_FONT\_COMPRESSED@{LV\_USE\_FONT\_COMPRESSED}}
+\index{LV\_USE\_FONT\_COMPRESSED@{LV\_USE\_FONT\_COMPRESSED}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_FONT\_COMPRESSED}{LV\_USE\_FONT\_COMPRESSED}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+FONT\+\_\+\+COMPRESSED~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00351}{351}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_af1ed71a18d1863db6b45f62e8b8fe9df}\label{lv__conf_8h_af1ed71a18d1863db6b45f62e8b8fe9df}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_FONT\_SUBPX@{LV\_USE\_FONT\_SUBPX}}
+\index{LV\_USE\_FONT\_SUBPX@{LV\_USE\_FONT\_SUBPX}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_FONT\_SUBPX}{LV\_USE\_FONT\_SUBPX}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+FONT\+\_\+\+SUBPX~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00354}{354}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_abe5ddd0574b1cd3c60ba4e17f27f36af}\label{lv__conf_8h_abe5ddd0574b1cd3c60ba4e17f27f36af}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_FONT\_SYMBOLS@{LV\_USE\_FONT\_SYMBOLS}}
+\index{LV\_USE\_FONT\_SYMBOLS@{LV\_USE\_FONT\_SYMBOLS}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_FONT\_SYMBOLS}{LV\_USE\_FONT\_SYMBOLS}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+FONT\+\_\+\+SYMBOLS~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00600}{600}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_add2c97b28774c04c288091b589cf50c6}\label{lv__conf_8h_add2c97b28774c04c288091b589cf50c6}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_FREETYPE@{LV\_USE\_FREETYPE}}
+\index{LV\_USE\_FREETYPE@{LV\_USE\_FREETYPE}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_FREETYPE}{LV\_USE\_FREETYPE}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+FREETYPE~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00575}{575}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_aaf74151144e3f9249f77a7092d64a2ab}\label{lv__conf_8h_aaf74151144e3f9249f77a7092d64a2ab}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_FS\_FATFS@{LV\_USE\_FS\_FATFS}}
+\index{LV\_USE\_FS\_FATFS@{LV\_USE\_FS\_FATFS}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_FS\_FATFS}{LV\_USE\_FS\_FATFS}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+FS\+\_\+\+FATFS~\textquotesingle{}\textbackslash{}0\textquotesingle{}        /$\ast$Uses f\+\_\+open, f\+\_\+read, etc$\ast$/}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00556}{556}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a60d22fc87afad0fd00fbb38a76889cfb}\label{lv__conf_8h_a60d22fc87afad0fd00fbb38a76889cfb}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_FS\_POSIX@{LV\_USE\_FS\_POSIX}}
+\index{LV\_USE\_FS\_POSIX@{LV\_USE\_FS\_POSIX}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_FS\_POSIX}{LV\_USE\_FS\_POSIX}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+FS\+\_\+\+POSIX~\textquotesingle{}\textbackslash{}0\textquotesingle{}        /$\ast$Uses open, read, etc$\ast$/}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00550}{550}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_ad229a30c5f679f8e608a491f098dec24}\label{lv__conf_8h_ad229a30c5f679f8e608a491f098dec24}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_FS\_STDIO@{LV\_USE\_FS\_STDIO}}
+\index{LV\_USE\_FS\_STDIO@{LV\_USE\_FS\_STDIO}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_FS\_STDIO}{LV\_USE\_FS\_STDIO}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+FS\+\_\+\+STDIO~\textquotesingle{}\textbackslash{}0\textquotesingle{}        /$\ast$Uses fopen, fread, etc$\ast$/}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00547}{547}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a83ade6ab62190bcf5adf2301bd56f01e}\label{lv__conf_8h_a83ade6ab62190bcf5adf2301bd56f01e}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_FS\_WIN32@{LV\_USE\_FS\_WIN32}}
+\index{LV\_USE\_FS\_WIN32@{LV\_USE\_FS\_WIN32}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_FS\_WIN32}{LV\_USE\_FS\_WIN32}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+FS\+\_\+\+WIN32~\textquotesingle{}\textbackslash{}0\textquotesingle{}        /$\ast$Uses Create\+File, Read\+File, etc$\ast$/}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00553}{553}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a40257e0390c96f7e9c604f6fef4f996c}\label{lv__conf_8h_a40257e0390c96f7e9c604f6fef4f996c}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_GIF@{LV\_USE\_GIF}}
+\index{LV\_USE\_GIF@{LV\_USE\_GIF}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_GIF}{LV\_USE\_GIF}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+GIF~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00569}{569}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_aa3e247fb2ac9e821def819aa0f522793}\label{lv__conf_8h_aa3e247fb2ac9e821def819aa0f522793}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_GPU\_ESP32\_DMA2D@{LV\_USE\_GPU\_ESP32\_DMA2D}}
+\index{LV\_USE\_GPU\_ESP32\_DMA2D@{LV\_USE\_GPU\_ESP32\_DMA2D}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_GPU\_ESP32\_DMA2D}{LV\_USE\_GPU\_ESP32\_DMA2D}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+GPU\+\_\+\+ESP32\+\_\+\+DMA2D~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00137}{137}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a8144f58325bda4bd72d89115ec1a8c20}\label{lv__conf_8h_a8144f58325bda4bd72d89115ec1a8c20}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_GPU\_NXP\_PXP@{LV\_USE\_GPU\_NXP\_PXP}}
+\index{LV\_USE\_GPU\_NXP\_PXP@{LV\_USE\_GPU\_NXP\_PXP}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_GPU\_NXP\_PXP}{LV\_USE\_GPU\_NXP\_PXP}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+GPU\+\_\+\+NXP\+\_\+\+PXP~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00147}{147}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_ab4e370c59df0309f3972eefdb6b4627a}\label{lv__conf_8h_ab4e370c59df0309f3972eefdb6b4627a}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_GPU\_NXP\_VG\_LITE@{LV\_USE\_GPU\_NXP\_VG\_LITE}}
+\index{LV\_USE\_GPU\_NXP\_VG\_LITE@{LV\_USE\_GPU\_NXP\_VG\_LITE}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_GPU\_NXP\_VG\_LITE}{LV\_USE\_GPU\_NXP\_VG\_LITE}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+GPU\+\_\+\+NXP\+\_\+\+VG\+\_\+\+LITE~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00158}{158}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a028f56151f846d3d6fb50042ea1ad2b4}\label{lv__conf_8h_a028f56151f846d3d6fb50042ea1ad2b4}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_GPU\_SDL@{LV\_USE\_GPU\_SDL}}
+\index{LV\_USE\_GPU\_SDL@{LV\_USE\_GPU\_SDL}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_GPU\_SDL}{LV\_USE\_GPU\_SDL}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+GPU\+\_\+\+SDL~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00164}{164}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_ae82ec72d48383f7ea5c0635cde734115}\label{lv__conf_8h_ae82ec72d48383f7ea5c0635cde734115}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_GPU\_STM32\_DMA2D@{LV\_USE\_GPU\_STM32\_DMA2D}}
+\index{LV\_USE\_GPU\_STM32\_DMA2D@{LV\_USE\_GPU\_STM32\_DMA2D}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_GPU\_STM32\_DMA2D}{LV\_USE\_GPU\_STM32\_DMA2D}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+GPU\+\_\+\+STM32\+\_\+\+DMA2D~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00139}{139}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a448130ebbbaf9352f91c9161bed49862}\label{lv__conf_8h_a448130ebbbaf9352f91c9161bed49862}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_GRID@{LV\_USE\_GRID}}
+\index{LV\_USE\_GRID@{LV\_USE\_GRID}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_GRID}{LV\_USE\_GRID}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+GRID~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00539}{539}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a5de90ae1a1b0eeab5cb41e132eb188e5}\label{lv__conf_8h_a5de90ae1a1b0eeab5cb41e132eb188e5}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_IMG@{LV\_USE\_IMG}}
+\index{LV\_USE\_IMG@{LV\_USE\_IMG}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_IMG}{LV\_USE\_IMG}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+IMG~1   /$\ast$Requires\+: lv\+\_\+label$\ast$/}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00428}{428}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a712d2807b13c1dc495d060ffa82114e1}\label{lv__conf_8h_a712d2807b13c1dc495d060ffa82114e1}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_IMGBTN@{LV\_USE\_IMGBTN}}
+\index{LV\_USE\_IMGBTN@{LV\_USE\_IMGBTN}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_IMGBTN}{LV\_USE\_IMGBTN}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+IMGBTN~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00479}{479}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a64d1725353f5ab3e1fb2fe6c4329c46f}\label{lv__conf_8h_a64d1725353f5ab3e1fb2fe6c4329c46f}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_KEYBOARD@{LV\_USE\_KEYBOARD}}
+\index{LV\_USE\_KEYBOARD@{LV\_USE\_KEYBOARD}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_KEYBOARD}{LV\_USE\_KEYBOARD}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+KEYBOARD~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00481}{481}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_adc097de303b9ea9dabe8ff4e70c615a6}\label{lv__conf_8h_adc097de303b9ea9dabe8ff4e70c615a6}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_LABEL@{LV\_USE\_LABEL}}
+\index{LV\_USE\_LABEL@{LV\_USE\_LABEL}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_LABEL}{LV\_USE\_LABEL}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+LABEL~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00430}{430}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_ab08a0881df87b2bdbab392455bf2847c}\label{lv__conf_8h_ab08a0881df87b2bdbab392455bf2847c}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_LARGE\_COORD@{LV\_USE\_LARGE\_COORD}}
+\index{LV\_USE\_LARGE\_COORD@{LV\_USE\_LARGE\_COORD}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_LARGE\_COORD}{LV\_USE\_LARGE\_COORD}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+LARGE\+\_\+\+COORD~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00297}{297}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a8f1b3daead5fdab89b96c6b53c1ec12e}\label{lv__conf_8h_a8f1b3daead5fdab89b96c6b53c1ec12e}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_LED@{LV\_USE\_LED}}
+\index{LV\_USE\_LED@{LV\_USE\_LED}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_LED}{LV\_USE\_LED}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+LED~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00483}{483}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_af4690072288635b42fbf0c8829943518}\label{lv__conf_8h_af4690072288635b42fbf0c8829943518}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_LINE@{LV\_USE\_LINE}}
+\index{LV\_USE\_LINE@{LV\_USE\_LINE}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_LINE}{LV\_USE\_LINE}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+LINE~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00436}{436}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a2d446163f0c6a19032a776e3d0c558da}\label{lv__conf_8h_a2d446163f0c6a19032a776e3d0c558da}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_LIST@{LV\_USE\_LIST}}
+\index{LV\_USE\_LIST@{LV\_USE\_LIST}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_LIST}{LV\_USE\_LIST}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+LIST~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00485}{485}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_ad17238861ec699b517a2fbe273d3013c}\label{lv__conf_8h_ad17238861ec699b517a2fbe273d3013c}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_LOG@{LV\_USE\_LOG}}
+\index{LV\_USE\_LOG@{LV\_USE\_LOG}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_LOG}{LV\_USE\_LOG}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+LOG~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00174}{174}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_aed77b5db413b3852f5ad654f04f1250a}\label{lv__conf_8h_aed77b5db413b3852f5ad654f04f1250a}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_MEM\_MONITOR@{LV\_USE\_MEM\_MONITOR}}
+\index{LV\_USE\_MEM\_MONITOR@{LV\_USE\_MEM\_MONITOR}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_MEM\_MONITOR}{LV\_USE\_MEM\_MONITOR}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+MEM\+\_\+\+MONITOR~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00230}{230}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a1e485e6fc2a1b99548fd399b00054fdf}\label{lv__conf_8h_a1e485e6fc2a1b99548fd399b00054fdf}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_METER@{LV\_USE\_METER}}
+\index{LV\_USE\_METER@{LV\_USE\_METER}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_METER}{LV\_USE\_METER}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+METER~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00487}{487}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_ab0d2f4f61aa8674a34c8e41b8d47d8aa}\label{lv__conf_8h_ab0d2f4f61aa8674a34c8e41b8d47d8aa}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_MSGBOX@{LV\_USE\_MSGBOX}}
+\index{LV\_USE\_MSGBOX@{LV\_USE\_MSGBOX}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_MSGBOX}{LV\_USE\_MSGBOX}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+MSGBOX~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00489}{489}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a83a5f331fbf9c993ee61f2e0e2fdcc59}\label{lv__conf_8h_a83a5f331fbf9c993ee61f2e0e2fdcc59}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_PERF\_MONITOR@{LV\_USE\_PERF\_MONITOR}}
+\index{LV\_USE\_PERF\_MONITOR@{LV\_USE\_PERF\_MONITOR}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_PERF\_MONITOR}{LV\_USE\_PERF\_MONITOR}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+PERF\+\_\+\+MONITOR~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00223}{223}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_aa5ab5053c7c516c234f3af8cec87efac}\label{lv__conf_8h_aa5ab5053c7c516c234f3af8cec87efac}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_PNG@{LV\_USE\_PNG}}
+\index{LV\_USE\_PNG@{LV\_USE\_PNG}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_PNG}{LV\_USE\_PNG}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+PNG~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00559}{559}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a23ad1b5ec39c469c9dda0cb4b8e3e858}\label{lv__conf_8h_a23ad1b5ec39c469c9dda0cb4b8e3e858}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_QRCODE@{LV\_USE\_QRCODE}}
+\index{LV\_USE\_QRCODE@{LV\_USE\_QRCODE}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_QRCODE}{LV\_USE\_QRCODE}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+QRCODE~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00572}{572}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_ad81f9a063608ab0027ab59025ed35cdb}\label{lv__conf_8h_ad81f9a063608ab0027ab59025ed35cdb}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_REFR\_DEBUG@{LV\_USE\_REFR\_DEBUG}}
+\index{LV\_USE\_REFR\_DEBUG@{LV\_USE\_REFR\_DEBUG}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_REFR\_DEBUG}{LV\_USE\_REFR\_DEBUG}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+REFR\+\_\+\+DEBUG~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00236}{236}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_af9a8b2a5334032d5e4e01fb32592a274}\label{lv__conf_8h_af9a8b2a5334032d5e4e01fb32592a274}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_RLOTTIE@{LV\_USE\_RLOTTIE}}
+\index{LV\_USE\_RLOTTIE@{LV\_USE\_RLOTTIE}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_RLOTTIE}{LV\_USE\_RLOTTIE}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+RLOTTIE~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00582}{582}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a612924ae19721e7d06c7a1640ce2097b}\label{lv__conf_8h_a612924ae19721e7d06c7a1640ce2097b}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_ROLLER@{LV\_USE\_ROLLER}}
+\index{LV\_USE\_ROLLER@{LV\_USE\_ROLLER}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_ROLLER}{LV\_USE\_ROLLER}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+ROLLER~1   /$\ast$Requires\+: lv\+\_\+label$\ast$/}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00438}{438}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a1a7272048f176c8b87966194933cc2bd}\label{lv__conf_8h_a1a7272048f176c8b87966194933cc2bd}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_SJPG@{LV\_USE\_SJPG}}
+\index{LV\_USE\_SJPG@{LV\_USE\_SJPG}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_SJPG}{LV\_USE\_SJPG}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+SJPG~0}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00566}{566}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_ab7c0f42cd62f7dd90c760143cee4fde4}\label{lv__conf_8h_ab7c0f42cd62f7dd90c760143cee4fde4}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_SLIDER@{LV\_USE\_SLIDER}}
+\index{LV\_USE\_SLIDER@{LV\_USE\_SLIDER}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_SLIDER}{LV\_USE\_SLIDER}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+SLIDER~1   /$\ast$Requires\+: lv\+\_\+bar$\ast$/}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00443}{443}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a44cc4d61a2c09eb55907a3e56e4829f3}\label{lv__conf_8h_a44cc4d61a2c09eb55907a3e56e4829f3}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_SNAPSHOT@{LV\_USE\_SNAPSHOT}}
+\index{LV\_USE\_SNAPSHOT@{LV\_USE\_SNAPSHOT}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_SNAPSHOT}{LV\_USE\_SNAPSHOT}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+SNAPSHOT~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00589}{589}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a1d6045ad00b8d5db61819fa511312871}\label{lv__conf_8h_a1d6045ad00b8d5db61819fa511312871}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_SPAN@{LV\_USE\_SPAN}}
+\index{LV\_USE\_SPAN@{LV\_USE\_SPAN}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_SPAN}{LV\_USE\_SPAN}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+SPAN~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00501}{501}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_afb7291443c61a1c56c1f8ee1fad58856}\label{lv__conf_8h_afb7291443c61a1c56c1f8ee1fad58856}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_SPINBOX@{LV\_USE\_SPINBOX}}
+\index{LV\_USE\_SPINBOX@{LV\_USE\_SPINBOX}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_SPINBOX}{LV\_USE\_SPINBOX}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+SPINBOX~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00491}{491}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a4d893a8d05d91416cfb0e94139f9975f}\label{lv__conf_8h_a4d893a8d05d91416cfb0e94139f9975f}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_SPINNER@{LV\_USE\_SPINNER}}
+\index{LV\_USE\_SPINNER@{LV\_USE\_SPINNER}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_SPINNER}{LV\_USE\_SPINNER}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+SPINNER~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00493}{493}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a4b4e6966f929a46dae36f62fcb4ad7c5}\label{lv__conf_8h_a4b4e6966f929a46dae36f62fcb4ad7c5}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_SWITCH@{LV\_USE\_SWITCH}}
+\index{LV\_USE\_SWITCH@{LV\_USE\_SWITCH}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_SWITCH}{LV\_USE\_SWITCH}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+SWITCH~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00445}{445}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a6100a01be7889f316d1bf5fb8935e05b}\label{lv__conf_8h_a6100a01be7889f316d1bf5fb8935e05b}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_TABLE@{LV\_USE\_TABLE}}
+\index{LV\_USE\_TABLE@{LV\_USE\_TABLE}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_TABLE}{LV\_USE\_TABLE}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+TABLE~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00452}{452}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a93727577a2845780880149217a435bac}\label{lv__conf_8h_a93727577a2845780880149217a435bac}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_TABVIEW@{LV\_USE\_TABVIEW}}
+\index{LV\_USE\_TABVIEW@{LV\_USE\_TABVIEW}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_TABVIEW}{LV\_USE\_TABVIEW}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+TABVIEW~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00495}{495}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a362c4684dabb55191514509aba33748e}\label{lv__conf_8h_a362c4684dabb55191514509aba33748e}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_TEXTAREA@{LV\_USE\_TEXTAREA}}
+\index{LV\_USE\_TEXTAREA@{LV\_USE\_TEXTAREA}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_TEXTAREA}{LV\_USE\_TEXTAREA}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+TEXTAREA~1   /$\ast$Requires\+: lv\+\_\+label$\ast$/}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00447}{447}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a98e05a1aa53e40f159c79b19d1c7f6b4}\label{lv__conf_8h_a98e05a1aa53e40f159c79b19d1c7f6b4}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_THEME\_BASIC@{LV\_USE\_THEME\_BASIC}}
+\index{LV\_USE\_THEME\_BASIC@{LV\_USE\_THEME\_BASIC}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_THEME\_BASIC}{LV\_USE\_THEME\_BASIC}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+THEME\+\_\+\+BASIC~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00526}{526}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a1df57ee8809abc5d8c24bc95ea6293b7}\label{lv__conf_8h_a1df57ee8809abc5d8c24bc95ea6293b7}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_THEME\_DEFAULT@{LV\_USE\_THEME\_DEFAULT}}
+\index{LV\_USE\_THEME\_DEFAULT@{LV\_USE\_THEME\_DEFAULT}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_THEME\_DEFAULT}{LV\_USE\_THEME\_DEFAULT}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+THEME\+\_\+\+DEFAULT~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00512}{512}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_a27648a176c28e6adbcf6225d8ef79e56}\label{lv__conf_8h_a27648a176c28e6adbcf6225d8ef79e56}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_THEME\_MONO@{LV\_USE\_THEME\_MONO}}
+\index{LV\_USE\_THEME\_MONO@{LV\_USE\_THEME\_MONO}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_THEME\_MONO}{LV\_USE\_THEME\_MONO}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+THEME\+\_\+\+MONO~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00529}{529}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_ae722bef533e6c7319fced268cfd6f712}\label{lv__conf_8h_ae722bef533e6c7319fced268cfd6f712}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_TILEVIEW@{LV\_USE\_TILEVIEW}}
+\index{LV\_USE\_TILEVIEW@{LV\_USE\_TILEVIEW}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_TILEVIEW}{LV\_USE\_TILEVIEW}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+TILEVIEW~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00497}{497}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_ad120fea2f0f56822803cc70d1731f84e}\label{lv__conf_8h_ad120fea2f0f56822803cc70d1731f84e}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_USER\_DATA@{LV\_USE\_USER\_DATA}}
+\index{LV\_USE\_USER\_DATA@{LV\_USE\_USER\_DATA}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_USER\_DATA}{LV\_USE\_USER\_DATA}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+USER\+\_\+\+DATA~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00248}{248}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+
+\mbox{\Hypertarget{lv__conf_8h_ab0b3e246f4129a4679c2f50749002ba1}\label{lv__conf_8h_ab0b3e246f4129a4679c2f50749002ba1}} 
+\index{lv\_conf.h@{lv\_conf.h}!LV\_USE\_WIN@{LV\_USE\_WIN}}
+\index{LV\_USE\_WIN@{LV\_USE\_WIN}!lv\_conf.h@{lv\_conf.h}}
+\doxysubsubsection{\texorpdfstring{LV\_USE\_WIN}{LV\_USE\_WIN}}
+{\footnotesize\ttfamily \#define LV\+\_\+\+USE\+\_\+\+WIN~1}
+
+
+
+Definition at line \mbox{\hyperlink{lv__conf_8h_source_l00499}{499}} of file \mbox{\hyperlink{lv__conf_8h_source}{lv\+\_\+conf.\+h}}.
+

@@ -1,0 +1,534 @@
+\hypertarget{nip44_8cpp_source}{}\doxysection{nip44.\+cpp}
+\label{nip44_8cpp_source}\index{lib/nostr/nip44/nip44.cpp@{lib/nostr/nip44/nip44.cpp}}
+\mbox{\hyperlink{nip44_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{chacha20_8h}{chacha20.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{helpers_8h}{helpers.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{nip44_8h}{nip44.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <gmp-\/ino.h>}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <bootloader\_random.h>}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <mbedtls/base64.h>}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <mbedtls/md.h>}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00011}00011\ \textcolor{comment}{//\ NIP-\/44\ encryption/decryption\ implementation}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00013}00013\ \textcolor{comment}{//\ NIP-\/44\ constant\ salt}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00014}\mbox{\hyperlink{nip44_8cpp_ab3580d289ffb91f2ee6e86b49248c0bd}{00014}}\ \textcolor{keyword}{const}\ uint8\_t\ \mbox{\hyperlink{nip44_8cpp_ab3580d289ffb91f2ee6e86b49248c0bd}{NIP44\_SALT}}[8]\ =\ \{\ 0x6e,\ 0x69,\ 0x70,\ 0x34,\ 0x34,\ 0x2d,\ 0x76,\ 0x32\ \};\ \textcolor{comment}{//\ "{}nip44-\/v2"{}}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00016}00016\ \textcolor{comment}{//\ Helper\ function\ to\ calculate\ integer\ log2}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00017}\mbox{\hyperlink{nip44_8cpp_aef32c7ca28c0cd7b60d37f47bb000170}{00017}}\ uint32\_t\ \mbox{\hyperlink{nip44_8cpp_aef32c7ca28c0cd7b60d37f47bb000170}{\_math\_int\_log2}}(uint32\_t\ x)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00018}00018\ \ \ \ \ uint32\_t\ r\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00019}00019\ \ \ \ \ \textcolor{keywordflow}{while}\ (x\ >>=\ 1)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00020}00020\ \ \ \ \ \ \ \ \ r++;}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00021}00021\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00022}00022\ \ \ \ \ \textcolor{keywordflow}{return}\ r;}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00023}00023\ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00025}00025\ \textcolor{comment}{//\ Calculate\ padded\ length\ according\ to\ NIP-\/44\ spec}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00026}\mbox{\hyperlink{nip44_8cpp_ace0160702e57dc7c72454879d8f0631e}{00026}}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{nip44_8cpp_ace0160702e57dc7c72454879d8f0631e}{calcPaddedLen}}(\textcolor{keywordtype}{size\_t}\ unpadded\_len)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00027}00027\ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}calcPaddedLen\ input:\ "{}}\ +\ String(unpadded\_len));}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00028}00028\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00029}00029\ \ \ \ \ \textcolor{keywordflow}{if}\ (unpadded\_len\ <\ 1\ ||\ unpadded\_len\ >\ 65535)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00030}00030\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}calcPaddedLen\ failed:\ Invalid\ length\ "{}}\ +\ String(unpadded\_len));}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00031}00031\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00032}00032\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00033}00033\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00034}00034\ \ \ \ \ \textcolor{comment}{//\ For\ messages\ <=\ 32\ bytes,\ pad\ to\ 32}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00035}00035\ \ \ \ \ \textcolor{keywordflow}{if}\ (unpadded\_len\ <=\ 32)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00036}00036\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}calcPaddedLen:\ using\ 32\ byte\ padding"{}});}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00037}00037\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 32;}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00038}00038\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00039}00039\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00040}00040\ \ \ \ \ \textcolor{comment}{//\ Calculate\ next\ power\ of\ 2\ based\ on\ (len-\/1)}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00041}00041\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ len\_minus\_one\ =\ unpadded\_len\ -\/\ 1;}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00042}00042\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ next\_power\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00043}00043\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00044}00044\ \ \ \ \ \textcolor{keywordflow}{while}\ (next\_power\ <=\ len\_minus\_one)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00045}00045\ \ \ \ \ \ \ \ \ next\_power\ <<=\ 1;}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00046}00046\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}next\_power\ now:\ "{}}\ +\ String(next\_power));}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00047}00047\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00048}00048\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00049}00049\ \ \ \ \ \textcolor{comment}{//\ Calculate\ chunk\ size}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00050}00050\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ chunk\ =\ next\_power\ <=\ 256\ ?\ 32\ :\ next\_power\ /\ 8;}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00051}00051\ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}chunk\ size:\ "{}}\ +\ String(chunk));}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00052}00052\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00053}00053\ \ \ \ \ \textcolor{comment}{//\ Calculate\ final\ padded\ length}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00054}00054\ \ \ \ \ \textcolor{keywordflow}{return}\ chunk\ *\ (((unpadded\_len\ -\/\ 1)\ /\ chunk)\ +\ 1);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00055}00055\ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00057}00057\ \textcolor{comment}{//\ Pad\ plaintext\ according\ to\ NIP-\/44\ spec}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00058}\mbox{\hyperlink{nip44_8cpp_ac24379517e65e887cbbdc17891ab8e9a}{00058}}\ std::vector<uint8\_t>\ \mbox{\hyperlink{nip44_8cpp_ac24379517e65e887cbbdc17891ab8e9a}{padMessage}}(\textcolor{keyword}{const}\ String\ \&plaintext)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00059}00059\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ unpadded\_len\ =\ plaintext.length();}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00060}00060\ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}padMessage\ input\ length:\ "{}}\ +\ String(unpadded\_len));}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00061}00061\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00062}00062\ \ \ \ \ \textcolor{comment}{//\ Validate\ length}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00063}00063\ \ \ \ \ \textcolor{keywordflow}{if}\ (unpadded\_len\ <\ 1\ ||\ unpadded\_len\ >\ 65535)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00064}00064\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}padMessage:\ Invalid\ length"{}});}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00065}00065\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::vector<uint8\_t>();}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00066}00066\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00067}00067\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00068}00068\ \ \ \ \ \textcolor{comment}{//\ Calculate\ padded\ length}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00069}00069\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ padded\_len\ =\ \mbox{\hyperlink{nip44_8cpp_ace0160702e57dc7c72454879d8f0631e}{calcPaddedLen}}(unpadded\_len);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00070}00070\ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}padMessage:\ calculated\ padded\ length:\ "{}}\ +\ String(padded\_len));}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00071}00071\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00072}00072\ \ \ \ \ \textcolor{keywordflow}{if}\ (padded\_len\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00073}00073\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}padMessage:\ padding\ calculation\ failed"{}});}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00074}00074\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::vector<uint8\_t>();}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00075}00075\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00076}00076\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00077}00077\ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00078}00078\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Create\ result\ vector\ with\ size\ for\ prefix\ +\ padded\ content}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00079}00079\ \ \ \ \ \ \ \ \ std::vector<uint8\_t>\ result(2\ +\ padded\_len);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00080}00080\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}padMessage:\ allocated\ vector\ size:\ "{}}\ +\ String(result.size()));}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00081}00081\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00082}00082\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Write\ length\ prefix\ (big-\/endian\ uint16)}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00083}00083\ \ \ \ \ \ \ \ \ result[0]\ =\ (unpadded\_len\ >>\ 8)\ \&\ 0xFF;}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00084}00084\ \ \ \ \ \ \ \ \ result[1]\ =\ unpadded\_len\ \&\ 0xFF;}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00085}00085\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00086}00086\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Copy\ plaintext}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00087}00087\ \ \ \ \ \ \ \ \ memcpy(result.data()\ +\ 2,\ plaintext.c\_str(),\ unpadded\_len);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00088}00088\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00089}00089\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Zero-\/pad\ the\ remainder}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00090}00090\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (padded\_len\ >\ unpadded\_len)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ memset(result.data()\ +\ 2\ +\ unpadded\_len,\ 0,\ padded\_len\ -\/\ unpadded\_len);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00092}00092\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00093}00093\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00094}00094\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}padMessage:\ final\ padded\ size:\ "{}}\ +\ String(result.size()));}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00095}00095\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00096}00096\ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (...)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00097}00097\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}padMessage:\ exception\ occurred"{}});}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00098}00098\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::vector<uint8\_t>();}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00099}00099\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00100}00100\ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00102}00102\ \textcolor{comment}{//\ Unpad\ according\ to\ NIP-\/44\ spec}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00103}\mbox{\hyperlink{nip44_8cpp_a6024adb12987206510b8794820ea53c5}{00103}}\ String\ \mbox{\hyperlink{nip44_8cpp_a6024adb12987206510b8794820ea53c5}{unpadMessage}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\ \&padded)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00104}00104\ \ \ \ \ \textcolor{keywordflow}{if}\ (padded.size()\ <\ 34)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00105}00105\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}unpadMessage\ failed:\ Padded\ size\ too\ small\ "{}}\ +\ String(padded.size()));}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00106}00106\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00107}00107\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00108}00108\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00109}00109\ \ \ \ \ \textcolor{comment}{//\ Read\ length\ prefix}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00110}00110\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ unpadded\_len\ =\ (padded[0]\ <<\ 8)\ |\ padded[1];}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00111}00111\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ expected\_padded\_len\ =\ \mbox{\hyperlink{nip44_8cpp_ace0160702e57dc7c72454879d8f0631e}{calcPaddedLen}}(unpadded\_len);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00112}00112\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00113}00113\ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}unpadMessage:\ unpaddedLen="{}}\ +\ String(unpadded\_len)\ +\ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ expectedPaddedLen="{}}\ +\ String(expected\_padded\_len)\ +\ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ actualPaddedSize="{}}\ +\ String(padded.size()\ -\/\ 2));}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00116}00116\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00117}00117\ \ \ \ \ \textcolor{comment}{//\ Validate\ lengths}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00118}00118\ \ \ \ \ \textcolor{keywordflow}{if}\ (unpadded\_len\ ==\ 0\ ||\ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00119}00119\ \ \ \ \ \ \ \ \ unpadded\_len\ >\ 65535\ ||\ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00120}00120\ \ \ \ \ \ \ \ \ unpadded\_len\ >\ padded.size()\ -\/\ 2\ ||}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00121}00121\ \ \ \ \ \ \ \ \ padded.size()\ -\/\ 2\ !=\ expected\_padded\_len)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00122}00122\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}unpadMessage\ failed:\ Invalid\ lengths"{}});}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00123}00123\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00124}00124\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00125}00125\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00126}00126\ \ \ \ \ \textcolor{comment}{//\ Extract\ unpadded\ content}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00127}00127\ \ \ \ \ \textcolor{keywordflow}{return}\ String((\textcolor{keywordtype}{char}*)(padded.data()\ +\ 2),\ unpadded\_len);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00128}00128\ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00129}00129\ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00130}00130\ \textcolor{comment}{//\ Update\ HKDF\ implementation\ to\ match\ reference}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00131}\mbox{\hyperlink{nip44_8cpp_adabe0c22a9ec0eb1995a13c9d18cbfbd}{00131}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{nip44_8cpp_adabe0c22a9ec0eb1995a13c9d18cbfbd}{hkdf\_sha256}}(\textcolor{keyword}{const}\ uint8\_t\ *salt,\ \textcolor{keywordtype}{size\_t}\ salt\_len,}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ *ikm,\ \textcolor{keywordtype}{size\_t}\ ikm\_len,}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00133}00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ *info,\ \textcolor{keywordtype}{size\_t}\ info\_len,}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ *okm,\ \textcolor{keywordtype}{size\_t}\ okm\_len)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00135}00135\ \ \ \ \ \textcolor{comment}{//\ HKDF-\/Extract\ phase}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00136}00136\ \ \ \ \ uint8\_t\ prk[32];}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00137}00137\ \ \ \ \ mbedtls\_md\_context\_t\ ctx;}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00138}00138\ \ \ \ \ mbedtls\_md\_init(\&ctx);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00139}00139\ \ \ \ \ mbedtls\_md\_setup(\&ctx,\ mbedtls\_md\_info\_from\_type(MBEDTLS\_MD\_SHA256),\ 1);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00140}00140\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00141}00141\ \ \ \ \ \textcolor{comment}{//\ Extract\ phase}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00142}00142\ \ \ \ \ mbedtls\_md\_hmac\_starts(\&ctx,\ salt,\ salt\_len);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00143}00143\ \ \ \ \ mbedtls\_md\_hmac\_update(\&ctx,\ ikm,\ ikm\_len);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00144}00144\ \ \ \ \ mbedtls\_md\_hmac\_finish(\&ctx,\ prk);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00145}00145\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00146}00146\ \ \ \ \ \textcolor{comment}{//\ Expand\ phase}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00147}00147\ \ \ \ \ uint8\_t\ T[32]\ =\ \{0\};\ \textcolor{comment}{//\ T(0)\ is\ empty\ string}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00148}00148\ \ \ \ \ uint8\_t\ counter\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00149}00149\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ offset\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00150}00150\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00151}00151\ \ \ \ \ \textcolor{keywordflow}{while}\ (okm\_len\ >\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00152}00152\ \ \ \ \ \ \ \ \ mbedtls\_md\_hmac\_starts(\&ctx,\ prk,\ 32);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00153}00153\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00154}00154\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (offset\ >\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ mbedtls\_md\_hmac\_update(\&ctx,\ T,\ 32);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00156}00156\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00157}00157\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00158}00158\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (info\_len\ >\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ mbedtls\_md\_hmac\_update(\&ctx,\ info,\ info\_len);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00160}00160\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00161}00161\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00162}00162\ \ \ \ \ \ \ \ \ mbedtls\_md\_hmac\_update(\&ctx,\ \&counter,\ 1);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00163}00163\ \ \ \ \ \ \ \ \ mbedtls\_md\_hmac\_finish(\&ctx,\ T);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00164}00164\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00165}00165\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ todo\ =\ (okm\_len\ <\ 32)\ ?\ okm\_len\ :\ 32;}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00166}00166\ \ \ \ \ \ \ \ \ memcpy(okm\ +\ offset,\ T,\ todo);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00167}00167\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00168}00168\ \ \ \ \ \ \ \ \ counter++;}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00169}00169\ \ \ \ \ \ \ \ \ offset\ +=\ todo;}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00170}00170\ \ \ \ \ \ \ \ \ okm\_len\ -\/=\ todo;}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00171}00171\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00172}00172\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00173}00173\ \ \ \ \ mbedtls\_md\_free(\&ctx);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00174}00174\ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00175}00175\ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00176}00176\ \textcolor{comment}{//\ Update\ getMessageKeys\ to\ use\ HKDF}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00177}\mbox{\hyperlink{nip44_8cpp_a2e10b2184c762247271948f4cc2db136}{00177}}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{nip44_8cpp_a2e10b2184c762247271948f4cc2db136}{getMessageKeys}}(\textcolor{keyword}{const}\ uint8\_t\ *conversation\_key,\ \textcolor{keyword}{const}\ uint8\_t\ *nonce,}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ *chacha\_key,\ uint8\_t\ *chacha\_nonce,\ uint8\_t\ *hmac\_key)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00179}00179\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00180}00180\ \ \ \ \ \textcolor{comment}{//\ Use\ constant\ salt\ for\ key\ derivation}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00181}00181\ \ \ \ \ uint8\_t\ derived\_key[76];\ \textcolor{comment}{//\ For\ chacha\_key(32)\ +\ chacha\_nonce(12)\ +\ hmac\_key(32)}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00182}00182\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00183}00183\ \ \ \ \ \mbox{\hyperlink{nip44_8cpp_adabe0c22a9ec0eb1995a13c9d18cbfbd}{hkdf\_sha256}}(\mbox{\hyperlink{nip44_8cpp_ab3580d289ffb91f2ee6e86b49248c0bd}{NIP44\_SALT}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{nip44_8cpp_ab3580d289ffb91f2ee6e86b49248c0bd}{NIP44\_SALT}}),}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ conversation\_key,\ 32,}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nonce,\ 32,}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00186}00186\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ derived\_key,\ \textcolor{keyword}{sizeof}(derived\_key));}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00187}00187\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00188}00188\ \ \ \ \ \textcolor{comment}{//\ Split\ derived\ key\ into\ components}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00189}00189\ \ \ \ \ memcpy(chacha\_key,\ derived\_key,\ 32);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00190}00190\ \ \ \ \ memcpy(chacha\_nonce,\ derived\_key\ +\ 32,\ 12);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00191}00191\ \ \ \ \ memcpy(hmac\_key,\ derived\_key\ +\ 44,\ 32);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00192}00192\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00193}00193\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00194}00194\ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00195}00195\ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00196}00196\ \textcolor{comment}{//\ Update\ HMAC\ calculation\ to\ match\ reference}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00197}\mbox{\hyperlink{nip44_8cpp_aae1b96189dd9a1799371b399dcd5b5df}{00197}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{nip44_8cpp_aae1b96189dd9a1799371b399dcd5b5df}{hmac\_aad}}(\textcolor{keyword}{const}\ uint8\_t\ *key,\ \textcolor{keywordtype}{size\_t}\ key\_len,}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00198}00198\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ *message,\ \textcolor{keywordtype}{size\_t}\ msg\_len,}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00199}00199\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ *aad,\ \textcolor{keywordtype}{size\_t}\ aad\_len,}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00200}00200\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ *output)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00201}00201\ \ \ \ \ mbedtls\_md\_context\_t\ ctx;}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00202}00202\ \ \ \ \ mbedtls\_md\_init(\&ctx);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00203}00203\ \ \ \ \ mbedtls\_md\_setup(\&ctx,\ mbedtls\_md\_info\_from\_type(MBEDTLS\_MD\_SHA256),\ 1);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00204}00204\ \ \ \ \ mbedtls\_md\_hmac\_starts(\&ctx,\ key,\ key\_len);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00205}00205\ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00206}00206\ \ \ \ \ \textcolor{comment}{//\ First\ update\ with\ the\ nonce\ (aad)}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00207}00207\ \ \ \ \ \textcolor{keywordflow}{if}\ (aad\_len\ >\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00208}00208\ \ \ \ \ \ \ \ \ mbedtls\_md\_hmac\_update(\&ctx,\ aad,\ aad\_len);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00209}00209\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00210}00210\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00211}00211\ \ \ \ \ \textcolor{comment}{//\ Then\ update\ with\ the\ ciphertext}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00212}00212\ \ \ \ \ \textcolor{keywordflow}{if}\ (msg\_len\ >\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00213}00213\ \ \ \ \ \ \ \ \ mbedtls\_md\_hmac\_update(\&ctx,\ message,\ msg\_len);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00214}00214\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00215}00215\ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00216}00216\ \ \ \ \ mbedtls\_md\_hmac\_finish(\&ctx,\ output);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00217}00217\ \ \ \ \ mbedtls\_md\_free(\&ctx);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00218}00218\ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00219}00219\ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00220}00220\ \textcolor{comment}{//\ Helper\ function\ to\ verify\ base64\ encoding/decoding}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00221}\mbox{\hyperlink{nip44_8cpp_a0d30e05c3789532f7d623aa456dfc4a5}{00221}}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{nip44_8cpp_a0d30e05c3789532f7d623aa456dfc4a5}{verifyBase64}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ input,\ String\&\ output)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00222}00222\ \ \ \ \ \textcolor{comment}{//\ First\ calculate\ required\ length}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00223}00223\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ base64\_len\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00224}00224\ \ \ \ \ \textcolor{keywordtype}{int}\ ret\ =\ mbedtls\_base64\_encode(\textcolor{keyword}{nullptr},\ 0,\ \&base64\_len,\ input.data(),\ input.size());}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00225}00225\ \ \ \ \ \textcolor{keywordflow}{if}\ (ret\ !=\ MBEDTLS\_ERR\_BASE64\_BUFFER\_TOO\_SMALL)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00226}00226\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}Base64\ length\ calculation\ failed"{}});}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00227}00227\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00228}00228\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00229}00229\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00230}00230\ \ \ \ \ \textcolor{comment}{//\ Allocate\ buffer\ with\ space\ for\ null\ terminator}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00231}00231\ \ \ \ \ std::vector<uint8\_t>\ base64\_out(base64\_len\ +\ 1);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00232}00232\ \ \ \ \ ret\ =\ mbedtls\_base64\_encode(base64\_out.data(),\ base64\_len\ +\ 1,\ \&base64\_len,}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00233}00233\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ input.data(),\ input.size());}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00234}00234\ \ \ \ \ \textcolor{keywordflow}{if}\ (ret\ !=\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00235}00235\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}Base64\ encode\ failed"{}});}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00236}00236\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00237}00237\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00238}00238\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00239}00239\ \ \ \ \ \textcolor{comment}{//\ Verify\ we\ can\ decode\ back\ to\ original}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00240}00240\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ decoded\_len\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00241}00241\ \ \ \ \ ret\ =\ mbedtls\_base64\_decode(\textcolor{keyword}{nullptr},\ 0,\ \&decoded\_len,}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00242}00242\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ base64\_out.data(),\ base64\_len);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00243}00243\ \ \ \ \ \textcolor{keywordflow}{if}\ (ret\ !=\ MBEDTLS\_ERR\_BASE64\_BUFFER\_TOO\_SMALL\ ||\ decoded\_len\ !=\ input.size())\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00244}00244\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}Base64\ decode\ length\ check\ failed"{}});}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00245}00245\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00246}00246\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00247}00247\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00248}00248\ \ \ \ \ std::vector<uint8\_t>\ decoded(decoded\_len);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00249}00249\ \ \ \ \ ret\ =\ mbedtls\_base64\_decode(decoded.data(),\ decoded\_len,\ \&decoded\_len,}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00250}00250\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ base64\_out.data(),\ base64\_len);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00251}00251\ \ \ \ \ \textcolor{keywordflow}{if}\ (ret\ !=\ 0\ ||\ decoded\_len\ !=\ input.size())\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00252}00252\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}Base64\ decode\ failed"{}});}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00253}00253\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00254}00254\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00255}00255\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00256}00256\ \ \ \ \ \textcolor{comment}{//\ Verify\ content\ matches}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00257}00257\ \ \ \ \ \textcolor{keywordflow}{if}\ (memcmp(decoded.data(),\ input.data(),\ input.size())\ !=\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00258}00258\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}Base64\ decoded\ content\ mismatch"{}});}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00259}00259\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00260}00260\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00261}00261\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00262}00262\ \ \ \ \ output\ =\ String((\textcolor{keywordtype}{char}*)base64\_out.data());}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00263}00263\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00264}00264\ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00265}00265\ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00266}00266\ \textcolor{comment}{//\ Base64\ encoding\ helper}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00267}\mbox{\hyperlink{nip44_8cpp_a9506ca2d042968bd0ae27489e0f55916}{00267}}\ String\ \mbox{\hyperlink{nip44_8cpp_a9506ca2d042968bd0ae27489e0f55916}{base64\_encode}}(\textcolor{keyword}{const}\ uint8\_t*\ input,\ \textcolor{keywordtype}{size\_t}\ length)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00268}00268\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ base64\_len\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00269}00269\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00270}00270\ \ \ \ \ \textcolor{comment}{//\ Calculate\ required\ length}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00271}00271\ \ \ \ \ \textcolor{keywordtype}{int}\ ret\ =\ mbedtls\_base64\_encode(\textcolor{keyword}{nullptr},\ 0,\ \&base64\_len,\ input,\ length);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00272}00272\ \ \ \ \ \textcolor{keywordflow}{if}\ (ret\ !=\ MBEDTLS\_ERR\_BASE64\_BUFFER\_TOO\_SMALL)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00273}00273\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00274}00274\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00275}00275\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00276}00276\ \ \ \ \ \textcolor{comment}{//\ Allocate\ buffer\ with\ space\ for\ null\ terminator}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00277}00277\ \ \ \ \ std::vector<uint8\_t>\ base64\_out(base64\_len\ +\ 1);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00278}00278\ \ \ \ \ ret\ =\ mbedtls\_base64\_encode(base64\_out.data(),\ base64\_len\ +\ 1,\ \&base64\_len,}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00279}00279\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ input,\ length);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00280}00280\ \ \ \ \ \textcolor{keywordflow}{if}\ (ret\ !=\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00281}00281\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00282}00282\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00283}00283\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00284}00284\ \ \ \ \ \textcolor{keywordflow}{return}\ String((\textcolor{keywordtype}{char}*)base64\_out.data());}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00285}00285\ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00286}00286\ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00287}00287\ \textcolor{comment}{//\ Update\ the\ encryption\ function\ with\ ChaCha20\ and\ proper\ MAC}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00288}\mbox{\hyperlink{nip44_8cpp_a6abc2f603f8e9809edfe83696548800e}{00288}}\ String\ \mbox{\hyperlink{nip44_8cpp_a6abc2f603f8e9809edfe83696548800e}{encryptMessageNip44}}(\textcolor{keyword}{const}\ String\ \&plaintext,\ \textcolor{keyword}{const}\ String\ \&sharedSecretHex)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00289}00289\ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00290}00290\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Convert\ shared\ secret\ from\ hex}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00291}00291\ \ \ \ \ \ \ \ \ uint8\_t\ conversation\_key[32];}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00292}00292\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!fromHex(sharedSecretHex,\ conversation\_key,\ 32))\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00293}00293\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00294}00294\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00295}00295\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00296}00296\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Generate\ random\ nonce}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00297}00297\ \ \ \ \ \ \ \ \ uint8\_t\ nonce[32];}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00298}00298\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a6ae1657637c7f60691f6aa6d8e2a909d}{generateRandomIV}}(nonce,\ 32);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00299}00299\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00300}00300\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Pad\ message\ according\ to\ NIP-\/44\ spec}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00301}00301\ \ \ \ \ \ \ \ \ std::vector<uint8\_t>\ padded\ =\ \mbox{\hyperlink{nip44_8cpp_ac24379517e65e887cbbdc17891ab8e9a}{padMessage}}(plaintext);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00302}00302\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (padded.empty())\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00303}00303\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00304}00304\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00305}00305\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00306}00306\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Derive\ encryption\ keys}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00307}00307\ \ \ \ \ \ \ \ \ uint8\_t\ chacha\_key[32];}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00308}00308\ \ \ \ \ \ \ \ \ uint8\_t\ chacha\_nonce[12];}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00309}00309\ \ \ \ \ \ \ \ \ uint8\_t\ hmac\_key[32];}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00310}00310\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{nip44_8cpp_a2e10b2184c762247271948f4cc2db136}{getMessageKeys}}(conversation\_key,\ nonce,\ chacha\_key,\ chacha\_nonce,\ hmac\_key))\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00311}00311\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00312}00312\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00313}00313\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00314}00314\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Encrypt\ with\ ChaCha20}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00315}00315\ \ \ \ \ \ \ \ \ std::vector<uint8\_t>\ ciphertext(padded.size());}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00316}00316\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structchacha20__ctx}{chacha20\_ctx}}\ chacha;}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00317}00317\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{chacha20_8cpp_a268a65c9476c0ac2ea6c5262e13ce207}{chacha20\_init\_ctx}}(\&chacha,\ chacha\_key,\ chacha\_nonce);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00318}00318\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{chacha20_8cpp_ae2b236dc071d0ce2940ce0593d03b09f}{chacha20\_encrypt}}(\&chacha,\ ciphertext.data(),\ padded.data(),\ padded.size());}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00319}00319\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00320}00320\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Calculate\ MAC\ over\ nonce+ciphertext}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00321}00321\ \ \ \ \ \ \ \ \ uint8\_t\ mac[32];}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00322}00322\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{nip44_8cpp_aae1b96189dd9a1799371b399dcd5b5df}{hmac\_aad}}(hmac\_key,\ 32,}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00323}00323\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ciphertext.data(),\ ciphertext.size(),}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00324}00324\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nonce,\ 32,}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00325}00325\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mac);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00326}00326\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00327}00327\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Construct\ final\ payload:\ version\ +\ nonce\ +\ ciphertext\ +\ mac}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00328}00328\ \ \ \ \ \ \ \ \ std::vector<uint8\_t>\ payload;}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00329}00329\ \ \ \ \ \ \ \ \ payload.push\_back(0x02);\ \ \textcolor{comment}{//\ Version\ 2}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00330}00330\ \ \ \ \ \ \ \ \ payload.insert(payload.end(),\ nonce,\ nonce\ +\ 32);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00331}00331\ \ \ \ \ \ \ \ \ payload.insert(payload.end(),\ ciphertext.begin(),\ ciphertext.end());}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00332}00332\ \ \ \ \ \ \ \ \ payload.insert(payload.end(),\ mac,\ mac\ +\ 32);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00333}00333\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00334}00334\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Base64\ encode}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00335}00335\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{nip44_8cpp_a9506ca2d042968bd0ae27489e0f55916}{base64\_encode}}(payload.data(),\ payload.size());}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00336}00336\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00337}00337\ \ \ \ \ \textcolor{keywordflow}{catch}\ (...)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00338}00338\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00339}00339\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00340}00340\ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00341}00341\ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00342}00342\ \textcolor{comment}{//\ Update\ decryption\ function\ with\ ChaCha20\ and\ proper\ MAC\ verification}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00343}\mbox{\hyperlink{nip44_8cpp_af4405bcf332e970f6a885d00e1e1a325}{00343}}\ String\ \mbox{\hyperlink{nip44_8cpp_af4405bcf332e970f6a885d00e1e1a325}{decryptMessageNip44}}(\textcolor{keyword}{const}\ String\ \&payload,\ \textcolor{keyword}{const}\ String\ \&sharedSecretHex)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00344}00344\ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00345}00345\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}Decrypting\ payload\ of\ length:\ "{}}\ +\ String(payload.length()));}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00346}00346\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00347}00347\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ First\ get\ the\ required\ buffer\ size}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00348}00348\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ binary\_len\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00349}00349\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ ret\ =\ mbedtls\_base64\_decode(\textcolor{keyword}{nullptr},\ 0,\ \&binary\_len,}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00350}00350\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keyword}{const}\ uint8\_t*)payload.c\_str(),}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00351}00351\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ payload.length());}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00352}00352\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00353}00353\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ret\ !=\ MBEDTLS\_ERR\_BASE64\_BUFFER\_TOO\_SMALL)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00354}00354\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}Decrypt\ failed:\ Base64\ length\ check\ failed"{}});}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00355}00355\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00356}00356\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00357}00357\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00358}00358\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Allocate\ buffer}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00359}00359\ \ \ \ \ \ \ \ \ std::vector<uint8\_t>\ binary(binary\_len);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00360}00360\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00361}00361\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Decode\ base64}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00362}00362\ \ \ \ \ \ \ \ \ ret\ =\ mbedtls\_base64\_decode(binary.data(),\ binary\_len,\ \&binary\_len,}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00363}00363\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keyword}{const}\ uint8\_t*)payload.c\_str(),}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00364}00364\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ payload.length());}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00365}00365\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00366}00366\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ret\ !=\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00367}00367\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}Decrypt\ failed:\ Base64\ decode\ failed\ with\ code:\ "{}}\ +\ String(ret));}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00368}00368\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00369}00369\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00370}00370\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00371}00371\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}Decoded\ binary\ length:\ "{}}\ +\ String(binary\_len));}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00372}00372\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00373}00373\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Basic\ length\ validation}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00374}00374\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (binary\_len\ <\ 65)\ \{\ \textcolor{comment}{//\ version(1)\ +\ nonce(32)\ +\ mac(32)}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00375}00375\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}Decrypt\ failed:\ Binary\ too\ short"{}});}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00376}00376\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00377}00377\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00378}00378\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00379}00379\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Extract\ components}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00380}00380\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ *nonce\ =\ binary.data()\ +\ 1;}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00381}00381\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ *ciphertext\ =\ binary.data()\ +\ 33;}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00382}00382\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ *mac\ =\ binary.data()\ +\ binary\_len\ -\/\ 32;}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00383}00383\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ ciphertext\_len\ =\ binary\_len\ -\/\ (1\ +\ 32\ +\ 32);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00384}00384\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00385}00385\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}Decryption\ component\ sizes:"{}});}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00386}00386\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}Total\ binary\ length:\ "{}}\ +\ String(binary\_len));}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00387}00387\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}Ciphertext\ length:\ "{}}\ +\ String(ciphertext\_len));}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00388}00388\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}Ciphertext\ starts\ at:\ "{}}\ +\ String(33));}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00389}00389\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}MAC\ starts\ at:\ "{}}\ +\ String(binary\_len\ -\/\ 32));}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00390}00390\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00391}00391\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Validate\ version}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00392}00392\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (binary[0]\ !=\ 0x02)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00393}00393\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}Decrypt\ failed:\ Invalid\ version\ "{}}\ +\ String(binary[0]));}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00394}00394\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00395}00395\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00396}00396\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00397}00397\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Convert\ shared\ secret\ from\ hex}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00398}00398\ \ \ \ \ \ \ \ \ uint8\_t\ conversation\_key[32];}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00399}00399\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!fromHex(sharedSecretHex,\ conversation\_key,\ 32))\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00400}00400\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}Decrypt\ failed:\ Invalid\ shared\ secret\ hex"{}});}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00401}00401\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00402}00402\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00403}00403\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00404}00404\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ message\ keys}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00405}00405\ \ \ \ \ \ \ \ \ uint8\_t\ chacha\_key[32];}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00406}00406\ \ \ \ \ \ \ \ \ uint8\_t\ chacha\_nonce[12];}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00407}00407\ \ \ \ \ \ \ \ \ uint8\_t\ hmac\_key[32];}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00408}00408\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{nip44_8cpp_a2e10b2184c762247271948f4cc2db136}{getMessageKeys}}(conversation\_key,\ nonce,\ chacha\_key,\ chacha\_nonce,\ hmac\_key))\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00409}00409\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}Decrypt\ failed:\ getMessageKeys\ failed"{}});}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00410}00410\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00411}00411\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00412}00412\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00413}00413\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Verify\ MAC}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00414}00414\ \ \ \ \ \ \ \ \ uint8\_t\ calculated\_mac[32];}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00415}00415\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{nip44_8cpp_aae1b96189dd9a1799371b399dcd5b5df}{hmac\_aad}}(hmac\_key,\ 32,}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00416}00416\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ciphertext,\ ciphertext\_len,}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00417}00417\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nonce,\ 32,}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00418}00418\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ calculated\_mac);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00419}00419\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00420}00420\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Log\ MAC\ comparison}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00421}00421\ \ \ \ \ \ \ \ \ String\ calcMacHex;}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00422}00422\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ 16;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00423}00423\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ hex[3];}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00424}00424\ \ \ \ \ \ \ \ \ \ \ \ \ snprintf(hex,\ \textcolor{keyword}{sizeof}(hex),\ \textcolor{stringliteral}{"{}\%02x"{}},\ calculated\_mac[i]);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00425}00425\ \ \ \ \ \ \ \ \ \ \ \ \ calcMacHex\ +=\ hex;}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00426}00426\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00427}00427\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}First\ bytes\ of\ calculated\ MAC:\ "{}}\ +\ calcMacHex);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00428}00428\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00429}00429\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (memcmp(calculated\_mac,\ mac,\ 32)\ !=\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00430}00430\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}Decrypt\ failed:\ MAC\ verification\ failed"{}});}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00431}00431\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00432}00432\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00433}00433\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00434}00434\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Decrypt\ with\ ChaCha20}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00435}00435\ \ \ \ \ \ \ \ \ std::vector<uint8\_t>\ plaintext(ciphertext\_len);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00436}00436\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structchacha20__ctx}{chacha20\_ctx}}\ chacha;}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00437}00437\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{chacha20_8cpp_a268a65c9476c0ac2ea6c5262e13ce207}{chacha20\_init\_ctx}}(\&chacha,\ chacha\_key,\ chacha\_nonce);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00438}00438\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{chacha20_8cpp_ae2b236dc071d0ce2940ce0593d03b09f}{chacha20\_encrypt}}(\&chacha,\ plaintext.data(),\ ciphertext,\ ciphertext\_len);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00439}00439\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00440}00440\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ logging\ for\ decrypted\ size}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00441}00441\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}Plaintext\ buffer\ size:\ "{}}\ +\ String(plaintext.size()));}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00442}00442\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00443}00443\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Unpad}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00444}00444\ \ \ \ \ \ \ \ \ String\ result\ =\ \mbox{\hyperlink{nip44_8cpp_a6024adb12987206510b8794820ea53c5}{unpadMessage}}(plaintext);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00445}00445\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}Unpadded\ result\ length:\ "{}}\ +\ String(result.length()));}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00446}00446\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00447}00447\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00448}00448\ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (...)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00449}00449\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}Decrypt\ failed:\ Exception\ caught"{}});}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00450}00450\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00451}00451\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00452}00452\ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00453}00453\ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00454}00454\ \textcolor{comment}{//\ HMAC-\/SHA256\ implementation}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00455}\mbox{\hyperlink{nip44_8cpp_a8658c09e51abaf63e23f7beabc2c04b5}{00455}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{nip44_8cpp_a8658c09e51abaf63e23f7beabc2c04b5}{hmac\_sha256}}(\textcolor{keyword}{const}\ uint8\_t*\ key,\ \textcolor{keywordtype}{size\_t}\ key\_len,}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00456}00456\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t*\ msg,\ \textcolor{keywordtype}{size\_t}\ msg\_len,}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00457}00457\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t*\ hmac)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00458}00458\ \ \ \ \ mbedtls\_md\_context\_t\ ctx;}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00459}00459\ \ \ \ \ mbedtls\_md\_init(\&ctx);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00460}00460\ \ \ \ \ mbedtls\_md\_setup(\&ctx,\ mbedtls\_md\_info\_from\_type(MBEDTLS\_MD\_SHA256),\ 1);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00461}00461\ \ \ \ \ mbedtls\_md\_hmac\_starts(\&ctx,\ key,\ key\_len);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00462}00462\ \ \ \ \ mbedtls\_md\_hmac\_update(\&ctx,\ msg,\ msg\_len);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00463}00463\ \ \ \ \ mbedtls\_md\_hmac\_finish(\&ctx,\ hmac);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00464}00464\ \ \ \ \ mbedtls\_md\_free(\&ctx);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00465}00465\ \}\ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00466}00466\ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00467}\mbox{\hyperlink{nip44_8cpp_a9fca4f5d3adc798444724f0ef23cb0c6}{00467}}\ String\ \mbox{\hyperlink{nip44_8cpp_a9fca4f5d3adc798444724f0ef23cb0c6}{executeEncryptMessageNip44}}(String\ data,\ String\ privateKeyHex,\ String\ thirdPartyPublicKeyHex)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00468}00468\ \ \ \ \ \textcolor{keywordflow}{if}\ (data\ ==\ \textcolor{stringliteral}{"{}"{}})\ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00469}00469\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00470}00470\ \ \ \ \ thirdPartyPublicKeyHex.trim();}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00471}00471\ \ \ \ \ thirdPartyPublicKeyHex.toLowerCase();}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00472}00472\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00473}00473\ \ \ \ \ \textcolor{keywordflow}{if}(!\mbox{\hyperlink{helpers_8cpp_ae988a492d91e393b7a984eb46cf10c87}{isValidHexKey}}(thirdPartyPublicKeyHex))\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00474}00474\ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}Encrypt\ Message\ error:\ Invalid\ 3rd\ party\ public\ key."{}});}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00475}00475\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00476}00476\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00477}00477\ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00478}00478\ \ \ \ \ String\ sharedSecretHex\ =\ \mbox{\hyperlink{helpers_8cpp_ad1ab262ea16780ef733d316495017766}{generateSharedSecret}}(privateKeyHex,\ thirdPartyPublicKeyHex);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00479}00479\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00480}00480\ \ \ \ \ \textcolor{comment}{//\ Get\ the\ content\ as\ everything\ after\ the\ first\ space}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00481}00481\ \ \ \ \ String\ content\ =\ data;}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00482}00482\ \ \ \ \ content.trim();}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00483}00483\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00484}00484\ \ \ \ \ String\ encryptedMessage\ =\ \mbox{\hyperlink{nip44_8cpp_a6abc2f603f8e9809edfe83696548800e}{encryptMessageNip44}}(content,\ sharedSecretHex);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00485}00485\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00486}00486\ \ \ \ \ \textcolor{comment}{//\ log\ the\ encrypted\ message}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00487}00487\ \ \ \ \ \textcolor{keywordflow}{if}\ (encryptedMessage\ ==\ \textcolor{stringliteral}{"{}"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00488}00488\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}Encrypt\ NIP-\/44\ failed:\ Invalid\ message\ or\ shared\ secret"{}});}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00489}00489\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00490}00490\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}Encrypted\ message:\ "{}}\ +\ encryptedMessage);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00491}00491\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00492}00492\ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00493}00493\ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}Encrypt\ NIP-\/44:\ "{}}\ +\ content.substring(0,\ 16)\ +\ \textcolor{stringliteral}{"{}..."{}});}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00494}00494\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00495}00495\ \ \ \ \ \textcolor{keywordflow}{return}\ encryptedMessage;}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00496}00496\ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00497}00497\ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00498}\mbox{\hyperlink{nip44_8cpp_a131b96ad7e7f560b2fd7194ade183695}{00498}}\ String\ \mbox{\hyperlink{nip44_8cpp_a131b96ad7e7f560b2fd7194ade183695}{executeDecryptMessageNip44}}(String\ data,\ String\ privateKeyHex,\ String\ thirdPartyPublicKeyHex)\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00499}00499\ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}Full\ command\ data\ length:\ "{}}\ +\ String(data.length()));}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00500}00500\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00501}00501\ \ \ \ \ \textcolor{keywordflow}{if}\ (data\ ==\ \textcolor{stringliteral}{"{}"{}})\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00502}00502\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00503}00503\ \ \ \ \ \textcolor{comment}{//\ Get\ the\ shared\ secret\ as\ the\ 3rd\ party\ public\ key}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00504}00504\ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}Public\ key\ length:\ "{}}\ +\ String(thirdPartyPublicKeyHex.length()));}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00505}00505\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00506}00506\ \ \ \ \ thirdPartyPublicKeyHex.trim();}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00507}00507\ \ \ \ \ thirdPartyPublicKeyHex.toLowerCase();}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00508}00508\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00509}00509\ \ \ \ \ \textcolor{keywordflow}{if}(!\mbox{\hyperlink{helpers_8cpp_ae988a492d91e393b7a984eb46cf10c87}{isValidHexKey}}(thirdPartyPublicKeyHex))\ \{}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00510}00510\ \ \ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}Decrypt\ Message\ Error:\ Invalid\ 3rd\ party\ public\ key."{}});}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00511}00511\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00512}00512\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00513}00513\ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00514}00514\ \ \ \ \ String\ sharedSecretHex\ =\ \mbox{\hyperlink{helpers_8cpp_ad1ab262ea16780ef733d316495017766}{generateSharedSecret}}(privateKeyHex,\ thirdPartyPublicKeyHex);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00515}00515\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00516}00516\ \ \ \ \ \textcolor{comment}{//\ Get\ the\ encrypted\ content}}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00517}00517\ \ \ \ \ String\ encryptedContent\ =\ data;}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00518}00518\ \ \ \ \ encryptedContent.trim();}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00519}00519\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00520}00520\ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}Encrypted\ content:\ "{}}\ +\ encryptedContent);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00521}00521\ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}Encrypted\ content\ length:\ "{}}\ +\ String(encryptedContent.length()));}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00522}00522\ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00523}00523\ \ \ \ \ String\ decryptedMessage\ =\ \mbox{\hyperlink{nip44_8cpp_af4405bcf332e970f6a885d00e1e1a325}{decryptMessageNip44}}(encryptedContent,\ sharedSecretHex);}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00524}00524\ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00525}00525\ \ \ \ \ \mbox{\hyperlink{helpers_8cpp_a5bef8eb35193fa4586662db6d111ded7}{logInfo}}(\textcolor{stringliteral}{"{}Decrypt\ NIP-\/44:\ "{}}\ +\ decryptedMessage.substring(0,\ 16)\ +\ \textcolor{stringliteral}{"{}..."{}});}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00526}00526\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00527}00527\ \ \ \ \ \textcolor{keywordflow}{return}\ decryptedMessage;}
+\DoxyCodeLine{\Hypertarget{nip44_8cpp_source_l00528}00528\ \}}
+
+\end{DoxyCode}

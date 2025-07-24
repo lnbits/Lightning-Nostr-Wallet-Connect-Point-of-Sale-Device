@@ -1,0 +1,483 @@
+\hypertarget{namespace_wi_fi_manager}{}\doxysection{Wi\+Fi\+Manager Namespace Reference}
+\label{namespace_wi_fi_manager}\index{WiFiManager@{WiFiManager}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__command__t}{wifi\+\_\+command\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{struct_wi_fi_manager_1_1wifi__scan__result__t}{wifi\+\_\+scan\+\_\+result\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef void($\ast$ \mbox{\hyperlink{namespace_wi_fi_manager_a839fecd4b9065c1e1e4b79953d5f2c63}{wifi\+\_\+status\+\_\+callback\+\_\+t}}) (bool connected, const char $\ast$status)
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{namespace_wi_fi_manager_a13aca7b0f742cd4e341fd9f564554c1e}{wifi\+\_\+command\+\_\+type\+\_\+t}} \{ \mbox{\hyperlink{namespace_wi_fi_manager_a13aca7b0f742cd4e341fd9f564554c1ea2a49dc40ced1f1c8878d9af409ab7dfc}{WIFI\+\_\+\+SCAN}}
+, \mbox{\hyperlink{namespace_wi_fi_manager_a13aca7b0f742cd4e341fd9f564554c1eaeb72173a3739edb98cc2214d65dcda40}{WIFI\+\_\+\+CONNECT}}
+, \mbox{\hyperlink{namespace_wi_fi_manager_a13aca7b0f742cd4e341fd9f564554c1ea986429df4b2cff5795ed0cd17bb13c58}{WIFI\+\_\+\+DISCONNECT}}
+, \mbox{\hyperlink{namespace_wi_fi_manager_a13aca7b0f742cd4e341fd9f564554c1eadb99ea8f650c95db02a6722a91a21873}{WIFI\+\_\+\+STOP\+\_\+\+SCAN}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespace_wi_fi_manager_a307a74b2278e5f1c3ac148944034ca75}{init}} ()
+\item 
+void \mbox{\hyperlink{namespace_wi_fi_manager_a65dac49e1bcceabd910231b2755d254d}{cleanup}} ()
+\item 
+void \mbox{\hyperlink{namespace_wi_fi_manager_a4600374afc464e50c6516ed52df26b81}{process\+Loop}} ()
+\item 
+void \mbox{\hyperlink{namespace_wi_fi_manager_aecf543cfe5d796167b7d92714ba27bee}{start\+Connection}} (const char $\ast$ssid, const char $\ast$password)
+\item 
+void \mbox{\hyperlink{namespace_wi_fi_manager_a390036853ea37ba2d30a0aaa5c37fe25}{disconnect}} ()
+\item 
+bool \mbox{\hyperlink{namespace_wi_fi_manager_aa6406a18b4523ef158247b902e770052}{is\+Connected}} ()
+\item 
+String \mbox{\hyperlink{namespace_wi_fi_manager_a0d7909fe5946dfd8e7024a61b0a9e048}{get\+SSID}} ()
+\item 
+String \mbox{\hyperlink{namespace_wi_fi_manager_a87f19df53f67ea0a4cb59ef57c184524}{get\+Local\+IP}} ()
+\item 
+wl\+\_\+status\+\_\+t \mbox{\hyperlink{namespace_wi_fi_manager_a1afb041d5ffe5293106eb38c9eb37690}{get\+Status}} ()
+\item 
+void \mbox{\hyperlink{namespace_wi_fi_manager_ac7951b652bea0671cd2e8e6bb26d81de}{start\+Scan}} ()
+\item 
+void \mbox{\hyperlink{namespace_wi_fi_manager_a92d199a9af58bbd61060ec1151a87291}{stop\+Scanning}} ()
+\item 
+bool \mbox{\hyperlink{namespace_wi_fi_manager_acce9115c77844a236e1e722ca26b2d30}{process\+Scan\+Results}} ()
+\item 
+void \mbox{\hyperlink{namespace_wi_fi_manager_ab0afc95b9cccc0c9eaa4052a1d8e970f}{save\+Credentials}} (const char $\ast$ssid, const char $\ast$password)
+\item 
+bool \mbox{\hyperlink{namespace_wi_fi_manager_ac2ae37228c5fb94ae3d8a28717976c03}{find\+Saved\+Credentials}} (const char $\ast$ssid, char $\ast$password, size\+\_\+t password\+\_\+size)
+\item 
+void \mbox{\hyperlink{namespace_wi_fi_manager_a979ffc34adde243292c287d2b4969978}{load\+All\+Networks}} ()
+\item 
+void \mbox{\hyperlink{namespace_wi_fi_manager_acda899003fb96827cf623a31729fa276}{remove\+Network}} (const char $\ast$ssid)
+\item 
+void \mbox{\hyperlink{namespace_wi_fi_manager_af144d928f236289193728660e5697b46}{start\+APMode}} ()
+\item 
+void \mbox{\hyperlink{namespace_wi_fi_manager_a4116ab699d4b132ac727840fab0c062e}{stop\+APMode}} ()
+\item 
+bool \mbox{\hyperlink{namespace_wi_fi_manager_a91219dd6aeea8f4e7f1960b8504a8b6f}{is\+APMode\+Active}} ()
+\item 
+String \mbox{\hyperlink{namespace_wi_fi_manager_a4c29afbf57b27bf7e7322269d8eb870e}{get\+APSSID}} ()
+\item 
+String \mbox{\hyperlink{namespace_wi_fi_manager_ae41c2e959336cc88a732b90a849c2606}{get\+APPassword}} ()
+\item 
+String \mbox{\hyperlink{namespace_wi_fi_manager_a5e2288b0e0c4e5211d6d1222f105f9da}{get\+APIP}} ()
+\item 
+void \mbox{\hyperlink{namespace_wi_fi_manager_aae8539684c2100427ec84c959c4c41be}{load\+NWCUrl}} ()
+\item 
+void \mbox{\hyperlink{namespace_wi_fi_manager_a0ad5d13aa01b899a242fafbeb5c59846}{save\+NWCUrl}} (const String \&url)
+\item 
+String \mbox{\hyperlink{namespace_wi_fi_manager_ae16ddb6337ee2503274a792efae0807e}{get\+NWCUrl}} ()
+\item 
+void \mbox{\hyperlink{namespace_wi_fi_manager_a097703a26a14ee99c6a7d13721e469ff}{set\+NWCUrl}} (const String \&url)
+\item 
+void \mbox{\hyperlink{namespace_wi_fi_manager_a3dbe1a7d671a87ebbdd4d3be1eecaea8}{update\+Status}} ()
+\item 
+void \mbox{\hyperlink{namespace_wi_fi_manager_a4d23f7d8812d092f2be0aac81f5cb8ac}{set\+Status\+Label}} (lv\+\_\+obj\+\_\+t $\ast$label)
+\item 
+void \mbox{\hyperlink{namespace_wi_fi_manager_a1401ba93320696ad67259cd4ed1986e1}{set\+Main\+Status\+Label}} (lv\+\_\+obj\+\_\+t $\ast$label)
+\item 
+void \mbox{\hyperlink{namespace_wi_fi_manager_a32c3f7851dec88fa0a0af25eac30a9ce}{scan\+Event\+Handler}} (lv\+\_\+event\+\_\+t $\ast$e)
+\item 
+void \mbox{\hyperlink{namespace_wi_fi_manager_a31680d46c796056057ae9dedd3e67af9}{connect\+Event\+Handler}} (lv\+\_\+event\+\_\+t $\ast$e)
+\item 
+void \mbox{\hyperlink{namespace_wi_fi_manager_ab0a62322259c53ddf5142935b2d373ce}{password\+KBEvent\+Handler}} (lv\+\_\+event\+\_\+t $\ast$e)
+\item 
+void \mbox{\hyperlink{namespace_wi_fi_manager_af89611ddc9efbc6714f4cc1796968314}{password\+Back\+Event\+Handler}} (lv\+\_\+event\+\_\+t $\ast$e)
+\item 
+void \mbox{\hyperlink{namespace_wi_fi_manager_a75f9204235fd981cc853216d83a6e6ac}{launch\+APMode\+Event\+Handler}} (lv\+\_\+event\+\_\+t $\ast$e)
+\item 
+void \mbox{\hyperlink{namespace_wi_fi_manager_ae100343aeb1989d3e3255515fe87fde7}{exit\+APMode\+Event\+Handler}} (lv\+\_\+event\+\_\+t $\ast$e)
+\item 
+void \mbox{\hyperlink{namespace_wi_fi_manager_a5c15b5f5715e0601b9233cf5c4e5e1ac}{create\+Task}} ()
+\item 
+void \mbox{\hyperlink{namespace_wi_fi_manager_a88be8f7c113aef1ec1fbf348bec0515d}{delete\+Task}} ()
+\item 
+Task\+Handle\+\_\+t \mbox{\hyperlink{namespace_wi_fi_manager_a21642cfac3d9379d2d1057956359f942}{get\+Task\+Handle}} ()
+\item 
+Queue\+Handle\+\_\+t \mbox{\hyperlink{namespace_wi_fi_manager_a93c0292de075a9ac285e5100827a30f0}{get\+Command\+Queue}} ()
+\item 
+Queue\+Handle\+\_\+t \mbox{\hyperlink{namespace_wi_fi_manager_a5ad74575fb22fb0e8c6193ff5c80db2a}{get\+Scan\+Result\+Queue}} ()
+\item 
+void \mbox{\hyperlink{namespace_wi_fi_manager_a5980532d43bbd1a132c31c6ebee6de4f}{set\+Current\+Credentials}} (const char $\ast$ssid, const char $\ast$password)
+\item 
+void \mbox{\hyperlink{namespace_wi_fi_manager_a30d1efaf5d3133ad392c33cc9bf08e97}{get\+Current\+Credentials}} (char $\ast$ssid, char $\ast$password)
+\item 
+std\+::vector$<$ String $>$ \& \mbox{\hyperlink{namespace_wi_fi_manager_aa5e0282461086a2020d2033df2705d05}{get\+SSIDList}} ()
+\item 
+void \mbox{\hyperlink{namespace_wi_fi_manager_afbd1520be38dcf8df79b62059bc70113}{set\+Status\+Callback}} (\mbox{\hyperlink{namespace_wi_fi_manager_a839fecd4b9065c1e1e4b79953d5f2c63}{wifi\+\_\+status\+\_\+callback\+\_\+t}} callback)
+\item 
+NTPClient \& \mbox{\hyperlink{namespace_wi_fi_manager_ad461825e802ccf532b007beb94549392}{get\+NTPClient}} ()
+\item 
+void \mbox{\hyperlink{namespace_wi_fi_manager_a02c69502601dcd050a76851836617b10}{create\+Status\+Timer}} ()
+\item 
+void \mbox{\hyperlink{namespace_wi_fi_manager_ab1c0505310d5aef0bd32d45a0b350a54}{delete\+Status\+Timer}} ()
+\item 
+void \mbox{\hyperlink{namespace_wi_fi_manager_acee34f68f7c76be57917ada674c087c3}{handle\+APRoot}} ()
+\item 
+void \mbox{\hyperlink{namespace_wi_fi_manager_a83adf4c440290cc3d725fbb7521dc5f1}{handle\+APConfig}} ()
+\item 
+void \mbox{\hyperlink{namespace_wi_fi_manager_af6cbe35aefb4d1a58ba6b38fa0a8f9ec}{update\+Settings\+Screen\+For\+APMode}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{namespace_wi_fi_manager_a839fecd4b9065c1e1e4b79953d5f2c63}\label{namespace_wi_fi_manager_a839fecd4b9065c1e1e4b79953d5f2c63}} 
+\index{WiFiManager@{WiFiManager}!wifi\_status\_callback\_t@{wifi\_status\_callback\_t}}
+\index{wifi\_status\_callback\_t@{wifi\_status\_callback\_t}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{wifi\_status\_callback\_t}{wifi\_status\_callback\_t}}
+{\footnotesize\ttfamily typedef void($\ast$ Wi\+Fi\+Manager\+::wifi\+\_\+status\+\_\+callback\+\_\+t) (bool connected, const char $\ast$status)}
+
+
+
+Definition at line \mbox{\hyperlink{wifi__manager_8h_source_l00108}{108}} of file \mbox{\hyperlink{wifi__manager_8h_source}{wifi\+\_\+manager.\+h}}.
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{namespace_wi_fi_manager_a13aca7b0f742cd4e341fd9f564554c1e}\label{namespace_wi_fi_manager_a13aca7b0f742cd4e341fd9f564554c1e}} 
+\index{WiFiManager@{WiFiManager}!wifi\_command\_type\_t@{wifi\_command\_type\_t}}
+\index{wifi\_command\_type\_t@{wifi\_command\_type\_t}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{wifi\_command\_type\_t}{wifi\_command\_type\_t}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{namespace_wi_fi_manager_a13aca7b0f742cd4e341fd9f564554c1e}{Wi\+Fi\+Manager\+::wifi\+\_\+command\+\_\+type\+\_\+t}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WIFI\_SCAN@{WIFI\_SCAN}!WiFiManager@{WiFiManager}}\index{WiFiManager@{WiFiManager}!WIFI\_SCAN@{WIFI\_SCAN}}}\mbox{\Hypertarget{namespace_wi_fi_manager_a13aca7b0f742cd4e341fd9f564554c1ea2a49dc40ced1f1c8878d9af409ab7dfc}\label{namespace_wi_fi_manager_a13aca7b0f742cd4e341fd9f564554c1ea2a49dc40ced1f1c8878d9af409ab7dfc}} 
+WIFI\+\_\+\+SCAN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WIFI\_CONNECT@{WIFI\_CONNECT}!WiFiManager@{WiFiManager}}\index{WiFiManager@{WiFiManager}!WIFI\_CONNECT@{WIFI\_CONNECT}}}\mbox{\Hypertarget{namespace_wi_fi_manager_a13aca7b0f742cd4e341fd9f564554c1eaeb72173a3739edb98cc2214d65dcda40}\label{namespace_wi_fi_manager_a13aca7b0f742cd4e341fd9f564554c1eaeb72173a3739edb98cc2214d65dcda40}} 
+WIFI\+\_\+\+CONNECT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WIFI\_DISCONNECT@{WIFI\_DISCONNECT}!WiFiManager@{WiFiManager}}\index{WiFiManager@{WiFiManager}!WIFI\_DISCONNECT@{WIFI\_DISCONNECT}}}\mbox{\Hypertarget{namespace_wi_fi_manager_a13aca7b0f742cd4e341fd9f564554c1ea986429df4b2cff5795ed0cd17bb13c58}\label{namespace_wi_fi_manager_a13aca7b0f742cd4e341fd9f564554c1ea986429df4b2cff5795ed0cd17bb13c58}} 
+WIFI\+\_\+\+DISCONNECT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WIFI\_STOP\_SCAN@{WIFI\_STOP\_SCAN}!WiFiManager@{WiFiManager}}\index{WiFiManager@{WiFiManager}!WIFI\_STOP\_SCAN@{WIFI\_STOP\_SCAN}}}\mbox{\Hypertarget{namespace_wi_fi_manager_a13aca7b0f742cd4e341fd9f564554c1eadb99ea8f650c95db02a6722a91a21873}\label{namespace_wi_fi_manager_a13aca7b0f742cd4e341fd9f564554c1eadb99ea8f650c95db02a6722a91a21873}} 
+WIFI\+\_\+\+STOP\+\_\+\+SCAN&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{wifi__manager_8h_source_l00020}{20}} of file \mbox{\hyperlink{wifi__manager_8h_source}{wifi\+\_\+manager.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{main_8cpp_a39e9cd7b432e4f3e6b935985bddf2a0cabc79e21d660ad53ddb48f80412b26363}{WIFI\_SCAN}},}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{main_8cpp_a39e9cd7b432e4f3e6b935985bddf2a0caf14ac08f8d7b221cd1e510207f041224}{WIFI\_CONNECT}},}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{main_8cpp_a39e9cd7b432e4f3e6b935985bddf2a0cae98478e31cd6b9f5453c009e650afd62}{WIFI\_DISCONNECT}},}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{main_8cpp_a39e9cd7b432e4f3e6b935985bddf2a0ca830823a0d1d8d9b5d7fcf516f10a396c}{WIFI\_STOP\_SCAN}}}
+\DoxyCodeLine{00025\ \ \ \ \ \}\ \mbox{\hyperlink{main_8cpp_a39e9cd7b432e4f3e6b935985bddf2a0c}{wifi\_command\_type\_t}};}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespace_wi_fi_manager_a65dac49e1bcceabd910231b2755d254d}\label{namespace_wi_fi_manager_a65dac49e1bcceabd910231b2755d254d}} 
+\index{WiFiManager@{WiFiManager}!cleanup@{cleanup}}
+\index{cleanup@{cleanup}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{cleanup()}{cleanup()}}
+{\footnotesize\ttfamily void Wi\+Fi\+Manager\+::cleanup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_a31680d46c796056057ae9dedd3e67af9}\label{namespace_wi_fi_manager_a31680d46c796056057ae9dedd3e67af9}} 
+\index{WiFiManager@{WiFiManager}!connectEventHandler@{connectEventHandler}}
+\index{connectEventHandler@{connectEventHandler}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{connectEventHandler()}{connectEventHandler()}}
+{\footnotesize\ttfamily void Wi\+Fi\+Manager\+::connect\+Event\+Handler (\begin{DoxyParamCaption}\item[{lv\+\_\+event\+\_\+t $\ast$}]{e }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_a02c69502601dcd050a76851836617b10}\label{namespace_wi_fi_manager_a02c69502601dcd050a76851836617b10}} 
+\index{WiFiManager@{WiFiManager}!createStatusTimer@{createStatusTimer}}
+\index{createStatusTimer@{createStatusTimer}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{createStatusTimer()}{createStatusTimer()}}
+{\footnotesize\ttfamily void Wi\+Fi\+Manager\+::create\+Status\+Timer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_a5c15b5f5715e0601b9233cf5c4e5e1ac}\label{namespace_wi_fi_manager_a5c15b5f5715e0601b9233cf5c4e5e1ac}} 
+\index{WiFiManager@{WiFiManager}!createTask@{createTask}}
+\index{createTask@{createTask}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{createTask()}{createTask()}}
+{\footnotesize\ttfamily void Wi\+Fi\+Manager\+::create\+Task (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_ab1c0505310d5aef0bd32d45a0b350a54}\label{namespace_wi_fi_manager_ab1c0505310d5aef0bd32d45a0b350a54}} 
+\index{WiFiManager@{WiFiManager}!deleteStatusTimer@{deleteStatusTimer}}
+\index{deleteStatusTimer@{deleteStatusTimer}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{deleteStatusTimer()}{deleteStatusTimer()}}
+{\footnotesize\ttfamily void Wi\+Fi\+Manager\+::delete\+Status\+Timer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_a88be8f7c113aef1ec1fbf348bec0515d}\label{namespace_wi_fi_manager_a88be8f7c113aef1ec1fbf348bec0515d}} 
+\index{WiFiManager@{WiFiManager}!deleteTask@{deleteTask}}
+\index{deleteTask@{deleteTask}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{deleteTask()}{deleteTask()}}
+{\footnotesize\ttfamily void Wi\+Fi\+Manager\+::delete\+Task (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_a390036853ea37ba2d30a0aaa5c37fe25}\label{namespace_wi_fi_manager_a390036853ea37ba2d30a0aaa5c37fe25}} 
+\index{WiFiManager@{WiFiManager}!disconnect@{disconnect}}
+\index{disconnect@{disconnect}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{disconnect()}{disconnect()}}
+{\footnotesize\ttfamily void Wi\+Fi\+Manager\+::disconnect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_ae100343aeb1989d3e3255515fe87fde7}\label{namespace_wi_fi_manager_ae100343aeb1989d3e3255515fe87fde7}} 
+\index{WiFiManager@{WiFiManager}!exitAPModeEventHandler@{exitAPModeEventHandler}}
+\index{exitAPModeEventHandler@{exitAPModeEventHandler}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{exitAPModeEventHandler()}{exitAPModeEventHandler()}}
+{\footnotesize\ttfamily void Wi\+Fi\+Manager\+::exit\+APMode\+Event\+Handler (\begin{DoxyParamCaption}\item[{lv\+\_\+event\+\_\+t $\ast$}]{e }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_ac2ae37228c5fb94ae3d8a28717976c03}\label{namespace_wi_fi_manager_ac2ae37228c5fb94ae3d8a28717976c03}} 
+\index{WiFiManager@{WiFiManager}!findSavedCredentials@{findSavedCredentials}}
+\index{findSavedCredentials@{findSavedCredentials}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{findSavedCredentials()}{findSavedCredentials()}}
+{\footnotesize\ttfamily bool Wi\+Fi\+Manager\+::find\+Saved\+Credentials (\begin{DoxyParamCaption}\item[{const char $\ast$}]{ssid,  }\item[{char $\ast$}]{password,  }\item[{size\+\_\+t}]{password\+\_\+size }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_a5e2288b0e0c4e5211d6d1222f105f9da}\label{namespace_wi_fi_manager_a5e2288b0e0c4e5211d6d1222f105f9da}} 
+\index{WiFiManager@{WiFiManager}!getAPIP@{getAPIP}}
+\index{getAPIP@{getAPIP}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{getAPIP()}{getAPIP()}}
+{\footnotesize\ttfamily String Wi\+Fi\+Manager\+::get\+APIP (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_ae41c2e959336cc88a732b90a849c2606}\label{namespace_wi_fi_manager_ae41c2e959336cc88a732b90a849c2606}} 
+\index{WiFiManager@{WiFiManager}!getAPPassword@{getAPPassword}}
+\index{getAPPassword@{getAPPassword}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{getAPPassword()}{getAPPassword()}}
+{\footnotesize\ttfamily String Wi\+Fi\+Manager\+::get\+APPassword (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_a4c29afbf57b27bf7e7322269d8eb870e}\label{namespace_wi_fi_manager_a4c29afbf57b27bf7e7322269d8eb870e}} 
+\index{WiFiManager@{WiFiManager}!getAPSSID@{getAPSSID}}
+\index{getAPSSID@{getAPSSID}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{getAPSSID()}{getAPSSID()}}
+{\footnotesize\ttfamily String Wi\+Fi\+Manager\+::get\+APSSID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_a93c0292de075a9ac285e5100827a30f0}\label{namespace_wi_fi_manager_a93c0292de075a9ac285e5100827a30f0}} 
+\index{WiFiManager@{WiFiManager}!getCommandQueue@{getCommandQueue}}
+\index{getCommandQueue@{getCommandQueue}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{getCommandQueue()}{getCommandQueue()}}
+{\footnotesize\ttfamily Queue\+Handle\+\_\+t Wi\+Fi\+Manager\+::get\+Command\+Queue (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_a30d1efaf5d3133ad392c33cc9bf08e97}\label{namespace_wi_fi_manager_a30d1efaf5d3133ad392c33cc9bf08e97}} 
+\index{WiFiManager@{WiFiManager}!getCurrentCredentials@{getCurrentCredentials}}
+\index{getCurrentCredentials@{getCurrentCredentials}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{getCurrentCredentials()}{getCurrentCredentials()}}
+{\footnotesize\ttfamily void Wi\+Fi\+Manager\+::get\+Current\+Credentials (\begin{DoxyParamCaption}\item[{char $\ast$}]{ssid,  }\item[{char $\ast$}]{password }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_a87f19df53f67ea0a4cb59ef57c184524}\label{namespace_wi_fi_manager_a87f19df53f67ea0a4cb59ef57c184524}} 
+\index{WiFiManager@{WiFiManager}!getLocalIP@{getLocalIP}}
+\index{getLocalIP@{getLocalIP}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{getLocalIP()}{getLocalIP()}}
+{\footnotesize\ttfamily String Wi\+Fi\+Manager\+::get\+Local\+IP (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_ad461825e802ccf532b007beb94549392}\label{namespace_wi_fi_manager_ad461825e802ccf532b007beb94549392}} 
+\index{WiFiManager@{WiFiManager}!getNTPClient@{getNTPClient}}
+\index{getNTPClient@{getNTPClient}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{getNTPClient()}{getNTPClient()}}
+{\footnotesize\ttfamily NTPClient \& Wi\+Fi\+Manager\+::get\+NTPClient (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_ae16ddb6337ee2503274a792efae0807e}\label{namespace_wi_fi_manager_ae16ddb6337ee2503274a792efae0807e}} 
+\index{WiFiManager@{WiFiManager}!getNWCUrl@{getNWCUrl}}
+\index{getNWCUrl@{getNWCUrl}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{getNWCUrl()}{getNWCUrl()}}
+{\footnotesize\ttfamily String Wi\+Fi\+Manager\+::get\+NWCUrl (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_a5ad74575fb22fb0e8c6193ff5c80db2a}\label{namespace_wi_fi_manager_a5ad74575fb22fb0e8c6193ff5c80db2a}} 
+\index{WiFiManager@{WiFiManager}!getScanResultQueue@{getScanResultQueue}}
+\index{getScanResultQueue@{getScanResultQueue}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{getScanResultQueue()}{getScanResultQueue()}}
+{\footnotesize\ttfamily Queue\+Handle\+\_\+t Wi\+Fi\+Manager\+::get\+Scan\+Result\+Queue (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_a0d7909fe5946dfd8e7024a61b0a9e048}\label{namespace_wi_fi_manager_a0d7909fe5946dfd8e7024a61b0a9e048}} 
+\index{WiFiManager@{WiFiManager}!getSSID@{getSSID}}
+\index{getSSID@{getSSID}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{getSSID()}{getSSID()}}
+{\footnotesize\ttfamily String Wi\+Fi\+Manager\+::get\+SSID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_aa5e0282461086a2020d2033df2705d05}\label{namespace_wi_fi_manager_aa5e0282461086a2020d2033df2705d05}} 
+\index{WiFiManager@{WiFiManager}!getSSIDList@{getSSIDList}}
+\index{getSSIDList@{getSSIDList}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{getSSIDList()}{getSSIDList()}}
+{\footnotesize\ttfamily std\+::vector$<$ String $>$ \& Wi\+Fi\+Manager\+::get\+SSIDList (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_a1afb041d5ffe5293106eb38c9eb37690}\label{namespace_wi_fi_manager_a1afb041d5ffe5293106eb38c9eb37690}} 
+\index{WiFiManager@{WiFiManager}!getStatus@{getStatus}}
+\index{getStatus@{getStatus}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{getStatus()}{getStatus()}}
+{\footnotesize\ttfamily wl\+\_\+status\+\_\+t Wi\+Fi\+Manager\+::get\+Status (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_a21642cfac3d9379d2d1057956359f942}\label{namespace_wi_fi_manager_a21642cfac3d9379d2d1057956359f942}} 
+\index{WiFiManager@{WiFiManager}!getTaskHandle@{getTaskHandle}}
+\index{getTaskHandle@{getTaskHandle}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{getTaskHandle()}{getTaskHandle()}}
+{\footnotesize\ttfamily Task\+Handle\+\_\+t Wi\+Fi\+Manager\+::get\+Task\+Handle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_a83adf4c440290cc3d725fbb7521dc5f1}\label{namespace_wi_fi_manager_a83adf4c440290cc3d725fbb7521dc5f1}} 
+\index{WiFiManager@{WiFiManager}!handleAPConfig@{handleAPConfig}}
+\index{handleAPConfig@{handleAPConfig}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{handleAPConfig()}{handleAPConfig()}}
+{\footnotesize\ttfamily void Wi\+Fi\+Manager\+::handle\+APConfig (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_acee34f68f7c76be57917ada674c087c3}\label{namespace_wi_fi_manager_acee34f68f7c76be57917ada674c087c3}} 
+\index{WiFiManager@{WiFiManager}!handleAPRoot@{handleAPRoot}}
+\index{handleAPRoot@{handleAPRoot}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{handleAPRoot()}{handleAPRoot()}}
+{\footnotesize\ttfamily void Wi\+Fi\+Manager\+::handle\+APRoot (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_a307a74b2278e5f1c3ac148944034ca75}\label{namespace_wi_fi_manager_a307a74b2278e5f1c3ac148944034ca75}} 
+\index{WiFiManager@{WiFiManager}!init@{init}}
+\index{init@{init}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void Wi\+Fi\+Manager\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_a91219dd6aeea8f4e7f1960b8504a8b6f}\label{namespace_wi_fi_manager_a91219dd6aeea8f4e7f1960b8504a8b6f}} 
+\index{WiFiManager@{WiFiManager}!isAPModeActive@{isAPModeActive}}
+\index{isAPModeActive@{isAPModeActive}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{isAPModeActive()}{isAPModeActive()}}
+{\footnotesize\ttfamily bool Wi\+Fi\+Manager\+::is\+APMode\+Active (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_aa6406a18b4523ef158247b902e770052}\label{namespace_wi_fi_manager_aa6406a18b4523ef158247b902e770052}} 
+\index{WiFiManager@{WiFiManager}!isConnected@{isConnected}}
+\index{isConnected@{isConnected}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{isConnected()}{isConnected()}}
+{\footnotesize\ttfamily bool Wi\+Fi\+Manager\+::is\+Connected (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_a75f9204235fd981cc853216d83a6e6ac}\label{namespace_wi_fi_manager_a75f9204235fd981cc853216d83a6e6ac}} 
+\index{WiFiManager@{WiFiManager}!launchAPModeEventHandler@{launchAPModeEventHandler}}
+\index{launchAPModeEventHandler@{launchAPModeEventHandler}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{launchAPModeEventHandler()}{launchAPModeEventHandler()}}
+{\footnotesize\ttfamily void Wi\+Fi\+Manager\+::launch\+APMode\+Event\+Handler (\begin{DoxyParamCaption}\item[{lv\+\_\+event\+\_\+t $\ast$}]{e }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_a979ffc34adde243292c287d2b4969978}\label{namespace_wi_fi_manager_a979ffc34adde243292c287d2b4969978}} 
+\index{WiFiManager@{WiFiManager}!loadAllNetworks@{loadAllNetworks}}
+\index{loadAllNetworks@{loadAllNetworks}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{loadAllNetworks()}{loadAllNetworks()}}
+{\footnotesize\ttfamily void Wi\+Fi\+Manager\+::load\+All\+Networks (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_aae8539684c2100427ec84c959c4c41be}\label{namespace_wi_fi_manager_aae8539684c2100427ec84c959c4c41be}} 
+\index{WiFiManager@{WiFiManager}!loadNWCUrl@{loadNWCUrl}}
+\index{loadNWCUrl@{loadNWCUrl}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{loadNWCUrl()}{loadNWCUrl()}}
+{\footnotesize\ttfamily void Wi\+Fi\+Manager\+::load\+NWCUrl (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_af89611ddc9efbc6714f4cc1796968314}\label{namespace_wi_fi_manager_af89611ddc9efbc6714f4cc1796968314}} 
+\index{WiFiManager@{WiFiManager}!passwordBackEventHandler@{passwordBackEventHandler}}
+\index{passwordBackEventHandler@{passwordBackEventHandler}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{passwordBackEventHandler()}{passwordBackEventHandler()}}
+{\footnotesize\ttfamily void Wi\+Fi\+Manager\+::password\+Back\+Event\+Handler (\begin{DoxyParamCaption}\item[{lv\+\_\+event\+\_\+t $\ast$}]{e }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_ab0a62322259c53ddf5142935b2d373ce}\label{namespace_wi_fi_manager_ab0a62322259c53ddf5142935b2d373ce}} 
+\index{WiFiManager@{WiFiManager}!passwordKBEventHandler@{passwordKBEventHandler}}
+\index{passwordKBEventHandler@{passwordKBEventHandler}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{passwordKBEventHandler()}{passwordKBEventHandler()}}
+{\footnotesize\ttfamily void Wi\+Fi\+Manager\+::password\+KBEvent\+Handler (\begin{DoxyParamCaption}\item[{lv\+\_\+event\+\_\+t $\ast$}]{e }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_a4600374afc464e50c6516ed52df26b81}\label{namespace_wi_fi_manager_a4600374afc464e50c6516ed52df26b81}} 
+\index{WiFiManager@{WiFiManager}!processLoop@{processLoop}}
+\index{processLoop@{processLoop}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{processLoop()}{processLoop()}}
+{\footnotesize\ttfamily void Wi\+Fi\+Manager\+::process\+Loop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_acce9115c77844a236e1e722ca26b2d30}\label{namespace_wi_fi_manager_acce9115c77844a236e1e722ca26b2d30}} 
+\index{WiFiManager@{WiFiManager}!processScanResults@{processScanResults}}
+\index{processScanResults@{processScanResults}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{processScanResults()}{processScanResults()}}
+{\footnotesize\ttfamily bool Wi\+Fi\+Manager\+::process\+Scan\+Results (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_acda899003fb96827cf623a31729fa276}\label{namespace_wi_fi_manager_acda899003fb96827cf623a31729fa276}} 
+\index{WiFiManager@{WiFiManager}!removeNetwork@{removeNetwork}}
+\index{removeNetwork@{removeNetwork}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{removeNetwork()}{removeNetwork()}}
+{\footnotesize\ttfamily void Wi\+Fi\+Manager\+::remove\+Network (\begin{DoxyParamCaption}\item[{const char $\ast$}]{ssid }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_ab0afc95b9cccc0c9eaa4052a1d8e970f}\label{namespace_wi_fi_manager_ab0afc95b9cccc0c9eaa4052a1d8e970f}} 
+\index{WiFiManager@{WiFiManager}!saveCredentials@{saveCredentials}}
+\index{saveCredentials@{saveCredentials}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{saveCredentials()}{saveCredentials()}}
+{\footnotesize\ttfamily void Wi\+Fi\+Manager\+::save\+Credentials (\begin{DoxyParamCaption}\item[{const char $\ast$}]{ssid,  }\item[{const char $\ast$}]{password }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_a0ad5d13aa01b899a242fafbeb5c59846}\label{namespace_wi_fi_manager_a0ad5d13aa01b899a242fafbeb5c59846}} 
+\index{WiFiManager@{WiFiManager}!saveNWCUrl@{saveNWCUrl}}
+\index{saveNWCUrl@{saveNWCUrl}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{saveNWCUrl()}{saveNWCUrl()}}
+{\footnotesize\ttfamily void Wi\+Fi\+Manager\+::save\+NWCUrl (\begin{DoxyParamCaption}\item[{const String \&}]{url }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_a32c3f7851dec88fa0a0af25eac30a9ce}\label{namespace_wi_fi_manager_a32c3f7851dec88fa0a0af25eac30a9ce}} 
+\index{WiFiManager@{WiFiManager}!scanEventHandler@{scanEventHandler}}
+\index{scanEventHandler@{scanEventHandler}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{scanEventHandler()}{scanEventHandler()}}
+{\footnotesize\ttfamily void Wi\+Fi\+Manager\+::scan\+Event\+Handler (\begin{DoxyParamCaption}\item[{lv\+\_\+event\+\_\+t $\ast$}]{e }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_a5980532d43bbd1a132c31c6ebee6de4f}\label{namespace_wi_fi_manager_a5980532d43bbd1a132c31c6ebee6de4f}} 
+\index{WiFiManager@{WiFiManager}!setCurrentCredentials@{setCurrentCredentials}}
+\index{setCurrentCredentials@{setCurrentCredentials}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{setCurrentCredentials()}{setCurrentCredentials()}}
+{\footnotesize\ttfamily void Wi\+Fi\+Manager\+::set\+Current\+Credentials (\begin{DoxyParamCaption}\item[{const char $\ast$}]{ssid,  }\item[{const char $\ast$}]{password }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_a1401ba93320696ad67259cd4ed1986e1}\label{namespace_wi_fi_manager_a1401ba93320696ad67259cd4ed1986e1}} 
+\index{WiFiManager@{WiFiManager}!setMainStatusLabel@{setMainStatusLabel}}
+\index{setMainStatusLabel@{setMainStatusLabel}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{setMainStatusLabel()}{setMainStatusLabel()}}
+{\footnotesize\ttfamily void Wi\+Fi\+Manager\+::set\+Main\+Status\+Label (\begin{DoxyParamCaption}\item[{lv\+\_\+obj\+\_\+t $\ast$}]{label }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_a097703a26a14ee99c6a7d13721e469ff}\label{namespace_wi_fi_manager_a097703a26a14ee99c6a7d13721e469ff}} 
+\index{WiFiManager@{WiFiManager}!setNWCUrl@{setNWCUrl}}
+\index{setNWCUrl@{setNWCUrl}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{setNWCUrl()}{setNWCUrl()}}
+{\footnotesize\ttfamily void Wi\+Fi\+Manager\+::set\+NWCUrl (\begin{DoxyParamCaption}\item[{const String \&}]{url }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_afbd1520be38dcf8df79b62059bc70113}\label{namespace_wi_fi_manager_afbd1520be38dcf8df79b62059bc70113}} 
+\index{WiFiManager@{WiFiManager}!setStatusCallback@{setStatusCallback}}
+\index{setStatusCallback@{setStatusCallback}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{setStatusCallback()}{setStatusCallback()}}
+{\footnotesize\ttfamily void Wi\+Fi\+Manager\+::set\+Status\+Callback (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespace_wi_fi_manager_a839fecd4b9065c1e1e4b79953d5f2c63}{wifi\+\_\+status\+\_\+callback\+\_\+t}}}]{callback }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_a4d23f7d8812d092f2be0aac81f5cb8ac}\label{namespace_wi_fi_manager_a4d23f7d8812d092f2be0aac81f5cb8ac}} 
+\index{WiFiManager@{WiFiManager}!setStatusLabel@{setStatusLabel}}
+\index{setStatusLabel@{setStatusLabel}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{setStatusLabel()}{setStatusLabel()}}
+{\footnotesize\ttfamily void Wi\+Fi\+Manager\+::set\+Status\+Label (\begin{DoxyParamCaption}\item[{lv\+\_\+obj\+\_\+t $\ast$}]{label }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_af144d928f236289193728660e5697b46}\label{namespace_wi_fi_manager_af144d928f236289193728660e5697b46}} 
+\index{WiFiManager@{WiFiManager}!startAPMode@{startAPMode}}
+\index{startAPMode@{startAPMode}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{startAPMode()}{startAPMode()}}
+{\footnotesize\ttfamily void Wi\+Fi\+Manager\+::start\+APMode (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_aecf543cfe5d796167b7d92714ba27bee}\label{namespace_wi_fi_manager_aecf543cfe5d796167b7d92714ba27bee}} 
+\index{WiFiManager@{WiFiManager}!startConnection@{startConnection}}
+\index{startConnection@{startConnection}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{startConnection()}{startConnection()}}
+{\footnotesize\ttfamily void Wi\+Fi\+Manager\+::start\+Connection (\begin{DoxyParamCaption}\item[{const char $\ast$}]{ssid,  }\item[{const char $\ast$}]{password }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_ac7951b652bea0671cd2e8e6bb26d81de}\label{namespace_wi_fi_manager_ac7951b652bea0671cd2e8e6bb26d81de}} 
+\index{WiFiManager@{WiFiManager}!startScan@{startScan}}
+\index{startScan@{startScan}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{startScan()}{startScan()}}
+{\footnotesize\ttfamily void Wi\+Fi\+Manager\+::start\+Scan (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_a4116ab699d4b132ac727840fab0c062e}\label{namespace_wi_fi_manager_a4116ab699d4b132ac727840fab0c062e}} 
+\index{WiFiManager@{WiFiManager}!stopAPMode@{stopAPMode}}
+\index{stopAPMode@{stopAPMode}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{stopAPMode()}{stopAPMode()}}
+{\footnotesize\ttfamily void Wi\+Fi\+Manager\+::stop\+APMode (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_a92d199a9af58bbd61060ec1151a87291}\label{namespace_wi_fi_manager_a92d199a9af58bbd61060ec1151a87291}} 
+\index{WiFiManager@{WiFiManager}!stopScanning@{stopScanning}}
+\index{stopScanning@{stopScanning}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{stopScanning()}{stopScanning()}}
+{\footnotesize\ttfamily void Wi\+Fi\+Manager\+::stop\+Scanning (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_af6cbe35aefb4d1a58ba6b38fa0a8f9ec}\label{namespace_wi_fi_manager_af6cbe35aefb4d1a58ba6b38fa0a8f9ec}} 
+\index{WiFiManager@{WiFiManager}!updateSettingsScreenForAPMode@{updateSettingsScreenForAPMode}}
+\index{updateSettingsScreenForAPMode@{updateSettingsScreenForAPMode}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{updateSettingsScreenForAPMode()}{updateSettingsScreenForAPMode()}}
+{\footnotesize\ttfamily void Wi\+Fi\+Manager\+::update\+Settings\+Screen\+For\+APMode (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_wi_fi_manager_a3dbe1a7d671a87ebbdd4d3be1eecaea8}\label{namespace_wi_fi_manager_a3dbe1a7d671a87ebbdd4d3be1eecaea8}} 
+\index{WiFiManager@{WiFiManager}!updateStatus@{updateStatus}}
+\index{updateStatus@{updateStatus}!WiFiManager@{WiFiManager}}
+\doxysubsubsection{\texorpdfstring{updateStatus()}{updateStatus()}}
+{\footnotesize\ttfamily void Wi\+Fi\+Manager\+::update\+Status (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+

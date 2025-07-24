@@ -1,0 +1,332 @@
+\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md13}{}\doxysection{Project Overview}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md13}
+This is a {\bfseries{Nostr Wallet Connect (\mbox{\hyperlink{namespace_n_w_c}{NWC}}) powered Point of Sale device}} built for the ESP32-\/\+S3 Guition JC3248\+W535 touch screen display. The device enables merchants to accept Bitcoin Lightning Network payments using the Nostr protocol NIP-\/47 for wallet communication.\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md14}{}\doxysubsection{Key Features}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md14}
+
+\begin{DoxyItemize}
+\item Nostr Wallet Connect integration for Lightning payments
+\item Touch screen interface
+\item Wi\+Fi connectivity with AP mode for \mbox{\hyperlink{namespace_n_w_c}{NWC}} Pairing Code configuration
+\item Bitcoin price fetching from multiple fiat currencies
+\item QR code generation for Lightning invoices
+\item Real-\/time payment notifications
+\end{DoxyItemize}\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md15}{}\doxysubsection{Technology Stack}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md15}
+
+\begin{DoxyItemize}
+\item {\bfseries{Device}}\+: ESP32-\/\+S3 Guition JC3248\+W535 with 3.\+5"{} touch screen display (320x480)
+\item {\bfseries{GUI Framework}}\+: LVGL (Light and Versatile Graphics Library)
+\item {\bfseries{\mbox{\hyperlink{namespace_display}{Display}} Driver}}\+: Arduino\+GFX
+\item {\bfseries{Protocols}}\+: Nostr, Web\+Socket, HTTP/\+HTTPS, NTP
+\item {\bfseries{Cryptography}}\+: Bitcoin secp256k1 with Schnorr sigs, AES encryption
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md17}{}\doxysection{Architecture Overview}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md17}
+The application follows a {\bfseries{modular architecture}} with clear separation of concerns. The {\ttfamily \mbox{\hyperlink{namespace_app}{App}}} namespace serves as the central coordinator, managing initialization, inter-\/module communication, and application lifecycle.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{┌─────────────────┐}
+\DoxyCodeLine{│\ \ \ \ \ \ App\ \ \ \ \ \ \ \ │\ \ ←\ Central\ coordinator}
+\DoxyCodeLine{│\ \ \ (app.cpp)\ \ \ \ \ │}
+\DoxyCodeLine{└─────┬───────────┘}
+\DoxyCodeLine{\ \ \ \ \ \ │}
+\DoxyCodeLine{┌─────┴───────────────────────────────────────┐}
+\DoxyCodeLine{│\ \ Module\ Layer\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{├─────────┬─────────┬─────────┬─────────┬─────┴──┐}
+\DoxyCodeLine{│Display\ \ │Settings\ │WiFiMgr\ \ │\ \ \ UI\ \ \ \ │\ \ NWC\ \ \ │}
+\DoxyCodeLine{│\ \ \ \ \ \ \ \ \ │\ \ \ \ \ \ \ \ \ │\ \ \ \ \ \ \ \ \ │\ \ \ \ \ \ \ \ \ │\ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{└─────────┴─────────┴─────────┴─────────┴────────┘}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md19}{}\doxysection{File Structure and Module Descriptions}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md19}
+\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md20}{}\doxysubsection{Core Application Files}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md20}
+\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md21}{}\doxysubsubsection{$<$tt$>$src/main.\+cpp$<$/tt$>$}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md21}
+{\bfseries{Entry point and main loop controller}}
+\begin{DoxyItemize}
+\item Initializes the entire application via {\ttfamily \mbox{\hyperlink{namespace_app_a36c71ca6134247ab51d1a7a2d0a02cd4}{App\+::init()}}}
+\item Runs the main event loop processing LVGL and application modules
+\item Manages legacy Wi\+Fi connection timeouts and status checking
+\item Creates task communication queues for modular operation
+\end{DoxyItemize}
+
+{\bfseries{Key Functions\+:}}
+\begin{DoxyItemize}
+\item {\ttfamily \mbox{\hyperlink{main_8cpp_a7dfd9b79bc5a37d7df40207afbc5431f}{setup()}}}\+: System initialization and module startup
+\item {\ttfamily \mbox{\hyperlink{main_8cpp_a0b33edabd7f1c4e4a0bf32c67269be2f}{loop()}}}\+: Main application event loop
+\item {\ttfamily wifi\+\_\+main\+\_\+status\+\_\+updater\+\_\+cb()}\+: Wi\+Fi connection timeout handling
+\end{DoxyItemize}\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md22}{}\doxysubsubsection{$<$tt$>$src/app.\+cpp$<$/tt$>$ / $<$tt$>$src/app.\+h$<$/tt$>$}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md22}
+{\bfseries{Central application coordinator and state manager}}
+\begin{DoxyItemize}
+\item Coordinates initialization and cleanup of all modules
+\item Manages application state transitions and error handling
+\item Implements deep sleep power management with GPIO wake-\/up
+\item Provides inter-\/module communication via event callbacks
+\item Handles system health monitoring and status reporting
+\end{DoxyItemize}
+
+{\bfseries{Key Functions\+:}}
+\begin{DoxyItemize}
+\item {\ttfamily init()}\+: Initialize all modules in dependency order
+\item {\ttfamily run()}\+: Main application loop with health checks
+\item {\ttfamily notify\+Wi\+Fi\+Status\+Changed()}\+: Coordinate Wi\+Fi state changes
+\item {\ttfamily notify\+NWCStatus\+Changed()}\+: Handle \mbox{\hyperlink{namespace_n_w_c}{NWC}} connection events
+\item {\ttfamily enter\+Sleep\+Mode()}/{\ttfamily exit\+Sleep\+Mode()}\+: Power management
+\item {\ttfamily check\+Module\+Health()}\+: System diagnostics
+\end{DoxyItemize}
+
+{\bfseries{Power Management\+:}}
+\begin{DoxyItemize}
+\item Configures GPIO 12 as wake-\/up pin
+\item Implements 30-\/second inactivity timeout
+\item Handles wake-\/up reason detection and display backlight control
+\end{DoxyItemize}\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md23}{}\doxysubsection{Display and UI Modules}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md23}
+\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md24}{}\doxysubsubsection{$<$tt$>$src/display.\+cpp$<$/tt$>$ / $<$tt$>$src/display.\+h$<$/tt$>$}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md24}
+{\bfseries{Hardware display driver and LVGL integration}}
+\begin{DoxyItemize}
+\item Custom LGFX driver implementation for WT32-\/\+SC01
+\item Configures ST7796 display controller and FT5x06 touch controller
+\item Provides LVGL display and input device callbacks
+\item Manages display backlight and power states
+\item Implements QR code rendering for Lightning invoices
+\end{DoxyItemize}
+
+{\bfseries{Key Functions\+:}}
+\begin{DoxyItemize}
+\item {\ttfamily init()}\+: Hardware initialization and LVGL setup
+\item {\ttfamily display\+Flush()}\+: LVGL display callback
+\item {\ttfamily touchpad\+Read()}\+: LVGL touch input callback
+\item {\ttfamily display\+QRCode()}\+: Lightning invoice QR code generation
+\item {\ttfamily turn\+Off\+Backlight()}/{\ttfamily turn\+On\+Backlight()}\+: Power management
+\end{DoxyItemize}\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md25}{}\doxysubsubsection{$<$tt$>$src/ui.\+cpp$<$/tt$>$ / $<$tt$>$src/ui.\+h$<$/tt$>$}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md25}
+{\bfseries{User interface screens and interaction handling}}
+\begin{DoxyItemize}
+\item Implements multiple screen states (keypad, settings, Wi\+Fi, etc.)
+\item Creates and manages LVGL \mbox{\hyperlink{namespace_u_i}{UI}} elements and layouts
+\item Handles user input events and navigation
+\item Manages invoice overlay display and payment confirmation
+\item Provides message dialogs and status updates
+\end{DoxyItemize}
+
+{\bfseries{Screen Types\+:}}
+\begin{DoxyItemize}
+\item {\ttfamily SCREEN\+\_\+\+KEYPAD}\+: Main payment amount entry screen
+\item {\ttfamily SCREEN\+\_\+\+SETTINGS}\+: Configuration and preferences
+\item {\ttfamily SCREEN\+\_\+\+WIFI}\+: Wi\+Fi network selection and management
+\item {\ttfamily SCREEN\+\_\+\+WIFI\+\_\+\+PASSWORD}\+: Network password entry
+\item {\ttfamily SCREEN\+\_\+\+INFO}\+: System information and diagnostics
+\end{DoxyItemize}
+
+{\bfseries{Key Functions\+:}}
+\begin{DoxyItemize}
+\item {\ttfamily create\+Keypad\+Screen()}\+: Main POS interface
+\item {\ttfamily create\+Invoice\+Overlay()}\+: Payment QR code display
+\item {\ttfamily update\+Invoice\+Display()}\+: Real-\/time invoice updates
+\item {\ttfamily show\+Payment\+Received()}\+: Payment confirmation \mbox{\hyperlink{namespace_u_i}{UI}}
+\end{DoxyItemize}\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md26}{}\doxysubsection{Connectivity Modules}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md26}
+\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md27}{}\doxysubsubsection{$<$tt$>$src/wifi.\+cpp$<$/tt$>$ / $<$tt$>$src/wifi.\+h$<$/tt$>$}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md27}
+{\bfseries{Wi\+Fi connection and access point management}}
+\begin{DoxyItemize}
+\item Manages Wi\+Fi station and AP mode operation
+\item Implements credential storage and auto-\/connection
+\item Provides network scanning and connection status monitoring
+\item Creates configuration web server in AP mode
+\item Integrates with \mbox{\hyperlink{namespace_settings}{Settings}} module for network persistence
+\end{DoxyItemize}
+
+{\bfseries{Key Functions\+:}}
+\begin{DoxyItemize}
+\item {\ttfamily start\+Connection()}\+: Connect to saved or new network
+\item {\ttfamily start\+APMode()}\+: Enable configuration access point
+\item {\ttfamily process\+Scan\+Results()}\+: Handle network discovery
+\item {\ttfamily save\+Credentials()}\+: Store network authentication
+\item {\ttfamily set\+Status\+Callback()}\+: Integration with \mbox{\hyperlink{namespace_app}{App}} coordinator
+\end{DoxyItemize}
+
+{\bfseries{AP Mode Configuration\+:}}
+\begin{DoxyItemize}
+\item Creates web server for device setup
+\item Handles \mbox{\hyperlink{namespace_n_w_c}{NWC}} URL configuration via web interface
+\item Provides Wi\+Fi network selection and credential entry
+\end{DoxyItemize}\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md28}{}\doxysubsubsection{$<$tt$>$src/nwc.\+cpp$<$/tt$>$ / $<$tt$>$src/nwc.\+h$<$/tt$>$}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md28}
+{\bfseries{Nostr Wallet Connect protocol implementation}}
+\begin{DoxyItemize}
+\item Implements \mbox{\hyperlink{namespace_n_w_c}{NWC}} protocol over Web\+Socket connections
+\item Handles Nostr event encryption/decryption (NIP-\/04)
+\item Manages Lightning invoice creation and payment monitoring
+\item Fetches Bitcoin price data from external APIs
+\item Provides automatic reconnection and connection health monitoring
+\end{DoxyItemize}
+
+{\bfseries{Key Functions\+:}}
+\begin{DoxyItemize}
+\item {\ttfamily setup\+Data()}\+: Parse \mbox{\hyperlink{namespace_n_w_c}{NWC}} pairing URL and extract credentials
+\item {\ttfamily connect\+To\+Relay()}\+: Establish Web\+Socket connection to Nostr relay
+\item {\ttfamily make\+Invoice()}\+: Create Lightning payment request
+\item {\ttfamily send\+Invoice\+Lookup\+Request()}\+: Check payment status
+\item {\ttfamily fetch\+Bitcoin\+Prices()}\+: Update exchange rates
+\item {\ttfamily websocket\+Event()}\+: Handle Web\+Socket events and Nostr messages
+\end{DoxyItemize}
+
+{\bfseries{Protocol Features\+:}}
+\begin{DoxyItemize}
+\item Supports multiple fiat currencies (USD, EUR, GBP, CAD, CHF, AUD, JPY, CNY)
+\item Implements Web\+Socket fragmentation handling
+\item Provides connection health monitoring with automatic reconnection
+\item Handles encrypted Nostr events (kinds 23194, 23195, 23196, 23197)
+\end{DoxyItemize}\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md29}{}\doxysubsection{Configuration and Storage}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md29}
+\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md30}{}\doxysubsubsection{$<$tt$>$src/settings.\+cpp$<$/tt$>$ / $<$tt$>$src/settings.\+h$<$/tt$>$}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md30}
+{\bfseries{Application settings and persistent storage}}
+\begin{DoxyItemize}
+\item Manages device configuration using ESP32 Preferences
+\item Handles shop name, currency selection, and AP password
+\item Provides PIN-\/based security for settings access
+\item Integrates with \mbox{\hyperlink{namespace_u_i}{UI}} module for settings screens
+\item Supports factory reset functionality
+\end{DoxyItemize}
+
+{\bfseries{Key Functions\+:}}
+\begin{DoxyItemize}
+\item {\ttfamily load\+From\+Preferences()}/{\ttfamily save\+To\+Preferences()}\+: Persistence
+\item {\ttfamily set\+Shop\+Name()}/{\ttfamily get\+Shop\+Name()}\+: Merchant identification
+\item {\ttfamily set\+Currency()}/{\ttfamily get\+Currency()}\+: Payment currency selection
+\item {\ttfamily verify\+Pin()}\+: Security access control
+\item {\ttfamily reset\+To\+Defaults()}\+: Factory reset
+\end{DoxyItemize}\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md31}{}\doxysubsubsection{$<$tt$>$src/config.\+h$<$/tt$>$}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md31}
+{\bfseries{System constants and configuration definitions}}
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{namespace_display}{Display}} resolution and buffer size constants
+\item Wi\+Fi timeout and connection parameters
+\item Screen state enumeration
+\item Hardware-\/specific configurations
+\end{DoxyItemize}\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md32}{}\doxysubsection{External Libraries}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md32}
+\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md33}{}\doxysubsubsection{$<$tt$>$lib/\+TFT\+\_\+e\+SPI/$<$/tt$>$}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md33}
+{\bfseries{Enhanced display driver library}}
+\begin{DoxyItemize}
+\item Comprehensive TFT display driver with touch support
+\item Multiple display controller support (ST7796, ILI9341, etc.)
+\item Font rendering and graphics primitives
+\item Hardware-\/specific optimizations for ESP32
+\end{DoxyItemize}\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md34}{}\doxysubsubsection{$<$tt$>$lib/aes/$<$/tt$>$}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md34}
+{\bfseries{AES encryption implementation}}
+\begin{DoxyItemize}
+\item Provides cryptographic functions for secure communication
+\item Used by \mbox{\hyperlink{namespace_n_w_c}{NWC}} module for Nostr message encryption
+\end{DoxyItemize}\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md35}{}\doxysubsubsection{$<$tt$>$lib/nostr/$<$/tt$>$}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md35}
+{\bfseries{Nostr protocol implementation}}
+\begin{DoxyItemize}
+\item NIP-\/19 bech32 encoding/decoding ({\ttfamily \mbox{\hyperlink{nip19_8cpp}{nip19.\+cpp}}})
+\item NIP-\/44 encryption for secure messaging ({\ttfamily nip44/})
+\item Nostr event creation and verification ({\ttfamily \mbox{\hyperlink{nostr_8cpp}{nostr.\+cpp}}})
+\item Integration with Bitcoin cryptographic functions
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md37}{}\doxysection{Data Flow and Module Interactions}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md37}
+\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md38}{}\doxysubsection{1. $<$strong$>$\+Application Startup$<$/strong$>$}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md38}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{main.cpp\ →\ App::init()\ →\ Display::init()\ →\ Settings::init()\ →\ WiFiManager::init()\ →\ UI::init()\ →\ NWC::init()}
+
+\end{DoxyCode}
+\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md39}{}\doxysubsection{2. $<$strong$>$\+Payment Processing Flow$<$/strong$>$}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md39}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{UI\ (amount\ entry)\ →\ NWC::makeInvoice()\ →\ Nostr\ relay\ →\ Lightning\ wallet\ →\ }
+\DoxyCodeLine{Payment\ notification\ →\ NWC::handleNwcResponseEvent()\ →\ UI::showPaymentReceived()}
+
+\end{DoxyCode}
+\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md40}{}\doxysubsection{3. $<$strong$>$\+Wi\+Fi Configuration Flow$<$/strong$>$}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md40}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{UI\ (WiFi\ screen)\ →\ WiFiManager::startScan()\ →\ UI\ (network\ list)\ →\ }
+\DoxyCodeLine{WiFiManager::startConnection()\ →\ App::notifyWiFiStatusChanged()\ →\ NWC::connectToRelay()}
+
+\end{DoxyCode}
+\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md41}{}\doxysubsection{4. $<$strong$>$\+Settings Management Flow$<$/strong$>$}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md41}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{UI\ (settings\ screen)\ →\ Settings::setShopName()\ →\ Settings::saveToPreferences()\ →\ }
+\DoxyCodeLine{App\ state\ update\ →\ UI\ refresh}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md43}{}\doxysection{Communication Protocols}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md43}
+\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md44}{}\doxysubsection{Nostr Wallet Connect (\+NWC)}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md44}
+
+\begin{DoxyItemize}
+\item {\bfseries{Web\+Socket connection}} to Nostr relay servers
+\item {\bfseries{Encrypted messaging}} using NIP-\/04 encryption
+\item {\bfseries{Event types}}\+: 23194 (requests), 23195 (responses), 23196/23197 (notifications)
+\item {\bfseries{Lightning integration}} for invoice creation and payment monitoring
+\end{DoxyItemize}\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md45}{}\doxysubsection{Lightning Network}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md45}
+
+\begin{DoxyItemize}
+\item {\bfseries{BOLT-\/11 invoices}} for payment requests
+\item {\bfseries{Real-\/time payment notifications}} via \mbox{\hyperlink{namespace_n_w_c}{NWC}} protocol
+\item {\bfseries{Multi-\/currency support}} with automatic satoshi conversion
+\end{DoxyItemize}\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md46}{}\doxysubsection{External APIs}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md46}
+
+\begin{DoxyItemize}
+\item {\bfseries{Mempool.\+space API}} for Bitcoin price data
+\item {\bfseries{NTP synchronization}} for accurate timestamps
+\item {\bfseries{HTTPS requests}} for secure API communication
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md48}{}\doxysection{Hardware Configuration}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md48}
+\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md49}{}\doxysubsection{ESP32 Pin Mapping}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md49}
+
+\begin{DoxyItemize}
+\item {\bfseries{GPIO 12}}\+: Wake-\/up button for deep sleep
+\item {\bfseries{\mbox{\hyperlink{namespace_display}{Display}} interface}}\+: Parallel 8-\/bit bus (ST7796)
+\item {\bfseries{Touch interface}}\+: I2C (FT5x06)
+\item {\bfseries{Wi\+Fi}}\+: Built-\/in ESP32 radio
+\end{DoxyItemize}\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md50}{}\doxysubsection{Power Management}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md50}
+
+\begin{DoxyItemize}
+\item {\bfseries{Deep sleep mode}} with GPIO wake-\/up
+\item {\bfseries{\mbox{\hyperlink{namespace_display}{Display}} backlight control}} for power saving
+\item {\bfseries{30-\/second inactivity timeout}} (configurable)
+\item {\bfseries{RTC GPIO configuration}} for wake-\/up functionality
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md52}{}\doxysection{Security Features}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md52}
+\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md53}{}\doxysubsection{Cryptographic Security}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md53}
+
+\begin{DoxyItemize}
+\item {\bfseries{secp256k1 key pairs}} for Nostr identity
+\item {\bfseries{AES encryption}} for sensitive communications
+\item {\bfseries{PIN protection}} for settings access
+\item {\bfseries{Secure storage}} of credentials in ESP32 Preferences
+\end{DoxyItemize}\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md54}{}\doxysubsection{Network Security}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md54}
+
+\begin{DoxyItemize}
+\item {\bfseries{HTTPS/\+WSS connections}} for all external communications
+\item {\bfseries{Encrypted Nostr messaging}} using NIP-\/04 standard
+\item {\bfseries{Access point password protection}} for device configuration
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md56}{}\doxysection{Development and Build}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md56}
+\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md57}{}\doxysubsection{Platform\+IO Configuration}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md57}
+
+\begin{DoxyItemize}
+\item {\bfseries{ESP32 development board}} target
+\item {\bfseries{Arduino framework}} with ESP-\/\+IDF components
+\item {\bfseries{Library dependencies}} managed via platformio.\+ini
+\item {\bfseries{Build flags}} for debugging and optimization
+\end{DoxyItemize}\hypertarget{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md58}{}\doxysubsection{Key Dependencies}\label{md__a_r_c_h_i_t_e_c_t_u_r_e_autotoc_md58}
+
+\begin{DoxyItemize}
+\item {\ttfamily lovyan03/\+Lovyan\+GFX@$^\wedge$0.4.\+14}\+: \mbox{\hyperlink{namespace_display}{Display}} driver
+\item {\ttfamily lvgl/lvgl@$^\wedge$8.1.\+0}\+: GUI framework
+\item {\ttfamily lnbits/\+Nostr@$^\wedge$0.2.\+0}\+: Nostr protocol implementation
+\item {\ttfamily micro-\/bitcoin/u\+Bitcoin}\+: Bitcoin cryptographic functions
+\item {\ttfamily bblanchon/\+Arduino\+Json@$^\wedge$6.21.\+0}\+: JSON processing
+\item {\ttfamily links2004/\+Web\+Sockets@$^\wedge$2.3.\+7}\+: Web\+Socket client 
+\end{DoxyItemize}

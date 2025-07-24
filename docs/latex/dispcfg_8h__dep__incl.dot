@@ -1,0 +1,28 @@
+digraph "src/dispcfg.h"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [label="src/dispcfg.h",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [dir="back",color="steelblue1",style="solid"];
+  Node2 [label="src/display.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$display_8h.html",tooltip=" "];
+  Node2 -> Node3 [dir="back",color="steelblue1",style="solid"];
+  Node3 [label="src/app.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$app_8h.html",tooltip=" "];
+  Node3 -> Node4 [dir="back",color="steelblue1",style="solid"];
+  Node4 [label="src/app.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$app_8cpp.html",tooltip=" "];
+  Node3 -> Node5 [dir="back",color="steelblue1",style="solid"];
+  Node5 [label="src/display.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$display_8cpp.html",tooltip=" "];
+  Node3 -> Node6 [dir="back",color="steelblue1",style="solid"];
+  Node6 [label="src/main.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$main_8cpp.html",tooltip="NWC Powered Point of Sale Device - Main Entry Point."];
+  Node3 -> Node7 [dir="back",color="steelblue1",style="solid"];
+  Node7 [label="src/nwc.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$nwc_8cpp.html",tooltip=" "];
+  Node3 -> Node8 [dir="back",color="steelblue1",style="solid"];
+  Node8 [label="src/settings.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$settings_8cpp.html",tooltip=" "];
+  Node3 -> Node9 [dir="back",color="steelblue1",style="solid"];
+  Node9 [label="src/ui.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$ui_8cpp.html",tooltip=" "];
+  Node3 -> Node10 [dir="back",color="steelblue1",style="solid"];
+  Node10 [label="src/wifi_manager.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$wifi__manager_8cpp.html",tooltip=" "];
+  Node2 -> Node5 [dir="back",color="steelblue1",style="solid"];
+  Node2 -> Node9 [dir="back",color="steelblue1",style="solid"];
+}

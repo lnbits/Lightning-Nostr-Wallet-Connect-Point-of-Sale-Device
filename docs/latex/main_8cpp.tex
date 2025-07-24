@@ -1,0 +1,175 @@
+\hypertarget{main_8cpp}{}\doxysection{src/main.cpp File Reference}
+\label{main_8cpp}\index{src/main.cpp@{src/main.cpp}}
+
+
+\mbox{\hyperlink{namespace_n_w_c}{NWC}} Powered Point of Sale Device -\/ Main Entry Point.  
+
+
+{\ttfamily \#include $<$Arduino.\+h$>$}\newline
+{\ttfamily \#include $<$lvgl.\+h$>$}\newline
+{\ttfamily \#include $<$Wi\+Fi.\+h$>$}\newline
+{\ttfamily \#include $<$Preferences.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}freertos/\+Free\+RTOS.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}freertos/task.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}freertos/queue.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}app.\+h\char`\"{}}\newline
+Include dependency graph for main.\+cpp\+:
+% FIG 0
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structwifi__command__t}{wifi\+\_\+command\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{structwifi__scan__result__t}{wifi\+\_\+scan\+\_\+result\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{main_8cpp_a39e9cd7b432e4f3e6b935985bddf2a0c}{wifi\+\_\+command\+\_\+type\+\_\+t}} \{ \mbox{\hyperlink{main_8cpp_a39e9cd7b432e4f3e6b935985bddf2a0cabc79e21d660ad53ddb48f80412b26363}{WIFI\+\_\+\+SCAN}}
+, \mbox{\hyperlink{main_8cpp_a39e9cd7b432e4f3e6b935985bddf2a0caf14ac08f8d7b221cd1e510207f041224}{WIFI\+\_\+\+CONNECT}}
+, \mbox{\hyperlink{main_8cpp_a39e9cd7b432e4f3e6b935985bddf2a0cae98478e31cd6b9f5453c009e650afd62}{WIFI\+\_\+\+DISCONNECT}}
+, \mbox{\hyperlink{main_8cpp_a39e9cd7b432e4f3e6b935985bddf2a0ca830823a0d1d8d9b5d7fcf516f10a396c}{WIFI\+\_\+\+STOP\+\_\+\+SCAN}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{main_8cpp_a7dfd9b79bc5a37d7df40207afbc5431f}{setup}} (void)
+\item 
+void \mbox{\hyperlink{main_8cpp_a0b33edabd7f1c4e4a0bf32c67269be2f}{loop}} (void)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{namespace_n_w_c}{NWC}} Powered Point of Sale Device -\/ Main Entry Point. 
+
+Modular ESP32 Point of Sale system featuring\+:
+\begin{DoxyItemize}
+\item Touch screen interface
+\item Wi\+Fi connectivity with AP mode setup
+\item Nostr Wallet Connect integration for Lightning payments
+\item LVGL-\/based user interface with QR code generation
+\item Deep sleep power management
+\end{DoxyItemize}
+
+\begin{DoxyAuthor}{Author}
+Black\+Coffee \href{mailto:bc@lnbits.com}{\texttt{ bc@lnbits.\+com}} 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+07-\/2025 
+\end{DoxyDate}
+
+
+Definition in file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{main_8cpp_a39e9cd7b432e4f3e6b935985bddf2a0c}\label{main_8cpp_a39e9cd7b432e4f3e6b935985bddf2a0c}} 
+\index{main.cpp@{main.cpp}!wifi\_command\_type\_t@{wifi\_command\_type\_t}}
+\index{wifi\_command\_type\_t@{wifi\_command\_type\_t}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{wifi\_command\_type\_t}{wifi\_command\_type\_t}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{main_8cpp_a39e9cd7b432e4f3e6b935985bddf2a0c}{wifi\+\_\+command\+\_\+type\+\_\+t}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WIFI\_SCAN@{WIFI\_SCAN}!main.cpp@{main.cpp}}\index{main.cpp@{main.cpp}!WIFI\_SCAN@{WIFI\_SCAN}}}\mbox{\Hypertarget{main_8cpp_a39e9cd7b432e4f3e6b935985bddf2a0cabc79e21d660ad53ddb48f80412b26363}\label{main_8cpp_a39e9cd7b432e4f3e6b935985bddf2a0cabc79e21d660ad53ddb48f80412b26363}} 
+WIFI\+\_\+\+SCAN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WIFI\_CONNECT@{WIFI\_CONNECT}!main.cpp@{main.cpp}}\index{main.cpp@{main.cpp}!WIFI\_CONNECT@{WIFI\_CONNECT}}}\mbox{\Hypertarget{main_8cpp_a39e9cd7b432e4f3e6b935985bddf2a0caf14ac08f8d7b221cd1e510207f041224}\label{main_8cpp_a39e9cd7b432e4f3e6b935985bddf2a0caf14ac08f8d7b221cd1e510207f041224}} 
+WIFI\+\_\+\+CONNECT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WIFI\_DISCONNECT@{WIFI\_DISCONNECT}!main.cpp@{main.cpp}}\index{main.cpp@{main.cpp}!WIFI\_DISCONNECT@{WIFI\_DISCONNECT}}}\mbox{\Hypertarget{main_8cpp_a39e9cd7b432e4f3e6b935985bddf2a0cae98478e31cd6b9f5453c009e650afd62}\label{main_8cpp_a39e9cd7b432e4f3e6b935985bddf2a0cae98478e31cd6b9f5453c009e650afd62}} 
+WIFI\+\_\+\+DISCONNECT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WIFI\_STOP\_SCAN@{WIFI\_STOP\_SCAN}!main.cpp@{main.cpp}}\index{main.cpp@{main.cpp}!WIFI\_STOP\_SCAN@{WIFI\_STOP\_SCAN}}}\mbox{\Hypertarget{main_8cpp_a39e9cd7b432e4f3e6b935985bddf2a0ca830823a0d1d8d9b5d7fcf516f10a396c}\label{main_8cpp_a39e9cd7b432e4f3e6b935985bddf2a0ca830823a0d1d8d9b5d7fcf516f10a396c}} 
+WIFI\+\_\+\+STOP\+\_\+\+SCAN&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00037}{37}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \mbox{\hyperlink{main_8cpp_a39e9cd7b432e4f3e6b935985bddf2a0cabc79e21d660ad53ddb48f80412b26363}{WIFI\_SCAN}},}
+\DoxyCodeLine{00039\ \ \ \ \ \mbox{\hyperlink{main_8cpp_a39e9cd7b432e4f3e6b935985bddf2a0caf14ac08f8d7b221cd1e510207f041224}{WIFI\_CONNECT}},}
+\DoxyCodeLine{00040\ \ \ \ \ \mbox{\hyperlink{main_8cpp_a39e9cd7b432e4f3e6b935985bddf2a0cae98478e31cd6b9f5453c009e650afd62}{WIFI\_DISCONNECT}},}
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{main_8cpp_a39e9cd7b432e4f3e6b935985bddf2a0ca830823a0d1d8d9b5d7fcf516f10a396c}{WIFI\_STOP\_SCAN}}}
+\DoxyCodeLine{00042\ \}\ \mbox{\hyperlink{main_8cpp_a39e9cd7b432e4f3e6b935985bddf2a0c}{wifi\_command\_type\_t}};}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{main_8cpp_a0b33edabd7f1c4e4a0bf32c67269be2f}\label{main_8cpp_a0b33edabd7f1c4e4a0bf32c67269be2f}} 
+\index{main.cpp@{main.cpp}!loop@{loop}}
+\index{loop@{loop}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{loop()}{loop()}}
+{\footnotesize\ttfamily void loop (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00105}{105}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00106\ \{}
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{comment}{//\ Process\ LVGL\ GUI\ events}}
+\DoxyCodeLine{00108\ \ \ \ \ lv\_timer\_handler();}
+\DoxyCodeLine{00109\ \ \ \ \ }
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{comment}{//\ Run\ main\ application\ logic\ through\ App\ coordinator}}
+\DoxyCodeLine{00111\ \ \ \ \ \mbox{\hyperlink{namespace_app_ae09dc71078b64c56c673b1ad1d25b5d1}{App::run}}();}
+\DoxyCodeLine{00112\ \ \ \ \ }
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{comment}{//\ Force\ periodic\ screen\ refresh\ for\ dynamic\ content\ (like\ WiFi\ scan\ lists)}}
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ lastRefresh\ =\ 0;}
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keywordflow}{if}\ (millis()\ -\/\ lastRefresh\ >\ 500)\ \{\ \textcolor{comment}{//\ Every\ 500ms}}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ lv\_refr\_now(lv\_disp\_get\_default());}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ lastRefresh\ =\ millis();}
+\DoxyCodeLine{00118\ \ \ \ \ \}}
+\DoxyCodeLine{00119\ \ \ \ \ }
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{comment}{//\ Small\ delay\ for\ stability}}
+\DoxyCodeLine{00121\ \ \ \ \ delay(5);}
+\DoxyCodeLine{00122\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{main_8cpp_a7dfd9b79bc5a37d7df40207afbc5431f}\label{main_8cpp_a7dfd9b79bc5a37d7df40207afbc5431f}} 
+\index{main.cpp@{main.cpp}!setup@{setup}}
+\index{setup@{setup}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily void setup (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00084}{84}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00085\ \{}
+\DoxyCodeLine{00086\ \ \ \ \ Serial.begin(115200);}
+\DoxyCodeLine{00087\ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}===\ NWC\ Point\ of\ Sale\ Device\ Starting\ ==="{}});}
+\DoxyCodeLine{00088\ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Software\ Version:\ "{}}\ +\ SOFTWARE\_VERSION);}
+\DoxyCodeLine{00089\ \ \ \ \ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{comment}{//\ Initialize\ all\ application\ modules\ through\ the\ App\ coordinator}}
+\DoxyCodeLine{00091\ \ \ \ \ \mbox{\hyperlink{namespace_app_a36c71ca6134247ab51d1a7a2d0a02cd4}{App::init}}();}
+\DoxyCodeLine{00092\ \ \ \ \ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{comment}{//\ Create\ status\ update\ timer\ (this\ will\ eventually\ move\ to\ a\ module)}}
+\DoxyCodeLine{00094\ \ \ \ \ lv\_timer\_create(wifi\_main\_status\_updater\_cb,\ 1000,\ NULL);}
+\DoxyCodeLine{00095\ \ \ \ \ }
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{comment}{//\ Create\ queues\ for\ task\ communication\ (this\ will\ eventually\ move\ to\ respective\ modules)}}
+\DoxyCodeLine{00097\ \ \ \ \ wifi\_command\_queue\ =\ xQueueCreate(10,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structwifi__command__t}{wifi\_command\_t}}));}
+\DoxyCodeLine{00098\ \ \ \ \ wifi\_scan\_result\_queue\ =\ xQueueCreate(5,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structwifi__scan__result__t}{wifi\_scan\_result\_t}}));}
+\DoxyCodeLine{00099\ \ \ \ \ invoice\_command\_queue\ =\ xQueueCreate(5,\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}));}
+\DoxyCodeLine{00100\ \ \ \ \ invoice\_status\_queue\ =\ xQueueCreate(5,\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}));}
+\DoxyCodeLine{00101\ \ \ \ \ }
+\DoxyCodeLine{00102\ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}===\ Setup\ Complete\ ==="{}});}
+\DoxyCodeLine{00103\ \}}
+
+\end{DoxyCode}
