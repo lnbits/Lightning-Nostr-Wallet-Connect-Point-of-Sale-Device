@@ -807,11 +807,11 @@ namespace NWC {
         // Update the relay status label
         if (relay_status_label != NULL && lv_obj_is_valid(relay_status_label)) {
             if (connected) {
-                String relay_status_text = LV_SYMBOL_OK + String(" Relay: Connected");
+                String relay_status_text = LV_SYMBOL_OK + String(" Nostr");
                 lv_label_set_text(relay_status_label, relay_status_text.c_str());
                 lv_obj_set_style_text_color(relay_status_label, lv_color_hex(0x00FF00), 0);
             } else {
-                String relay_status_text = "Relay: Disconnected";
+                String relay_status_text = "Nostr: Disconnected";
                 lv_label_set_text(relay_status_label, relay_status_text.c_str());
                 lv_obj_set_style_text_color(relay_status_label, lv_color_hex(0x9E9E9E), 0);
             }
