@@ -94,6 +94,7 @@ namespace App {
     unsigned long getLightSleepTimeout();
     unsigned long getDeepSleepTimeout();
     void handleTouchWake();
+    bool isInWakeGracePeriod();
     
     /**
      * Module Health Monitoring
@@ -134,5 +135,8 @@ namespace App {
         const unsigned long SLEEP_TIMEOUT = 30 * 1000; // 30 seconds
         const gpio_num_t WAKE_PIN = GPIO_NUM_10; // GPIO for wake up
         const unsigned long SLEEP_CHECK_INTERVAL = 1000; // Check every second
+        
+        // Wake Grace Period Configuration
+        const unsigned long WAKE_GRACE_PERIOD = 300; // 300ms grace period after wake
     }
 }
