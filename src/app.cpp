@@ -104,16 +104,34 @@ namespace App
 
     void run()
     {
+        static bool first_run = true;
+        if (first_run) {
+            Serial.println("=== App::run() started ===");
+            first_run = false;
+        }
+        
         unsigned long current_time = millis();
 
-        // Process WiFi AP mode events
-        WiFiManager::processLoop();
+        // Process WiFi AP mode events (with error handling)
+        try {
+            WiFiManager::processLoop();
+        } catch (...) {
+            Serial.println("ERROR: WiFiManager::processLoop() threw exception");
+        }
 
-        // Process NWC WebSocket events
-        NWC::processLoop();
+        // Process NWC WebSocket events (with error handling)
+        try {
+            NWC::processLoop();
+        } catch (...) {
+            Serial.println("ERROR: NWC::processLoop() threw exception");
+        }
 
-        // Update NWC time synchronization
-        NWC::updateTime();
+        // Update NWC time synchronization (with error handling)
+        try {
+            NWC::updateTime();
+        } catch (...) {
+            Serial.println("ERROR: NWC::updateTime() threw exception");
+        }
 
         // Periodic health checks
         if (current_time - last_health_check >= Config::HEALTH_CHECK_INTERVAL)
@@ -129,8 +147,12 @@ namespace App
             last_status_report = current_time;
         }
 
-        // Handle reconnection attempts
-        NWC::attemptReconnectionIfNeeded();
+        // Handle reconnection attempts (with error handling)
+        try {
+            NWC::attemptReconnectionIfNeeded();
+        } catch (...) {
+            Serial.println("ERROR: NWC::attemptReconnectionIfNeeded() threw exception");
+        }
 
         // Small delay to prevent watchdog triggers
         delay(1);
@@ -343,14 +365,14 @@ namespace App
         Display::turnOffBacklight();
 
         // Set Config::WAKE_PIN as input with pulldown (to default LOW)
-        pinMode(Config::WAKE_PIN, INPUT);
-        rtc_gpio_pulldown_en(Config::WAKE_PIN);
-        rtc_gpio_pullup_dis(Config::WAKE_PIN);
+        // pinMode(Config::WAKE_PIN, INPUT);
+        // rtc_gpio_pulldown_en(Config::WAKE_PIN);
+        // rtc_gpio_pullup_dis(Config::WAKE_PIN);
 
-        // Enable EXT1 wakeup when GPIO12 goes HIGH
-        esp_sleep_enable_ext1_wakeup(1ULL << Config::WAKE_PIN, ESP_EXT1_WAKEUP_ANY_HIGH);
+        // // Enable EXT1 wakeup when GPIO12 goes HIGH
+        // esp_sleep_enable_ext1_wakeup(1ULL << Config::WAKE_PIN, ESP_EXT1_WAKEUP_ANY_HIGH);
 
-        Serial.println("Going to deep sleep. Wake when " + String(Config::WAKE_PIN) + " goes HIGH.");
+        // Serial.println("Going to deep sleep. Wake when " + String(Config::WAKE_PIN) + " goes HIGH.");
         Serial.flush();
         esp_deep_sleep_start();
     }
@@ -364,6 +386,13 @@ namespace App
         
         // Turn off display backlight
         Display::turnOffBacklight();
+        
+        // Stop invoice lookup timer if no invoice is being processed
+        if (!UI::isInvoiceProcessing()) {
+            Serial.println("Stopping invoice lookup timer for light sleep");
+            NWC::stopInvoiceLookupTimer();
+            NWC::stopInvoiceNotificationWatchdog();
+        }
         
         fireEvent("light_sleep", "entered");
     }

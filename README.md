@@ -46,6 +46,14 @@ pio run --target upload
 pio device monitor
 ```
 
+### Documentation
+
+```bash
+# Generate documentation
+pio run -t docs
+```
+
+
 ### Initial Setup
 
 1. Power on the device

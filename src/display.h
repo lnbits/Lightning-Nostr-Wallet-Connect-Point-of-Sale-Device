@@ -1,25 +1,22 @@
 #pragma once
 
 #include <Arduino.h>
-#define LGFX_USE_V1
-#include <LovyanGFX.hpp>
+#include <Arduino_GFX_Library.h>
 #include <lvgl.h>
+#include "pincfg.h"
+#include "dispcfg.h"
+#include "AXS15231B_touch.h"
 
 // Portrait display constants
-#define TFT_WIDTH   320
-#define TFT_HEIGHT  480
+#define TFT_WIDTH   TFT_res_W
+#define TFT_HEIGHT  TFT_res_H
 
 namespace Display {
-    // LGFX Display Driver Class
-    class LGFX : public lgfx::LGFX_Device {
-        lgfx::Panel_ST7796  _panel_instance;
-        lgfx::Bus_Parallel8 _bus_instance;
-        lgfx::Light_PWM     _light_instance;
-        lgfx::Touch_FT5x06  _touch_instance;
-
-    public:
-        LGFX(void);
-    };
+    // ArduinoGFX objects
+    extern Arduino_DataBus *bus;
+    extern Arduino_GFX *g;
+    extern Arduino_Canvas *gfx;
+    extern AXS15231B_Touch touch;
 
     // Initialization and cleanup
     void init();
@@ -37,16 +34,13 @@ namespace Display {
     
     // QR Code display functions
     void displayQRCode(const String& invoice);
-    void displayQRCodeAlternative(const String& invoice);
     void displayInvoiceTextFallback(const String& invoice);
-    void testCanvasDrawing();
-    
     
     // LVGL setup
     void setupLVGL();
     
     // Display object getters (for UI module to access)
-    LGFX& getLCD();
+    Arduino_GFX& getGFX();
     lv_obj_t* getQRCanvas();
     void setQRCanvas(lv_obj_t* canvas);
     

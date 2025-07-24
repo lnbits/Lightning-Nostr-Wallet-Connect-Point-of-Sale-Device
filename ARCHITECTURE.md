@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This is a **Nostr Wallet Connect (NWC) powered Point of Sale device** built for the ESP32 microcontroller with WT32-SC01 touch screen display. The device enables merchants to accept Bitcoin Lightning Network payments using the Nostr protocol NIP-47 for wallet communication.
+This is a **Nostr Wallet Connect (NWC) powered Point of Sale device** built for the ESP32-S3 Guition JC3248W535 touch screen display. The device enables merchants to accept Bitcoin Lightning Network payments using the Nostr protocol NIP-47 for wallet communication.
 
 ### Key Features
 - Nostr Wallet Connect integration for Lightning payments
@@ -13,12 +13,11 @@ This is a **Nostr Wallet Connect (NWC) powered Point of Sale device** built for 
 - Real-time payment notifications
 
 ### Technology Stack
-- **Platform**: ESP32 (Arduino framework via PlatformIO)
-- **Display**: WT32-SC01 Plus 320x480 touch screen (ST7796 controller)
+- **Device**: ESP32-S3 Guition JC3248W535 with 3.5" touch screen display (320x480)
 - **GUI Framework**: LVGL (Light and Versatile Graphics Library)
-- **Display Driver**: LovyanGFX
+- **Display Driver**: ArduinoGFX
 - **Protocols**: Nostr, WebSocket, HTTP/HTTPS, NTP
-- **Cryptography**: Bitcoin secp256k1, AES encryption
+- **Cryptography**: Bitcoin secp256k1 with Schnorr sigs, AES encryption
 
 ---
 
