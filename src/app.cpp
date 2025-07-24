@@ -18,6 +18,10 @@ namespace App
     static lv_timer_t *sleep_check_timer = NULL;
     static bool in_light_sleep = false;
     static bool backlight_off = false;
+    
+    // Wake grace period management
+    static unsigned long wake_grace_start_time = 0;
+    static bool in_wake_grace_period = false;
 
     // Sleep timing constants
     static const unsigned long LIGHT_SLEEP_TIMEOUT = 10 * 1000; // 10 seconds
@@ -742,6 +746,30 @@ namespace App
         {
             Serial.println("Touch detected - waking from light sleep");
             exitLightSleepMode();
+            
+            // Start wake grace period to prevent accidental keypad presses
+            wake_grace_start_time = millis();
+            in_wake_grace_period = true;
+            Serial.println("Wake grace period started");
         }
+    }
+    
+    // Check if device is currently in wake grace period
+    bool isInWakeGracePeriod()
+    {
+        if (!in_wake_grace_period)
+        {
+            return false;
+        }
+        
+        // Check if grace period has expired
+        if (millis() - wake_grace_start_time >= Config::WAKE_GRACE_PERIOD)
+        {
+            in_wake_grace_period = false;
+            Serial.println("Wake grace period ended");
+            return false;
+        }
+        
+        return true;
     }
 }

@@ -196,6 +196,16 @@ namespace Display {
         bool currently_touched = touch.touched();
         
         if (currently_touched) {
+            // Handle touch wake from light sleep first
+            App::handleTouchWake();
+            
+            // Check if we're in wake grace period - if so, ignore touch events
+            if (App::isInWakeGracePeriod()) {
+                data->state = LV_INDEV_STATE_RELEASED;
+                last_touch_state = currently_touched;
+                return;
+            }
+            
             // Read touched point from touch module
             touch.readData(&touchX, &touchY);
 
@@ -210,9 +220,6 @@ namespace Display {
             // if (!last_touch_state) {
             //     Serial.printf("Touch: X=%d, Y=%d\n", touchX, touchY);
             // }
-            
-            // Handle touch wake from light sleep
-            App::handleTouchWake();
         } else {
             data->state = LV_INDEV_STATE_RELEASED;
         }
